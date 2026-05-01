@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Remeras Street | Tienda Oficial</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --bg: #0a0a0a;
+            --surface: #141414;
+            --card: #1a1a1a;
+            --elevated: #222222;
+            --accent: #ff3e3e;
+            --accent-hover: #e63636;
+            --text: #f5f5f5;
+            --text-secondary: #a0a0a0;
+            --text-muted: #666;
+            --border: #2a2a2a;
+            --success: #00d084;
+            --success-dim: rgba(0,208,132,0.1);
+            --warning: #ffb800;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg); }
+        ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
+
+        /* Header */
+        header {
+            position: fixed; top: 0; width: 100%;
+            background: rgba(10,10,10,0.92); backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border); z-index: 1000;
+            padding: 1rem 5%; display: flex; justify-content: space-between; align-items: center;
+        }
+        .logo { font-size: 1.6rem; font-weight: 800; letter-spacing: -1px; }
+        .logo span { color: var(--accent); }
+        .cart-btn {
+            position: relative; background: var(--card); border: 1px solid var(--border);
+            color: var(--text); padding: 0.7rem 1.4rem; border-radius: 50px;
+            cursor: pointer; font-size: 0.95rem; font-weight: 500;
+            transition: all 0.3s; display: flex; align-items: center; gap: 0.6rem;
+        }
+        .cart-btn:hover { border-color: var(--accent); transform: translateY(-2px); background: var(--elevated); }
+        .cart-count {
+            position: absolute; top: -8px; right: -8px; background: var(--accent); color: white;
+            font-size: 0.7rem; font-weight: 700; width: 22px; height: 22px;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+        }
+
+        /* Hero */
+        .hero {
+            margin-top: 76px; padding: 5rem 5% 4rem;
+            text-align: center; position: relative; overflow: hidden;
+            border-bottom: 1px solid var(--border);
+        }
+        .hero::before {
+            content: ''; position: absolute; inset: 0;
+            background: radial-gradient(ellipse at center, rgba(255,62,62,0.08) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        .hero h1 { font-size: 3.2rem; font-weight: 800; line-height: 1.05; margin-bottom: 1.2rem; position: relative; }
+        .hero p { color: var(--text-secondary); font-size: 1.15rem; max-width: 560px; margin: 0 auto 1.8rem; position: relative; }
+        .badge {
+            display: inline-flex; align-items: center; gap: 0.4rem;
+            background: var(--success-dim); color: var(--success);
+            padding: 0.5rem 1.1rem; border-radius: 50px; font-size: 0.85rem; font-weight: 600;
+            border: 1px solid rgba(0,208,132,0.15); position: relative;
+        }
+
+        /* Container */
+        .container { max-width: 1200px; margin: 0 auto; padding: 3rem 5%; }
+        .section-title {
+            font-size: 1.6rem; font-weight: 700; margin-bottom: 2.2rem;
+            display: flex; align-items: center; gap: 0.6rem;
+        }
+
+        /* Products */
+        .products {
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.8rem;
+        }
+        .product-card {
+            background: var(--card); border: 1px solid var(--border); border-radius: 18px;
+            overflow: hidden; transition: all 0.35s; position: relative;
+        }
+        .product-card:hover {
+            transform: translateY(-6px); border-color: rgba(255,62,62,0.3);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+        }
+        .product-img-wrap { position: relative; overflow: hidden; }
+        .product-img {
+            width: 100%; height: 320px; object-fit: cover; display: block;
+            transition: transform 0.5s;
+        }
+        .product-card:hover .product-img { transform: scale(1.05); }
+        .product-info { padding: 1.4rem; }
+        .product-name { font-size: 1.1rem; font-weight: 600; margin-bottom: 0.25rem; }
+        .product-desc { color: var(--text-secondary); font-size: 0.88rem; margin-bottom: 0.9rem; line-height: 1.5; }
+        .product-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 0.2rem; }
+        .price { font-size: 1.35rem; font-weight: 800; color: var(--text); }
+        .add-btn {
+            background: var(--accent); color: white; border: none;
+            padding: 0.65rem 1.3rem; border-radius: 10px; cursor: pointer;
+            font-weight: 600; font-size: 0.9rem; transition: all 0.25s;
+            display: flex; align-items: center; gap: 0.4rem;
+        }
+        .add-btn:hover { background: var(--accent-hover); transform: scale(1.04); }
+
+        /* Size Modal */
+        .modal-overlay {
+            position: fixed; inset: 0; background: rgba(0,0,0,0.75);
+            backdrop-filter: blur(8px); z-index: 2000;
+            display: none; align-items: center; justify-content: center; padding: 1rem;
+            opacity: 0; transition: opacity 0.3s;
+        }
+        .modal-overlay.active { display: flex; opacity: 1; }
+        .modal {
+            background: var(--card); border: 1px solid var(--border); border-radius: 20px;
+            width: 100%; max-width: 420px; padding: 0; overflow: hidden;
+            transform: translateY(30px) scale(0.95); transition: transform 0.35s;
+        }
+        .modal-overlay.active .modal { transform: translateY(0) scale(1); }
+        .modal-header {
+            padding: 1.5rem 1.8rem; border-bottom: 1px solid var(--border);
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .modal-title { font-size: 1.2rem; font-weight: 700; }
+        .close-btn {
+            background: none; border: none; color: var(--text-muted); font-size: 1.6rem;
+            cursor: pointer; width: 36px; height: 36px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            transition: all 0.2s;
+        }
+        .close-btn:hover { background: var(--elevated); color: var(--accent); }
+        .modal-body { padding: 1.5rem 1.8rem; }
+        .size-grid {
+            display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.7rem; margin: 1.2rem 0;
+        }
+        .size-option {
+            background: var(--bg); border: 2px solid var(--border); color: var(--text);
+            padding: 0.9rem; border-radius: 12px; cursor: pointer; font-weight: 600;
+            text-align: center; transition: all 0.2s; font-size: 0.95rem;
+        }
+        .size-option:hover { border-color: var(--text-secondary); background: var(--elevated); }
+        .size-option.selected { border-color: var(--accent); background: rgba(255,62,62,0.1); color: var(--accent); }
+        .size-option.disabled { opacity: 0.3; cursor: not-allowed; }
+        .modal-price { font-size: 1.5rem; font-weight: 800; color: var(--accent); margin-top: 0.5rem; }
+        .confirm-btn {
+            width: 100%; background: var(--accent); color: white; border: none;
+            padding: 1rem; border-radius: 12px; font-size: 1rem; font-weight: 700;
+            cursor: pointer; margin-top: 1.2rem; transition: all 0.25s;
+        }
+        .confirm-btn:hover { background: var(--accent-hover); }
+        .confirm-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+        /* Cart Modal */
+        .cart-modal { max-width: 540px; }
+        .cart-item {
+            display: flex; gap: 1rem; padding: 1.1rem 0; border-bottom: 1px solid var(--border);
+        }
+        .cart-item img { width: 72px; height: 72px; object-fit: cover; border-radius: 10px; background: #222; }
+        .cart-item-info { flex: 1; min-width: 0; }
+        .cart-item-name { font-weight: 600; font-size: 0.95rem; margin-bottom: 0.15rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .cart-item-meta { color: var(--text-muted); font-size: 0.8rem; margin-bottom: 0.4rem; }
+        .cart-item-meta span { background: var(--bg); padding: 0.15rem 0.5rem; border-radius: 4px; border: 1px solid var(--border); }
+        .cart-item-price { color: var(--accent); font-weight: 700; font-size: 0.95rem; }
+        .qty-controls { display: flex; align-items: center; gap: 0.5rem; margin-top: 0.4rem; }
+        .qty-btn {
+            background: var(--bg); border: 1px solid var(--border); color: var(--text);
+            width: 26px; height: 26px; border-radius: 6px; cursor: pointer;
+            display: flex; align-items: center; justify-content: center; font-size: 0.85rem;
+            transition: all 0.2s;
+        }
+        .qty-btn:hover { border-color: var(--accent); }
+        .remove-btn {
+            color: #ff5555; background: none; border: none; cursor: pointer;
+            font-size: 0.8rem; margin-top: 0.3rem; padding: 0;
+        }
+        .cart-total {
+            margin-top: 1.2rem; padding-top: 1.2rem;
+            border-top: 2px solid var(--border); display: flex;
+            justify-content: space-between; align-items: center;
+        }
+        .total-price { font-size: 1.6rem; font-weight: 800; color: var(--accent); }
+
+        /* Payment Step */
+        .payment-step { display: none; }
+        .payment-step.active { display: block; animation: fadeIn 0.4s; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        .payment-options { display: flex; flex-direction: column; gap: 0.8rem; margin: 1.2rem 0; }
+        .payment-option {
+            background: var(--bg); border: 2px solid var(--border); border-radius: 14px;
+            padding: 1.1rem 1.3rem; cursor: pointer; display: flex; align-items: center;
+            gap: 1rem; transition: all 0.25s;
+        }
+        .payment-option:hover { border-color: var(--text-secondary); background: var(--elevated); }
+        .payment-option.selected { border-color: var(--success); background: var(--success-dim); }
+        .payment-option i { font-size: 1.3rem; color: var(--text-secondary); }
+        .payment-option.selected i { color: var(--success); }
+        .payment-option-text { flex: 1; }
+        .payment-option-text strong { display: block; font-size: 0.95rem; margin-bottom: 0.15rem; }
+        .payment-option-text small { color: var(--text-muted); font-size: 0.8rem; }
+        .check-icon { color: var(--success); opacity: 0; transition: opacity 0.2s; }
+        .payment-option.selected .check-icon { opacity: 1; }
+
+        .payment-details {
+            display: none; background: var(--bg); border: 1px solid var(--border);
+            border-radius: 14px; padding: 1.5rem; margin-top: 1rem; text-align: center;
+        }
+        .payment-details.active { display: block; animation: fadeIn 0.4s; }
+        .payment-details h4 { margin-bottom: 0.8rem; font-size: 1rem; }
+        .payment-details .detail-box {
+            background: var(--card); border: 1px dashed var(--border); border-radius: 10px;
+            padding: 1rem; font-family: 'Courier New', monospace; font-size: 1.1rem;
+            margin: 0.8rem 0; word-break: break-all;
+        }
+        .copy-btn {
+            background: var(--elevated); border: 1px solid var(--border); color: var(--text);
+            padding: 0.5rem 1.2rem; border-radius: 8px; cursor: pointer; font-size: 0.85rem;
+            transition: all 0.2s; display: inline-flex; align-items: center; gap: 0.4rem;
+        }
+        .copy-btn:hover { border-color: var(--accent); color: var(--accent); }
+        .qr-box {
+            width: 160px; height: 160px; background: white; border-radius: 12px;
+            margin: 1rem auto; display: flex; align-items: center; justify-content: center;
+            overflow: hidden;
+        }
+        .qr-box img { width: 100%; height: 100%; object-fit: contain; }
+        .qr-placeholder {
+            color: #666; font-size: 0.8rem; text-align: center; padding: 1rem;
+        }
+        .note {
+            background: rgba(255,184,0,0.08); border: 1px solid rgba(255,184,0,0.2);
+            color: var(--warning); padding: 0.8rem 1rem; border-radius: 10px;
+            font-size: 0.85rem; margin-top: 1rem; text-align: left;
+        }
+
+        .finish-btn {
+            width: 100%; background: var(--success); color: #000; border: none;
+            padding: 1rem; border-radius: 12px; font-size: 1.05rem; font-weight: 700;
+            cursor: pointer; margin-top: 1.2rem; transition: all 0.25s;
+            display: flex; align-items: center; justify-content: center; gap: 0.5rem;
+        }
+        .finish-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0,208,132,0.25); }
+
+        .back-btn {
+            background: none; border: none; color: var(--text-muted); cursor: pointer;
+            font-size: 0.9rem; display: flex; align-items: center; gap: 0.4rem;
+            margin-bottom: 1rem; transition: color 0.2s;
+        }
+        .back-btn:hover { color: var(--text); }
+
+        .empty-cart { text-align: center; padding: 3rem 1rem; color: var(--text-secondary); }
+        .empty-cart i { font-size: 3rem; margin-bottom: 1rem; opacity: 0.4; }
+
+        /* Footer */
+        footer {
+            text-align: center; padding: 2.5rem 1rem; border-top: 1px solid var(--border);
+            color: var(--text-muted); font-size: 0.9rem; margin-top: 2rem;
+        }
+        footer a { color: var(--accent); text-decoration: none; }
+
+        /* Toast */
+        .toast {
+            position: fixed; bottom: 2rem; right: 2rem; background: var(--success); color: #000;
+            padding: 1rem 1.5rem; border-radius: 12px; font-weight: 600;
+            transform: translateX(150%); transition: transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 3000; box-shadow: 0 10px 30px rgba(0,0,0,0.4); display: flex; align-items: center; gap: 0.5rem;
+        }
+        .toast.show { transform: translateX(0); }
+        .toast.error { background: #ff4444; color: white; }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.2rem; }
+            .products { grid-template-columns: 1fr; }
+            .size-grid { grid-template-columns: repeat(4, 1fr); }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="logo">Remeras<span>Street</span></div>
+    <button class="cart-btn" onclick="openCart()">
+        <i class="fas fa-shopping-bag"></i>
+        <span id="cartLabel">Carrito</span>
+        <span class="cart-count" id="cartCount">0</span>
+    </button>
+</header>
+
+<section class="hero">
+    <h1>Remeras de calidad,<br>sin intermediarios.</h1>
+    <p>Elegí tu talle, pagá como quieras y listo. Sin comisiones, sin sorpresas. Todo el dinero va al emprendedor.</p>
+    <span class="badge"><i class="fas fa-check-circle"></i> Envíos a todo el país</span>
+</section>
+
+<div class="container">
+    <h2 class="section-title"><i class="fas fa-fire" style="color: var(--accent)"></i> Catálogo</h2>
+    <div class="products" id="products"></div>
+</div>
+
+<footer>
+    <p>Remeras Street © 2026 | Hecho con ❤️ y sin comisiones.</p>
+    <p style="margin-top: 0.4rem; font-size: 0.82rem;">¿Dudas? <a href="https://wa.me/5490000000000?text=Hola!%20Tengo%20una%20consulta" target="_blank">Escribinos por WhatsApp</a></p>
+</footer>
+
+<!-- Size Modal -->
+<div class="modal-overlay" id="sizeModal" onclick="closeSizeModal(event)">
+    <div class="modal" onclick="event.stopPropagation()">
+        <div class="modal-header">
+            <div class="modal-title" id="sizeModalTitle">Elegí tu talle</div>
+            <button class="close-btn" onclick="closeSizeModalDirect()">&times;</button>
+        </div>
+        <div class="modal-body">
+            <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 0.5rem;">Seleccioná el talle disponible:</p>
+            <div class="size-grid" id="sizeGrid"></div>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 0.5rem;">
+                <span style="color: var(--text-secondary); font-size: 0.9rem;">Precio unitario</span>
+                <span class="modal-price" id="sizeModalPrice">$0</span>
+            </div>
+            <button class="confirm-btn" id="confirmSizeBtn" onclick="confirmAddToCart()" disabled>Agregar al carrito</button>
+        </div>
+    </div>
+</div>
+
+<!-- Cart / Payment Modal -->
+<div class="modal-overlay" id="cartModal" onclick="closeCartOutside(event)">
+    <div class="modal cart-modal" onclick="event.stopPropagation()">
+
+        <!-- Step 1: Cart Items -->
+        <div id="cartStep1">
+            <div class="modal-header">
+                <div class="modal-title">Tu Carrito</div>
+                <button class="close-btn" onclick="closeCart()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div id="cartItems"></div>
+                <div id="cartFooter" style="display: none;">
+                    <div class="cart-total">
+                        <span style="font-size: 1.05rem; font-weight: 600;">Total</span>
+                        <span class="total-price" id="totalPrice">$0</span>
+                    </div>
+                    <button class="confirm-btn" style="margin-top: 1.2rem;" onclick="goToPayment()">
+                        Continuar al pago <i class="fas fa-arrow-right" style="margin-left: 0.4rem;"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 2: Payment Method -->
+        <div id="cartStep2" class="payment-step">
+            <div class="modal-header">
+                <div class="modal-title">Método de pago</div>
+                <button class="close-btn" onclick="closeCart()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <button class="back-btn" onclick="backToCart()"><i class="fas fa-arrow-left"></i> Volver al carrito</button>
+                <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 0.8rem;">Elegí cómo querés abonar:</p>
+
+                <div class="payment-options">
+                    <div class="payment-option" onclick="selectPayment('1pago')" id="opt-1pago">
+                        <i class="fas fa-money-bill-wave"></i>
+                        <div class="payment-option-text">
+                            <strong>1 pago</strong>
+                            <small>Pagás el total ahora por transferencia o QR</small>
+                        </div>
+                        <i class="fas fa-check-circle check-icon"></i>
+                    </div>
+                    <div class="payment-option" onclick="selectPayment('2pagos')" id="opt-2pagos">
+                        <i class="fas fa-calendar-alt"></i>
+                        <div class="payment-option-text">
+                            <strong>2 pagos</strong>
+                            <small>50% ahora para reservar, 50% al retirar/recibir</small>
+                        </div>
+                        <i class="fas fa-check-circle check-icon"></i>
+                    </div>
+                </div>
+
+                <!-- Payment Details Container -->
+                <div class="payment-details" id="paymentDetails">
+                    <h4 id="paymentTitle">Datos para transferir</h4>
+                    <div class="detail-box" id="paymentAmount">$0</div>
+                    <p style="color: var(--text-secondary); font-size: 0.85rem; margin-bottom: 0.8rem;">Alias / CBU</p>
+                    <div class="detail-box" id="paymentAlias">TU.ALIAS.AQUI</div>
+                    <button class="copy-btn" onclick="copyAlias()"><i class="fas fa-copy"></i> Copiar alias</button>
+
+                    <div style="margin-top: 1.2rem;">
+                        <p style="color: var(--text-secondary); font-size: 0.85rem; margin-bottom: 0.6rem;">O escaneá el QR de MercadoPago:</p>
+                        <div class="qr-box" id="qrBox">
+                            <div class="qr-placeholder">
+                                <i class="fas fa-image" style="font-size: 2rem; display: block; margin-bottom: 0.5rem;"></i>
+                                Reemplazá esto<br>con tu QR real
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="note" id="paymentNote">
+                        <i class="fas fa-info-circle" style="margin-right: 0.4rem;"></i>
+                        Una vez que realizaste el pago, tocá el botón de abajo para enviarnos el comprobante por WhatsApp.
+                    </div>
+
+                    <button class="finish-btn" onclick="finishOrder()">
+                        <i class="fab fa-whatsapp"></i>
+                        Ya pagué — Enviar comprobante
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="toast" id="toast"><i class="fas fa-check-circle"></i><span id="toastMsg">Producto agregado</span></div>
+
+<script>
+    // ===================== CONFIGURÁ TUS DATOS ACÁ =====================
+    const CONFIG = {
+        whatsappNumber: "5490000000000",  // Tu número sin + ni espacios (ej: 5491123456789)
+        alias: "TU.ALIAS.AQUI",           // Tu alias de MercadoPago o CBU
+        cbu: "0000000000000000000000",    // Tu CBU (opcional, para mostrar también)
+        qrImageUrl: ""                    // URL de tu QR (dejalo vacío para usar placeholder)
+    };
+    // =====================================================================
+
+    const products = [
+        { id: 1, name: "Remera Oversize Negra", desc: "100% algodón peinado. Corte oversize, cuello reforzado.", price: 18500, sizes: ["S","M","L","XL"], image: "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?w=500&auto=format&fit=crop&q=60" },
+        { id: 2, name: "Remera Blanca Clásica", desc: "Básica premium. Tela 24/1, no se deforma.", price: 16500, sizes: ["S","M","L","XL","XXL"], image: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=500&auto=format&fit=crop&q=60" },
+        { id: 3, name: "Remera Estampada 'Street'", desc: "Diseño exclusivo. Estampado en serigrafía de alta resistencia.", price: 22000, sizes: ["M","L","XL"], image: "https://images.unsplash.com/photo-1503341504253-dff4815485f1?w=500&auto=format&fit=crop&q=60" },
+        { id: 4, name: "Remera Vintage Wash", desc: "Efecto lavado ácido. Cada pieza es única.", price: 24000, sizes: ["S","M","L"], image: "https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=500&auto=format&fit=crop&q=60" },
+        { id: 5, name: "Remera Negra Manga Larga", desc: "Ideal para entretiempo. Puños reforzados.", price: 21000, sizes: ["S","M","L","XL"], image: "https://images.unsplash.com/photo-1618354691373-d851c5c3a990?w=500&auto=format&fit=crop&q=60" },
+        { id: 6, name: "Remera Boxy Fit Beige", desc: "Corte cuadrado, tendencia 2026. Tela pesada.", price: 23000, sizes: ["M","L","XL"], image: "https://images.unsplash.com/photo-1627225924765-552d49cf47ad?w=500&auto=format&fit=crop&q=60" }
+    ];
+
+    let cart = JSON.parse(localStorage.getItem('cart_v2')) || [];
+    let selectedProduct = null;
+    let selectedSize = null;
+    let selectedPayment = null;
+
+    function saveCart() {
+        localStorage.setItem('cart_v2', JSON.stringify(cart));
+        const totalQty = cart.reduce((sum, item) => sum + item.qty, 0);
+        document.getElementById('cartCount').textContent = totalQty;
+        document.getElementById('cartLabel').textContent = totalQty > 0 ? `Carrito (${totalQty})` : 'Carrito';
+    }
+
+    function renderProducts() {
+        const container = document.getElementById('products');
+        container.innerHTML = products.map(p => `
+            <div class="product-card">
+                <div class="product-img-wrap">
+                    <img src="${p.image}" alt="${p.name}" class="product-img" 
+                         onerror="this.src='https://via.placeholder.com/400x400/1a1a1a/555?text=Remera'">
+                </div>
+                <div class="product-info">
+                    <div class="product-name">${p.name}</div>
+                    <div class="product-desc">${p.desc}</div>
+                    <div class="product-footer">
+                        <span class="price">$${p.price.toLocaleString('es-AR')}</span>
+                        <button class="add-btn" onclick="openSizeModal(${p.id})">
+                            <i class="fas fa-plus"></i> Elegir talle
+                        </button>
+                    </div>
+                </div>
+            </div>
+        `).join('');
+    }
+
+    // ===================== SIZE MODAL =====================
+    function openSizeModal(productId) {
+        selectedProduct = products.find(p => p.id === productId);
+        selectedSize = null;
+        document.getElementById('sizeModalTitle').textContent = selectedProduct.name;
+        document.getElementById('sizeModalPrice').textContent = '$' + selectedProduct.price.toLocaleString('es-AR');
+
+        const grid = document.getElementById('sizeGrid');
+        grid.innerHTML = selectedProduct.sizes.map(size => `
+            <div class="size-option" onclick="selectSize(this, '${size}')">${size}</div>
+        `).join('');
+
+        document.getElementById('confirmSizeBtn').disabled = true;
+        document.getElementById('sizeModal').classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function selectSize(el, size) {
+        document.querySelectorAll('.size-option').forEach(btn => btn.classList.remove('selected'));
+        el.classList.add('selected');
+        selectedSize = size;
+        document.getElementById('confirmSizeBtn').disabled = false;
+    }
+
+    function confirmAddToCart() {
+        if (!selectedProduct || !selectedSize) return;
+
+        const existing = cart.find(item => item.id === selectedProduct.id && item.size === selectedSize);
+        if (existing) {
+            existing.qty++;
+        } else {
+            cart.push({ 
+                id: selectedProduct.id, 
+                name: selectedProduct.name, 
+                price: selectedProduct.price, 
+                size: selectedSize, 
+                qty: 1,
+                image: selectedProduct.image
+            });
+        }
+
+        saveCart();
+        closeSizeModalDirect();
+        showToast(`${selectedProduct.name} (Talle ${selectedSize}) agregada al carrito`);
+    }
+
+    function closeSizeModalDirect() {
+        document.getElementById('sizeModal').classList.remove('active');
+        document.body.style.overflow = '';
+        selectedProduct = null;
+        selectedSize = null;
+    }
+
+    function closeSizeModal(e) {
+        if (e.target === document.getElementById('sizeModal')) closeSizeModalDirect();
+    }
+
+    // ===================== CART MODAL =====================
+    function openCart() {
+        renderCart();
+        document.getElementById('cartModal').classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeCart() {
+        document.getElementById('cartModal').classList.remove('active');
+        document.body.style.overflow = '';
+        // Reset payment step
+        setTimeout(() => {
+            document.getElementById('cartStep1').style.display = 'block';
+            document.getElementById('cartStep2').classList.remove('active');
+            selectedPayment = null;
+            document.querySelectorAll('.payment-option').forEach(o => o.classList.remove('selected'));
+            document.getElementById('paymentDetails').classList.remove('active');
+        }, 300);
+    }
+
+    function closeCartOutside(e) {
+        if (e.target === document.getElementById('cartModal')) closeCart();
+    }
+
+    function renderCart() {
+        const container = document.getElementById('cartItems');
+        const footer = document.getElementById('cartFooter');
+
+        if (cart.length === 0) {
+            container.innerHTML = `
+                <div class="empty-cart">
+                    <i class="fas fa-shopping-bag"></i>
+                    <p>Tu carrito está vacío</p>
+                </div>`;
+            footer.style.display = 'none';
+            return;
+        }
+
+        const total = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+
+        container.innerHTML = cart.map((item, idx) => `
+            <div class="cart-item">
+                <img src="${item.image}" alt="${item.name}" onerror="this.src='https://via.placeholder.com/100x100/1a1a1a/555?text=Remera'">
+                <div class="cart-item-info">
+                    <div class="cart-item-name">${item.name}</div>
+                    <div class="cart-item-meta">Talle: <span>${item.size}</span></div>
+                    <div class="cart-item-price">$${item.price.toLocaleString('es-AR')} c/u</div>
+                    <div class="qty-controls">
+                        <button class="qty-btn" onclick="updateQty(${idx}, -1)">-</button>
+                        <span style="font-weight: 600; min-width: 20px; text-align: center;">${item.qty}</span>
+                        <button class="qty-btn" onclick="updateQty(${idx}, 1)">+</button>
+                    </div>
+                    <button class="remove-btn" onclick="removeItem(${idx})">Eliminar</button>
+                </div>
+                <div style="font-weight: 700; color: var(--accent); white-space: nowrap;">
+                    $${(item.price * item.qty).toLocaleString('es-AR')}
+                </div>
+            </div>
+        `).join('');
+
+        document.getElementById('totalPrice').textContent = '$' + total.toLocaleString('es-AR');
+        footer.style.display = 'block';
+    }
+
+    function updateQty(index, change) {
+        cart[index].qty += change;
+        if (cart[index].qty <= 0) cart.splice(index, 1);
+        saveCart();
+        renderCart();
+    }
+
+    function removeItem(index) {
+        cart.splice(index, 1);
+        saveCart();
+        renderCart();
+    }
+
+    function goToPayment() {
+        if (cart.length === 0) return;
+        document.getElementById('cartStep1').style.display = 'none';
+        document.getElementById('cartStep2').classList.add('active');
+    }
+
+    function backToCart() {
+        document.getElementById('cartStep2').classList.remove('active');
+        document.getElementById('cartStep1').style.display = 'block';
+        selectedPayment = null;
+        document.querySelectorAll('.payment-option').forEach(o => o.classList.remove('selected'));
+        document.getElementById('paymentDetails').classList.remove('active');
+    }
+
+    // ===================== PAYMENT =====================
+    function selectPayment(method) {
+        selectedPayment = method;
+        document.querySelectorAll('.payment-option').forEach(o => o.classList.remove('selected'));
+        document.getElementById('opt-' + method).classList.add('selected');
+
+        const total = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+        const details = document.getElementById('paymentDetails');
+        const amountEl = document.getElementById('paymentAmount');
+        const titleEl = document.getElementById('paymentTitle');
+        const noteEl = document.getElementById('paymentNote');
+
+        if (method === '1pago') {
+            titleEl.textContent = "Pagá el total ahora";
+            amountEl.textContent = '$' + total.toLocaleString('es-AR');
+            noteEl.innerHTML = '<i class="fas fa-info-circle" style="margin-right: 0.4rem;"></i> Transferinos el total y envianos el comprobante por WhatsApp. Ahí coordinamos el envío.';
+        } else {
+            const half = Math.round(total / 2);
+            titleEl.textContent = "Pagá en 2 partes";
+            amountEl.innerHTML = `<span style="font-size:0.85rem;color:var(--text-secondary)">1er pago (ahora)</span><br>$${half.toLocaleString('es-AR')}`;
+            noteEl.innerHTML = `<i class="fas fa-info-circle" style="margin-right: 0.4rem;"></i> Reservá con el 50% ($${half.toLocaleString('es-AR')}). El resto lo pagás al retirar o cuando te llegue.`;
+        }
+
+        // QR
+        const qrBox = document.getElementById('qrBox');
+        if (CONFIG.qrImageUrl) {
+            qrBox.innerHTML = `<img src="${CONFIG.qrImageUrl}" alt="QR MercadoPago">`;
+        }
+
+        details.classList.add('active');
+    }
+
+    function copyAlias() {
+        navigator.clipboard.writeText(CONFIG.alias).then(() => {
+            showToast('Alias copiado: ' + CONFIG.alias);
+        });
+    }
+
+    function finishOrder() {
+        if (!selectedPayment) return;
+
+        const total = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+        const half = Math.round(total / 2);
+
+        let msg = "¡Hola! Acabo de realizar un pedido en Remeras Street.%0A%0A";
+        msg += "*RESUMEN DEL PEDIDO:*%0A";
+        msg += "─────────────────%0A";
+
+        cart.forEach(item => {
+            msg += `• ${item.name}%0A  Talle: ${item.size} | Cant: ${item.qty} | $${(item.price * item.qty).toLocaleString('es-AR')}%0A`;
+        });
+
+        msg += "─────────────────%0A";
+        msg += `*Total:* $${total.toLocaleString('es-AR')}%0A`;
+
+        if (selectedPayment === '2pagos') {
+            msg += `*Pagado ahora (50%):* $${half.toLocaleString('es-AR')}%0A`;
+            msg += `*Resta pagar:* $${half.toLocaleString('es-AR')}%0A`;
+        } else {
+            msg += `*Método:* Pago único%0A`;
+        }
+
+        msg += "%0A*Adjunto el comprobante de pago.*%0A";
+        msg += "¿Me confirmás cuando lo veas? ¡Gracias! 🙌";
+
+        window.open(`https://wa.me/${CONFIG.whatsappNumber}?text=${msg}`, '_blank');
+
+        // Opcional: vaciar carrito después
+        // cart = []; saveCart(); closeCart();
+    }
+
+    // ===================== UTILS =====================
+    function showToast(message, isError = false) {
+        const toast = document.getElementById('toast');
+        const msg = document.getElementById('toastMsg');
+        msg.textContent = message;
+        toast.className = 'toast' + (isError ? ' error' : '') + ' show';
+        setTimeout(() => toast.classList.remove('show'), 2800);
+    }
+
+    // Init
+    renderProducts();
+    saveCart();
+</script>
+
+</body>
+</html>
