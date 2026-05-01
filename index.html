@@ -433,26 +433,26 @@
         .payment-option.selected .check-icon { opacity: 1; }
 
         .payment-details {
-            display: none; background: var(--bg); border: 1px solid var(--border);
-            border-radius: 14px; padding: 1.4rem; margin-top: 0.8rem; text-align: center;
+            display: none; background: var(--bg); border: 0.70px solid var(--border);
+            border-radius: 8px; padding: 1rem; margin-top: 0.8rem; text-align: center;
         }
         .payment-details.active { display: block; animation: fadeIn 0.4s; }
-        .payment-details h4 { margin-bottom: 0.7rem; font-size: 0.95rem; }
+        .payment-details h4 { margin-bottom: 0.7rem; font-size: 0.70rem; }
         .detail-box {
-            background: var(--card); border: 1px dashed var(--border); border-radius: 10px;
-            padding: 0.9rem; font-family: 'Courier New', monospace; font-size: 1rem;
-            margin: 0.7rem 0; word-break: break-all;
+            background: var(--card); border: 1px dashed var(--border); border-radius: 7px;
+            padding: 0.7rem; font-family: 'Courier New', monospace; font-size: 0.7rem;
+            margin: 0.4rem 0; word-break: break-all;
         }
         .copy-btn {
             background: var(--elevated); border: 1px solid var(--border); color: var(--text);
-            padding: 0.45rem 1rem; border-radius: 8px; cursor: pointer; font-size: 0.82rem;
-            transition: all 0.2s; display: inline-flex; align-items: center; gap: 0.35rem;
+            padding: 0.45rem 1rem; border-radius: 6px; cursor: pointer; font-size: 0.62rem;
+            transition: all 0.2s; display: inline-flex; align-items: center; gap: 0.25rem;
         }
         .copy-btn:hover {
             border-color: var(--accent); color: var(--accent);
         }
         .qr-box {
-            width: 150px; height: 150px; background: white; border-radius: 12px;
+            width: 110px; height: 110px; background: white; border-radius: 12px;
             margin: 0.8rem auto; display: flex; align-items: center; justify-content: center;
             overflow: hidden;
         }
@@ -1078,10 +1078,11 @@
             reminders.push(reminder);
             localStorage.setItem('ruca_reminders', JSON.stringify(reminders));
         } else {
+
+            msg += "indicanos el nombre personalizado:";
             msg += `*Método:* Pago único%0A`;
         }
-
-        msg += "Porfavor diga aqui que nombre personalizado quiere:";
+    
         msg += "%0A*Adjunto el comprobante de pago.*%0A";
         msg += "¿Me confirmás cuando lo vean? ¡Gracias! 🙌";
 
