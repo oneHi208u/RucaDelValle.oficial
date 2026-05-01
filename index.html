@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Camisetas Ruca del Valle | Tienda Oficial</title>
+    <style>
+        /* ESTÉTICA ORIGINAL PRESERVADA EXACTAMENTE */
+        :root {
+            --primary: #1a1a1a;
+            --secondary: #f5f5f5;
+            --accent: #25d366;
+            --text: #333;
+            --light-text: #666;
+            --border: #e0e0e0;
+            --success: #27ae60;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: system-ui, -apple-system, sans-serif; }
+        body { background: var(--secondary); color: var(--text); line-height: 1.5; }
+        .reminder-banner { background: #fff3cd; color: #856404; padding: 12px 20px; text-align: center; border-bottom: 2px solid #ffeeba; display: none; }
+        .reminder-banner.show { display: block; }
+        .reminder-banner button { background: #000; color: #fff; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; margin-left: 10px; font-weight: 500; }
+        header { background: #fff; padding: 20px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 5px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 100; }
+        h1 { font-size: 1.5rem; font-weight: 700; }
+        .subtitle { font-size: 0.9rem; color: var(--light-text); }
+        .cart-icon { background: var(--primary); color: #fff; padding: 10px 15px; border-radius: 8px; cursor: pointer; display: flex; align-items: center; gap: 8px; font-weight: 600; }
+        .cart-count { background: var(--success); color: #fff; font-size: 0.75rem; padding: 2px 6px; border-radius: 50%; }
+        .hero { text-align: center; padding: 60px 20px 40px; background: #fff; }
+        .hero h2 { font-size: 2rem; margin-bottom: 10px; }
+        .hero p { color: var(--light-text); margin-bottom: 15px; }
+        .stock-badge { display: inline-block; background: #e8f5e9; color: var(--success); padding: 6px 12px; border-radius: 20px; font-size: 0.85rem; font-weight: 600; }
+        
+        /* NUEVO: GALERÍA DE MODELOS (SE MANTIENE LA ESTÉTICA ORIGINAL) */
+        .models-section { padding: 40px 20px; background: #fff; margin: 20px 0; }
+        .models-section h3 { text-align: center; font-size: 1.5rem; margin-bottom: 25px; color: var(--primary); }
+        .models-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; max-width: 1200px; margin: 0 auto; }
+        .model-item { border-radius: 12px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.08); background: var(--secondary); }
+        .model-item img, .model-item video { width: 100%; height: 350px; object-fit: cover; display: block; }
+        
+        .catalog { padding: 40px 20px; max-width: 1200px; margin: 0 auto; }
+        .catalog h3 { font-size: 1.5rem; margin-bottom: 20px; text-align: center; }
+        .products-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px; }
+        .product-card { background: #fff; border-radius: 12px; padding: 20px; text-align: center; box-shadow: 0 4px 12px rgba(0,0,0,0.05); transition: transform 0.2s; }
+        .product-card:hover { transform: translateY(-5px); }
+        .product-img { width: 100%; height: 250px; object-fit: cover; border-radius: 8px; margin-bottom: 15px; background: var(--secondary); }
+        .btn-buy { background: var(--primary); color: #fff; border: none; padding: 12px 24px; border-radius: 6px; cursor: pointer; font-weight: 600; width: 100%; margin-top: 10px; }
+        .btn-buy:hover { opacity: 0.9; }
+        
+        /* MODALES ORIGINALES (SIN MODIFICAR) */
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 200; justify-content: center; align-items: center; padding: 20px; }
+        .modal.show { display: flex; }
+        .modal-content { background: #fff; padding: 25px; border-radius: 12px; max-width: 500px; width: 100%; max-height: 90vh; overflow-y: auto; position: relative; }
+        .close-modal { position: absolute; top: 15px; right: 15px; background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--light-text); }
+        .size-table { width: 100%; border-collapse: collapse; margin: 15px 0; }
+        .size-table th, .size-table td { padding: 10px; border: 1px solid var(--border); text-align: center; }
+        .size-table th { background: var(--secondary); font-weight: 600; }
+        .cart-total { font-size: 1.25rem; font-weight: 700; margin: 15px 0; padding: 15px; background: var(--secondary); border-radius: 8px; text-align: center; }
+        .payment-options { display: grid; gap: 10px; margin: 15px 0; }
+        .payment-option { border: 2px solid var(--border); padding: 12px; border-radius: 8px; cursor: pointer; transition: all 0.2s; }
+        .payment-option.selected { border-color: var(--primary); background: #f0f0f0; }
+        .qr-box { text-align: center; margin: 20px 0; padding: 15px; background: var(--secondary); border-radius: 8px; }
+        .qr-placeholder { width: 180px; height: 180px; background: #fff; margin: 0 auto 10px; display: flex; align-items: center; justify-content: center; border: 2px dashed var(--border); border-radius: 8px; color: var(--light-text); font-size: 0.85rem; }
+        .alias-box { background: #fff; padding: 10px; border-radius: 6px; font-family: monospace; cursor: pointer; display: inline-block; margin: 5px 0; }
+        .toast { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 8px; opacity: 0; transition: opacity 0.3s; pointer-events: none; z-index: 300; }
+        .toast.show { opacity: 1; }
+        
+        /* NUEVO: CAMPOS DE FORMULARIO (ESTILO CONSISTENTE) */
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; font-weight: 600; margin-bottom: 6px; color: var(--text); font-size: 0.9rem; }
+        .form-group input { width: 100%; padding: 10px; border: 1px solid var(--border); border-radius: 6px; font-size: 1rem; }
+        .form-group input:focus { outline: none; border-color: var(--primary); }
+        .form-note { font-size: 0.8rem; color: var(--light-text); margin-top: 4px; }
+        
+        footer { text-align: center; padding: 40px 20px; color: var(--light-text); font-size: 0.9rem; }
+        footer a { color: var(--accent); text-decoration: none; font-weight: 600; }
+        
+        @media (max-width: 768px) {
+            header { flex-direction: column; gap: 10px; text-align: center; }
+            .models-grid, .products-grid { grid-template-columns: 1fr; }
+            .model-item img, .model-item video { height: 280px; }
+        }
+    </style>
+</head>
+<body>
+    <!-- BANNER RECORDATORIO (ORIGINAL) -->
+    <div id="reminderBanner" class="reminder-banner">
+        <span>¡Te recordamos! Tenés una 2da cuota pendiente de $<span id="pendingAmount">0</span>.</span>
+        <button onclick="paySecondInstallment()">Pagar 2da cuota ahora</button>
+    </div>
+
+    <!-- HEADER (ORIGINAL) -->
+    <header>
+        <div>
+            <h1>Remeras Ruca del Valle</h1>
+            <p class="subtitle">Hecho con raíces ❤️</p>
+        </div>
+        <div class="cart-icon" onclick="openCart()">
+            🛒 Carrito <span class="cart-count" id="cartCount">0</span>
+        </div>
+    </header>
+
+    <!-- HERO (ORIGINAL) -->
+    <section class="hero">
+        <h2>Remeras Ruca del Valle</h2>
+        <p>Edición limitada. Sin intermediarios, sin comisiones.</p>
+        <span class="stock-badge">Stock disponible</span>
+    </section>
+
+    <!-- NUEVO: GALERÍA DE MODELOS -->
+    <section class="models-section">
+        <h3>Nuestros Modelos</h3>
+        <div class="models-grid">
+            <div class="model-item"><img src="assets/modelos/foto1.jpg" alt="Modelo Ruca 1"></div>
+            <div class="model-item"><img src="assets/modelos/foto2.jpg" alt="Modelo Ruca 2"></div>
+            <div class="model-item"><video controls src="assets/modelos/video1.mp4"></video></div>
+            <div class="model-item"><video controls src="assets/modelos/video2.mp4"></video></div>
+        </div>
+    </section>
+
+    <!-- CATÁLOGO (ORIGINAL) -->
+    <section class="catalog">
+        <h3>Catálogo</h3>
+        <div class="products-grid" id="productsGrid">
+            <!-- Se genera con JS manteniendo tu estructura original -->
+        </div>
+    </section>
+
+    <!-- FOOTER (ORIGINAL) -->
+    <footer>
+        <p>Remeras Ruca del Valle © 2026 | Hecho con ❤️ y sin comisiones.</p>
+        <p>¿Dudas? <a href="https://wa.me/3834565209?text=Hola!%20Tengo%20una%20consulta">Escribinos por WhatsApp</a></p>
+    </footer>
+
+    <!-- MODAL TABLA DE TALLES (ORIGINAL) -->
+    <div id="sizeModal" class="modal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeModal('sizeModal')">×</button>
+            <h3>Tabla de talles</h3>
+            <table class="size-table">
+                <thead><tr><th>Talle</th><th>Ancho (cm)</th><th>Largo (cm)</th></tr></thead>
+                <tbody>
+                    <tr><td>S</td><td>48</td><td>68</td></tr>
+                    <tr><td>M</td><td>51</td><td>70</td></tr>
+                    <tr><td>L</td><td>54</td><td>72</td></tr>
+                    <tr><td>XL</td><td>57</td><td>74</td></tr>
+                    <tr><td>XXL</td><td>60</td><td>76</td></tr>
+                </tbody>
+            </table>
+            <p class="form-note">Medidas aproximadas. Puede variar ±2cm.</p>
+        </div>
+    </div>
+
+    <!-- MODAL CARRITO (ORIGINAL + NUEVOS CAMPOS) -->
+    <div id="cartModal" class="modal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeModal('cartModal')">×</button>
+            <h3>Tu Carrito</h3>
+            <div id="cartItems"></div>
+            <div class="cart-total">Total: $<span id="cartTotal">0</span></div>
+            <button class="btn-buy" onclick="openCheckout()">Continuar al pago</button>
+        </div>
+    </div>
+
+    <!-- MODAL CHECKOUT (ORIGINAL + CAMPOS OBLIGATORIOS) -->
+    <div id="checkoutModal" class="modal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeModal('checkoutModal')">×</button>
+            <h3>Datos para la compra</h3>
+            
+            <!-- NUEVO: DATOS DEL CLIENTE -->
+            <div class="form-group">
+                <label>Nombre completo *</label>
+                <input type="text" id="clientName" placeholder="Ej: Juan Carlos" required>
+            </div>
+            <div class="form-group">
+                <label>Apellido *</label>
+                <input type="text" id="clientSurname" placeholder="Ej: Pérez" required>
+            </div>
+            
+            <!-- NUEVO: PERSONALIZACIÓN -->
+            <div class="form-group">
+                <label>Nombre para estampar en la camiseta</label>
+                <input type="text" id="shirtCustomName" placeholder="Ej: MARADONA (opcional)">
+                <p class="form-note">Dejalo vacío si no querés personalización</p>
+            </div>
+
+            <h3 style="margin: 20px 0 10px;">Método de pago</h3>
+            <div class="payment-options">
+                <div class="payment-option selected" onclick="selectPayment(this, 'single')">1 pago (Total ahora)</div>
+                <div class="payment-option" onclick="selectPayment(this, 'installment')">2 pagos (Mitad ahora, mitad en 30 días)</div>
+            </div>
+
+            <div class="qr-box">
+                <h4>Datos para transferir</h4>
+                <p style="font-size: 1.5rem; font-weight: 700; margin: 10px 0;">$<span id="checkoutTotal">0</span></p>
+                <p>Alias / CBU</p>
+                <div class="alias-box" onclick="copyAlias()">TU.ALIAS.AQUI <small>Copiar alias</small></div>
+                <p style="margin-top: 15px;">O escaneá el QR Para Pagar:</p>
+                <div class="qr-placeholder">Reemplazá esto con tu QR real</div>
+            </div>
+
+            <p class="form-note" style="text-align: center; margin: 15px 0;">
+                Una vez que realizaste el pago, tocá el botón de abajo para enviarnos el comprobante por WhatsApp e Indicarnos el Nombre Personalizado en tu Camiseta.
+            </p>
+            <button class="btn-buy" onclick="finishPurchase()">Ya pagué — Enviar comprobante</button>
+            <button class="btn-buy" style="background: #666; margin-top: 10px;" onclick="closeModal('checkoutModal'); openCart();">Volver al carrito</button>
+        </div>
+    </div>
+
+    <!-- TOAST NOTIFICACIÓN (ORIGINAL) -->
+    <div id="toast" class="toast">Producto agregado</div>
+
+    <script>
+        // CONFIGURACIÓN ORIGINAL + GOOGLE SHEETS URL
+        const CONFIG = {
+            sheetUrl: 'https://script.google.com/macros/s/TU_SCRIPT_ID_AQUI/exec', // ← REEMPLAZAR CON TU URL DE APPS SCRIPT
+            whatsapp: '3834565209',
+            products: [
+                { id: 1, name: 'Camiseta Clásica', price: 15000, img: 'assets/producto1.jpg' },
+                { id: 2, name: 'Camiseta Edición Limitada', price: 18000, img: 'assets/producto2.jpg' },
+                { id: 3, name: 'Camiseta Premium', price: 20000, img: 'assets/producto3.jpg' }
+            ]
+        };
+
+        let cart = JSON.parse(localStorage.getItem('rucaCart')) || [];
+        let paymentType = 'single';
+
+        // INICIALIZACIÓN
+        document.addEventListener('DOMContentLoaded', () => {
+            renderProducts();
+            updateCartUI();
+            checkPendingPayment();
+        });
+
+        function renderProducts() {
+            const grid = document.getElementById('productsGrid');
+            grid.innerHTML = CONFIG.products.map(p => `
+                <div class="product-card">
+                    <img src="${p.img}" alt="${p.name}" class="product-img" onerror="this.style.background='#eee'">
+                    <h4>${p.name}</h4>
+                    <p style="color: var(--light-text); margin: 5px 0;">$${p.price.toLocaleString()}</p>
+                    <button class="btn-buy" onclick="addToCart(${p.id})">Agregar al carrito</button>
+                </div>
+            `).join('');
+        }
+
+        function addToCart(id) {
+            const product = CONFIG.products.find(p => p.id === id);
+            const existing = cart.find(item => item.id === id);
+            if (existing) existing.qty++; else cart.push({ ...product, qty: 1 });
+            saveCart();
+            updateCartUI();
+            showToast();
+        }
+
+        function saveCart() { localStorage.setItem('rucaCart', JSON.stringify(cart)); }
+
+        function updateCartUI() {
+            document.getElementById('cartCount').textContent = cart.reduce((sum, item) => sum + item.qty, 0);
+        }
+
+        function openCart() {
+            const container = document.getElementById('cartItems');
+            if (cart.length === 0) container.innerHTML = '<p style="text-align:center; padding:20px;">El carrito está vacío</p>';
+            else container.innerHTML = cart.map(item => `
+                <div style="display:flex; justify-content:space-between; padding:10px 0; border-bottom:1px solid #eee;">
+                    <span>${item.name} (x${item.qty})</span>
+                    <strong>$${(item.price * item.qty).toLocaleString()}</strong>
+                </div>
+            `).join('');
+            
+            const total = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+            document.getElementById('cartTotal').textContent = total.toLocaleString();
+            document.getElementById('cartModal').classList.add('show');
+        }
+
+        function openCheckout() {
+            closeModal('cartModal');
+            const total = paymentType === 'single' 
+                ? cart.reduce((sum, item) => sum + (item.price * item.qty), 0)
+                : Math.round(cart.reduce((sum, item) => sum + (item.price * item.qty), 0) / 2);
+            
+            document.getElementById('checkoutTotal').textContent = total.toLocaleString();
+            document.getElementById('checkoutModal').classList.add('show');
+        }
+
+        function selectPayment(el, type) {
+            document.querySelectorAll('.payment-option').forEach(opt => opt.classList.remove('selected'));
+            el.classList.add('selected');
+            paymentType = type;
+            const total = paymentType === 'single' 
+                ? cart.reduce((sum, item) => sum + (item.price * item.qty), 0)
+                : Math.round(cart.reduce((sum, item) => sum + (item.price * item.qty), 0) / 2);
+            document.getElementById('checkoutTotal').textContent = total.toLocaleString();
+        }
+
+        function closeModal(id) { document.getElementById(id).classList.remove('show'); }
+
+        function copyAlias() {
+            navigator.clipboard.writeText('TU.ALIAS.AQUI');
+            alert('Alias copiado al portapapeles');
+        }
+
+        // NUEVO: FINALIZAR COMPRA + WHATSAPP + GOOGLE SHEETS
+        function finishPurchase() {
+            const name = document.getElementById('clientName').value.trim();
+            const surname = document.getElementById('clientSurname').value.trim();
+            const customName = document.getElementById('shirtCustomName').value.trim() || 'Sin personalización';
+            
+            if (!name || !surname) return alert('Por favor completá nombre y apellido');
+
+            const total = paymentType === 'single' ? cart.reduce((s, i) => s + i.price * i.qty, 0) : Math.round(cart.reduce((s, i) => s + i.price * i.qty, 0) / 2);
+            
+            // MENSAJE WHATSAPP ACTUALIZADO
+            let msg = `👕 *NUEVO PEDIDO - RUCA DEL VALLE*\n\n`;
+            cart.forEach(item => {
+                msg += `• ${item.name} x${item.qty} - $${(item.price * item.qty).toLocaleString()}\n`;
+            });
+            msg += `\n💳 Total a pagar: $${total.toLocaleString()}\n💳 Método: ${paymentType === 'single' ? '1 Pago' : '2 Pagos'}\n`;
+            msg += `👤 Cliente: ${name} ${surname}\n📝 Nombre Camiseta: ${customName}\n`;
+            msg += `\n📎 *Adjunto comprobante de pago*`;
+
+            // ENVIAR A WHATSAPP
+            window.open(`https://wa.me/54${CONFIG.whatsapp}?text=${encodeURIComponent(msg)}`, '_blank');
+
+            // ENVIAR A GOOGLE SHEETS (NUEVO)
+            sendToGoogleSheets({ name, surname, customName, total, paymentType });
+
+            // LIMPIAR CARRITO
+            cart = [];
+            saveCart();
+            updateCartUI();
+            closeModal('checkoutModal');
+            
+            // GUARDAR PARA RECORDATORIO SI ES 2 PAGOS
+            if (paymentType === 'installment') {
+                const nextPay = new Date();
+                nextPay.setDate(nextPay.getDate() + 30);
+                localStorage.setItem('rucaPending', JSON.stringify({
+                    amount: total,
+                    due: nextPay.toISOString(),
+                    client: `${name} ${surname}`,
+                    shirtName: customName
+                }));
+                setTimeout(() => location.reload(), 1000);
+            }
+        }
+
+        // NUEVO: INTEGRACIÓN GOOGLE SHEETS + APPS SCRIPT
+        function sendToGoogleSheets(data) {
+            fetch(CONFIG.sheetUrl, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ ...data, date: new Date().toISOString(), cart: cart })
+            }).catch(console.error);
+        }
+
+        // LÓGICA DE RECORDATORIO ORIGINAL (PRESERVADA)
+        function checkPendingPayment() {
+            const pending = JSON.parse(localStorage.getItem('rucaPending'));
+            if (pending && new Date() >= new Date(pending.due)) {
+                document.getElementById('pendingAmount').textContent = pending.amount.toLocaleString();
+                document.getElementById('reminderBanner').classList.add('show');
+            }
+        }
+
+        function paySecondInstallment() {
+            const pending = JSON.parse(localStorage.getItem('rucaPending'));
+            if (!pending) return;
+            alert(`Redirigiendo a pagar 2da cuota ($${pending.amount.toLocaleString()})...`);
+            localStorage.removeItem('rucaPending');
+            document.getElementById('reminderBanner').classList.remove('show');
+        }
+
+        function showToast() {
+            const toast = document.getElementById('toast');
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 2000);
+        }
+
+        // CERRAR MODALES AL CLICK AFUERA
+        window.onclick = e => { if (e.target.classList.contains('modal')) e.target.classList.remove('show'); };
+    </script>
+</body>
+</html>
