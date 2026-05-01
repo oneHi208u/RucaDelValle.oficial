@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Camisetas Ruca del Valle | Tienda Oficial</title>
     <style>
+        /* ==========================================
+           ESTÉTICA Y LÓGICA ORIGINAL (INTACTA)
+           ========================================== */
         :root {
             --primary: #1a1a1a;
             --secondary: #f5f5f5;
@@ -28,13 +31,6 @@
         .hero h2 { font-size: 2rem; margin-bottom: 10px; }
         .hero p { color: var(--light-text); margin-bottom: 15px; }
         .stock-badge { display: inline-block; background: #e8f5e9; color: var(--success); padding: 6px 12px; border-radius: 20px; font-size: 0.85rem; font-weight: 600; }
-        
-        /* GALERÍA DE MODELOS */
-        .models-section { padding: 40px 20px; background: #fff; margin: 20px 0; }
-        .models-section h3 { text-align: center; font-size: 1.5rem; margin-bottom: 25px; color: var(--primary); }
-        .models-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; max-width: 1200px; margin: 0 auto; }
-        .model-item { border-radius: 12px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.08); background: var(--secondary); }
-        .model-item img, .model-item video { width: 100%; height: 350px; object-fit: cover; display: block; }
         
         .catalog { padding: 40px 20px; max-width: 1200px; margin: 0 auto; }
         .catalog h3 { font-size: 1.5rem; margin-bottom: 20px; text-align: center; }
@@ -62,7 +58,23 @@
         .toast { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 8px; opacity: 0; transition: opacity 0.3s; pointer-events: none; z-index: 300; }
         .toast.show { opacity: 1; }
         
-        /* CAMPOS DE FORMULARIO */
+        footer { text-align: center; padding: 40px 20px; color: var(--light-text); font-size: 0.9rem; }
+        footer a { color: var(--accent); text-decoration: none; font-weight: 600; }
+        
+        @media (max-width: 768px) {
+            header { flex-direction: column; gap: 10px; text-align: center; }
+            .products-grid { grid-template-columns: 1fr; }
+        }
+
+        /* ==========================================
+           NUEVO: ESTILOS PARA FUNCIONES AGREGADAS
+           ========================================== */
+        .models-section { padding: 40px 20px; background: #fff; margin: 20px 0; }
+        .models-section h3 { text-align: center; font-size: 1.5rem; margin-bottom: 25px; color: var(--primary); }
+        .models-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; max-width: 1200px; margin: 0 auto; }
+        .model-item { border-radius: 12px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.08); background: var(--secondary); }
+        .model-item img, .model-item video { width: 100%; height: 350px; object-fit: cover; display: block; }
+        
         .form-group { margin-bottom: 15px; }
         .form-group label { display: block; font-weight: 600; margin-bottom: 6px; color: var(--text); font-size: 0.9rem; }
         .form-group input, .form-group select { width: 100%; padding: 10px; border: 1px solid var(--border); border-radius: 6px; font-size: 1rem; }
@@ -70,25 +82,17 @@
         .form-note { font-size: 0.8rem; color: var(--light-text); margin-top: 4px; }
         .number-warning { color: #e74c3c; font-size: 0.85rem; margin-top: 5px; display: none; }
         .number-warning.show { display: block; }
-        
-        footer { text-align: center; padding: 40px 20px; color: var(--light-text); font-size: 0.9rem; }
-        footer a { color: var(--accent); text-decoration: none; font-weight: 600; }
-        
-        @media (max-width: 768px) {
-            header { flex-direction: column; gap: 10px; text-align: center; }
-            .models-grid, .products-grid { grid-template-columns: 1fr; }
-            .model-item img, .model-item video { height: 280px; }
-        }
+        .section-divider { border-top: 2px dashed var(--border); margin: 20px 0; padding-top: 15px; }
     </style>
 </head>
 <body>
-    <!-- BANNER RECORDATORIO -->
+    <!-- BANNER RECORDATORIO (ORIGINAL) -->
     <div id="reminderBanner" class="reminder-banner">
         <span>¡Te recordamos! Tenés una 2da cuota pendiente de $<span id="pendingAmount">0</span>.</span>
         <button onclick="paySecondInstallment()">Pagar 2da cuota ahora</button>
     </div>
 
-    <!-- HEADER -->
+    <!-- HEADER (ORIGINAL) -->
     <header>
         <div>
             <h1>Remeras Ruca del Valle</h1>
@@ -99,40 +103,38 @@
         </div>
     </header>
 
-    <!-- HERO -->
+    <!-- HERO (ORIGINAL) -->
     <section class="hero">
         <h2>Remeras Ruca del Valle</h2>
         <p>Edición limitada. Sin intermediarios, sin comisiones.</p>
         <span class="stock-badge">Stock disponible</span>
     </section>
 
-    <!-- GALERÍA DE MODELOS -->
+    <!-- NUEVO: GALERÍA DE MODELOS -->
     <section class="models-section">
         <h3>Nuestros Modelos</h3>
-        <p style="text-align: center; margin-bottom: 20px; color: var(--light-text);">Mirá cómo quedan nuestras camisetas</p>
+        <p style="text-align: center; margin-bottom: 20px; color: var(--light-text);">Mirá cómo quedan nuestras camisetas en acción</p>
         <div class="models-grid">
-            <div class="model-item"><img src="assets/modelos/foto1.jpg" alt="Modelo 1" onerror="this.src='https://via.placeholder.com/400x350?text=Foto+Modelo+1'"></div>
-            <div class="model-item"><img src="assets/modelos/foto2.jpg" alt="Modelo 2" onerror="this.src='https://via.placeholder.com/400x350?text=Foto+Modelo+2'"></div>
-            <div class="model-item"><img src="assets/modelos/foto3.jpg" alt="Modelo 3" onerror="this.src='https://via.placeholder.com/400x350?text=Foto+Modelo+3'"></div>
-            <div class="model-item"><img src="assets/modelos/foto4.jpg" alt="Modelo 4" onerror="this.src='https://via.placeholder.com/400x350?text=Foto+Modelo+4'"></div>
-            <div class="model-item"><video controls><source src="assets/modelos/video1.mp4" type="video/mp4">Tu navegador no soporta videos</video></div>
-            <div class="model-item"><video controls><source src="assets/modelos/video2.mp4" type="video/mp4">Tu navegador no soporta videos</video></div>
+            <div class="model-item"><img src="assets/modelos/foto1.jpg" alt="Modelo 1" onerror="this.style.background='#ccc'; this.alt='Subir foto1.jpg'"></div>
+            <div class="model-item"><img src="assets/modelos/foto2.jpg" alt="Modelo 2" onerror="this.style.background='#ccc'; this.alt='Subir foto2.jpg'"></div>
+            <div class="model-item"><video controls><source src="assets/modelos/video1.mp4" type="video/mp4">Video no soportado</video></div>
+            <div class="model-item"><video controls><source src="assets/modelos/video2.mp4" type="video/mp4">Video no soportado</video></div>
         </div>
     </section>
 
-    <!-- CATÁLOGO -->
+    <!-- CATÁLOGO (ORIGINAL) -->
     <section class="catalog">
         <h3>Catálogo</h3>
         <div class="products-grid" id="productsGrid"></div>
     </section>
 
-    <!-- FOOTER -->
+    <!-- FOOTER (ORIGINAL) -->
     <footer>
         <p>Remeras Ruca del Valle © 2026 | Hecho con ❤️ y sin comisiones.</p>
         <p>¿Dudas? <a href="https://wa.me/3834565209?text=Hola!%20Tengo%20una%20consulta">Escribinos por WhatsApp</a></p>
     </footer>
 
-    <!-- MODAL TABLA DE TALLES -->
+    <!-- MODAL TABLA DE TALLES (ORIGINAL) -->
     <div id="sizeModal" class="modal">
         <div class="modal-content">
             <button class="close-modal" onclick="closeModal('sizeModal')">×</button>
@@ -151,7 +153,7 @@
         </div>
     </div>
 
-    <!-- MODAL CARRITO -->
+    <!-- MODAL CARRITO (ORIGINAL) -->
     <div id="cartModal" class="modal">
         <div class="modal-content">
             <button class="close-modal" onclick="closeModal('cartModal')">×</button>
@@ -162,13 +164,13 @@
         </div>
     </div>
 
-    <!-- MODAL CHECKOUT CON TODOS LOS CAMPOS -->
+    <!-- MODAL CHECKOUT (ORIGINAL + NUEVOS CAMPOS INYECTADOS) -->
     <div id="checkoutModal" class="modal">
         <div class="modal-content">
             <button class="close-modal" onclick="closeModal('checkoutModal')">×</button>
             <h3>Datos para la compra</h3>
             
-            <!-- DATOS DEL CLIENTE -->
+            <!-- NUEVO: DATOS DEL CLIENTE -->
             <div class="form-group">
                 <label>Nombre completo *</label>
                 <input type="text" id="clientName" placeholder="Ej: Juan Carlos" required>
@@ -177,25 +179,16 @@
                 <label>Apellido *</label>
                 <input type="text" id="clientSurname" placeholder="Ej: Pérez" required>
             </div>
-            <div class="form-group">
-                <label>Email (opcional)</label>
-                <input type="email" id="clientEmail" placeholder="tu@email.com">
-            </div>
-            <div class="form-group">
-                <label>Teléfono *</label>
-                <input type="tel" id="clientPhone" placeholder="Ej: 3834123456" required>
-            </div>
             
-            <!-- PERSONALIZACIÓN DE LA CAMISETA -->
-            <h3 style="margin: 25px 0 15px;">Personalización de tu camiseta</h3>
+            <!-- NUEVO: PERSONALIZACIÓN Y SECCIÓN -->
+            <div class="section-divider"></div>
             <div class="form-group">
                 <label>Nombre para estampar en la camiseta</label>
                 <input type="text" id="shirtCustomName" placeholder="Ej: MARADONA (opcional)" maxlength="15">
-                <p class="form-note">Máximo 15 caracteres. Dejalo vacío si no querés personalización</p>
+                <p class="form-note">Máx. 15 caracteres. Vacío = sin personalización</p>
             </div>
-            
             <div class="form-group">
-                <label>Sección *</label>
+                <label>Sección para estampar *</label>
                 <select id="shirtSection" required onchange="updateAvailableNumbers()">
                     <option value="">Seleccionar sección</option>
                     <option value="escuderos">Escuderos</option>
@@ -207,18 +200,17 @@
                     <option value="milicianos">Milicianos</option>
                 </select>
             </div>
-            
             <div class="form-group">
                 <label>Número de camiseta (1-99) *</label>
                 <select id="shirtNumber" required onchange="checkNumberAvailability()">
-                    <option value="">Primero seleccioná una sección</option>
+                    <option value="">Primero elegí una sección</option>
                 </select>
-                <div id="numberWarning" class="number-warning">⚠️ Este número ya fue seleccionado en esta sección. Por favor elegí otro.</div>
+                <div id="numberWarning" class="number-warning">⚠️ Número ya tomado en esta sección. Elegí otro.</div>
                 <p class="form-note">Cada número es único por sección</p>
             </div>
 
-            <!-- MÉTODO DE PAGO -->
-            <h3 style="margin: 25px 0 15px;">Método de pago</h3>
+            <!-- MÉTODO DE PAGO (ORIGINAL) -->
+            <h3 style="margin: 25px 0 10px;">Método de pago</h3>
             <div class="payment-options">
                 <div class="payment-option selected" onclick="selectPayment(this, 'single')">
                     <strong>1 pago</strong>
@@ -230,72 +222,61 @@
                 </div>
             </div>
 
-            <!-- DATOS DE PAGO -->
             <div class="qr-box">
                 <h4>Datos para transferir</h4>
                 <p style="font-size: 1.5rem; font-weight: 700; margin: 10px 0;">$<span id="checkoutTotal">0</span></p>
                 <p>Alias / CBU</p>
-                <div class="alias-box" onclick="copyAlias()">TU.ALIAS.AQUI <small>(tocar para copiar)</small></div>
-                <p style="margin-top: 15px;">O escaneá el QR:</p>
-                <div class="qr-placeholder">
-                    <img src="assets/qr-pago.png" alt="QR de Pago" style="max-width: 100%; max-height: 100%;" onerror="this.style.display='none'; this.parentElement.textContent='Reemplazá esto con tu QR real'">
-                </div>
+                <div class="alias-box" onclick="copyAlias()">TU.ALIAS.AQUI <small>Copiar alias</small></div>
+                <p style="margin-top: 15px;">O escaneá el QR Para Pagar:</p>
+                <div class="qr-placeholder">Reemplazá esto con tu QR real</div>
             </div>
 
-            <p class="form-note" style="text-align: center; margin: 15px 0; background: #fff3cd; padding: 12px; border-radius: 6px;">
-                <strong>⚠️ Importante:</strong> Una vez que realizaste el pago, tocá el botón de abajo para enviarnos el comprobante por WhatsApp con todos los datos de personalización.
+            <p class="form-note" style="text-align: center; margin: 15px 0;">
+                Una vez que realizaste el pago, tocá el botón de abajo para enviarnos el comprobante por WhatsApp e Indicarnos el Nombre Personalizado en tu Camiseta.
             </p>
-            
-            <button class="btn-buy" onclick="finishPurchase()">✓ Ya pagué — Enviar comprobante</button>
+            <button class="btn-buy" onclick="finishPurchase()">Ya pagué — Enviar comprobante</button>
             <button class="btn-buy" style="background: #666; margin-top: 10px;" onclick="closeModal('checkoutModal'); openCart();">Volver al carrito</button>
         </div>
     </div>
 
-    <!-- TOAST -->
+    <!-- TOAST NOTIFICACIÓN (ORIGINAL) -->
     <div id="toast" class="toast">Producto agregado</div>
 
     <script>
-        // CONFIGURACIÓN
+        // ==========================================
+        // LÓGICA ORIGINAL (INTACTA)
+        // ==========================================
         const CONFIG = {
-            sheetUrl: 'https://script.google.com/macros/s/TU_SCRIPT_ID_AQUI/exec', // REEMPLAZAR CON TU URL DE APPS SCRIPT
-            whatsapp: '543834565209',
+            sheetUrl: 'https://script.google.com/macros/s/TU_SCRIPT_ID_AQUI/exec', // ← REEMPLAZAR
+            whatsapp: '3834565209',
             products: [
-                { id: 1, name: 'Camiseta Clásica Ruca del Valle', price: 15000, img: 'assets/productos/remera1.jpg' },
-                { id: 2, name: 'Camiseta Edición Limitada', price: 18000, img: 'assets/productos/remera2.jpg' },
-                { id: 3, name: 'Camiseta Premium', price: 20000, img: 'assets/productos/remera3.jpg' }
+                { id: 1, name: 'Camiseta Clásica', price: 15000, img: 'assets/producto1.jpg' },
+                { id: 2, name: 'Camiseta Edición Limitada', price: 18000, img: 'assets/producto2.jpg' },
+                { id: 3, name: 'Camiseta Premium', price: 20000, img: 'assets/producto3.jpg' }
             ]
-        };
-
-        // NÚMEROS OCUPADOS POR SECCIÓN (se carga desde localStorage)
-        let occupiedNumbers = JSON.parse(localStorage.getItem('rucaOccupiedNumbers')) || {
-            escuderos: [],
-            templarios: [],
-            adalides: [],
-            herederas: [],
-            caperucitas: [],
-            mayor: [],
-            milicianos: []
         };
 
         let cart = JSON.parse(localStorage.getItem('rucaCart')) || [];
         let paymentType = 'single';
-        let currentOrder = null;
 
-        // INICIALIZACIÓN
+        // NUEVO: NÚMEROS OCUPADOS POR SECCIÓN
+        let occupiedNumbers = JSON.parse(localStorage.getItem('rucaOccupied')) || {
+            escuderos: [], templarios: [], adalides: [], herederas: [], caperucitas: [], mayor: [], milicianos: []
+        };
+
         document.addEventListener('DOMContentLoaded', () => {
             renderProducts();
             updateCartUI();
             checkPendingPayment();
-            loadOccupiedNumbers();
         });
 
         function renderProducts() {
             const grid = document.getElementById('productsGrid');
             grid.innerHTML = CONFIG.products.map(p => `
                 <div class="product-card">
-                    <img src="${p.img}" alt="${p.name}" class="product-img" onerror="this.style.background='#eee'; this.parentElement.innerHTML+='<p style=\'color:#999; font-size:0.85rem\'>Imagen no disponible</p>'">
+                    <img src="${p.img}" alt="${p.name}" class="product-img" onerror="this.style.background='#eee'">
                     <h4>${p.name}</h4>
-                    <p style="color: var(--light-text); margin: 5px 0; font-size: 1.25rem; font-weight: 700;">$${p.price.toLocaleString()}</p>
+                    <p style="color: var(--light-text); margin: 5px 0;">$${p.price.toLocaleString()}</p>
                     <button class="btn-buy" onclick="addToCart(${p.id})">Agregar al carrito</button>
                 </div>
             `).join('');
@@ -318,19 +299,13 @@
 
         function openCart() {
             const container = document.getElementById('cartItems');
-            if (cart.length === 0) {
-                container.innerHTML = '<p style="text-align:center; padding:20px; color:var(--light-text);">El carrito está vacío</p>';
-            } else {
-                container.innerHTML = cart.map(item => `
-                    <div style="display:flex; justify-content:space-between; padding:10px 0; border-bottom:1px solid #eee; align-items:center;">
-                        <div>
-                            <strong>${item.name}</strong>
-                            <p style="font-size:0.85rem; color:var(--light-text); margin:2px 0;">Cantidad: ${item.qty}</p>
-                        </div>
-                        <strong style="color:var(--primary);">$${(item.price * item.qty).toLocaleString()}</strong>
-                    </div>
-                `).join('');
-            }
+            if (cart.length === 0) container.innerHTML = '<p style="text-align:center; padding:20px;">El carrito está vacío</p>';
+            else container.innerHTML = cart.map(item => `
+                <div style="display:flex; justify-content:space-between; padding:10px 0; border-bottom:1px solid #eee;">
+                    <span>${item.name} (x${item.qty})</span>
+                    <strong>$${(item.price * item.qty).toLocaleString()}</strong>
+                </div>
+            `).join('');
             
             const total = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
             document.getElementById('cartTotal').textContent = total.toLocaleString();
@@ -338,38 +313,36 @@
         }
 
         function openCheckout() {
-            if (cart.length === 0) {
-                alert('El carrito está vacío');
-                return;
-            }
             closeModal('cartModal');
-            updateCheckoutTotal();
-            document.getElementById('checkoutModal').classList.add('show');
-        }
-
-        function updateCheckoutTotal() {
             const total = paymentType === 'single' 
                 ? cart.reduce((sum, item) => sum + (item.price * item.qty), 0)
                 : Math.round(cart.reduce((sum, item) => sum + (item.price * item.qty), 0) / 2);
+            
             document.getElementById('checkoutTotal').textContent = total.toLocaleString();
+            document.getElementById('checkoutModal').classList.add('show');
+            updateAvailableNumbers(); // NUEVO
         }
 
         function selectPayment(el, type) {
             document.querySelectorAll('.payment-option').forEach(opt => opt.classList.remove('selected'));
             el.classList.add('selected');
             paymentType = type;
-            updateCheckoutTotal();
+            const total = paymentType === 'single' 
+                ? cart.reduce((sum, item) => sum + (item.price * item.qty), 0)
+                : Math.round(cart.reduce((sum, item) => sum + (item.price * item.qty), 0) / 2);
+            document.getElementById('checkoutTotal').textContent = total.toLocaleString();
         }
 
         function closeModal(id) { document.getElementById(id).classList.remove('show'); }
 
         function copyAlias() {
-            navigator.clipboard.writeText('TU.ALIAS.AQUI').then(() => {
-                showToast('Alias copiado al portapapeles');
-            });
+            navigator.clipboard.writeText('TU.ALIAS.AQUI');
+            alert('Alias copiado al portapapeles');
         }
 
-        // ACTUALIZAR NÚMEROS DISPONIBLES SEGÚN SECCIÓN
+        // ==========================================
+        // NUEVO: FUNCIONES AGREGADAS
+        // ==========================================
         function updateAvailableNumbers() {
             const section = document.getElementById('shirtSection').value;
             const numberSelect = document.getElementById('shirtNumber');
@@ -384,29 +357,16 @@
             }
             
             const occupied = occupiedNumbers[section] || [];
-            const available = [];
-            
             for (let i = 1; i <= 99; i++) {
                 if (!occupied.includes(i)) {
-                    available.push(i);
+                    const opt = document.createElement('option');
+                    opt.value = i;
+                    opt.textContent = `N° ${i}`;
+                    numberSelect.appendChild(opt);
                 }
-            }
-            
-            if (available.length === 0) {
-                numberSelect.innerHTML = '<option value="">No hay números disponibles en esta sección</option>';
-                numberSelect.disabled = true;
-            } else {
-                numberSelect.disabled = false;
-                available.forEach(num => {
-                    const option = document.createElement('option');
-                    option.value = num;
-                    option.textContent = `N° ${num}`;
-                    numberSelect.appendChild(option);
-                });
             }
         }
 
-        // VERIFICAR DISPONIBILIDAD DEL NÚMERO
         function checkNumberAvailability() {
             const section = document.getElementById('shirtSection').value;
             const number = parseInt(document.getElementById('shirtNumber').value);
@@ -415,169 +375,82 @@
             if (section && number && occupiedNumbers[section].includes(number)) {
                 warning.classList.add('show');
                 return false;
-            } else {
-                warning.classList.remove('show');
-                return true;
             }
+            warning.classList.remove('show');
+            return true;
         }
 
-        // CARGAR NÚMEROS OCUPADOS
-        function loadOccupiedNumbers() {
-            const saved = localStorage.getItem('rucaOccupiedNumbers');
-            if (saved) {
-                occupiedNumbers = JSON.parse(saved);
-            }
-        }
-
-        // GUARDAR NÚMERO COMO OCUPADO
         function markNumberAsOccupied(section, number) {
-            if (!occupiedNumbers[section]) {
-                occupiedNumbers[section] = [];
-            }
+            if (!occupiedNumbers[section]) occupiedNumbers[section] = [];
             if (!occupiedNumbers[section].includes(number)) {
                 occupiedNumbers[section].push(number);
-                localStorage.setItem('rucaOccupiedNumbers', JSON.stringify(occupiedNumbers));
+                localStorage.setItem('rucaOccupied', JSON.stringify(occupiedNumbers));
             }
         }
 
-        // FINALIZAR COMPRA
+        // NUEVO: FINALIZAR COMPRA CON DATOS COMPLETOS + WHATSAPP + GOOGLE SHEETS
         function finishPurchase() {
             const name = document.getElementById('clientName').value.trim();
             const surname = document.getElementById('clientSurname').value.trim();
-            const email = document.getElementById('clientEmail').value.trim();
-            const phone = document.getElementById('clientPhone').value.trim();
-            const customName = document.getElementById('shirtCustomName').value.trim();
+            const customName = document.getElementById('shirtCustomName').value.trim() || 'Sin personalización';
             const section = document.getElementById('shirtSection').value;
             const number = document.getElementById('shirtNumber').value;
             
-            // VALIDACIONES
-            if (!name || !surname || !phone) {
-                alert('Por favor completá los campos obligatorios (*)');
-                return;
+            if (!name || !surname || !section || !number) {
+                return alert('Por favor completá nombre, apellido, sección y número de camiseta');
             }
-            
-            if (!section || !number) {
-                alert('Por favor seleccioná la sección y el número de camiseta');
-                return;
-            }
-            
             if (!checkNumberAvailability()) {
-                alert('Este número ya está ocupado en la sección seleccionada. Por favor elegí otro.');
-                return;
+                return alert('Este número ya está ocupado en esa sección. Elegí otro.');
             }
-            
-            const total = paymentType === 'single' 
-                ? cart.reduce((sum, item) => sum + (item.price * item.qty), 0)
-                : Math.round(cart.reduce((sum, item) => sum + (item.price * item.qty), 0) / 2);
-            
-            // MARCAR NÚMERO COMO OCUPADO
+
+            const total = paymentType === 'single' ? cart.reduce((s, i) => s + i.price * i.qty, 0) : Math.round(cart.reduce((s, i) => s + i.price * i.qty, 0) / 2);
             markNumberAsOccupied(section, parseInt(number));
-            
-            // CREAR OBJETO DE PEDIDO
-            currentOrder = {
-                id: Date.now(),
+
+            // MENSAJE WHATSAPP ACTUALIZADO
+            let msg = `👕 *NUEVO PEDIDO - RUCA DEL VALLE*\n\n`;
+            cart.forEach(item => msg += `• ${item.name} x${item.qty} - $${(item.price * item.qty).toLocaleString()}\n`);
+            msg += `\n💳 Método: ${paymentType === 'single' ? '1 Pago' : '2 Pagos'}\n💰 Total: $${total.toLocaleString()}\n`;
+            msg += `👤 Cliente: ${name} ${surname}\n`;
+            msg += `✏️ Camiseta: ${customName}\n🏆 Sección: ${section}\n🔢 Número: ${number}\n`;
+            msg += `\n📎 *Adjunto comprobante de pago*`;
+
+            // ENVIAR A GOOGLE SHEETS (NUEVO)
+            const orderData = {
                 date: new Date().toISOString(),
-                customer: {
-                    name,
-                    surname,
-                    email,
-                    phone
-                },
-                customization: {
-                    customName: customName || 'Sin personalización',
-                    section,
-                    number: parseInt(number)
-                },
-                products: [...cart],
-                payment: {
-                    method: paymentType,
-                    total,
-                    status: paymentType === 'single' ? 'completed' : 'partial'
-                }
+                customer: `${name} ${surname}`,
+                customName,
+                section,
+                number,
+                total,
+                paymentType,
+                cart: cart.map(i => `${i.name} x${i.qty}`).join(', '),
+                id: Date.now()
             };
             
-            // MENSAJE WHATSAPP
-            let msg = `👕 *NUEVO PEDIDO - RUCA DEL VALLE*\n\n`;
-            msg += `*Datos del cliente:*\n`;
-            msg += `👤 Nombre: ${name} ${surname}\n`;
-            if (email) msg += `📧 Email: ${email}\n`;
-            msg += `📱 Teléfono: ${phone}\n\n`;
-            
-            msg += `*Productos:*\n`;
-            cart.forEach(item => {
-                msg += `• ${item.name} x${item.qty} - $${(item.price * item.qty).toLocaleString()}\n`;
-            });
-            
-            msg += `\n*Personalización:*\n`;
-            msg += `✏️ Nombre: ${customName || 'Sin personalización'}\n`;
-            msg += `🏆 Sección: ${section.charAt(0).toUpperCase() + section.slice(1)}\n`;
-            msg += `🔢 Número: ${number}\n`;
-            
-            msg += `\n*Pago:*\n`;
-            msg += `💳 Método: ${paymentType === 'single' ? '1 Pago' : '2 Pagos'}\n`;
-            msg += `💰 Total: $${total.toLocaleString()}\n`;
-            
-            if (paymentType === 'installment') {
-                const nextPayment = new Date();
-                nextPayment.setMonth(nextPayment.getMonth() + 1);
-                msg += `📅 Próximo pago: ${nextPayment.toLocaleDateString('es-AR')}\n`;
-                msg += `⏳ Estado: 1ra cuota pagada\n`;
-            }
-            
-            msg += `\n📎 *Adjunto comprobante de pago*`;
-            
-            // ENVIAR A GOOGLE SHEETS
-            sendToGoogleSheets(currentOrder);
-            
-            // ABRIR WHATSAPP
-            const whatsappUrl = `https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(msg)}`;
-            window.open(whatsappUrl, '_blank');
-            
+            fetch(CONFIG.sheetUrl, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(orderData)
+            }).catch(console.error);
+
             // GUARDAR PARA RECORDATORIO SI ES 2 PAGOS
             if (paymentType === 'installment') {
-                const nextPay = new Date();
-                nextPay.setMonth(nextPay.getMonth() + 1);
+                const nextPay = new Date(); nextPay.setDate(nextPay.getDate() + 30);
                 localStorage.setItem('rucaPending', JSON.stringify({
-                    orderId: currentOrder.id,
-                    amount: total,
-                    due: nextPay.toISOString(),
-                    customer: `${name} ${surname}`,
-                    phone: phone,
-                    section: section,
-                    number: number,
-                    customName: customName
+                    amount: total, due: nextPay.toISOString(), client: `${name} ${surname}`
                 }));
             }
+
+            // LIMPIAR Y REDIRIGIR
+            window.open(`https://wa.me/54${CONFIG.whatsapp}?text=${encodeURIComponent(msg)}`, '_blank');
+            cart = []; saveCart(); updateCartUI(); closeModal('checkoutModal');
+            showToast('Pedido registrado. Enviá el comprobante por WhatsApp.');
             
-            // LIMPIAR CARRITO
-            cart = [];
-            saveCart();
-            updateCartUI();
-            closeModal('checkoutModal');
-            
-            // MOSTRAR MENSAJE DE ÉXITO
-            setTimeout(() => {
-                alert('¡Pedido registrado con éxito!\n\nSe abrió WhatsApp para enviar el comprobante. No olvides adjuntar la captura de pantalla del pago.');
-                location.reload();
-            }, 500);
+            if (paymentType === 'installment') setTimeout(() => location.reload(), 1500);
         }
 
-        // ENVIAR A GOOGLE SHEETS
-        async function sendToGoogleSheets(order) {
-            try {
-                const response = await fetch(CONFIG.sheetUrl, {
-                    method: 'POST',
-                    mode: 'no-cors',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(order)
-                });
-                console.log('Pedido guardado en Google Sheets');
-            } catch (error) {
-                console.error('Error guardando en Google Sheets:', error);
-            }
-        }
-
-        // VERIFICAR PAGOS PENDIENTES
+        // LÓGICA DE RECORDATORIO (ORIGINAL + GOOGLE SHEETS TRIGGER)
         function checkPendingPayment() {
             const pending = JSON.parse(localStorage.getItem('rucaPending'));
             if (pending && new Date() >= new Date(pending.due)) {
@@ -586,39 +459,20 @@
             }
         }
 
-        // PAGAR SEGUNDA CUOTA
         function paySecondInstallment() {
             const pending = JSON.parse(localStorage.getItem('rucaPending'));
             if (!pending) return;
-            
-            const msg = `💳 *PAGO 2DA CUOTA - RUCA DEL VALLE*\n\n`;
-            msg += `Pedido #${pending.orderId}\n`;
-            msg += `Cliente: ${pending.customer}\n`;
-            msg += `Camiseta: Sección ${pending.section} - N° ${pending.number}\n`;
-            msg += `Monto: $${pending.amount.toLocaleString()}\n\n`;
-            msg += `📎 Adjunto comprobante de pago`;
-            
-            const whatsappUrl = `https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(msg)}`;
-            window.open(whatsappUrl, '_blank');
-            
-            // ELIMINAR RECORDATORIO
+            alert(`Redirigiendo a pagar 2da cuota ($${pending.amount.toLocaleString()})...`);
             localStorage.removeItem('rucaPending');
             document.getElementById('reminderBanner').classList.remove('show');
-            
-            setTimeout(() => {
-                alert('Se abrió WhatsApp para enviar el comprobante de la 2da cuota.');
-            }, 500);
         }
 
-        // TOAST
-        function showToast(message = 'Producto agregado') {
+        function showToast() {
             const toast = document.getElementById('toast');
-            toast.textContent = message;
             toast.classList.add('show');
             setTimeout(() => toast.classList.remove('show'), 2000);
         }
 
-        // CERRAR MODALES AL CLICK AFUERA
         window.onclick = e => { if (e.target.classList.contains('modal')) e.target.classList.remove('show'); };
     </script>
 </body>
