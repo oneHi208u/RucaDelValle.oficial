@@ -178,6 +178,15 @@
             background: linear-gradient(90deg, transparent, var(--gold), transparent);
             opacity: 0.3;
         }
+
+        .view-btn {
+            transition: all 0.3s ease;
+        }
+        .view-btn.active {
+            background: var(--gold);
+            color: var(--black);
+            border-color: var(--gold);
+        }
     </style>
 </head>
 <body>
@@ -243,7 +252,7 @@
         <div class="max-w-7xl mx-auto px-4 py-3">
             <div class="flex flex-wrap justify-center gap-2 sm:gap-3 text-xs">
                 <span class="section-tag px-3 py-1.5 rounded-full font-medium">🛡️ Escuderos</span>
-                <span class="section-tag px-3 py-1.5 rounded-full font-medium">⚔️ Templarios</span>
+                <span class="section-tag px-3 py-1.5 rounded-full font-medium">️ Templarios</span>
                 <span class="section-tag px-3 py-1.5 rounded-full font-medium"> Adalides</span>
                 <span class="section-tag px-3 py-1.5 rounded-full font-medium">👑 Herederas</span>
                 <span class="section-tag px-3 py-1.5 rounded-full font-medium"> Caperucitas</span>
@@ -268,21 +277,32 @@
             <div class="card-dark rounded-2xl overflow-hidden">
                 <div class="grid md:grid-cols-2">
                     
-                    <!-- Product Image Area -->
-                    <div class="relative h-80 sm:h-96 md:h-full min-h-[320px] overflow-hidden">
+                    <!-- Product Image Area with Front/Back Toggle -->
+                    <div class="relative h-80 sm:h-96 md:h-full min-h-[320px] overflow-hidden flex flex-col">
                         
-                        <!-- CAMISETA IMAGE: Reemplazá img/camiseta.jpg con tu foto real -->
-                          <img src="img/camiseta.jpg" alt="Camiseta Oficial Ruca del Valle" class="w-full h-full object-cover" onerror="this.parentElement.innerHTML='<div class=\'w-full h-full flex items-center justify-center bg-gradient-to-br from-[#1E1E1E] to-[#2A2A2A]\'><div class=\'text-center px-6\'><div class=\'w-40 h-44 sm:w-48 sm:h-52 mx-auto border-2 border-dashed border-[#3A3A3A] rounded-xl flex flex-col items-center justify-center mb-4\'><svg class=\'w-12 h-12 text-[#3A3A3A] mb-2\' fill=\'none\' viewBox=\'0 0 24 24\' stroke=\'currentColor\'><path stroke-linecap=\'round\' stroke-linejoin=\'round\' stroke-width=\'1\' d=\'M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z\'/></svg><p class=\'text-xs text-gray-600 font-medium\'>Agregá img/camiseta.jpg</p></div><span class=\'badge-stock text-[10px] font-bold px-3 py-1 rounded-full inline-block\'>STOCK DISPONIBLE</span></div></div>'">
-                        <img src="img/camisetatras.jpg" alt="Camiseta Oficial Ruca del Valle" class="w-full h-full object-cover" onerror="this.parentElement.innerHTML='<div class=\'w-full h-full flex items-center justify-center bg-gradient-to-br from-[#1E1E1E] to-[#2A2A2A]\'><div class=\'text-center px-6\'><div class=\'w-40 h-44 sm:w-48 sm:h-52 mx-auto border-2 border-dashed border-[#3A3A3A] rounded-xl flex flex-col items-center justify-center mb-4\'><svg class=\'w-12 h-12 text-[#3A3A3A] mb-2\' fill=\'none\' viewBox=\'0 0 24 24\' stroke=\'currentColor\'><path stroke-linecap=\'round\' stroke-linejoin=\'round\' stroke-width=\'1\' d=\'M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z\'/></svg><p class=\'text-xs text-gray-600 font-medium\'>Agregá img/camiseta.jpg</p></div><span class=\'badge-stock text-[10px] font-bold px-3 py-1 rounded-full inline-block\'>STOCK DISPONIBLE</span></div></div>'">
+                        <!-- Image Container -->
+                        <div class="relative flex-1 overflow-hidden">
+                            <img id="shirt-image" src="img/camiseta-frontal.jpg" alt="Camiseta Oficial Ruca del Valle" class="w-full h-full object-cover transition-opacity duration-500" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MDAiIGhlaWdodD0iNTAwIiB2aWV3Qm94PSIwIDAgNDAwIDUwMCI+PHJlY3Qgd2lkdGg9IjQwMCIgaGVpZ2h0PSI1MDAiIGZpbGw9IiMxRTFFMUUiLz48dGV4dCB4PSI1MCUiIHk9IjUwJSIgZmlsbD0iIzU1NSIgZm9udC1zaXplPSIxNiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPmltZy9jYW1pc2V0YS1mcm9udGFsLmpwZzwvdGV4dD48L3N2Zz4='">
+                            <!-- Label -->
+                            <div class="absolute top-4 left-4 badge-stock text-[10px] font-bold px-3 py-1 rounded-full" id="shirt-view-label">VISTA FRONTAL</div>
+                        </div>
 
-                        <div class="absolute inset-0 bg-gradient-to-t from-[#1A1A1A] via-transparent to-transparent opacity-60"></div>
+                        <!-- Toggle Buttons -->
+                        <div class="flex border-t border-[#2A2A2A]">
+                            <button onclick="toggleShirtView('frontal')" id="btn-frontal" class="view-btn active flex-1 py-3 text-xs font-bold uppercase tracking-widest border-r border-[#2A2A2A] text-[#F5B731]">
+                                📸 Vista Frontal
+                            </button>
+                            <button onclick="toggleShirtView('trasera')" id="btn-trasera" class="view-btn flex-1 py-3 text-xs font-bold uppercase tracking-widest text-gray-500 hover:text-[#F5B731]">
+                                 Vista Trasera
+                            </button>
+                        </div>
                     </div>
 
                     <!-- Product Info -->
                     <div class="p-6 sm:p-8 flex flex-col justify-center">
                         <h4 class="font-cinzel text-xl sm:text-2xl font-bold text-white mb-2">Camiseta Oficial Ruca del Valle</h4>
                         <p class="text-gray-400 text-sm leading-relaxed mb-6">
-                            Camiseta personalizada con estampado de tu sección. Elegí tu número único y el nombre que querés que lleve. Algodón premium de primera calidad.
+                            Camiseta personalizada con estampado de tu sección. Elegí tu número único y el nombre que querás que lleve. Algodón premium de primera calidad.
                         </p>
                         
                         <div class="mb-6">
@@ -309,7 +329,7 @@
                         </div>
 
                         <button onclick="openProductModal()" class="btn-gold w-full py-4 rounded-xl text-sm font-bold">
-                            🛒 COMPRAR AHORA
+                             COMPRAR AHORA
                         </button>
                     </div>
                 </div>
@@ -317,13 +337,44 @@
         </div>
     </main>
 
-    <!-- ==================== MODELOS / GALERÍA ==================== -->
+    <!-- ==================== VIDEO DE MODELOS ==================== -->
     <section class="bg-[#121212] border-y border-[#2A2A2A]">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
             <div class="text-center mb-12">
-                <h3 class="font-cinzel text-2xl sm:text-3xl font-bold text-white mb-2 tracking-wider">NUESTROS MODELOS</h3>
+                <h3 class="font-cinzel text-2xl sm:text-3xl font-bold text-white mb-2 tracking-wider">NUESTROS MODELOS EN ACCIÓN</h3>
                 <div class="section-divider w-20 mx-auto"></div>
-                <p class="text-gray-500 mt-4 text-sm">Mirá cómo lucen nuestras camisetas</p>
+                <p class="text-gray-500 mt-4 text-sm">Mirá cómo lucen nuestras camisetas en movimiento</p>
+            </div>
+
+            <!-- Video Container -->
+            <div class="max-w-3xl mx-auto">
+                <div class="relative rounded-2xl overflow-hidden border border-[#2A2A2A] shadow-2xl bg-black aspect-video flex items-center justify-center">
+                    <!-- Video Element -->
+                    <video id="models-video" controls class="w-full h-full object-cover" poster="img/video-poster.jpg" preload="metadata">
+                        <source src="img/video-modelos.mp4" type="video/mp4">
+                        Tu navegador no soporta la etiqueta de video.
+                    </video>
+                    
+                    <!-- Fallback if video fails -->
+                    <div id="video-fallback" class="absolute inset-0 flex flex-col items-center justify-center bg-[#1A1A1A] hidden">
+                        <svg class="w-16 h-16 text-[#3A3A3A] mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/>
+                        </svg>
+                        <p class="text-sm text-gray-500">Agregá <span class="text-[#F5B731]">img/video-modelos.mp4</span></p>
+                        <p class="text-xs text-gray-600 mt-1">o un archivo de video compatible</p>
+                    </div>
+                </div>
+                <p class="text-center text-xs text-gray-600 mt-3">El video puede tardar en cargar dependiendo de tu conexión.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== GALERÍA DE FOTOS DE MODELOS ==================== -->
+    <section class="bg-[#0A0A0A]">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+            <div class="text-center mb-12">
+                <h3 class="font-cinzel text-xl sm:text-2xl font-bold text-white mb-2 tracking-wider">GALERÍA DE FOTOS</h3>
+                <div class="section-divider w-20 mx-auto"></div>
             </div>
 
             <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
@@ -494,7 +545,7 @@
                             <option value="Escuderos">️ Escuderos</option>
                             <option value="Templarios">⚔️ Templarios</option>
                             <option value="Adalides">🏹 Adalides</option>
-                            <option value="Herederas">👑 Herederas</option>
+                            <option value="Herederas"> Herederas</option>
                             <option value="Caperucitas">🎭 Caperucitas</option>
                             <option value="Mayor"> Mayor</option>
                             <option value="Milicianos">🏛️ Milicianos</option>
@@ -644,7 +695,6 @@
 
                         <div class="mb-4 text-center">
                             <p class="text-[10px] text-gray-600 uppercase tracking-widest mb-2">O escaneá el QR para pagar</p>
-                            <!-- QR IMAGE: Reemplazá img/qr.png con tu QR real -->
                             <div class="w-36 h-36 bg-black mx-auto flex items-center justify-center rounded-xl border border-[#2A2A2A] overflow-hidden">
                                 <img src="img/qr.png" alt="QR para pagar" class="w-full h-full object-contain" onerror="this.style.display='none';this.parentElement.innerHTML+='<span class=\'text-xs text-gray-600\'>Agregá img/qr.png</span>'">
                             </div>
@@ -670,6 +720,38 @@
     </div>
 
     <script>
+        // ==================== SHIRT VIEW TOGGLE ====================
+        function toggleShirtView(view) {
+            const imgElement = document.getElementById('shirt-image');
+            const labelElement = document.getElementById('shirt-view-label');
+            const btnFrontal = document.getElementById('btn-frontal');
+            const btnTrasera = document.getElementById('btn-trasera');
+
+            if (view === 'frontal') {
+                imgElement.src = 'img/camiseta-frontal.jpg';
+                labelElement.textContent = 'VISTA FRONTAL';
+                
+                btnFrontal.classList.add('active');
+                btnFrontal.classList.remove('text-gray-500');
+                btnFrontal.classList.add('text-[#F5B731]');
+                
+                btnTrasera.classList.remove('active');
+                btnTrasera.classList.add('text-gray-500');
+                btnTrasera.classList.remove('text-[#F5B731]');
+            } else {
+                imgElement.src = 'img/camiseta-trasera.jpg';
+                labelElement.textContent = 'VISTA TRASERA';
+                
+                btnTrasera.classList.add('active');
+                btnTrasera.classList.remove('text-gray-500');
+                btnTrasera.classList.add('text-[#F5B731]');
+                
+                btnFrontal.classList.remove('active');
+                btnFrontal.classList.add('text-gray-500');
+                btnFrontal.classList.remove('text-[#F5B731]');
+            }
+        }
+
         // ==================== STATE ====================
         let cart = [];
         let selectedPayment = 'full';
@@ -858,8 +940,8 @@
                             <h4 class="font-cinzel font-bold text-sm text-[#F5B731] truncate">${item.productName}</h4>
                             <div class="mt-2 space-y-1">
                                 <p class="text-xs text-gray-400">👤 ${item.customer}</p>
-                                <p class="text-xs text-gray-400">📏 Talle: ${item.size} · 🛡️ ${item.section}</p>
-                                <p class="text-xs text-gray-400">🔢 Nº ${item.number} · ️ "${item.customName}"</p>
+                                <p class="text-xs text-gray-400">📏 Talle: ${item.size} · ️ ${item.section}</p>
+                                <p class="text-xs text-gray-400">🔢 Nº ${item.number} · ✍️ "${item.customName}"</p>
                             </div>
                             <p class="text-sm font-bold text-[#F5B731] mt-2">$${item.price.toLocaleString('es-AR')}</p>
                         </div>
