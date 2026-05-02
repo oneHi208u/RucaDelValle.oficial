@@ -187,6 +187,28 @@
             color: var(--black);
             border-color: var(--gold);
         }
+
+        /* Estilos específicos para el video */
+        .video-container {
+            position: relative;
+            background: #000;
+        }
+        .video-container video {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+        .video-controls-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.8));
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
     </style>
 </head>
 <body>
@@ -201,9 +223,8 @@
     <header class="sticky top-0 z-40 bg-black/90 backdrop-blur-xl border-b border-[#2A2A2A]">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between">
             <div class="flex items-center gap-3">
-                <!-- LOGO IMAGE -->
                 <div class="w-9 h-9 sm:w-11 sm:h-11 flex-shrink-0 drop-shadow-[0_0_8px_rgba(245,183,49,0.5)]">
-                    <img src="img/logo.png" alt="Logo Ruca del Valle" class="w-full h-full object-contain">
+                    <img src="img/logo.png" alt="Logo Ruca del Valle" class="w-full h-full object-contain" onerror="this.parentElement.innerHTML='<span class=\'text-[#F5B731] font-cinzel font-bold text-sm\'>RUCA</span>'">
                 </div>
                 <div>
                     <h1 class="text-sm sm:text-base font-cinzel font-bold text-[#F5B731] tracking-[0.2em] leading-tight">RUCA DEL VALLE</h1>
@@ -222,10 +243,9 @@
         <div class="absolute inset-0 hero-grid-pattern"></div>
         <div class="relative max-w-7xl mx-auto py-16 sm:py-24 px-4 sm:px-6 lg:px-8 text-center">
             
-            <!-- Large Logo Image -->
             <div class="flex justify-center mb-8">
                 <div class="w-28 h-28 sm:w-36 sm:h-36 lg:w-44 lg:h-44 drop-shadow-[0_0_15px_rgba(245,183,49,0.6)]">
-                    <img src="img/logo.png" alt="Logo Ruca del Valle Grande" class="w-full h-full object-contain">
+                    <img src="img/logo.png" alt="Logo Ruca del Valle Grande" class="w-full h-full object-contain" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'w-full h-full border-2 border-dashed border-[#3A3A3A] rounded-full flex items-center justify-center\'><span class=\'text-xs text-gray-600\'>img/logo.png</span></div>'">
                 </div>
             </div>
 
@@ -252,11 +272,11 @@
         <div class="max-w-7xl mx-auto px-4 py-3">
             <div class="flex flex-wrap justify-center gap-2 sm:gap-3 text-xs">
                 <span class="section-tag px-3 py-1.5 rounded-full font-medium">🛡️ Escuderos</span>
-                <span class="section-tag px-3 py-1.5 rounded-full font-medium">️ Templarios</span>
+                <span class="section-tag px-3 py-1.5 rounded-full font-medium">⚔️ Templarios</span>
                 <span class="section-tag px-3 py-1.5 rounded-full font-medium"> Adalides</span>
                 <span class="section-tag px-3 py-1.5 rounded-full font-medium">👑 Herederas</span>
                 <span class="section-tag px-3 py-1.5 rounded-full font-medium"> Caperucitas</span>
-                <span class="section-tag px-3 py-1.5 rounded-full font-medium">🏰 Mayor</span>
+                <span class="section-tag px-3 py-1.5 rounded-full font-medium"> Mayor</span>
                 <span class="section-tag px-3 py-1.5 rounded-full font-medium">️ Milicianos</span>
             </div>
         </div>
@@ -265,29 +285,27 @@
     <!-- ==================== PRODUCTO PRINCIPAL ==================== -->
     <main id="producto" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
         
-        <!-- Section Title -->
         <div class="text-center mb-12">
             <h3 class="font-cinzel text-2xl sm:text-3xl font-bold text-white mb-2 tracking-wider">NUESTRA CAMISETA</h3>
             <div class="section-divider w-20 mx-auto"></div>
             <p class="text-gray-500 mt-4 text-sm">Personalizable · Algodón premium · Edición limitada</p>
         </div>
 
-        <!-- Product Card - Single Product -->
         <div class="max-w-4xl mx-auto">
             <div class="card-dark rounded-2xl overflow-hidden">
                 <div class="grid md:grid-cols-2">
                     
                     <!-- Product Image Area with Front/Back Toggle -->
                     <div class="relative h-80 sm:h-96 md:h-full min-h-[320px] overflow-hidden flex flex-col">
-                        
-                        <!-- Image Container -->
-                        <div class="relative flex-1 overflow-hidden">
-                            <img id="shirt-image" src="img/camiseta-frontal.jpg" alt="Camiseta Oficial Ruca del Valle" class="w-full h-full object-cover transition-opacity duration-500" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MDAiIGhlaWdodD0iNTAwIiB2aWV3Qm94PSIwIDAgNDAwIDUwMCI+PHJlY3Qgd2lkdGg9IjQwMCIgaGVpZ2h0PSI1MDAiIGZpbGw9IiMxRTFFMUUiLz48dGV4dCB4PSI1MCUiIHk9IjUwJSIgZmlsbD0iIzU1NSIgZm9udC1zaXplPSIxNiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPmltZy9jYW1pc2V0YS1mcm9udGFsLmpwZzwvdGV4dD48L3N2Zz4='">
-                            <!-- Label -->
+                        <div class="relative flex-1 overflow-hidden bg-[#1E1E1E]">
+                            <img id="shirt-image" src="img/camiseta-frontal.jpg" alt="Camiseta Oficial Ruca del Valle" class="w-full h-full object-cover transition-opacity duration-500">
+                            <div id="shirt-placeholder" class="absolute inset-0 flex flex-col items-center justify-center hidden">
+                                <svg class="w-16 h-16 text-[#3A3A3A] mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                                <p class="text-xs text-gray-500" id="shirt-placeholder-text">img/camiseta-frontal.jpg</p>
+                            </div>
                             <div class="absolute top-4 left-4 badge-stock text-[10px] font-bold px-3 py-1 rounded-full" id="shirt-view-label">VISTA FRONTAL</div>
                         </div>
 
-                        <!-- Toggle Buttons -->
                         <div class="flex border-t border-[#2A2A2A]">
                             <button onclick="toggleShirtView('frontal')" id="btn-frontal" class="view-btn active flex-1 py-3 text-xs font-bold uppercase tracking-widest border-r border-[#2A2A2A] text-[#F5B731]">
                                 📸 Vista Frontal
@@ -298,7 +316,6 @@
                         </div>
                     </div>
 
-                    <!-- Product Info -->
                     <div class="p-6 sm:p-8 flex flex-col justify-center">
                         <h4 class="font-cinzel text-xl sm:text-2xl font-bold text-white mb-2">Camiseta Oficial Ruca del Valle</h4>
                         <p class="text-gray-400 text-sm leading-relaxed mb-6">
@@ -346,25 +363,29 @@
                 <p class="text-gray-500 mt-4 text-sm">Mirá cómo lucen nuestras camisetas en movimiento</p>
             </div>
 
-            <!-- Video Container -->
             <div class="max-w-3xl mx-auto">
-                <div class="relative rounded-2xl overflow-hidden border border-[#2A2A2A] shadow-2xl bg-black aspect-video flex items-center justify-center">
-                    <!-- Video Element -->
-                    <video id="models-video" controls class="w-full h-full object-cover" poster="img/video-poster.jpg" preload="metadata">
+                <div class="video-container rounded-2xl overflow-hidden border border-[#2A2A2A] shadow-2xl aspect-video bg-black">
+                    
+                    <!-- Video Principal -->
+                    <video id="models-video" playsinline preload="auto" poster="img/video-poster.jpg">
                         <source src="img/video-modelos.mp4" type="video/mp4">
+                        <!-- Fallback: Intenta cargar una versión webm si existe -->
+                        <source src="img/video-modelos.webm" type="video/webm">
                         Tu navegador no soporta la etiqueta de video.
                     </video>
                     
-                    <!-- Fallback if video fails -->
-                    <div id="video-fallback" class="absolute inset-0 flex flex-col items-center justify-center bg-[#1A1A1A] hidden">
-                        <svg class="w-16 h-16 text-[#3A3A3A] mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/>
+                    <!-- Mensaje de Error -->
+                    <div id="video-error-msg" class="absolute inset-0 flex flex-col items-center justify-center bg-[#1A1A1A] hidden text-center p-6">
+                        <svg class="w-12 h-12 text-red-500 mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
-                        <p class="text-sm text-gray-500">Agregá <span class="text-[#F5B731]">img/video-modelos.mp4</span></p>
-                        <p class="text-xs text-gray-600 mt-1">o un archivo de video compatible</p>
+                        <p class="text-sm text-gray-300 font-bold mb-2">El video no se pudo reproducir</p>
+                        <p class="text-xs text-gray-500 mb-4" id="video-error-detail">Verificá que el archivo exista y sea .mp4 (H.264)</p>
+                        <button onclick="retryVideo()" class="btn-gold px-6 py-2 rounded-lg text-xs font-bold">Reintentar</button>
                     </div>
+
                 </div>
-                <p class="text-center text-xs text-gray-600 mt-3">El video puede tardar en cargar dependiendo de tu conexión.</p>
+                <p class="text-center text-xs text-gray-600 mt-3">Si el video no carga, aseguráte de que esté en la carpeta <span class="text-[#F5B731]">img/</span> y se llame <span class="text-[#F5B731]">video-modelos.mp4</span>.</p>
             </div>
         </div>
     </section>
@@ -378,95 +399,86 @@
             </div>
 
             <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
-                
                 <!-- Model 1 -->
                 <div class="model-card rounded-xl overflow-hidden aspect-[3/4] bg-[#1E1E1E] border border-[#2A2A2A]">
-                    <img src="img/modelo-1.jpg" alt="Modelo 1" class="w-full h-full object-cover" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-                    <div class="w-full h-full flex flex-col items-center justify-center" style="display:none">
-                        <p class="text-[10px] text-gray-600 text-center px-2">Agregá img/modelo-1.jpg</p>
+                    <img src="img/modelo-1.jpg" alt="Modelo 1" class="w-full h-full object-cover">
+                    <div class="w-full h-full flex flex-col items-center justify-center hidden">
+                        <p class="text-[10px] text-gray-600 text-center px-2">img/modelo-1.jpg</p>
                     </div>
                     <div class="overlay flex items-end p-4">
                         <p class="text-sm font-semibold text-white">Modelo 1</p>
                     </div>
                 </div>
-
                 <!-- Model 2 -->
                 <div class="model-card rounded-xl overflow-hidden aspect-[3/4] bg-[#1E1E1E] border border-[#2A2A2A]">
-                    <img src="img/modelo-2.jpg" alt="Modelo 2" class="w-full h-full object-cover" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-                    <div class="w-full h-full flex flex-col items-center justify-center" style="display:none">
-                        <p class="text-[10px] text-gray-600 text-center px-2">Agregá img/modelo-2.jpg</p>
+                    <img src="img/modelo-2.jpg" alt="Modelo 2" class="w-full h-full object-cover">
+                    <div class="w-full h-full flex flex-col items-center justify-center hidden">
+                        <p class="text-[10px] text-gray-600 text-center px-2">img/modelo-2.jpg</p>
                     </div>
                     <div class="overlay flex items-end p-4">
                         <p class="text-sm font-semibold text-white">Modelo 2</p>
                     </div>
                 </div>
-
                 <!-- Model 3 -->
                 <div class="model-card rounded-xl overflow-hidden aspect-[3/4] bg-[#1E1E1E] border border-[#2A2A2A]">
-                    <img src="img/modelo-3.jpg" alt="Modelo 3" class="w-full h-full object-cover" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-                    <div class="w-full h-full flex flex-col items-center justify-center" style="display:none">
-                        <p class="text-[10px] text-gray-600 text-center px-2">Agregá img/modelo-3.jpg</p>
+                    <img src="img/modelo-3.jpg" alt="Modelo 3" class="w-full h-full object-cover">
+                    <div class="w-full h-full flex flex-col items-center justify-center hidden">
+                        <p class="text-[10px] text-gray-600 text-center px-2">img/modelo-3.jpg</p>
                     </div>
                     <div class="overlay flex items-end p-4">
                         <p class="text-sm font-semibold text-white">Modelo 3</p>
                     </div>
                 </div>
-
                 <!-- Model 4 -->
                 <div class="model-card rounded-xl overflow-hidden aspect-[3/4] bg-[#1E1E1E] border border-[#2A2A2A]">
-                    <img src="img/modelo-4.jpg" alt="Modelo 4" class="w-full h-full object-cover" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-                    <div class="w-full h-full flex flex-col items-center justify-center" style="display:none">
-                        <p class="text-[10px] text-gray-600 text-center px-2">Agregá img/modelo-4.jpg</p>
+                    <img src="img/modelo-4.jpg" alt="Modelo 4" class="w-full h-full object-cover">
+                    <div class="w-full h-full flex flex-col items-center justify-center hidden">
+                        <p class="text-[10px] text-gray-600 text-center px-2">img/modelo-4.jpg</p>
                     </div>
                     <div class="overlay flex items-end p-4">
                         <p class="text-sm font-semibold text-white">Modelo 4</p>
                     </div>
                 </div>
-
                 <!-- Model 5 -->
                 <div class="model-card rounded-xl overflow-hidden aspect-[3/4] bg-[#1E1E1E] border border-[#2A2A2A]">
-                    <img src="img/modelo-5.jpg" alt="Modelo 5" class="w-full h-full object-cover" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-                    <div class="w-full h-full flex flex-col items-center justify-center" style="display:none">
-                        <p class="text-[10px] text-gray-600 text-center px-2">Agregá img/modelo-5.jpg</p>
+                    <img src="img/modelo-5.jpg" alt="Modelo 5" class="w-full h-full object-cover">
+                    <div class="w-full h-full flex flex-col items-center justify-center hidden">
+                        <p class="text-[10px] text-gray-600 text-center px-2">img/modelo-5.jpg</p>
                     </div>
                     <div class="overlay flex items-end p-4">
                         <p class="text-sm font-semibold text-white">Modelo 5</p>
                     </div>
                 </div>
-
                 <!-- Model 6 -->
                 <div class="model-card rounded-xl overflow-hidden aspect-[3/4] bg-[#1E1E1E] border border-[#2A2A2A]">
-                    <img src="img/modelo-6.jpg" alt="Modelo 6" class="w-full h-full object-cover" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-                    <div class="w-full h-full flex flex-col items-center justify-center" style="display:none">
-                        <p class="text-[10px] text-gray-600 text-center px-2">Agregá img/modelo-6.jpg</p>
+                    <img src="img/modelo-6.jpg" alt="Modelo 6" class="w-full h-full object-cover">
+                    <div class="w-full h-full flex flex-col items-center justify-center hidden">
+                        <p class="text-[10px] text-gray-600 text-center px-2">img/modelo-6.jpg</p>
                     </div>
                     <div class="overlay flex items-end p-4">
                         <p class="text-sm font-semibold text-white">Modelo 6</p>
                     </div>
                 </div>
-
                 <!-- Model 7 -->
                 <div class="model-card rounded-xl overflow-hidden aspect-[3/4] bg-[#1E1E1E] border border-[#2A2A2A]">
-                    <img src="img/modelo-7.jpg" alt="Modelo 7" class="w-full h-full object-cover" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-                    <div class="w-full h-full flex flex-col items-center justify-center" style="display:none">
-                        <p class="text-[10px] text-gray-600 text-center px-2">Agregá img/modelo-7.jpg</p>
+                    <img src="img/modelo-7.jpg" alt="Modelo 7" class="w-full h-full object-cover">
+                    <div class="w-full h-full flex flex-col items-center justify-center hidden">
+                        <p class="text-[10px] text-gray-600 text-center px-2">img/modelo-7.jpg</p>
                     </div>
                     <div class="overlay flex items-end p-4">
                         <p class="text-sm font-semibold text-white">Modelo 7</p>
                     </div>
                 </div>
-
                 <!-- Model 8 -->
                 <div class="model-card rounded-xl overflow-hidden aspect-[3/4] bg-[#1E1E1E] border border-[#2A2A2A]">
-                    <img src="img/modelo-8.jpg" alt="Modelo 8" class="w-full h-full object-cover" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-                    <div class="w-full h-full flex flex-col items-center justify-center" style="display:none">
-                        <p class="text-[10px] text-gray-600 text-center px-2">Agregá img/modelo-8.jpg</p>
+                    <img src="img/modelo-8.jpg" alt="Modelo 8" class="w-full h-full object-cover">
+                    <div class="w-full h-full flex flex-col items-center justify-center hidden">
+                        <p class="text-[10px] text-gray-600 text-center px-2">img/modelo-8.jpg</p>
                     </div>
                     <div class="overlay flex items-end p-4">
                         <p class="text-sm font-semibold text-white">Modelo 8</p>
                     </div>
                 </div>
-
             </div>
         </div>
     </section>
@@ -496,7 +508,6 @@
             
             <div class="inline-block align-bottom bg-[#1A1A1A] rounded-2xl text-left overflow-hidden shadow-2xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg w-full fade-in border border-[#2A2A2A]">
                 
-                <!-- Modal Header -->
                 <div class="px-6 pt-6 pb-4">
                     <div class="flex items-center justify-between">
                         <div>
@@ -510,10 +521,7 @@
                     <div class="section-divider mt-4"></div>
                 </div>
 
-                <!-- Modal Body -->
                 <div class="px-6 pb-6 space-y-4">
-                    
-                    <!-- Customer Name -->
                     <div class="grid grid-cols-2 gap-3">
                         <div>
                             <label class="block text-[10px] font-bold text-[#F5B731] uppercase tracking-widest mb-1.5">Nombre *</label>
@@ -525,7 +533,6 @@
                         </div>
                     </div>
 
-                    <!-- Size -->
                     <div>
                         <label class="block text-[10px] font-bold text-[#F5B731] uppercase tracking-widest mb-1.5">Talle *</label>
                         <select id="size-select" class="input-dark w-full rounded-lg px-3 py-2.5 text-sm">
@@ -537,13 +544,12 @@
                         </select>
                     </div>
 
-                    <!-- Section -->
                     <div>
                         <label class="block text-[10px] font-bold text-[#F5B731] uppercase tracking-widest mb-1.5">Sección *</label>
                         <select id="section-select" onchange="checkNumberAvailability()" class="input-dark w-full rounded-lg px-3 py-2.5 text-sm">
                             <option value="">Elegí tu sección...</option>
                             <option value="Escuderos">️ Escuderos</option>
-                            <option value="Templarios">⚔️ Templarios</option>
+                            <option value="Templarios">️ Templarios</option>
                             <option value="Adalides">🏹 Adalides</option>
                             <option value="Herederas"> Herederas</option>
                             <option value="Caperucitas">🎭 Caperucitas</option>
@@ -552,23 +558,19 @@
                         </select>
                     </div>
 
-                    <!-- Number -->
                     <div>
                         <label class="block text-[10px] font-bold text-[#F5B731] uppercase tracking-widest mb-1.5">Número (1-99) *</label>
                         <input type="number" id="number-input" min="1" max="99" oninput="validateNumberInput()" class="input-dark w-full rounded-lg px-3 py-2.5 text-sm" placeholder="Ej: 10">
-                        <p id="number-error" class="text-red-400 text-xs mt-1 hidden">⚠️ Este número ya está tomado en esta sección.</p>
+                        <p id="number-error" class="text-red-400 text-xs mt-1 hidden">️ Este número ya está tomado en esta sección.</p>
                     </div>
 
-                    <!-- Custom Shirt Name -->
                     <div>
                         <label class="block text-[10px] font-bold text-[#F5B731] uppercase tracking-widest mb-1.5">Nombre para estampar <span class="text-gray-600 normal-case">(Opcional)</span></label>
                         <input type="text" id="custom-shirt-name" maxlength="12" class="input-dark w-full rounded-lg px-3 py-2.5 text-sm uppercase tracking-wider" placeholder="Nombre en la remera">
                         <p class="text-[10px] text-gray-600 mt-1">Máximo 12 caracteres. Si no ponés nada, se usa tu nombre.</p>
                     </div>
-
                 </div>
 
-                <!-- Modal Footer -->
                 <div class="bg-black/40 px-6 py-4 sm:flex sm:flex-row-reverse gap-3">
                     <button type="button" id="add-to-cart-btn" onclick="addToCart()" class="w-full sm:w-auto btn-gold px-8 py-3 rounded-xl text-sm font-bold disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:transform-none disabled:hover:shadow-none">
                         Agregar al Carrito
@@ -696,7 +698,8 @@
                         <div class="mb-4 text-center">
                             <p class="text-[10px] text-gray-600 uppercase tracking-widest mb-2">O escaneá el QR para pagar</p>
                             <div class="w-36 h-36 bg-black mx-auto flex items-center justify-center rounded-xl border border-[#2A2A2A] overflow-hidden">
-                                <img src="img/qr.png" alt="QR para pagar" class="w-full h-full object-contain" onerror="this.style.display='none';this.parentElement.innerHTML+='<span class=\'text-xs text-gray-600\'>Agregá img/qr.png</span>'">
+                                <img src="img/qr.png" alt="QR para pagar" class="w-full h-full object-contain">
+                                <span class="text-xs text-gray-600 absolute">Agregá img/qr.png</span>
                             </div>
                         </div>
 
@@ -720,16 +723,93 @@
     </div>
 
     <script>
+        // ==================== VIDEO FIX SCRIPT ====================
+        // Este script fuerza la carga del video y muestra errores detallados
+        document.addEventListener('DOMContentLoaded', function() {
+            const video = document.getElementById('models-video');
+            const errorMsg = document.getElementById('video-error-msg');
+            const errorDetail = document.getElementById('video-error-detail');
+
+            if (video) {
+                // Intentar cargar el video
+                video.load();
+
+                // Si hay error al cargar
+                video.onerror = function() {
+                    video.style.display = 'none';
+                    errorMsg.classList.remove('hidden');
+                    // Mostrar el código de error para saber qué falla
+                    if (video.error) {
+                        let msg = "Error desconocido";
+                        switch (video.error.code) {
+                            case 1: msg = "El usuario abortó la carga."; break;
+                            case 2: msg = "Error de red. Verificá tu conexión."; break;
+                            case 3: msg = "Error de decodificación. El formato no es compatible."; break;
+                            case 4: msg = "Archivo no encontrado (404). Verificá la ruta img/video-modelos.mp4"; break;
+                        }
+                        errorDetail.textContent = msg;
+                    }
+                };
+
+                // Si la carga se detiene por alguna razón
+                video.onstalled = function() {
+                    console.warn("Video stalled");
+                };
+            }
+
+            // Manejo de imágenes rotas
+            const images = document.querySelectorAll('img');
+            images.forEach(img => {
+                img.onerror = function() {
+                    this.style.display = 'none';
+                    const parent = this.parentElement;
+                    let placeholder = parent.querySelector('.img-placeholder');
+                    if (!placeholder) {
+                        placeholder = document.createElement('div');
+                        placeholder.className = 'img-placeholder absolute inset-0 flex flex-col items-center justify-center bg-[#1E1E1E] text-center p-2';
+                        placeholder.innerHTML = `
+                            <svg class="w-10 h-10 text-[#3A3A3A] mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                            </svg>
+                            <p class="text-[10px] text-gray-500 font-mono">${this.src.split('/').pop()}</p>
+                            <p class="text-[9px] text-gray-600 mt-1">Archivo no encontrado</p>
+                        `;
+                        if (getComputedStyle(parent).position === 'static') {
+                            parent.style.position = 'relative';
+                        }
+                        parent.appendChild(placeholder);
+                    } else {
+                        placeholder.style.display = 'flex';
+                    }
+                };
+            });
+        });
+
+        function retryVideo() {
+            const video = document.getElementById('models-video');
+            const errorMsg = document.getElementById('video-error-msg');
+            if (video) {
+                video.style.display = 'block';
+                errorMsg.classList.add('hidden');
+                video.load();
+                video.play().catch(e => console.error("Auto-play blocked", e));
+            }
+        }
+
         // ==================== SHIRT VIEW TOGGLE ====================
         function toggleShirtView(view) {
             const imgElement = document.getElementById('shirt-image');
             const labelElement = document.getElementById('shirt-view-label');
             const btnFrontal = document.getElementById('btn-frontal');
             const btnTrasera = document.getElementById('btn-trasera');
+            const placeholderText = document.getElementById('shirt-placeholder-text');
+
+            imgElement.style.display = 'block';
 
             if (view === 'frontal') {
                 imgElement.src = 'img/camiseta-frontal.jpg';
                 labelElement.textContent = 'VISTA FRONTAL';
+                if(placeholderText) placeholderText.textContent = 'img/camiseta-frontal.jpg';
                 
                 btnFrontal.classList.add('active');
                 btnFrontal.classList.remove('text-gray-500');
@@ -741,6 +821,7 @@
             } else {
                 imgElement.src = 'img/camiseta-trasera.jpg';
                 labelElement.textContent = 'VISTA TRASERA';
+                if(placeholderText) placeholderText.textContent = 'img/camiseta-trasera.jpg';
                 
                 btnTrasera.classList.add('active');
                 btnTrasera.classList.remove('text-gray-500');
@@ -756,7 +837,6 @@
         let cart = [];
         let selectedPayment = 'full';
         
-        // Database of taken numbers per section (separated Mayor and Milicianos)
         const takenNumbersDB = {
             "Escuderos": [10, 20],
             "Templarios": [7],
@@ -973,7 +1053,7 @@
             cart.forEach((item, i) => {
                 msg += `*${i + 1}. ${item.productName}*%0A`;
                 msg += `   👤 Cliente: ${item.customer}%0A`;
-                msg += `   📏 Talle: ${item.size}%0A`;
+                msg += `    Talle: ${item.size}%0A`;
                 msg += `   🛡️ Sección: ${item.section}%0A`;
                 msg += `   🔢 Número: ${item.number}%0A`;
                 msg += `   ✍️ Estampado: "${item.customName}"%0A`;
@@ -985,7 +1065,7 @@
             
             msg += `--------------------------%0A`;
             msg += `💵 *TOTAL: $${total.toLocaleString('es-AR')}*%0A`;
-            msg += `💳 Método: ${method}%0A`;
+            msg += ` Método: ${method}%0A`;
             msg += `--------------------------%0A%0A`;
             msg += `Adjunto el comprobante de transferencia a continuación.`;
 
