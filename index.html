@@ -4,13 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Camisetas Ruca del Valle | Tienda Oficial</title>
-    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
     <style>
-        /* --- ESTÉTICA RUCA DEL VALLE --- */
         :root {
             --gold: #F5B731;
             --gold-dark: #C49000;
@@ -21,84 +17,40 @@
             --card-bg: #1A1A1A;
             --cream: #FFF8E1;
         }
-        
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Inter', sans-serif; background-color: var(--black); color: var(--cream); overflow-x: hidden; }
         .font-cinzel { font-family: 'Cinzel', serif; }
-
-        /* Botones */
-        .btn-gold {
-            background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
-            color: var(--black); font-weight: 700; transition: all 0.3s ease;
-            text-transform: uppercase; letter-spacing: 1.5px;
-        }
-        .btn-gold:hover {
-            background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold) 100%);
-            transform: translateY(-2px); box-shadow: 0 6px 25px rgba(245, 183, 49, 0.35);
-        }
+        .btn-gold { background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%); color: var(--black); font-weight: 700; transition: all 0.3s ease; text-transform: uppercase; letter-spacing: 1.5px; }
+        .btn-gold:hover { background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold) 100%); transform: translateY(-2px); box-shadow: 0 6px 25px rgba(245, 183, 49, 0.35); }
         .btn-gold:disabled { opacity: 0.4; cursor: not-allowed; transform: none !important; box-shadow: none !important; }
-
-        .btn-outline-gold {
-            border: 2px solid var(--gold); color: var(--gold); background: transparent;
-            font-weight: 600; transition: all 0.3s ease; text-transform: uppercase; letter-spacing: 1.5px;
-        }
+        .btn-outline-gold { border: 2px solid var(--gold); color: var(--gold); background: transparent; font-weight: 600; transition: all 0.3s ease; text-transform: uppercase; letter-spacing: 1.5px; }
         .btn-outline-gold:hover { background: var(--gold); color: var(--black); }
-
-        /* Tarjetas */
-        .card-dark {
-            background: var(--card-bg); border: 1px solid #2A2A2A; transition: all 0.4s ease;
-        }
+        .card-dark { background: var(--card-bg); border: 1px solid #2A2A2A; transition: all 0.4s ease; }
         .card-dark:hover { border-color: var(--gold); transform: translateY(-4px); box-shadow: 0 10px 40px rgba(245, 183, 49, 0.12); }
-
-        /* Modales */
         .modal-backdrop { background-color: rgba(0, 0, 0, 0.9); backdrop-filter: blur(10px); }
         .fade-in { animation: fadeIn 0.35s ease-out; }
         @keyframes fadeIn { from { opacity: 0; transform: scale(0.96) translateY(10px); } to { opacity: 1; transform: scale(1) translateY(0); } }
-
-        /* Inputs */
         .section-divider { height: 2px; background: linear-gradient(90deg, transparent, var(--gold), transparent); }
-        .input-dark {
-            background: var(--dark-gray); border: 1px solid #3A3A3A; color: var(--cream);
-            transition: border-color 0.3s ease, box-shadow 0.3s ease;
-        }
+        .input-dark { background: var(--dark-gray); border: 1px solid #3A3A3A; color: var(--cream); transition: border-color 0.3s ease, box-shadow 0.3s ease; }
         .input-dark:focus { border-color: var(--gold); outline: none; box-shadow: 0 0 0 3px rgba(245, 183, 49, 0.15); }
         .input-dark::placeholder { color: #666; }
         select.input-dark option { background: var(--dark); color: var(--cream); }
-
-        /* Scrollbar */
         ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-track { background: var(--dark); }
         ::-webkit-scrollbar-thumb { background: #333; border-radius: 3px; }
         ::-webkit-scrollbar-thumb:hover { background: var(--gold-dark); }
-
-        /* Componentes Varios */
         .toast-gold { background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%); color: var(--black); }
-        .hero-bg {
-            background: radial-gradient(ellipse at 50% 0%, rgba(245, 183, 49, 0.08) 0%, transparent 60%),
-                        radial-gradient(ellipse at 80% 80%, rgba(245, 183, 49, 0.04) 0%, transparent 50%),
-                        var(--black);
-        }
-        .hero-grid-pattern {
-            background-image: linear-gradient(rgba(245,183,49,0.03) 1px, transparent 1px),
-                              linear-gradient(90deg, rgba(245,183,49,0.03) 1px, transparent 1px);
-            background-size: 40px 40px;
-        }
+        .hero-bg { background: radial-gradient(ellipse at 50% 0%, rgba(245, 183, 49, 0.08) 0%, transparent 60%), radial-gradient(ellipse at 80% 80%, rgba(245, 183, 49, 0.04) 0%, transparent 50%), var(--black); }
+        .hero-grid-pattern { background-image: linear-gradient(rgba(245,183,49,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(245,183,49,0.03) 1px, transparent 1px); background-size: 40px 40px; }
         .badge-stock { background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%); color: var(--black); }
-        .section-tag {
-            background: rgba(245, 183, 49, 0.08); border: 1px solid rgba(245, 183, 49, 0.2);
-            color: var(--gold); transition: all 0.3s ease;
-        }
+        .section-tag { background: rgba(245, 183, 49, 0.08); border: 1px solid rgba(245, 183, 49, 0.2); color: var(--gold); transition: all 0.3s ease; }
         .section-tag:hover { background: rgba(245, 183, 49, 0.15); border-color: var(--gold); }
         .payment-option { border: 2px solid #2A2A2A; transition: all 0.3s ease; cursor: pointer; }
         .payment-option:hover { border-color: var(--gold); }
         .payment-option.selected { border-color: var(--gold); background: rgba(245, 183, 49, 0.06); }
         .cart-sidebar { background: var(--dark); border-left: 1px solid #2A2A2A; }
         .model-card { position: relative; overflow: hidden; }
-        .model-card .overlay {
-            position: absolute; inset: 0;
-            background: linear-gradient(180deg, transparent 40%, rgba(0,0,0,0.8) 100%);
-            opacity: 0; transition: opacity 0.4s ease;
-        }
+        .model-card .overlay { position: absolute; inset: 0; background: linear-gradient(180deg, transparent 40%, rgba(0,0,0,0.8) 100%); opacity: 0; transition: opacity 0.4s ease; }
         .model-card:hover .overlay { opacity: 1; }
         .glow-line { height: 1px; background: linear-gradient(90deg, transparent, var(--gold), transparent); opacity: 0.3; }
         .view-btn { transition: all 0.3s ease; }
@@ -115,7 +67,7 @@
         <span id="toast-msg">¡Producto agregado al carrito!</span>
     </div>
 
-    <!-- ==================== HEADER ==================== -->
+    <!-- Header -->
     <header class="sticky top-0 z-40 bg-black/90 backdrop-blur-xl border-b border-[#2A2A2A]">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between">
             <div class="flex items-center gap-3">
@@ -134,7 +86,7 @@
         </div>
     </header>
 
-    <!-- ==================== HERO SECTION ==================== -->
+    <!-- Hero -->
     <section class="relative hero-bg overflow-hidden">
         <div class="absolute inset-0 hero-grid-pattern"></div>
         <div class="relative max-w-7xl mx-auto py-16 sm:py-24 px-4 sm:px-6 lg:px-8 text-center">
@@ -156,7 +108,7 @@
         </div>
     </section>
 
-    <!-- ==================== SECTIONS TAGS ==================== -->
+    <!-- Sections Tags -->
     <div class="bg-[#121212] border-y border-[#2A2A2A]">
         <div class="max-w-7xl mx-auto px-4 py-3">
             <div class="flex flex-wrap justify-center gap-2 sm:gap-3 text-xs">
@@ -171,7 +123,7 @@
         </div>
     </div>
 
-    <!-- ==================== PRODUCTO PRINCIPAL ==================== -->
+    <!-- Product -->
     <main id="producto" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
         <div class="text-center mb-12">
             <h3 class="font-cinzel text-2xl sm:text-3xl font-bold text-white mb-2 tracking-wider">NUESTRA CAMISETA</h3>
@@ -181,7 +133,6 @@
         <div class="max-w-4xl mx-auto">
             <div class="card-dark rounded-2xl overflow-hidden">
                 <div class="grid md:grid-cols-2">
-                    <!-- Imagen con Toggle -->
                     <div class="relative h-80 sm:h-96 md:h-full min-h-[320px] overflow-hidden flex flex-col">
                         <div class="relative flex-1 overflow-hidden bg-[#1E1E1E]">
                             <img id="shirt-image" src="img/camiseta-frontal.jpg" alt="Camiseta" class="w-full h-full object-cover transition-opacity duration-500">
@@ -192,7 +143,6 @@
                             <button onclick="toggleShirtView('trasera')" id="btn-trasera" class="view-btn flex-1 py-3 text-xs font-bold uppercase tracking-widest text-gray-500 hover:text-[#F5B731]">Vista Trasera</button>
                         </div>
                     </div>
-                    <!-- Info del Producto -->
                     <div class="p-6 sm:p-8 flex flex-col justify-center">
                         <h4 class="font-cinzel text-xl sm:text-2xl font-bold text-white mb-2">Camiseta Oficial Ruca del Valle</h4>
                         <p class="text-gray-400 text-sm leading-relaxed mb-6">Camiseta personalizada con estampado de tu sección. Elegí tu número único y el nombre que querás que lleve.</p>
@@ -210,7 +160,7 @@
         </div>
     </main>
 
-    <!-- ==================== VIDEO ==================== -->
+    <!-- Video -->
     <section class="bg-[#121212] border-y border-[#2A2A2A]">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
             <div class="text-center mb-12">
@@ -227,7 +177,7 @@
         </div>
     </section>
 
-    <!-- ==================== GALERÍA ==================== -->
+    <!-- Gallery -->
     <section class="bg-[#0A0A0A]">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
             <div class="text-center mb-12">
@@ -235,7 +185,6 @@
                 <div class="section-divider w-20 mx-auto"></div>
             </div>
             <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
-                <!-- Placeholder Models -->
                 <div class="model-card rounded-xl overflow-hidden aspect-[3/4] bg-[#1E1E1E] border border-[#2A2A2A]"><img src="img/modelo-1.jpg" alt="1" class="w-full h-full object-cover"><div class="overlay flex items-end p-4"><p class="text-sm font-semibold text-white">Modelo 1</p></div></div>
                 <div class="model-card rounded-xl overflow-hidden aspect-[3/4] bg-[#1E1E1E] border border-[#2A2A2A]"><img src="img/modelo-2.jpg" alt="2" class="w-full h-full object-cover"><div class="overlay flex items-end p-4"><p class="text-sm font-semibold text-white">Modelo 2</p></div></div>
                 <div class="model-card rounded-xl overflow-hidden aspect-[3/4] bg-[#1E1E1E] border border-[#2A2A2A]"><img src="img/modelo-3.jpg" alt="3" class="w-full h-full object-cover"><div class="overlay flex items-end p-4"><p class="text-sm font-semibold text-white">Modelo 3</p></div></div>
@@ -248,7 +197,7 @@
         </div>
     </section>
 
-    <!-- ==================== RESEÑAS ==================== -->
+    <!-- Reviews -->
     <section class="bg-[#121212] border-y border-[#2A2A2A] py-16">
         <div class="max-w-4xl mx-auto px-4">
             <h3 class="font-cinzel text-2xl font-bold text-white text-center mb-8">💬 Opiniones de Clientes</h3>
@@ -265,7 +214,7 @@
         </div>
     </section>
 
-    <!-- ==================== FOOTER ==================== -->
+    <!-- Footer -->
     <footer class="bg-[#0A0A0A] border-t border-[#2A2A2A] py-12">
         <div class="max-w-7xl mx-auto px-4 text-center">
             <div class="flex justify-center mb-6"><div class="w-14 h-14 drop-shadow-[0_0_8px_rgba(245,183,49,0.5)]"><img src="img/logo.png" alt="Logo" class="w-full h-full object-contain"></div></div>
@@ -275,7 +224,7 @@
         </div>
     </footer>
 
-    <!-- ==================== MODAL: PRODUCTO ==================== -->
+    <!-- Product Modal -->
     <div id="product-modal" class="fixed inset-0 z-50 hidden overflow-y-auto">
         <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-6 text-center sm:block sm:p-0">
             <div class="fixed inset-0 modal-backdrop transition-opacity" onclick="closeProductModal()"></div>
@@ -307,7 +256,7 @@
         </div>
     </div>
 
-    <!-- ==================== MODAL: TALLAS ==================== -->
+    <!-- Size Chart Modal -->
     <div id="size-chart-modal" class="fixed inset-0 z-50 hidden overflow-y-auto">
         <div class="flex items-center justify-center min-h-screen px-4 text-center">
             <div class="fixed inset-0 modal-backdrop transition-opacity" onclick="toggleSizeChart()"></div>
@@ -323,7 +272,7 @@
         </div>
     </div>
 
-    <!-- ==================== SIDEBAR: CARRITO ==================== -->
+    <!-- Cart Sidebar -->
     <div id="cart-sidebar" class="fixed inset-y-0 right-0 z-50 w-full max-w-md cart-sidebar shadow-2xl transform translate-x-full transition-transform duration-300 ease-in-out">
         <div class="flex flex-col h-full">
             <div class="px-6 py-5 bg-black/40 border-b border-[#2A2A2A] flex justify-between items-center">
@@ -340,7 +289,7 @@
         </div>
     </div>
 
-    <!-- ==================== MODAL: CHECKOUT ==================== -->
+    <!-- Checkout Modal -->
     <div id="checkout-modal" class="fixed inset-0 z-[60] hidden overflow-y-auto">
         <div class="flex items-center justify-center min-h-screen px-4 text-center">
             <div class="fixed inset-0 modal-backdrop transition-opacity" onclick="closeCheckoutModal()"></div>
@@ -372,11 +321,10 @@
         </div>
     </div>
 
-    <!-- ==================== JAVASCRIPT ==================== -->
+    <!-- JAVASCRIPT -->
     <script>
         // ⚙️ CONFIGURACIÓN
-        // ⚠️ IMPORTANTE: Esta es la URL de tu Apps Script que me pasaste antes.
-        const SHEET_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz4y-Mkdqj-KykhRviO3SCsi7OQhu_7HGDSgoroj5NH_9XrJsG0eV7HEDssexdH5lo5pg/exec';
+        const SHEET_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzneOHcisZO5p8ZF584hkI3PWf9nJT44OA8qn1p2p-TQc0rOFngbHw_y5AkA3__u38zBw/exec';
         
         let cart = [];
         let selectedPayment = 'full';
@@ -384,7 +332,11 @@
         const PRODUCT_PRICE = 35000;
 
         // 🖼️ UI Helpers
-        function openProductModal() { document.getElementById('product-modal').classList.remove('hidden'); occupiedNumbers = {}; }
+        async function openProductModal() { 
+            document.getElementById('product-modal').classList.remove('hidden'); 
+            occupiedNumbers = {}; 
+            await loadSectionSalesCount(); 
+        }
         function closeProductModal() { document.getElementById('product-modal').classList.add('hidden'); }
         function toggleCart() { document.getElementById('cart-sidebar').classList.toggle('translate-x-full'); }
         function openCheckoutModal() { toggleCart(); document.getElementById('checkout-modal').classList.remove('hidden'); updateTransferAmount(); }
@@ -419,7 +371,27 @@
             document.getElementById('transfer-amount').textContent = `$${d.toLocaleString('es-AR')}`;
         }
 
-        // 🔢 Number Validation & Availability Check
+        // 📊 Contador de ventas por sección
+        async function loadSectionSalesCount() {
+            const sections = ["Escuderos", "Templarios", "Adalides", "Herederas", "Caperucitas", "Mayor", "Milicianos"];
+            const select = document.getElementById('section-select');
+            
+            for (const sec of sections) {
+                try {
+                    const res = await fetch(`${SHEET_SCRIPT_URL}?action=availability&section=${sec}`);
+                    const usedNumbers = await res.json();
+                    occupiedNumbers[sec] = usedNumbers;
+                    
+                    let option = select.querySelector(`option[value="${sec}"]`);
+                    if (option) {
+                        let baseName = option.text.split('(')[0].trim();
+                        option.text = `${baseName} (Vendidas: ${usedNumbers.length})`;
+                    }
+                } catch (e) { console.error(`Error cargando ventas de ${sec}`, e); }
+            }
+        }
+
+        // 🔢 Number Validation
         async function checkAvailability(section) {
             if(!section) return;
             const btn = document.getElementById('add-to-cart-btn');
@@ -478,12 +450,11 @@
             if(cart.length===0) return;
             showToast("Procesando pedido...");
             
-            // Enviar cada item a Google Sheets
             for(const item of cart) {
                 const recordData = {
                     action: 'purchase',
                     cliente: item.customer,
-                    email: item.email || '', // Email solo para recordatorios
+                    email: item.email || '',
                     producto: item.product,
                     talle: item.size,
                     seccion: item.section,
@@ -492,17 +463,11 @@
                     total: item.price,
                     metodo: selectedPayment === 'installments' ? '2 Pagos' : '1 Pago'
                 };
-                
                 try {
-                    await fetch(SHEET_SCRIPT_URL, {
-                        method: 'POST', mode: 'no-cors',
-                        headers: {'Content-Type':'application/json'},
-                        body: JSON.stringify(recordData)
-                    });
+                    await fetch(SHEET_SCRIPT_URL, { method: 'POST', mode: 'no-cors', headers: {'Content-Type':'application/json'}, body: JSON.stringify(recordData) });
                 } catch (e) { console.error('Error enviando a Sheets:', e); }
             }
 
-            // Preparar mensaje de WhatsApp
             let msg = "¡Hola Ruca del Valle! Quiero confirmar mi pedido:%0A%0A";
             cart.forEach((i,idx)=>{
                 msg+=`*${idx+1}. ${i.product}*%0A👤 ${i.customer}%0A📏 ${i.size} | 🛡️ ${i.section}%0A🔢 ${i.number} | ✍️ ${i.customName}%0A💰 $${i.price.toLocaleString('es-AR')}%0A%0A`;
@@ -514,13 +479,11 @@
             cart=[]; renderCart(); closeCheckoutModal();
         }
 
-        // ⭐ Reviews System
+        // ⭐ Reviews
         document.querySelectorAll('#star-selector span').forEach(s => {
             s.addEventListener('click', function() {
                 selectedRating = parseInt(this.dataset.val);
-                document.querySelectorAll('#star-selector span').forEach((el, i) => {
-                    el.classList.toggle('active', i < selectedRating);
-                });
+                document.querySelectorAll('#star-selector span').forEach((el, i) => el.classList.toggle('active', i < selectedRating));
             });
         });
         let selectedRating = 0;
@@ -543,19 +506,13 @@
             const name = document.getElementById('review-name').value.trim();
             const comment = document.getElementById('review-comment').value.trim();
             if(!name || !selectedRating || !comment) return alert('Completá nombre, calificación y comentario.');
-            
-            await fetch(SHEET_SCRIPT_URL, {
-                method: 'POST', mode: 'no-cors',
-                headers: {'Content-Type':'application/json'},
-                body: JSON.stringify({action:'review', name, rating:selectedRating, comment})
-            });
+            await fetch(SHEET_SCRIPT_URL, { method: 'POST', mode: 'no-cors', headers: {'Content-Type':'application/json'}, body: JSON.stringify({action:'review', name, rating:selectedRating, comment}) });
             showToast('¡Gracias! Tu opinión se publicará en breve.');
             document.getElementById('review-name').value=''; document.getElementById('review-comment').value='';
             selectedRating=0; document.querySelectorAll('#star-selector span').forEach(s=>s.classList.remove('active'));
             loadReviews();
         }
 
-        // 🚀 Init
         document.addEventListener('DOMContentLoaded', () => { loadReviews(); renderCart(); });
     </script>
 </body>
