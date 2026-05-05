@@ -4,9 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Camisetas Ruca del Valle | Tienda Oficial</title>
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
     <style>
+        /* --- ESTÉTICA RUCA DEL VALLE --- */
         :root {
             --gold: #F5B731;
             --gold-dark: #C49000;
@@ -17,40 +21,84 @@
             --card-bg: #1A1A1A;
             --cream: #FFF8E1;
         }
+        
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Inter', sans-serif; background-color: var(--black); color: var(--cream); overflow-x: hidden; }
         .font-cinzel { font-family: 'Cinzel', serif; }
-        .btn-gold { background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%); color: var(--black); font-weight: 700; transition: all 0.3s ease; text-transform: uppercase; letter-spacing: 1.5px; }
-        .btn-gold:hover { background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold) 100%); transform: translateY(-2px); box-shadow: 0 6px 25px rgba(245, 183, 49, 0.35); }
+
+        /* Botones */
+        .btn-gold {
+            background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
+            color: var(--black); font-weight: 700; transition: all 0.3s ease;
+            text-transform: uppercase; letter-spacing: 1.5px;
+        }
+        .btn-gold:hover {
+            background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold) 100%);
+            transform: translateY(-2px); box-shadow: 0 6px 25px rgba(245, 183, 49, 0.35);
+        }
         .btn-gold:disabled { opacity: 0.4; cursor: not-allowed; transform: none !important; box-shadow: none !important; }
-        .btn-outline-gold { border: 2px solid var(--gold); color: var(--gold); background: transparent; font-weight: 600; transition: all 0.3s ease; text-transform: uppercase; letter-spacing: 1.5px; }
+
+        .btn-outline-gold {
+            border: 2px solid var(--gold); color: var(--gold); background: transparent;
+            font-weight: 600; transition: all 0.3s ease; text-transform: uppercase; letter-spacing: 1.5px;
+        }
         .btn-outline-gold:hover { background: var(--gold); color: var(--black); }
-        .card-dark { background: var(--card-bg); border: 1px solid #2A2A2A; transition: all 0.4s ease; }
+
+        /* Tarjetas */
+        .card-dark {
+            background: var(--card-bg); border: 1px solid #2A2A2A; transition: all 0.4s ease;
+        }
         .card-dark:hover { border-color: var(--gold); transform: translateY(-4px); box-shadow: 0 10px 40px rgba(245, 183, 49, 0.12); }
+
+        /* Modales */
         .modal-backdrop { background-color: rgba(0, 0, 0, 0.9); backdrop-filter: blur(10px); }
         .fade-in { animation: fadeIn 0.35s ease-out; }
         @keyframes fadeIn { from { opacity: 0; transform: scale(0.96) translateY(10px); } to { opacity: 1; transform: scale(1) translateY(0); } }
+
+        /* Inputs */
         .section-divider { height: 2px; background: linear-gradient(90deg, transparent, var(--gold), transparent); }
-        .input-dark { background: var(--dark-gray); border: 1px solid #3A3A3A; color: var(--cream); transition: border-color 0.3s ease, box-shadow 0.3s ease; }
+        .input-dark {
+            background: var(--dark-gray); border: 1px solid #3A3A3A; color: var(--cream);
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
         .input-dark:focus { border-color: var(--gold); outline: none; box-shadow: 0 0 0 3px rgba(245, 183, 49, 0.15); }
         .input-dark::placeholder { color: #666; }
         select.input-dark option { background: var(--dark); color: var(--cream); }
+
+        /* Scrollbar */
         ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-track { background: var(--dark); }
         ::-webkit-scrollbar-thumb { background: #333; border-radius: 3px; }
         ::-webkit-scrollbar-thumb:hover { background: var(--gold-dark); }
+
+        /* Componentes Varios */
         .toast-gold { background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%); color: var(--black); }
-        .hero-bg { background: radial-gradient(ellipse at 50% 0%, rgba(245, 183, 49, 0.08) 0%, transparent 60%), radial-gradient(ellipse at 80% 80%, rgba(245, 183, 49, 0.04) 0%, transparent 50%), var(--black); }
-        .hero-grid-pattern { background-image: linear-gradient(rgba(245,183,49,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(245,183,49,0.03) 1px, transparent 1px); background-size: 40px 40px; }
+        .hero-bg {
+            background: radial-gradient(ellipse at 50% 0%, rgba(245, 183, 49, 0.08) 0%, transparent 60%),
+                        radial-gradient(ellipse at 80% 80%, rgba(245, 183, 49, 0.04) 0%, transparent 50%),
+                        var(--black);
+        }
+        .hero-grid-pattern {
+            background-image: linear-gradient(rgba(245,183,49,0.03) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(245,183,49,0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
         .badge-stock { background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%); color: var(--black); }
-        .section-tag { background: rgba(245, 183, 49, 0.08); border: 1px solid rgba(245, 183, 49, 0.2); color: var(--gold); transition: all 0.3s ease; }
+        .section-tag {
+            background: rgba(245, 183, 49, 0.08); border: 1px solid rgba(245, 183, 49, 0.2);
+            color: var(--gold); transition: all 0.3s ease;
+        }
         .section-tag:hover { background: rgba(245, 183, 49, 0.15); border-color: var(--gold); }
         .payment-option { border: 2px solid #2A2A2A; transition: all 0.3s ease; cursor: pointer; }
         .payment-option:hover { border-color: var(--gold); }
         .payment-option.selected { border-color: var(--gold); background: rgba(245, 183, 49, 0.06); }
         .cart-sidebar { background: var(--dark); border-left: 1px solid #2A2A2A; }
         .model-card { position: relative; overflow: hidden; }
-        .model-card .overlay { position: absolute; inset: 0; background: linear-gradient(180deg, transparent 40%, rgba(0,0,0,0.8) 100%); opacity: 0; transition: opacity 0.4s ease; }
+        .model-card .overlay {
+            position: absolute; inset: 0;
+            background: linear-gradient(180deg, transparent 40%, rgba(0,0,0,0.8) 100%);
+            opacity: 0; transition: opacity 0.4s ease;
+        }
         .model-card:hover .overlay { opacity: 1; }
         .glow-line { height: 1px; background: linear-gradient(90deg, transparent, var(--gold), transparent); opacity: 0.3; }
         .view-btn { transition: all 0.3s ease; }
@@ -67,7 +115,7 @@
         <span id="toast-msg">¡Producto agregado al carrito!</span>
     </div>
 
-    <!-- Header -->
+    <!-- ==================== HEADER ==================== -->
     <header class="sticky top-0 z-40 bg-black/90 backdrop-blur-xl border-b border-[#2A2A2A]">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between">
             <div class="flex items-center gap-3">
@@ -86,7 +134,7 @@
         </div>
     </header>
 
-    <!-- Hero -->
+    <!-- ==================== HERO SECTION ==================== -->
     <section class="relative hero-bg overflow-hidden">
         <div class="absolute inset-0 hero-grid-pattern"></div>
         <div class="relative max-w-7xl mx-auto py-16 sm:py-24 px-4 sm:px-6 lg:px-8 text-center">
@@ -108,7 +156,7 @@
         </div>
     </section>
 
-    <!-- Sections Tags -->
+    <!-- ==================== SECTIONS TAGS ==================== -->
     <div class="bg-[#121212] border-y border-[#2A2A2A]">
         <div class="max-w-7xl mx-auto px-4 py-3">
             <div class="flex flex-wrap justify-center gap-2 sm:gap-3 text-xs">
@@ -123,7 +171,7 @@
         </div>
     </div>
 
-    <!-- Product -->
+    <!-- ==================== PRODUCTO PRINCIPAL ==================== -->
     <main id="producto" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
         <div class="text-center mb-12">
             <h3 class="font-cinzel text-2xl sm:text-3xl font-bold text-white mb-2 tracking-wider">NUESTRA CAMISETA</h3>
@@ -133,6 +181,7 @@
         <div class="max-w-4xl mx-auto">
             <div class="card-dark rounded-2xl overflow-hidden">
                 <div class="grid md:grid-cols-2">
+                    <!-- Imagen con Toggle -->
                     <div class="relative h-80 sm:h-96 md:h-full min-h-[320px] overflow-hidden flex flex-col">
                         <div class="relative flex-1 overflow-hidden bg-[#1E1E1E]">
                             <img id="shirt-image" src="img/camiseta-frontal.jpg" alt="Camiseta" class="w-full h-full object-cover transition-opacity duration-500">
@@ -140,9 +189,10 @@
                         </div>
                         <div class="flex border-t border-[#2A2A2A]">
                             <button onclick="toggleShirtView('frontal')" id="btn-frontal" class="view-btn active flex-1 py-3 text-xs font-bold uppercase tracking-widest border-r border-[#2A2A2A] text-[#F5B731]">📸 Vista Frontal</button>
-                            <button onclick="toggleShirtView('trasera')" id="btn-trasera" class="view-btn flex-1 py-3 text-xs font-bold uppercase tracking-widest text-gray-500 hover:text-[#F5B731]"> Vista Trasera</button>
+                            <button onclick="toggleShirtView('trasera')" id="btn-trasera" class="view-btn flex-1 py-3 text-xs font-bold uppercase tracking-widest text-gray-500 hover:text-[#F5B731]">Vista Trasera</button>
                         </div>
                     </div>
+                    <!-- Info del Producto -->
                     <div class="p-6 sm:p-8 flex flex-col justify-center">
                         <h4 class="font-cinzel text-xl sm:text-2xl font-bold text-white mb-2">Camiseta Oficial Ruca del Valle</h4>
                         <p class="text-gray-400 text-sm leading-relaxed mb-6">Camiseta personalizada con estampado de tu sección. Elegí tu número único y el nombre que querás que lleve.</p>
@@ -160,7 +210,7 @@
         </div>
     </main>
 
-    <!-- Video -->
+    <!-- ==================== VIDEO ==================== -->
     <section class="bg-[#121212] border-y border-[#2A2A2A]">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
             <div class="text-center mb-12">
@@ -169,6 +219,7 @@
             </div>
             <div class="max-w-3xl mx-auto">
                 <div class="relative w-full aspect-video rounded-2xl overflow-hidden border border-[#2A2A2A] shadow-2xl bg-black">
+                    <!-- REEMPLAZÁ TU_ID_DE_YOUTUBE POR TU ID REAL -->
                     <iframe class="absolute inset-0 w-full h-full" src="https://www.youtube.com/embed/TU_ID_DE_YOUTUBE?rel=0&modestbranding=1&playsinline=1" title="Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                 </div>
                 <p class="text-center text-xs text-gray-600 mt-3">Si no carga, verificá tu conexión o <a href="https://youtu.be/TU_ID_DE_YOUTUBE" target="_blank" class="text-[#F5B731] underline">miralo directo en YouTube</a>.</p>
@@ -176,7 +227,7 @@
         </div>
     </section>
 
-    <!-- Gallery -->
+    <!-- ==================== GALERÍA ==================== -->
     <section class="bg-[#0A0A0A]">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
             <div class="text-center mb-12">
@@ -184,6 +235,7 @@
                 <div class="section-divider w-20 mx-auto"></div>
             </div>
             <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+                <!-- Placeholder Models -->
                 <div class="model-card rounded-xl overflow-hidden aspect-[3/4] bg-[#1E1E1E] border border-[#2A2A2A]"><img src="img/modelo-1.jpg" alt="1" class="w-full h-full object-cover"><div class="overlay flex items-end p-4"><p class="text-sm font-semibold text-white">Modelo 1</p></div></div>
                 <div class="model-card rounded-xl overflow-hidden aspect-[3/4] bg-[#1E1E1E] border border-[#2A2A2A]"><img src="img/modelo-2.jpg" alt="2" class="w-full h-full object-cover"><div class="overlay flex items-end p-4"><p class="text-sm font-semibold text-white">Modelo 2</p></div></div>
                 <div class="model-card rounded-xl overflow-hidden aspect-[3/4] bg-[#1E1E1E] border border-[#2A2A2A]"><img src="img/modelo-3.jpg" alt="3" class="w-full h-full object-cover"><div class="overlay flex items-end p-4"><p class="text-sm font-semibold text-white">Modelo 3</p></div></div>
@@ -196,7 +248,7 @@
         </div>
     </section>
 
-    <!-- Reviews Section -->
+    <!-- ==================== RESEÑAS ==================== -->
     <section class="bg-[#121212] border-y border-[#2A2A2A] py-16">
         <div class="max-w-4xl mx-auto px-4">
             <h3 class="font-cinzel text-2xl font-bold text-white text-center mb-8">💬 Opiniones de Clientes</h3>
@@ -205,11 +257,7 @@
                 <h4 class="text-[#F5B731] font-bold mb-4">Dejá tu opinión</h4>
                 <input type="text" id="review-name" placeholder="Tu nombre" class="input-dark w-full mb-3 rounded-lg px-3 py-2 text-sm">
                 <div class="flex gap-2 mb-3" id="star-selector">
-                    <span class="star-btn text-gray-600" data-val="1">★</span>
-                    <span class="star-btn text-gray-600" data-val="2">★</span>
-                    <span class="star-btn text-gray-600" data-val="3">★</span>
-                    <span class="star-btn text-gray-600" data-val="4">★</span>
-                    <span class="star-btn text-gray-600" data-val="5">★</span>
+                    <span class="star-btn text-gray-600" data-val="1">★</span><span class="star-btn text-gray-600" data-val="2">★</span><span class="star-btn text-gray-600" data-val="3">★</span><span class="star-btn text-gray-600" data-val="4">★</span><span class="star-btn text-gray-600" data-val="5">★</span>
                 </div>
                 <textarea id="review-comment" placeholder="Contanos tu experiencia..." class="input-dark w-full mb-3 rounded-lg px-3 py-2 text-sm h-20"></textarea>
                 <button onclick="submitReview()" class="btn-gold w-full py-2 rounded-lg text-sm font-bold">Enviar Opinión</button>
@@ -217,7 +265,7 @@
         </div>
     </section>
 
-    <!-- Footer -->
+    <!-- ==================== FOOTER ==================== -->
     <footer class="bg-[#0A0A0A] border-t border-[#2A2A2A] py-12">
         <div class="max-w-7xl mx-auto px-4 text-center">
             <div class="flex justify-center mb-6"><div class="w-14 h-14 drop-shadow-[0_0_8px_rgba(245,183,49,0.5)]"><img src="img/logo.png" alt="Logo" class="w-full h-full object-contain"></div></div>
@@ -227,7 +275,7 @@
         </div>
     </footer>
 
-    <!-- Product Modal -->
+    <!-- ==================== MODAL: PRODUCTO ==================== -->
     <div id="product-modal" class="fixed inset-0 z-50 hidden overflow-y-auto">
         <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-6 text-center sm:block sm:p-0">
             <div class="fixed inset-0 modal-backdrop transition-opacity" onclick="closeProductModal()"></div>
@@ -245,11 +293,11 @@
                         <div><label class="block text-[10px] font-bold text-[#F5B731] uppercase tracking-widest mb-1.5">Nombre *</label><input type="text" id="cust-name" class="input-dark w-full rounded-lg px-3 py-2.5 text-sm" placeholder="Tu nombre"></div>
                         <div><label class="block text-[10px] font-bold text-[#F5B731] uppercase tracking-widest mb-1.5">Apellido *</label><input type="text" id="cust-lastname" class="input-dark w-full rounded-lg px-3 py-2.5 text-sm" placeholder="Tu apellido"></div>
                     </div>
-                    <div><label class="block text-[10px] font-bold text-[#F5B731] uppercase tracking-widest mb-1.5">Email <span class="text-gray-500 normal-case">(opcional)</span></label><input type="email" id="cust-email" class="input-dark w-full rounded-lg px-3 py-2.5 text-sm" placeholder="Solo para recordatorios de pago (opcional)">
-                    <div><label class="block text-[10px] font-bold text-[#F5B731] uppercase tracking-widest mb-1.5">Talle *</label><select id="size-select" class="input-dark w-full rounded-lg px-3 py-2.5 text-sm"><option value="S">S — Ancho 48cm / Largo 68cm</option><option value="M">M — Ancho 51cm / Largo 70cm</option><option value="L">L — Ancho 54cm / Largo 72cm</option><option value="XL">XL — Ancho 57cm / Largo 74cm</option><option value="XXL">XXL — Ancho 60cm / Largo 76cm</option><option value="XXXL">XXXL — Ancho 68cm / Largo 80cm</option></select></div>
+                    <div><label class="block text-[10px] font-bold text-[#F5B731] uppercase tracking-widest mb-1.5">Email <span class="text-gray-500 normal-case">(Solo para recordatorios)</span></label><input type="email" id="cust-email" class="input-dark w-full rounded-lg px-3 py-2.5 text-sm" placeholder="Opcional"></div>
+                    <div><label class="block text-[10px] font-bold text-[#F5B731] uppercase tracking-widest mb-1.5">Talle *</label><select id="size-select" class="input-dark w-full rounded-lg px-3 py-2.5 text-sm"><option value="S">S</option><option value="M">M</option><option value="L">L</option><option value="XL">XL</option><option value="XXL">XXL</option><option value="XXXL">XXXL</option></select></div>
                     <div><label class="block text-[10px] font-bold text-[#F5B731] uppercase tracking-widest mb-1.5">Sección *</label><select id="section-select" onchange="checkAvailability(this.value)" class="input-dark w-full rounded-lg px-3 py-2.5 text-sm"><option value="">Elegí tu sección...</option><option value="Escuderos">🛡️ Escuderos</option><option value="Templarios">⚔️ Templarios</option><option value="Adalides">🏹 Adalides</option><option value="Herederas">👑 Herederas</option><option value="Caperucitas">🎭 Caperucitas</option><option value="Mayor">🏰 Mayor</option><option value="Milicianos">🏛️ Milicianos</option></select></div>
-                    <div><label class="block text-[10px] font-bold text-[#F5B731] uppercase tracking-widest mb-1.5">Número (1-99) *</label><input type="number" id="number-input" min="1" max="99" oninput="validateNumberInput()" class="input-dark w-full rounded-lg px-3 py-2.5 text-sm" placeholder="Ej: 10"><p id="number-error" class="text-red-400 text-xs mt-1 hidden">⚠️ Este número ya está ocupado en esta sección.</p></div>
-                    <div><label class="block text-[10px] font-bold text-[#F5B731] uppercase tracking-widest mb-1.5">Nombre para estampar <span class="text-gray-600 normal-case">(Opcional)</span></label><input type="text" id="custom-shirt-name" maxlength="12" class="input-dark w-full rounded-lg px-3 py-2.5 text-sm uppercase tracking-wider" placeholder="Nombre en la remera"><p class="text-[10px] text-gray-600 mt-1">Máximo 12 caracteres. Si no ponés nada, se usa tu nombre.</p></div>
+                    <div><label class="block text-[10px] font-bold text-[#F5B731] uppercase tracking-widest mb-1.5">Número (1-99) *</label><input type="number" id="number-input" min="1" max="99" oninput="validateNumberInput()" class="input-dark w-full rounded-lg px-3 py-2.5 text-sm" placeholder="Ej: 10"><p id="number-error" class="text-red-400 text-xs mt-1 hidden">⚠️ Este número ya está ocupado.</p></div>
+                    <div><label class="block text-[10px] font-bold text-[#F5B731] uppercase tracking-widest mb-1.5">Nombre para estampar <span class="text-gray-600 normal-case">(Opcional)</span></label><input type="text" id="custom-shirt-name" maxlength="12" class="input-dark w-full rounded-lg px-3 py-2.5 text-sm uppercase" placeholder="Nombre en la remera"></div>
                 </div>
                 <div class="bg-black/40 px-6 py-4 sm:flex sm:flex-row-reverse gap-3">
                     <button type="button" id="add-to-cart-btn" onclick="addToCart()" class="w-full sm:w-auto btn-gold px-8 py-3 rounded-xl text-sm font-bold disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:transform-none disabled:hover:shadow-none">Agregar al Carrito</button>
@@ -259,7 +307,7 @@
         </div>
     </div>
 
-    <!-- Size Chart Modal -->
+    <!-- ==================== MODAL: TALLAS ==================== -->
     <div id="size-chart-modal" class="fixed inset-0 z-50 hidden overflow-y-auto">
         <div class="flex items-center justify-center min-h-screen px-4 text-center">
             <div class="fixed inset-0 modal-backdrop transition-opacity" onclick="toggleSizeChart()"></div>
@@ -275,7 +323,7 @@
         </div>
     </div>
 
-    <!-- Cart Sidebar -->
+    <!-- ==================== SIDEBAR: CARRITO ==================== -->
     <div id="cart-sidebar" class="fixed inset-y-0 right-0 z-50 w-full max-w-md cart-sidebar shadow-2xl transform translate-x-full transition-transform duration-300 ease-in-out">
         <div class="flex flex-col h-full">
             <div class="px-6 py-5 bg-black/40 border-b border-[#2A2A2A] flex justify-between items-center">
@@ -283,11 +331,7 @@
                 <button onclick="toggleCart()" class="text-gray-500 hover:text-white transition-colors"><svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg></button>
             </div>
             <div id="cart-items" class="flex-1 overflow-y-auto p-6 space-y-4">
-                <div class="text-center text-gray-600 mt-16">
-                    <svg class="w-16 h-16 mx-auto mb-4 text-[#2A2A2A]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" /></svg>
-                    <p class="text-base font-medium text-gray-500">El carrito está vacío</p>
-                    <p class="text-xs mt-1 text-gray-600">Agregá tu camiseta para comenzar</p>
-                </div>
+                <div class="text-center text-gray-600 mt-16"><svg class="w-16 h-16 mx-auto mb-4 text-[#2A2A2A]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" /></svg><p class="text-base font-medium text-gray-500">El carrito está vacío</p><p class="text-xs mt-1 text-gray-600">Agregá tu camiseta para comenzar</p></div>
             </div>
             <div class="border-t border-[#2A2A2A] p-6 bg-black/40">
                 <div class="flex justify-between text-base font-bold text-[#F5B731] mb-4"><p>Total</p><p id="cart-total">$0</p></div>
@@ -296,7 +340,7 @@
         </div>
     </div>
 
-    <!-- Checkout Modal -->
+    <!-- ==================== MODAL: CHECKOUT ==================== -->
     <div id="checkout-modal" class="fixed inset-0 z-[60] hidden overflow-y-auto">
         <div class="flex items-center justify-center min-h-screen px-4 text-center">
             <div class="fixed inset-0 modal-backdrop transition-opacity" onclick="closeCheckoutModal()"></div>
@@ -328,189 +372,191 @@
         </div>
     </div>
 
-    <!-- JAVASCRIPT -->
+    <!-- ==================== JAVASCRIPT ==================== -->
     <script>
-    // ==================== ESTADO GLOBAL ====================
-    let cart = [];
-    let selectedPayment = 'full';
-    const PRODUCT_PRICE = 35000;
+        // ⚙️ CONFIGURACIÓN
+        // ⚠️ IMPORTANTE: Esta es la URL de tu Apps Script que me pasaste antes.
+        const SHEET_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwzWUX9RVNHu5kdeQjLJs0Mk3bVAPCEwq4pEGGOU8D9-DdKWAiom7GyesSvgN2G21oO/exec';
+        
+        let cart = [];
+        let selectedPayment = 'full';
+        let occupiedNumbers = {};
+        const PRODUCT_PRICE = 35000;
 
-    // ==================== FUNCIONES DEL CARRITO ====================
-    function toggleCart() {
-        const sidebar = document.getElementById('cart-sidebar');
-        sidebar.classList.toggle('translate-x-full');
-    }
-
-    function addToCart() {
-        const name = document.getElementById('cust-name').value.trim();
-        const lastname = document.getElementById('cust-lastname').value.trim();
-        const size = document.getElementById('size-select').value;
-        const section = document.getElementById('section-select').value;
-        const number = document.getElementById('number-input').value;
-        const customName = document.getElementById('custom-shirt-name').value.trim().toUpperCase();
-
-        if (!name || !lastname) { alert("Por favor ingresá tu nombre y apellido."); return; }
-        if (!section) { alert("Por favor seleccioná una sección."); return; }
-        if (!number || number < 1 || number > 99) { alert("Ingresá un número válido entre 1 y 99."); return; }
-
-        const item = {
-            id: Date.now(),
-            productName: "Camiseta Oficial Ruca del Valle",
-            price: PRODUCT_PRICE,
-            customer: `${name} ${lastname}`,
-            size, section, number: parseInt(number),
-            customName: customName || name.toUpperCase()
-        };
-
-        cart.push(item);
-        renderCart();
-        showToast("¡Producto agregado al carrito!");
-        closeProductModal();
-    }
-
-    function removeFromCart(id) {
-        cart = cart.filter(item => item.id !== id);
-        renderCart();
-    }
-
-    function renderCart() {
-        const container = document.getElementById('cart-items');
-        const badge = document.getElementById('cart-count');
-        const totalEl = document.getElementById('cart-total');
-        const checkoutBtn = document.getElementById('checkout-btn');
-        let total = 0;
-
-        if (cart.length === 0) {
-            container.innerHTML = `<div class="text-center text-gray-600 mt-16"><p class="text-base font-medium text-gray-500">El carrito está vacío</p><p class="text-xs mt-1 text-gray-600">Agregá tu camiseta para comenzar</p></div>`;
-            badge.classList.add('hidden');
-            checkoutBtn.disabled = true;
-            totalEl.textContent = '$0';
-            return;
+        // 🖼️ UI Helpers
+        function openProductModal() { document.getElementById('product-modal').classList.remove('hidden'); occupiedNumbers = {}; }
+        function closeProductModal() { document.getElementById('product-modal').classList.add('hidden'); }
+        function toggleCart() { document.getElementById('cart-sidebar').classList.toggle('translate-x-full'); }
+        function openCheckoutModal() { toggleCart(); document.getElementById('checkout-modal').classList.remove('hidden'); updateTransferAmount(); }
+        function closeCheckoutModal() { document.getElementById('checkout-modal').classList.add('hidden'); }
+        function toggleSizeChart() { document.getElementById('size-chart-modal').classList.toggle('hidden'); }
+        
+        function showToast(msg) { 
+            const t = document.getElementById('toast'); 
+            document.getElementById('toast-msg').textContent = msg; 
+            t.classList.remove('translate-x-full'); 
+            setTimeout(() => t.classList.add('translate-x-full'), 3000); 
+        }
+        
+        function copyAlias() { navigator.clipboard.writeText("camisetas.rdv"); showToast("Alias copiado"); }
+        
+        function toggleShirtView(v) {
+            const img = document.getElementById('shirt-image'), lbl = document.getElementById('shirt-view-label');
+            if(v==='frontal'){ img.src='img/camiseta-frontal.jpg'; lbl.textContent='VISTA FRONTAL'; }
+            else { img.src='img/camiseta-trasera.jpg'; lbl.textContent='VISTA TRASERA'; }
         }
 
-        badge.textContent = cart.length;
-        badge.classList.remove('hidden');
-        checkoutBtn.disabled = false;
-        container.innerHTML = '';
-
-        cart.forEach(item => {
-            total += item.price;
-            container.innerHTML += `
-                <div class="bg-black/30 border border-[#2A2A2A] rounded-xl p-4 mb-3">
-                    <div class="flex justify-between items-start">
-                        <div class="flex-1 min-w-0">
-                            <h4 class="font-cinzel font-bold text-sm text-[#F5B731] truncate">${item.productName}</h4>
-                            <div class="mt-1 text-xs text-gray-400 space-y-0.5">
-                                <p>👤 ${item.customer}</p>
-                                <p>📏 Talle: ${item.size} · 🛡️ ${item.section}</p>
-                                <p>🔢 Nº ${item.number} · ✍️ "${item.customName}"</p>
-                            </div>
-                            <p class="text-sm font-bold text-[#F5B731] mt-2">$${item.price.toLocaleString('es-AR')}</p>
-                        </div>
-                        <button onclick="removeFromCart(${item.id})" class="text-gray-500 hover:text-red-400 p-1 text-lg leading-none">✕</button>
-                    </div>
-                </div>`;
-        });
-
-        totalEl.textContent = `$${total.toLocaleString('es-AR')}`;
-    }
-
-    // ==================== MODALES Y UI ====================
-    function openProductModal() { document.getElementById('product-modal').classList.remove('hidden'); }
-    function closeProductModal() { document.getElementById('product-modal').classList.add('hidden'); }
-    function toggleSizeChart() { document.getElementById('size-chart-modal').classList.toggle('hidden'); }
-
-    function showToast(msg) {
-        const toast = document.getElementById('toast');
-        document.getElementById('toast-msg').textContent = msg;
-        toast.classList.remove('translate-x-full');
-        setTimeout(() => toast.classList.add('translate-x-full'), 3000);
-    }
-
-    // ==================== CHECKOUT Y PAGO ====================
-    function openCheckoutModal() {
-        toggleCart();
-        document.getElementById('checkout-modal').classList.remove('hidden');
-        updateTransferAmount();
-    }
-    function closeCheckoutModal() { document.getElementById('checkout-modal').classList.add('hidden'); }
-
-    function selectPayment(method) {
-        selectedPayment = method;
-        document.getElementById('payment-full').classList.toggle('selected', method === 'full');
-        document.getElementById('payment-installments').classList.toggle('selected', method === 'installments');
-        document.querySelector(`input[name="payment-method"][value="${method}"]`).checked = true;
-        updateTransferAmount();
-    }
-
-    function updateTransferAmount() {
-        const total = cart.reduce((sum, item) => sum + item.price, 0);
-        const displayTotal = selectedPayment === 'installments' ? total / 2 : total;
-        const label = selectedPayment === 'installments' ? '1ra Cuota (50%)' : 'Total a Pagar';
-        document.getElementById('transfer-amount').innerHTML = `<span class="text-sm font-normal text-gray-500 block">${label}</span>$${displayTotal.toLocaleString('es-AR')}`;
-    }
-
-    function copyAlias() {
-        navigator.clipboard.writeText("camisetas.rdv");
-        showToast("Alias copiado al portapapeles");
-    }
-
-    function toggleShirtView(view) {
-        const img = document.getElementById('shirt-image');
-        const label = document.getElementById('shirt-view-label');
-        const btnF = document.getElementById('btn-frontal');
-        const btnT = document.getElementById('btn-trasera');
-        
-        if (view === 'frontal') {
-            img.src = 'img/camiseta-frontal.jpg';
-            label.textContent = 'VISTA FRONTAL';
-            btnF.classList.add('active', 'text-[#F5B731]'); btnF.classList.remove('text-gray-500');
-            btnT.classList.remove('active', 'text-[#F5B731]'); btnT.classList.add('text-gray-500');
-        } else {
-            img.src = 'img/camiseta-trasera.jpg';
-            label.textContent = 'VISTA TRASERA';
-            btnT.classList.add('active', 'text-[#F5B731]'); btnT.classList.remove('text-gray-500');
-            btnF.classList.remove('active', 'text-[#F5B731]'); btnF.classList.add('text-gray-500');
+        function selectPayment(m) {
+            selectedPayment = m;
+            document.getElementById('payment-full').classList.toggle('selected', m==='full');
+            document.getElementById('payment-installments').classList.toggle('selected', m==='installments');
+            document.querySelector(`input[name="payment-method"][value="${m}"]`).checked = true;
+            updateTransferAmount();
         }
-    }
+        function updateTransferAmount() {
+            const t = cart.reduce((s,i)=>s+i.price,0);
+            const d = selectedPayment==='installments'?t/2:t;
+            document.getElementById('transfer-amount').textContent = `$${d.toLocaleString('es-AR')}`;
+        }
 
-    // ==================== WHATSAPP ORDER ====================
-    function sendWhatsAppOrder() {
-        if (cart.length === 0) return;
+        // 🔢 Number Validation & Availability Check
+        async function checkAvailability(section) {
+            if(!section) return;
+            const btn = document.getElementById('add-to-cart-btn');
+            btn.disabled = true; btn.textContent = "Verificando...";
+            try {
+                const res = await fetch(`${SHEET_SCRIPT_URL}?action=availability&section=${section}`);
+                occupiedNumbers[section] = await res.json();
+                validateNumberInput();
+            } catch(e) { console.error(e); }
+            btn.disabled = false; btn.textContent = "Agregar al Carrito";
+        }
+        function validateNumberInput() {
+            const sec = document.getElementById('section-select').value, num = parseInt(document.getElementById('number-input').value);
+            const err = document.getElementById('number-error'), btn = document.getElementById('add-to-cart-btn');
+            if(!sec || !num) { err.classList.add('hidden'); btn.disabled=false; return; }
+            const used = (occupiedNumbers[sec]||[]).includes(num);
+            const inCart = cart.some(i=>i.section===sec && i.number===num);
+            if(used || inCart) { err.textContent=`⚠️ El ${num} ya está ocupado en ${sec}.`; err.classList.remove('hidden'); btn.disabled=true; }
+            else { err.classList.add('hidden'); btn.disabled=false; }
+        }
+
+        // 🛒 Cart Logic
+        function addToCart() {
+            const n=document.getElementById('cust-name').value.trim(), l=document.getElementById('cust-lastname').value.trim();
+            const s=document.getElementById('size-select').value, sec=document.getElementById('section-select').value;
+            const num=document.getElementById('number-input').value, cn=document.getElementById('custom-shirt-name').value.trim().toUpperCase();
+            
+            if(!n||!l) return alert("Nombre y apellido obligatorios");
+            if(!sec) return alert("Seleccioná una sección");
+            if(!num || num < 1 || num > 99) return alert("Ingresá un número válido (1-99)");
+            
+            const item = {id:Date.now(), product:"Camiseta Oficial Ruca del Valle", price:PRODUCT_PRICE, customer:`${n} ${l}`, email:document.getElementById('cust-email').value, size:s, section:sec, number:parseInt(num), customName:cn||n.toUpperCase()};
+            cart.push(item); renderCart(); showToast("¡Agregado al carrito!"); closeProductModal();
+        }
         
-        let msg = "¡Hola Ruca del Valle! Quiero confirmar mi pedido:%0A%0A";
-        cart.forEach((item, i) => {
-            msg += `*${i + 1}. ${item.productName}*%0A`;
-            msg += `   👤 Cliente: ${item.customer}%0A`;
-            msg += `   📏 Talle: ${item.size}%0A`;
-            msg += `   🛡️ Sección: ${item.section}%0A`;
-            msg += `   🔢 Número: ${item.number}%0A`;
-            msg += `   ✍️ Estampado: "${item.customName}"%0A`;
-            msg += `   💰 Precio: $${item.price.toLocaleString('es-AR')}%0A%0A`;
-        });
-
-        const total = cart.reduce((sum, item) => sum + item.price, 0);
-        const method = selectedPayment === 'installments' ? '2 Pagos (Mitad ahora)' : 'Pago Total';
-        msg += `--------------------------%0A💵 *TOTAL: $${total.toLocaleString('es-AR')}*%0A💳 Método: ${method}%0A--------------------------%0A%0AAdjunto comprobante.`;
+        function removeFromCart(id) { cart=cart.filter(i=>i.id!==id); renderCart(); }
         
-        window.open(`https://wa.me/3834565209?text=${msg}`, '_blank');
-        cart = [];
-        renderCart();
-        closeCheckoutModal();
-    }
-
-    // ==================== INIT ====================
-    document.addEventListener('DOMContentLoaded', () => {
-        renderCart();
-        // Cerrar modales con ESC
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') {
-                closeProductModal();
-                closeCheckoutModal();
-                document.getElementById('size-chart-modal').classList.add('hidden');
+        function renderCart() {
+            const c=document.getElementById('cart-items'), badge=document.getElementById('cart-count'), tot=document.getElementById('cart-total'), btn=document.getElementById('checkout-btn');
+            let t=0;
+            if(cart.length===0) { 
+                c.innerHTML='<div class="text-center text-gray-600 mt-16"><svg class="w-16 h-16 mx-auto mb-4 text-[#2A2A2A]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" /></svg><p class="text-base font-medium text-gray-500">El carrito está vacío</p><p class="text-xs mt-1 text-gray-600">Agregá tu camiseta para comenzar</p></div>'; 
+                badge.classList.add('hidden'); btn.disabled=true; 
+            } else {
+                badge.textContent=cart.length; badge.classList.remove('hidden'); btn.disabled=false; c.innerHTML='';
+                cart.forEach(i=>{ 
+                    t+=i.price; 
+                    c.innerHTML+=`<div class="bg-black/30 border border-[#2A2A2A] rounded-xl p-4"><div class="flex justify-between items-start"><div class="flex-1 min-w-0"><h4 class="font-cinzel font-bold text-sm text-[#F5B731] truncate">${i.product}</h4><div class="mt-2 space-y-1"><p class="text-xs text-gray-400">👤 ${i.customer}</p><p class="text-xs text-gray-400">📏 Talle: ${i.size} · 🛡️ ${i.section}</p><p class="text-xs text-gray-400">🔢 Nº ${i.number} · ✍️ "${i.customName}"</p></div><p class="text-sm font-bold text-[#F5B731] mt-2">$${i.price.toLocaleString('es-AR')}</p></div><button onclick="removeFromCart(${i.id})" class="text-gray-600 hover:text-red-400 ml-3 p-1">🗑️</button></div></div>`; 
+                });
             }
+            tot.textContent=`$${t.toLocaleString('es-AR')}`;
+        }
+
+        // 💳 Checkout & WhatsApp
+        async function sendWhatsAppOrder() {
+            if(cart.length===0) return;
+            showToast("Procesando pedido...");
+            
+            // Enviar cada item a Google Sheets
+            for(const item of cart) {
+                const recordData = {
+                    action: 'purchase',
+                    cliente: item.customer,
+                    email: item.email || '', // Email solo para recordatorios
+                    producto: item.product,
+                    talle: item.size,
+                    seccion: item.section,
+                    numero: item.number,
+                    nombreEstampado: item.customName,
+                    total: item.price,
+                    metodo: selectedPayment === 'installments' ? '2 Pagos' : '1 Pago'
+                };
+                
+                try {
+                    await fetch(SHEET_SCRIPT_URL, {
+                        method: 'POST', mode: 'no-cors',
+                        headers: {'Content-Type':'application/json'},
+                        body: JSON.stringify(recordData)
+                    });
+                } catch (e) { console.error('Error enviando a Sheets:', e); }
+            }
+
+            // Preparar mensaje de WhatsApp
+            let msg = "¡Hola Ruca del Valle! Quiero confirmar mi pedido:%0A%0A";
+            cart.forEach((i,idx)=>{
+                msg+=`*${idx+1}. ${i.product}*%0A👤 ${i.customer}%0A📏 ${i.size} | 🛡️ ${i.section}%0A🔢 ${i.number} | ✍️ ${i.customName}%0A💰 $${i.price.toLocaleString('es-AR')}%0A%0A`;
+            });
+            const total = cart.reduce((s,i)=>s+i.price,0);
+            msg+=`--------------------------%0A💵 *TOTAL: $${total.toLocaleString('es-AR')}*%0A💳 Método: ${selectedPayment==='installments'?'2 Pagos (Mitad ahora)':'Pago Total'}%0A--------------------------%0A%0AAdjunto comprobante.`;
+            
+            window.open(`https://wa.me/3834565209?text=${msg}`, '_blank');
+            cart=[]; renderCart(); closeCheckoutModal();
+        }
+
+        // ⭐ Reviews System
+        document.querySelectorAll('#star-selector span').forEach(s => {
+            s.addEventListener('click', function() {
+                selectedRating = parseInt(this.dataset.val);
+                document.querySelectorAll('#star-selector span').forEach((el, i) => {
+                    el.classList.toggle('active', i < selectedRating);
+                });
+            });
         });
-    });
-</script>
+        let selectedRating = 0;
+
+        async function loadReviews() {
+            try {
+                const res = await fetch(`${SHEET_SCRIPT_URL}?action=reviews`);
+                const reviews = await res.json();
+                const container = document.getElementById('reviews-container');
+                container.innerHTML = reviews.length ? '' : '<p class="text-gray-500 text-center py-4">Sé el primero en opinar.</p>';
+                reviews.reverse().forEach(r => {
+                    const stars = '★'.repeat(r.rating) + '☆'.repeat(5-r.rating);
+                    const date = new Date(r.date).toLocaleDateString('es-AR');
+                    container.innerHTML += `<div class="bg-[#1A1A1A] p-4 rounded-lg border border-[#2A2A2A]"><div class="flex justify-between items-center mb-2"><span class="font-bold text-white">${r.name}</span><span class="text-[#F5B731] text-sm">${stars}</span></div><p class="text-gray-400 text-sm">${r.comment}</p><p class="text-gray-600 text-xs mt-2">${date}</p></div>`;
+                });
+            } catch(e){ console.error("Error cargando reseñas", e); }
+        }
+
+        async function submitReview() {
+            const name = document.getElementById('review-name').value.trim();
+            const comment = document.getElementById('review-comment').value.trim();
+            if(!name || !selectedRating || !comment) return alert('Completá nombre, calificación y comentario.');
+            
+            await fetch(SHEET_SCRIPT_URL, {
+                method: 'POST', mode: 'no-cors',
+                headers: {'Content-Type':'application/json'},
+                body: JSON.stringify({action:'review', name, rating:selectedRating, comment})
+            });
+            showToast('¡Gracias! Tu opinión se publicará en breve.');
+            document.getElementById('review-name').value=''; document.getElementById('review-comment').value='';
+            selectedRating=0; document.querySelectorAll('#star-selector span').forEach(s=>s.classList.remove('active'));
+            loadReviews();
+        }
+
+        // 🚀 Init
+        document.addEventListener('DOMContentLoaded', () => { loadReviews(); renderCart(); });
+    </script>
 </body>
 </html>
