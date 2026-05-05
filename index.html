@@ -17,173 +17,46 @@
             --card-bg: #1A1A1A;
             --cream: #FFF8E1;
         }
-        
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--black);
-            color: var(--cream);
-            overflow-x: hidden;
-        }
-
+        body { font-family: 'Inter', sans-serif; background-color: var(--black); color: var(--cream); overflow-x: hidden; }
         .font-cinzel { font-family: 'Cinzel', serif; }
-
-        .btn-gold {
-            background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
-            color: var(--black);
-            font-weight: 700;
-            transition: all 0.3s ease;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-        }
-        .btn-gold:hover {
-            background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold) 100%);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 25px rgba(245, 183, 49, 0.35);
-        }
-        .btn-gold:disabled {
-            opacity: 0.4;
-            cursor: not-allowed;
-            transform: none !important;
-            box-shadow: none !important;
-        }
-        .btn-outline-gold {
-            border: 2px solid var(--gold);
-            color: var(--gold);
-            background: transparent;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-        }
-        .btn-outline-gold:hover {
-            background: var(--gold);
-            color: var(--black);
-        }
-
-        .card-dark {
-            background: var(--card-bg);
-            border: 1px solid #2A2A2A;
-            transition: all 0.4s ease;
-        }
-        .card-dark:hover {
-            border-color: var(--gold);
-            transform: translateY(-4px);
-            box-shadow: 0 10px 40px rgba(245, 183, 49, 0.12);
-        }
-
-        .modal-backdrop {
-            background-color: rgba(0, 0, 0, 0.9);
-            backdrop-filter: blur(10px);
-        }
-
+        .btn-gold { background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%); color: var(--black); font-weight: 700; transition: all 0.3s ease; text-transform: uppercase; letter-spacing: 1.5px; }
+        .btn-gold:hover { background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold) 100%); transform: translateY(-2px); box-shadow: 0 6px 25px rgba(245, 183, 49, 0.35); }
+        .btn-gold:disabled { opacity: 0.4; cursor: not-allowed; transform: none !important; box-shadow: none !important; }
+        .btn-outline-gold { border: 2px solid var(--gold); color: var(--gold); background: transparent; font-weight: 600; transition: all 0.3s ease; text-transform: uppercase; letter-spacing: 1.5px; }
+        .btn-outline-gold:hover { background: var(--gold); color: var(--black); }
+        .card-dark { background: var(--card-bg); border: 1px solid #2A2A2A; transition: all 0.4s ease; }
+        .card-dark:hover { border-color: var(--gold); transform: translateY(-4px); box-shadow: 0 10px 40px rgba(245, 183, 49, 0.12); }
+        .modal-backdrop { background-color: rgba(0, 0, 0, 0.9); backdrop-filter: blur(10px); }
         .fade-in { animation: fadeIn 0.35s ease-out; }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: scale(0.96) translateY(10px); }
-            to { opacity: 1; transform: scale(1) translateY(0); }
-        }
-
-        .section-divider {
-            height: 2px;
-            background: linear-gradient(90deg, transparent, var(--gold), transparent);
-        }
-
-        .input-dark {
-            background: var(--dark-gray);
-            border: 1px solid #3A3A3A;
-            color: var(--cream);
-            transition: border-color 0.3s ease, box-shadow 0.3s ease;
-        }
-        .input-dark:focus {
-            border-color: var(--gold);            outline: none;
-            box-shadow: 0 0 0 3px rgba(245, 183, 49, 0.15);
-        }
+        @keyframes fadeIn { from { opacity: 0; transform: scale(0.96) translateY(10px); } to { opacity: 1; transform: scale(1) translateY(0); } }
+        .section-divider { height: 2px; background: linear-gradient(90deg, transparent, var(--gold), transparent); }
+        .input-dark { background: var(--dark-gray); border: 1px solid #3A3A3A; color: var(--cream); transition: border-color 0.3s ease, box-shadow 0.3s ease; }
+        .input-dark:focus { border-color: var(--gold); outline: none; box-shadow: 0 0 0 3px rgba(245, 183, 49, 0.15); }
         .input-dark::placeholder { color: #666; }
         select.input-dark option { background: var(--dark); color: var(--cream); }
-
         ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-track { background: var(--dark); }
         ::-webkit-scrollbar-thumb { background: #333; border-radius: 3px; }
         ::-webkit-scrollbar-thumb:hover { background: var(--gold-dark); }
-
-        .toast-gold {
-            background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
-            color: var(--black);
-        }
-
-        .hero-bg {
-            background: 
-                radial-gradient(ellipse at 50% 0%, rgba(245, 183, 49, 0.08) 0%, transparent 60%),
-                radial-gradient(ellipse at 80% 80%, rgba(245, 183, 49, 0.04) 0%, transparent 50%),
-                var(--black);
-        }
-
-        .hero-grid-pattern {
-            background-image: 
-                linear-gradient(rgba(245,183,49,0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(245,183,49,0.03) 1px, transparent 1px);
-            background-size: 40px 40px;
-        }
-
-        .badge-stock {
-            background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
-            color: var(--black);
-        }
-
-        .section-tag {
-            background: rgba(245, 183, 49, 0.08);
-            border: 1px solid rgba(245, 183, 49, 0.2);
-            color: var(--gold);
-            transition: all 0.3s ease;
-        }
-        .section-tag:hover {
-            background: rgba(245, 183, 49, 0.15);
-            border-color: var(--gold);
-        }
-
-        .payment-option {
-            border: 2px solid #2A2A2A;
-            transition: all 0.3s ease;
-            cursor: pointer;        }
+        .toast-gold { background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%); color: var(--black); }
+        .hero-bg { background: radial-gradient(ellipse at 50% 0%, rgba(245, 183, 49, 0.08) 0%, transparent 60%), radial-gradient(ellipse at 80% 80%, rgba(245, 183, 49, 0.04) 0%, transparent 50%), var(--black); }
+        .hero-grid-pattern { background-image: linear-gradient(rgba(245,183,49,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(245,183,49,0.03) 1px, transparent 1px); background-size: 40px 40px; }
+        .badge-stock { background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%); color: var(--black); }
+        .section-tag { background: rgba(245, 183, 49, 0.08); border: 1px solid rgba(245, 183, 49, 0.2); color: var(--gold); transition: all 0.3s ease; }
+        .section-tag:hover { background: rgba(245, 183, 49, 0.15); border-color: var(--gold); }
+        .payment-option { border: 2px solid #2A2A2A; transition: all 0.3s ease; cursor: pointer; }
         .payment-option:hover { border-color: var(--gold); }
-        .payment-option.selected {
-            border-color: var(--gold);
-            background: rgba(245, 183, 49, 0.06);
-        }
-
-        .cart-sidebar {
-            background: var(--dark);
-            border-left: 1px solid #2A2A2A;
-        }
-
-        .model-card {
-            position: relative;
-            overflow: hidden;
-        }
-        .model-card .overlay {
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(180deg, transparent 40%, rgba(0,0,0,0.8) 100%);
-            opacity: 0;
-            transition: opacity 0.4s ease;
-        }
+        .payment-option.selected { border-color: var(--gold); background: rgba(245, 183, 49, 0.06); }
+        .cart-sidebar { background: var(--dark); border-left: 1px solid #2A2A2A; }
+        .model-card { position: relative; overflow: hidden; }
+        .model-card .overlay { position: absolute; inset: 0; background: linear-gradient(180deg, transparent 40%, rgba(0,0,0,0.8) 100%); opacity: 0; transition: opacity 0.4s ease; }
         .model-card:hover .overlay { opacity: 1; }
-
-        .glow-line {
-            height: 1px;
-            background: linear-gradient(90deg, transparent, var(--gold), transparent);
-            opacity: 0.3;
-        }
-
-        .view-btn {
-            transition: all 0.3s ease;
-        }
-        .view-btn.active {
-            background: var(--gold);
-            color: var(--black);
-            border-color: var(--gold);
-        }
+        .glow-line { height: 1px; background: linear-gradient(90deg, transparent, var(--gold), transparent); opacity: 0.3; }
+        .view-btn { transition: all 0.3s ease; }
+        .view-btn.active { background: var(--gold); color: var(--black); border-color: var(--gold); }
+        .star-btn { cursor: pointer; transition: color 0.2s; font-size: 1.5rem; }
+        .star-btn.active { color: var(--gold); }
     </style>
 </head>
 <body>
@@ -191,20 +64,15 @@
     <!-- Toast Notification -->
     <div id="toast" class="fixed top-4 right-4 toast-gold px-6 py-3 rounded-lg shadow-2xl transform translate-x-full transition-transform duration-300 z-[100] flex items-center gap-2 font-semibold text-sm">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
-        <span>¡Producto agregado al carrito!</span>
+        <span id="toast-msg">¡Producto agregado al carrito!</span>
     </div>
 
-    <!-- Toast de Registro Exitoso -->    <div id="toast-record" class="fixed top-4 right-4 bg-green-600 text-white px-6 py-3 rounded-lg shadow-2xl transform translate-x-full transition-transform duration-300 z-[100] flex items-center gap-2 font-semibold text-sm">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-        <span>¡Pedido registrado!</span>
-    </div>
-
-    <!-- ==================== HEADER ==================== -->
+    <!-- Header -->
     <header class="sticky top-0 z-40 bg-black/90 backdrop-blur-xl border-b border-[#2A2A2A]">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between">
             <div class="flex items-center gap-3">
                 <div class="w-9 h-9 sm:w-11 sm:h-11 flex-shrink-0 drop-shadow-[0_0_8px_rgba(245,183,49,0.5)]">
-                    <img src="img/logo.png" alt="Logo Ruca del Valle" class="w-full h-full object-contain" onerror="this.parentElement.innerHTML='<span class=\'text-[#F5B731] font-cinzel font-bold text-sm\'>RUCA</span>'">
+                    <img src="img/logo.png" alt="Logo" class="w-full h-full object-contain" onerror="this.parentElement.innerHTML='<span class=\'text-[#F5B731] font-cinzel font-bold text-sm\'>RUCA</span>'">
                 </div>
                 <div>
                     <h1 class="text-sm sm:text-base font-cinzel font-bold text-[#F5B731] tracking-[0.2em] leading-tight">RUCA DEL VALLE</h1>
@@ -218,35 +86,29 @@
         </div>
     </header>
 
-    <!-- ==================== HERO SECTION ==================== -->
+    <!-- Hero -->
     <section class="relative hero-bg overflow-hidden">
         <div class="absolute inset-0 hero-grid-pattern"></div>
         <div class="relative max-w-7xl mx-auto py-16 sm:py-24 px-4 sm:px-6 lg:px-8 text-center">
-            
             <div class="flex justify-center mb-8">
                 <div class="w-28 h-28 sm:w-36 sm:h-36 lg:w-44 lg:h-44 drop-shadow-[0_0_15px_rgba(245,183,49,0.6)]">
-                    <img src="img/logo.png" alt="Logo Ruca del Valle Grande" class="w-full h-full object-contain" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'w-full h-full border-2 border-dashed border-[#3A3A3A] rounded-full flex items-center justify-center\'><span class=\'text-xs text-gray-600\'>img/logo.png</span></div>'">
+                    <img src="img/logo.png" alt="Logo" class="w-full h-full object-contain" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'w-full h-full border-2 border-dashed border-[#3A3A3A] rounded-full flex items-center justify-center\'><span class=\'text-xs text-gray-600\'>img/logo.png</span></div>'">
                 </div>
             </div>
-
             <h2 class="font-cinzel text-3xl sm:text-5xl lg:text-6xl font-black text-white tracking-wider mb-1">EDICIÓN LIMITADA</h2>
             <div class="glow-line w-40 mx-auto my-6"></div>
-            <p class="text-base sm:text-lg text-gray-400 max-w-xl mx-auto font-light leading-relaxed">
-                Sin intermediarios, sin comisiones.<br>
-                <span class="text-[#F5B731] font-semibold">Hecho con raíces.</span>
-            </p>
+            <p class="text-base sm:text-lg text-gray-400 max-w-xl mx-auto font-light leading-relaxed">Sin intermediarios, sin comisiones.<br><span class="text-[#F5B731] font-semibold">Hecho con raíces.</span></p>
             <div class="mt-10 flex flex-col sm:flex-row justify-center gap-4">
-                <button onclick="document.getElementById('producto').scrollIntoView({behavior:'smooth'})" class="btn-gold px-10 py-4 rounded-lg text-sm sm:text-base font-bold">
-                     Ver Producto
-                </button>
+                <button onclick="document.getElementById('producto').scrollIntoView({behavior:'smooth'})" class="btn-gold px-10 py-4 rounded-lg text-sm sm:text-base font-bold">Ver Producto</button>
                 <a href="https://wa.me/3834565209?text=Hola!%20Tengo%20una%20consulta" target="_blank" class="btn-outline-gold px-10 py-4 rounded-lg text-sm sm:text-base font-bold flex items-center justify-center gap-2">
                     <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
                     Escribinos
                 </a>
-            </div>        </div>
+            </div>
+        </div>
     </section>
 
-    <!-- ==================== SECTIONS TAGS ==================== -->
+    <!-- Sections Tags -->
     <div class="bg-[#121212] border-y border-[#2A2A2A]">
         <div class="max-w-7xl mx-auto px-4 py-3">
             <div class="flex flex-wrap justify-center gap-2 sm:gap-3 text-xs">
@@ -261,723 +123,355 @@
         </div>
     </div>
 
-    <!-- ==================== PRODUCTO PRINCIPAL ==================== -->
+    <!-- Product -->
     <main id="producto" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
-        
         <div class="text-center mb-12">
             <h3 class="font-cinzel text-2xl sm:text-3xl font-bold text-white mb-2 tracking-wider">NUESTRA CAMISETA</h3>
             <div class="section-divider w-20 mx-auto"></div>
             <p class="text-gray-500 mt-4 text-sm">Personalizable · Algodón premium · Edición limitada</p>
         </div>
-
         <div class="max-w-4xl mx-auto">
             <div class="card-dark rounded-2xl overflow-hidden">
                 <div class="grid md:grid-cols-2">
-                    
-                    <!-- Product Image Area with Front/Back Toggle -->
                     <div class="relative h-80 sm:h-96 md:h-full min-h-[320px] overflow-hidden flex flex-col">
                         <div class="relative flex-1 overflow-hidden bg-[#1E1E1E]">
-                            <img id="shirt-image" src="img/camiseta-frontal.jpg" alt="Camiseta Oficial Ruca del Valle" class="w-full h-full object-cover transition-opacity duration-500">
-                            <div id="shirt-placeholder" class="absolute inset-0 flex flex-col items-center justify-center hidden">
-                                <svg class="w-16 h-16 text-[#3A3A3A] mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
-                                <p class="text-xs text-gray-500" id="shirt-placeholder-text">img/camiseta-frontal.jpg</p>
-                            </div>
+                            <img id="shirt-image" src="img/camiseta-frontal.jpg" alt="Camiseta" class="w-full h-full object-cover transition-opacity duration-500">
                             <div class="absolute top-4 left-4 badge-stock text-[10px] font-bold px-3 py-1 rounded-full" id="shirt-view-label">VISTA FRONTAL</div>
                         </div>
-
                         <div class="flex border-t border-[#2A2A2A]">
-                            <button onclick="toggleShirtView('frontal')" id="btn-frontal" class="view-btn active flex-1 py-3 text-xs font-bold uppercase tracking-widest border-r border-[#2A2A2A] text-[#F5B731]">
-                                📸 Vista Frontal
-                            </button>
-                            <button onclick="toggleShirtView('trasera')" id="btn-trasera" class="view-btn flex-1 py-3 text-xs font-bold uppercase tracking-widest text-gray-500 hover:text-[#F5B731]">
-                                 Vista Trasera
-                            </button>
-                        </div>                    </div>
-
+                            <button onclick="toggleShirtView('frontal')" id="btn-frontal" class="view-btn active flex-1 py-3 text-xs font-bold uppercase tracking-widest border-r border-[#2A2A2A] text-[#F5B731]">📸 Vista Frontal</button>
+                            <button onclick="toggleShirtView('trasera')" id="btn-trasera" class="view-btn flex-1 py-3 text-xs font-bold uppercase tracking-widest text-gray-500 hover:text-[#F5B731]"> Vista Trasera</button>
+                        </div>
+                    </div>
                     <div class="p-6 sm:p-8 flex flex-col justify-center">
                         <h4 class="font-cinzel text-xl sm:text-2xl font-bold text-white mb-2">Camiseta Oficial Ruca del Valle</h4>
-                        <p class="text-gray-400 text-sm leading-relaxed mb-6">
-                            Camiseta personalizada con estampado de tu sección. Elegí tu número único y el nombre que querás que lleve. Algodón premium de primera calidad.
-                        </p>
-                        
-                        <div class="mb-6">
-                            <span class="text-3xl font-bold text-[#F5B731]">$35.000</span>
-                        </div>
-
+                        <p class="text-gray-400 text-sm leading-relaxed mb-6">Camiseta personalizada con estampado de tu sección. Elegí tu número único y el nombre que querás que lleve.</p>
+                        <div class="mb-6"><span class="text-3xl font-bold text-[#F5B731]">$35.000</span></div>
                         <div class="space-y-3 mb-6">
-                            <div class="flex items-center gap-2 text-sm text-gray-400">
-                                <svg class="w-4 h-4 text-[#F5B731] flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
-                                <span>Personalización de nombre incluida</span>
-                            </div>
-                            <div class="flex items-center gap-2 text-sm text-gray-400">
-                                <svg class="w-4 h-4 text-[#F5B731] flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
-                                <span>Número único por sección (1-99)</span>
-                            </div>
-                            <div class="flex items-center gap-2 text-sm text-gray-400">
-                                <svg class="w-4 h-4 text-[#F5B731] flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
-                                <span>7 secciones disponibles</span>
-                            </div>
-                            <div class="flex items-center gap-2 text-sm text-gray-400">
-                                <svg class="w-4 h-4 text-[#F5B731] flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
-                                <span>Pago en 1 o 2 cuotas</span>
-                            </div>
+                            <div class="flex items-center gap-2 text-sm text-gray-400"><svg class="w-4 h-4 text-[#F5B731]" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg><span>Personalización de nombre incluida</span></div>
+                            <div class="flex items-center gap-2 text-sm text-gray-400"><svg class="w-4 h-4 text-[#F5B731]" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg><span>Número único por sección (1-99)</span></div>
+                            <div class="flex items-center gap-2 text-sm text-gray-400"><svg class="w-4 h-4 text-[#F5B731]" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg><span>7 secciones disponibles</span></div>
+                            <div class="flex items-center gap-2 text-sm text-gray-400"><svg class="w-4 h-4 text-[#F5B731]" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg><span>Pago en 1 o 2 cuotas</span></div>
                         </div>
-
-                        <button onclick="openProductModal()" class="btn-gold w-full py-4 rounded-xl text-sm font-bold">
-                             COMPRAR AHORA
-                        </button>
+                        <button onclick="openProductModal()" class="btn-gold w-full py-4 rounded-xl text-sm font-bold">COMPRAR AHORA</button>
                     </div>
                 </div>
             </div>
         </div>
     </main>
 
-    <!-- ==================== VIDEO DE MODELOS ==================== -->
+    <!-- Video -->
     <section class="bg-[#121212] border-y border-[#2A2A2A]">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
             <div class="text-center mb-12">
                 <h3 class="font-cinzel text-2xl sm:text-3xl font-bold text-white mb-2 tracking-wider">NUESTROS MODELOS EN ACCIÓN</h3>
                 <div class="section-divider w-20 mx-auto"></div>
-                <p class="text-gray-500 mt-4 text-sm">Mirá cómo lucen nuestras camisetas en movimiento</p>
             </div>
-
-            <div class="max-w-3xl mx-auto">                <div class="relative w-full aspect-video rounded-2xl overflow-hidden border border-[#2A2A2A] shadow-2xl bg-black">
-                    <!-- REEMPLAZÁ TU_ID_DE_YOUTUBE POR TU ID REAL -->
-                    <iframe 
-                        class="absolute inset-0 w-full h-full"
-                        src="https://www.youtube.com/embed/TU_ID_DE_YOUTUBE?rel=0&modestbranding=1&playsinline=1" 
-                        title="Video de Modelos Ruca del Valle" 
-                        frameborder="0" 
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                        allowfullscreen>
-                    </iframe>
+            <div class="max-w-3xl mx-auto">
+                <div class="relative w-full aspect-video rounded-2xl overflow-hidden border border-[#2A2A2A] shadow-2xl bg-black">
+                    <iframe class="absolute inset-0 w-full h-full" src="https://www.youtube.com/embed/TU_ID_DE_YOUTUBE?rel=0&modestbranding=1&playsinline=1" title="Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                 </div>
-                <p class="text-center text-xs text-gray-600 mt-3">
-                    Si no carga, verificá tu conexión o 
-                    <a href="https://youtu.be/TU_ID_DE_YOUTUBE" target="_blank" class="text-[#F5B731] underline">miralo directo en YouTube</a>.
-                </p>
+                <p class="text-center text-xs text-gray-600 mt-3">Si no carga, verificá tu conexión o <a href="https://youtu.be/TU_ID_DE_YOUTUBE" target="_blank" class="text-[#F5B731] underline">miralo directo en YouTube</a>.</p>
             </div>
         </div>
     </section>
 
-    <!-- ==================== GALERÍA DE FOTOS DE MODELOS ==================== -->
+    <!-- Gallery -->
     <section class="bg-[#0A0A0A]">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
             <div class="text-center mb-12">
                 <h3 class="font-cinzel text-xl sm:text-2xl font-bold text-white mb-2 tracking-wider">GALERÍA DE FOTOS</h3>
                 <div class="section-divider w-20 mx-auto"></div>
             </div>
-
             <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
-                <!-- Model 1 -->
-                <div class="model-card rounded-xl overflow-hidden aspect-[3/4] bg-[#1E1E1E] border border-[#2A2A2A]">
-                    <img src="img/modelo-1.jpg" alt="Modelo 1" class="w-full h-full object-cover">
-                    <div class="w-full h-full flex flex-col items-center justify-center hidden">
-                        <p class="text-[10px] text-gray-600 text-center px-2">img/modelo-1.jpg</p>
-                    </div>
-                    <div class="overlay flex items-end p-4">
-                        <p class="text-sm font-semibold text-white">Modelo 1</p>
-                    </div>
-                </div>
-                <!-- Model 2 -->
-                <div class="model-card rounded-xl overflow-hidden aspect-[3/4] bg-[#1E1E1E] border border-[#2A2A2A]">
-                    <img src="img/modelo-2.jpg" alt="Modelo 2" class="w-full h-full object-cover">
-                    <div class="w-full h-full flex flex-col items-center justify-center hidden">
-                        <p class="text-[10px] text-gray-600 text-center px-2">img/modelo-2.jpg</p>
-                    </div>
-                    <div class="overlay flex items-end p-4">
-                        <p class="text-sm font-semibold text-white">Modelo 2</p>
-                    </div>
-                </div>
-                <!-- Model 3 -->
-                <div class="model-card rounded-xl overflow-hidden aspect-[3/4] bg-[#1E1E1E] border border-[#2A2A2A]">                    <img src="img/modelo-3.jpg" alt="Modelo 3" class="w-full h-full object-cover">
-                    <div class="w-full h-full flex flex-col items-center justify-center hidden">
-                        <p class="text-[10px] text-gray-600 text-center px-2">img/modelo-3.jpg</p>
-                    </div>
-                    <div class="overlay flex items-end p-4">
-                        <p class="text-sm font-semibold text-white">Modelo 3</p>
-                    </div>
-                </div>
-                <!-- Model 4 -->
-                <div class="model-card rounded-xl overflow-hidden aspect-[3/4] bg-[#1E1E1E] border border-[#2A2A2A]">
-                    <img src="img/modelo-4.jpg" alt="Modelo 4" class="w-full h-full object-cover">
-                    <div class="w-full h-full flex flex-col items-center justify-center hidden">
-                        <p class="text-[10px] text-gray-600 text-center px-2">img/modelo-4.jpg</p>
-                    </div>
-                    <div class="overlay flex items-end p-4">
-                        <p class="text-sm font-semibold text-white">Modelo 4</p>
-                    </div>
-                </div>
-                <!-- Model 5 -->
-                <div class="model-card rounded-xl overflow-hidden aspect-[3/4] bg-[#1E1E1E] border border-[#2A2A2A]">
-                    <img src="img/modelo-5.jpg" alt="Modelo 5" class="w-full h-full object-cover">
-                    <div class="w-full h-full flex flex-col items-center justify-center hidden">
-                        <p class="text-[10px] text-gray-600 text-center px-2">img/modelo-5.jpg</p>
-                    </div>
-                    <div class="overlay flex items-end p-4">
-                        <p class="text-sm font-semibold text-white">Modelo 5</p>
-                    </div>
-                </div>
-                <!-- Model 6 -->
-                <div class="model-card rounded-xl overflow-hidden aspect-[3/4] bg-[#1E1E1E] border border-[#2A2A2A]">
-                    <img src="img/modelo-6.jpg" alt="Modelo 6" class="w-full h-full object-cover">
-                    <div class="w-full h-full flex flex-col items-center justify-center hidden">
-                        <p class="text-[10px] text-gray-600 text-center px-2">img/modelo-6.jpg</p>
-                    </div>
-                    <div class="overlay flex items-end p-4">
-                        <p class="text-sm font-semibold text-white">Modelo 6</p>
-                    </div>
-                </div>
-                <!-- Model 7 -->
-                <div class="model-card rounded-xl overflow-hidden aspect-[3/4] bg-[#1E1E1E] border border-[#2A2A2A]">
-                    <img src="img/modelo-7.jpg" alt="Modelo 7" class="w-full h-full object-cover">
-                    <div class="w-full h-full flex flex-col items-center justify-center hidden">
-                        <p class="text-[10px] text-gray-600 text-center px-2">img/modelo-7.jpg</p>
-                    </div>
-                    <div class="overlay flex items-end p-4">
-                        <p class="text-sm font-semibold text-white">Modelo 7</p>
-                    </div>
-                </div>
-                <!-- Model 8 -->
-                <div class="model-card rounded-xl overflow-hidden aspect-[3/4] bg-[#1E1E1E] border border-[#2A2A2A]">                    <img src="img/modelo-8.jpg" alt="Modelo 8" class="w-full h-full object-cover">
-                    <div class="w-full h-full flex flex-col items-center justify-center hidden">
-                        <p class="text-[10px] text-gray-600 text-center px-2">img/modelo-8.jpg</p>
-                    </div>
-                    <div class="overlay flex items-end p-4">
-                        <p class="text-sm font-semibold text-white">Modelo 8</p>
-                    </div>
-                </div>
+                <div class="model-card rounded-xl overflow-hidden aspect-[3/4] bg-[#1E1E1E] border border-[#2A2A2A]"><img src="img/modelo-1.jpg" alt="1" class="w-full h-full object-cover"><div class="overlay flex items-end p-4"><p class="text-sm font-semibold text-white">Modelo 1</p></div></div>
+                <div class="model-card rounded-xl overflow-hidden aspect-[3/4] bg-[#1E1E1E] border border-[#2A2A2A]"><img src="img/modelo-2.jpg" alt="2" class="w-full h-full object-cover"><div class="overlay flex items-end p-4"><p class="text-sm font-semibold text-white">Modelo 2</p></div></div>
+                <div class="model-card rounded-xl overflow-hidden aspect-[3/4] bg-[#1E1E1E] border border-[#2A2A2A]"><img src="img/modelo-3.jpg" alt="3" class="w-full h-full object-cover"><div class="overlay flex items-end p-4"><p class="text-sm font-semibold text-white">Modelo 3</p></div></div>
+                <div class="model-card rounded-xl overflow-hidden aspect-[3/4] bg-[#1E1E1E] border border-[#2A2A2A]"><img src="img/modelo-4.jpg" alt="4" class="w-full h-full object-cover"><div class="overlay flex items-end p-4"><p class="text-sm font-semibold text-white">Modelo 4</p></div></div>
+                <div class="model-card rounded-xl overflow-hidden aspect-[3/4] bg-[#1E1E1E] border border-[#2A2A2A]"><img src="img/modelo-5.jpg" alt="5" class="w-full h-full object-cover"><div class="overlay flex items-end p-4"><p class="text-sm font-semibold text-white">Modelo 5</p></div></div>
+                <div class="model-card rounded-xl overflow-hidden aspect-[3/4] bg-[#1E1E1E] border border-[#2A2A2A]"><img src="img/modelo-6.jpg" alt="6" class="w-full h-full object-cover"><div class="overlay flex items-end p-4"><p class="text-sm font-semibold text-white">Modelo 6</p></div></div>
+                <div class="model-card rounded-xl overflow-hidden aspect-[3/4] bg-[#1E1E1E] border border-[#2A2A2A]"><img src="img/modelo-7.jpg" alt="7" class="w-full h-full object-cover"><div class="overlay flex items-end p-4"><p class="text-sm font-semibold text-white">Modelo 7</p></div></div>
+                <div class="model-card rounded-xl overflow-hidden aspect-[3/4] bg-[#1E1E1E] border border-[#2A2A2A]"><img src="img/modelo-8.jpg" alt="8" class="w-full h-full object-cover"><div class="overlay flex items-end p-4"><p class="text-sm font-semibold text-white">Modelo 8</p></div></div>
             </div>
         </div>
     </section>
 
-    <!-- ==================== FOOTER ==================== -->
+    <!-- Reviews Section -->
+    <section class="bg-[#121212] border-y border-[#2A2A2A] py-16">
+        <div class="max-w-4xl mx-auto px-4">
+            <h3 class="font-cinzel text-2xl font-bold text-white text-center mb-8">💬 Opiniones de Clientes</h3>
+            <div id="reviews-container" class="grid gap-4 mb-10 max-h-96 overflow-y-auto pr-2"></div>
+            <div class="bg-[#1A1A1A] p-6 rounded-xl border border-[#2A2A2A]">
+                <h4 class="text-[#F5B731] font-bold mb-4">Dejá tu opinión</h4>
+                <input type="text" id="review-name" placeholder="Tu nombre" class="input-dark w-full mb-3 rounded-lg px-3 py-2 text-sm">
+                <div class="flex gap-2 mb-3" id="star-selector">
+                    <span class="star-btn text-gray-600" data-val="1">★</span>
+                    <span class="star-btn text-gray-600" data-val="2">★</span>
+                    <span class="star-btn text-gray-600" data-val="3">★</span>
+                    <span class="star-btn text-gray-600" data-val="4">★</span>
+                    <span class="star-btn text-gray-600" data-val="5">★</span>
+                </div>
+                <textarea id="review-comment" placeholder="Contanos tu experiencia..." class="input-dark w-full mb-3 rounded-lg px-3 py-2 text-sm h-20"></textarea>
+                <button onclick="submitReview()" class="btn-gold w-full py-2 rounded-lg text-sm font-bold">Enviar Opinión</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
     <footer class="bg-[#0A0A0A] border-t border-[#2A2A2A] py-12">
         <div class="max-w-7xl mx-auto px-4 text-center">
-            <div class="flex justify-center mb-6">
-                <div class="w-14 h-14 drop-shadow-[0_0_8px_rgba(245,183,49,0.5)]">
-                    <img src="img/logo.png" alt="Logo Footer" class="w-full h-full object-contain">
-                </div>
-            </div>
+            <div class="flex justify-center mb-6"><div class="w-14 h-14 drop-shadow-[0_0_8px_rgba(245,183,49,0.5)]"><img src="img/logo.png" alt="Logo" class="w-full h-full object-contain"></div></div>
             <p class="font-cinzel text-[#F5B731] text-lg font-bold tracking-widest">RUCA DEL VALLE</p>
-            <p class="text-gray-600 mt-2 text-sm">Remeras Ruca del Valle © 2026</p>
-            <p class="text-gray-600 text-sm">Hecho con ❤️ y sin comisiones.</p>
-            <p class="mt-4">
-                <a href="https://wa.me/3834565209?text=Hola!%20Tengo%20una%20consulta" class="text-[#F5B731] hover:text-[#FFD54F] underline transition-colors text-sm">¿Dudas? Escribinos por WhatsApp</a>
-            </p>
+            <p class="text-gray-600 mt-2 text-sm">Remeras Ruca del Valle © 2026 | Hecho con ❤️ y sin comisiones.</p>
+            <p class="mt-4"><a href="https://wa.me/3834565209?text=Hola!%20Tengo%20una%20consulta" class="text-[#F5B731] hover:text-[#FFD54F] underline transition-colors text-sm">¿Dudas? Escribinos por WhatsApp</a></p>
         </div>
     </footer>
 
-    <!-- ==================== PRODUCT MODAL ==================== -->
+    <!-- Product Modal -->
     <div id="product-modal" class="fixed inset-0 z-50 hidden overflow-y-auto">
         <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-6 text-center sm:block sm:p-0">
-            <div class="fixed inset-0 modal-backdrop transition-opacity" aria-hidden="true" onclick="closeProductModal()"></div>
+            <div class="fixed inset-0 modal-backdrop transition-opacity" onclick="closeProductModal()"></div>
             <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
-            
             <div class="inline-block align-bottom bg-[#1A1A1A] rounded-2xl text-left overflow-hidden shadow-2xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg w-full fade-in border border-[#2A2A2A]">
-                
                 <div class="px-6 pt-6 pb-4">
                     <div class="flex items-center justify-between">
-                        <div>
-                            <h3 class="font-cinzel text-lg font-bold text-[#F5B731]">Personalizar Camiseta</h3>
-                            <p class="text-xs text-gray-500 mt-0.5">Completá los datos para tu remera</p>
-                        </div>
-                        <button onclick="closeProductModal()" class="text-gray-500 hover:text-white transition-colors p-1">
-                            <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
-                        </button>
+                        <div><h3 class="font-cinzel text-lg font-bold text-[#F5B731]">Personalizar Camiseta</h3><p class="text-xs text-gray-500 mt-0.5">Completá los datos para tu remera</p></div>
+                        <button onclick="closeProductModal()" class="text-gray-500 hover:text-white transition-colors p-1"><svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg></button>
                     </div>
                     <div class="section-divider mt-4"></div>
                 </div>
                 <div class="px-6 pb-6 space-y-4">
                     <div class="grid grid-cols-2 gap-3">
-                        <div>
-                            <label class="block text-[10px] font-bold text-[#F5B731] uppercase tracking-widest mb-1.5">Nombre *</label>
-                            <input type="text" id="cust-name" class="input-dark w-full rounded-lg px-3 py-2.5 text-sm" placeholder="Tu nombre">
-                        </div>
-                        <div>
-                            <label class="block text-[10px] font-bold text-[#F5B731] uppercase tracking-widest mb-1.5">Apellido *</label>
-                            <input type="text" id="cust-lastname" class="input-dark w-full rounded-lg px-3 py-2.5 text-sm" placeholder="Tu apellido">
-                        </div>
+                        <div><label class="block text-[10px] font-bold text-[#F5B731] uppercase tracking-widest mb-1.5">Nombre *</label><input type="text" id="cust-name" class="input-dark w-full rounded-lg px-3 py-2.5 text-sm" placeholder="Tu nombre"></div>
+                        <div><label class="block text-[10px] font-bold text-[#F5B731] uppercase tracking-widest mb-1.5">Apellido *</label><input type="text" id="cust-lastname" class="input-dark w-full rounded-lg px-3 py-2.5 text-sm" placeholder="Tu apellido"></div>
                     </div>
-
-                    <div>
-                        <label class="block text-[10px] font-bold text-[#F5B731] uppercase tracking-widest mb-1.5">Talle *</label>
-                        <select id="size-select" class="input-dark w-full rounded-lg px-3 py-2.5 text-sm">
-                            <option value="S">S — Ancho 48cm / Largo 68cm</option>
-                            <option value="M">M — Ancho 51cm / Largo 70cm</option>
-                            <option value="L">L — Ancho 54cm / Largo 72cm</option>
-                            <option value="XL">XL — Ancho 57cm / Largo 74cm</option>
-                            <option value="XXL">XXL — Ancho 60cm / Largo 76cm</option>
-                            <option value="XXXL">XXXL — Ancho 68cm / Largo 80cm</option>
-                        </select>
-                    </div>
-
-                    <div>
-                        <label class="block text-[10px] font-bold text-[#F5B731] uppercase tracking-widest mb-1.5">Sección *</label>
-                        <select id="section-select" onchange="checkAvailability(this.value)" class="input-dark w-full rounded-lg px-3 py-2.5 text-sm">
-                            <option value="">Elegí tu sección...</option>
-                            <option value="Escuderos">🛡️ Escuderos</option>
-                            <option value="Templarios">⚔️ Templarios</option>
-                            <option value="Adalides">🏹 Adalides</option>
-                            <option value="Herederas">👑 Herederas</option>
-                            <option value="Caperucitas">🎭 Caperucitas</option>
-                            <option value="Mayor">🏰 Mayor</option>
-                            <option value="Milicianos">🏛️ Milicianos</option>
-                        </select>
-                    </div>
-
-                    <div>
-                        <label class="block text-[10px] font-bold text-[#F5B731] uppercase tracking-widest mb-1.5">Número (1-99) *</label>
-                        <input type="number" id="number-input" min="1" max="99" oninput="validateNumberInput()" class="input-dark w-full rounded-lg px-3 py-2.5 text-sm" placeholder="Ej: 10">
-                        <p id="number-error" class="text-red-400 text-xs mt-1 hidden">⚠️ Este número ya está ocupado en esta sección.</p>
-                    </div>
-
-                    <div>
-                        <label class="block text-[10px] font-bold text-[#F5B731] uppercase tracking-widest mb-1.5">Nombre para estampar <span class="text-gray-600 normal-case">(Opcional)</span></label>
-                        <input type="text" id="custom-shirt-name" maxlength="12" class="input-dark w-full rounded-lg px-3 py-2.5 text-sm uppercase tracking-wider" placeholder="Nombre en la remera">
-                        <p class="text-[10px] text-gray-600 mt-1">Máximo 12 caracteres. Si no ponés nada, se usa tu nombre.</p>
-                    </div>
+                    <div><label class="block text-[10px] font-bold text-[#F5B731] uppercase tracking-widest mb-1.5">Email <span class="text-gray-500 normal-case">(opcional)</span></label><input type="email" id="cust-email" class="input-dark w-full rounded-lg px-3 py-2.5 text-sm" placeholder="Para confirmación automática"></div>
+                    <div><label class="block text-[10px] font-bold text-[#F5B731] uppercase tracking-widest mb-1.5">Talle *</label><select id="size-select" class="input-dark w-full rounded-lg px-3 py-2.5 text-sm"><option value="S">S — Ancho 48cm / Largo 68cm</option><option value="M">M — Ancho 51cm / Largo 70cm</option><option value="L">L — Ancho 54cm / Largo 72cm</option><option value="XL">XL — Ancho 57cm / Largo 74cm</option><option value="XXL">XXL — Ancho 60cm / Largo 76cm</option><option value="XXXL">XXXL — Ancho 68cm / Largo 80cm</option></select></div>
+                    <div><label class="block text-[10px] font-bold text-[#F5B731] uppercase tracking-widest mb-1.5">Sección *</label><select id="section-select" onchange="checkAvailability(this.value)" class="input-dark w-full rounded-lg px-3 py-2.5 text-sm"><option value="">Elegí tu sección...</option><option value="Escuderos">🛡️ Escuderos</option><option value="Templarios">⚔️ Templarios</option><option value="Adalides">🏹 Adalides</option><option value="Herederas">👑 Herederas</option><option value="Caperucitas">🎭 Caperucitas</option><option value="Mayor">🏰 Mayor</option><option value="Milicianos">🏛️ Milicianos</option></select></div>
+                    <div><label class="block text-[10px] font-bold text-[#F5B731] uppercase tracking-widest mb-1.5">Número (1-99) *</label><input type="number" id="number-input" min="1" max="99" oninput="validateNumberInput()" class="input-dark w-full rounded-lg px-3 py-2.5 text-sm" placeholder="Ej: 10"><p id="number-error" class="text-red-400 text-xs mt-1 hidden">⚠️ Este número ya está ocupado en esta sección.</p></div>
+                    <div><label class="block text-[10px] font-bold text-[#F5B731] uppercase tracking-widest mb-1.5">Nombre para estampar <span class="text-gray-600 normal-case">(Opcional)</span></label><input type="text" id="custom-shirt-name" maxlength="12" class="input-dark w-full rounded-lg px-3 py-2.5 text-sm uppercase tracking-wider" placeholder="Nombre en la remera"><p class="text-[10px] text-gray-600 mt-1">Máximo 12 caracteres. Si no ponés nada, se usa tu nombre.</p></div>
                 </div>
                 <div class="bg-black/40 px-6 py-4 sm:flex sm:flex-row-reverse gap-3">
-                    <button type="button" id="add-to-cart-btn" onclick="addToCart()" class="w-full sm:w-auto btn-gold px-8 py-3 rounded-xl text-sm font-bold disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:transform-none disabled:hover:shadow-none">
-                        Agregar al Carrito
-                    </button>
-                    <button type="button" onclick="closeProductModal()" class="mt-3 sm:mt-0 w-full sm:w-auto btn-outline-gold px-8 py-3 rounded-xl text-sm font-bold">
-                        Cancelar
-                    </button>
+                    <button type="button" id="add-to-cart-btn" onclick="addToCart()" class="w-full sm:w-auto btn-gold px-8 py-3 rounded-xl text-sm font-bold disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:transform-none disabled:hover:shadow-none">Agregar al Carrito</button>
+                    <button type="button" onclick="closeProductModal()" class="mt-3 sm:mt-0 w-full sm:w-auto btn-outline-gold px-8 py-3 rounded-xl text-sm font-bold">Cancelar</button>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- ==================== SIZE CHART MODAL ==================== -->
+    <!-- Size Chart Modal -->
     <div id="size-chart-modal" class="fixed inset-0 z-50 hidden overflow-y-auto">
         <div class="flex items-center justify-center min-h-screen px-4 text-center">
             <div class="fixed inset-0 modal-backdrop transition-opacity" onclick="toggleSizeChart()"></div>
             <div class="inline-block bg-[#1A1A1A] rounded-2xl text-left overflow-hidden shadow-xl transform transition-all max-w-md w-full fade-in border border-[#2A2A2A] p-6 relative z-10">
                 <div class="flex items-center justify-between mb-4">
                     <h3 class="font-cinzel text-lg font-bold text-[#F5B731]">Tabla de Talles</h3>
-                    <button onclick="toggleSizeChart()" class="text-gray-500 hover:text-white transition-colors">
-                        <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
-                    </button>
+                    <button onclick="toggleSizeChart()" class="text-gray-500 hover:text-white transition-colors"><svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg></button>
                 </div>
                 <div class="section-divider mb-4"></div>
-                <table class="min-w-full">
-                    <thead>
-                        <tr class="border-b border-[#2A2A2A]">
-                            <th class="px-4 py-3 text-left text-[10px] font-bold text-[#F5B731] uppercase tracking-widest">Talle</th>
-                            <th class="px-4 py-3 text-left text-[10px] font-bold text-[#F5B731] uppercase tracking-widest">Ancho (cm)</th>
-                            <th class="px-4 py-3 text-left text-[10px] font-bold text-[#F5B731] uppercase tracking-widest">Largo (cm)</th>
-                        </tr>
-                    </thead>
-                    <tbody class="divide-y divide-[#2A2A2A]">
-                        <tr class="hover:bg-black/30"><td class="px-4 py-3 font-semibold text-white text-sm">S</td><td class="px-4 py-3 text-gray-400 text-sm">48</td><td class="px-4 py-3 text-gray-400 text-sm">68</td></tr>
-                        <tr class="hover:bg-black/30"><td class="px-4 py-3 font-semibold text-white text-sm">M</td><td class="px-4 py-3 text-gray-400 text-sm">51</td><td class="px-4 py-3 text-gray-400 text-sm">70</td></tr>
-                        <tr class="hover:bg-black/30"><td class="px-4 py-3 font-semibold text-white text-sm">L</td><td class="px-4 py-3 text-gray-400 text-sm">54</td><td class="px-4 py-3 text-gray-400 text-sm">72</td></tr>
-                        <tr class="hover:bg-black/30"><td class="px-4 py-3 font-semibold text-white text-sm">XL</td><td class="px-4 py-3 text-gray-400 text-sm">57</td><td class="px-4 py-3 text-gray-400 text-sm">74</td></tr>
-                        <tr class="hover:bg-black/30"><td class="px-4 py-3 font-semibold text-white text-sm">XXL</td><td class="px-4 py-3 text-gray-400 text-sm">60</td><td class="px-4 py-3 text-gray-400 text-sm">76</td></tr>
-                        <tr class="hover:bg-black/30"><td class="px-4 py-3 font-semibold text-white text-sm">XXXL</td><td class="px-4 py-3 text-gray-400 text-sm">68</td><td class="px-4 py-3 text-gray-400 text-sm">80</td></tr>
-                    </tbody>
-                </table>
+                <table class="min-w-full"><thead><tr class="border-b border-[#2A2A2A]"><th class="px-4 py-3 text-left text-[10px] font-bold text-[#F5B731] uppercase tracking-widest">Talle</th><th class="px-4 py-3 text-left text-[10px] font-bold text-[#F5B731] uppercase tracking-widest">Ancho (cm)</th><th class="px-4 py-3 text-left text-[10px] font-bold text-[#F5B731] uppercase tracking-widest">Largo (cm)</th></tr></thead><tbody class="divide-y divide-[#2A2A2A]"><tr class="hover:bg-black/30"><td class="px-4 py-3 font-semibold text-white text-sm">S</td><td class="px-4 py-3 text-gray-400 text-sm">48</td><td class="px-4 py-3 text-gray-400 text-sm">68</td></tr><tr class="hover:bg-black/30"><td class="px-4 py-3 font-semibold text-white text-sm">M</td><td class="px-4 py-3 text-gray-400 text-sm">51</td><td class="px-4 py-3 text-gray-400 text-sm">70</td></tr><tr class="hover:bg-black/30"><td class="px-4 py-3 font-semibold text-white text-sm">L</td><td class="px-4 py-3 text-gray-400 text-sm">54</td><td class="px-4 py-3 text-gray-400 text-sm">72</td></tr><tr class="hover:bg-black/30"><td class="px-4 py-3 font-semibold text-white text-sm">XL</td><td class="px-4 py-3 text-gray-400 text-sm">57</td><td class="px-4 py-3 text-gray-400 text-sm">74</td></tr><tr class="hover:bg-black/30"><td class="px-4 py-3 font-semibold text-white text-sm">XXL</td><td class="px-4 py-3 text-gray-400 text-sm">60</td><td class="px-4 py-3 text-gray-400 text-sm">76</td></tr><tr class="hover:bg-black/30"><td class="px-4 py-3 font-semibold text-white text-sm">XXXL</td><td class="px-4 py-3 text-gray-400 text-sm">68</td><td class="px-4 py-3 text-gray-400 text-sm">80</td></tr></tbody></table>
                 <p class="text-[10px] text-gray-600 mt-4 text-center">Medidas aproximadas. Puede variar ±2cm.</p>
             </div>
         </div>
     </div>
 
-    <!-- ==================== CART SIDEBAR ==================== -->
+    <!-- Cart Sidebar -->
     <div id="cart-sidebar" class="fixed inset-y-0 right-0 z-50 w-full max-w-md cart-sidebar shadow-2xl transform translate-x-full transition-transform duration-300 ease-in-out">
-        <div class="flex flex-col h-full">            <div class="px-6 py-5 bg-black/40 border-b border-[#2A2A2A] flex justify-between items-center">
+        <div class="flex flex-col h-full">
+            <div class="px-6 py-5 bg-black/40 border-b border-[#2A2A2A] flex justify-between items-center">
                 <h2 class="font-cinzel text-lg font-bold text-[#F5B731]">Tu Carrito</h2>
-                <button onclick="toggleCart()" class="text-gray-500 hover:text-white transition-colors">
-                    <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
-                </button>
+                <button onclick="toggleCart()" class="text-gray-500 hover:text-white transition-colors"><svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg></button>
             </div>
-            
             <div id="cart-items" class="flex-1 overflow-y-auto p-6 space-y-4">
                 <div class="text-center text-gray-600 mt-16">
-                    <svg class="w-16 h-16 mx-auto mb-4 text-[#2A2A2A]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
-                    </svg>
+                    <svg class="w-16 h-16 mx-auto mb-4 text-[#2A2A2A]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" /></svg>
                     <p class="text-base font-medium text-gray-500">El carrito está vacío</p>
                     <p class="text-xs mt-1 text-gray-600">Agregá tu camiseta para comenzar</p>
                 </div>
             </div>
-
             <div class="border-t border-[#2A2A2A] p-6 bg-black/40">
-                <div class="flex justify-between text-base font-bold text-[#F5B731] mb-4">
-                    <p>Total</p>
-                    <p id="cart-total">$0</p>
-                </div>
-                <button onclick="openCheckoutModal()" id="checkout-btn" disabled class="w-full flex justify-center items-center px-6 py-3 border border-transparent rounded-xl shadow-sm text-sm font-bold text-black bg-[#F5B731] hover:bg-[#FFD54F] disabled:opacity-40 disabled:cursor-not-allowed transition-all uppercase tracking-widest">
-                    Continuar al Pago
-                </button>
+                <div class="flex justify-between text-base font-bold text-[#F5B731] mb-4"><p>Total</p><p id="cart-total">$0</p></div>
+                <button onclick="openCheckoutModal()" id="checkout-btn" disabled class="w-full flex justify-center items-center px-6 py-3 border border-transparent rounded-xl shadow-sm text-sm font-bold text-black bg-[#F5B731] hover:bg-[#FFD54F] disabled:opacity-40 disabled:cursor-not-allowed transition-all uppercase tracking-widest">Continuar al Pago</button>
             </div>
         </div>
     </div>
 
-    <!-- ==================== CHECKOUT MODAL ==================== -->
+    <!-- Checkout Modal -->
     <div id="checkout-modal" class="fixed inset-0 z-[60] hidden overflow-y-auto">
         <div class="flex items-center justify-center min-h-screen px-4 text-center">
             <div class="fixed inset-0 modal-backdrop transition-opacity" onclick="closeCheckoutModal()"></div>
             <div class="inline-block bg-[#1A1A1A] rounded-2xl text-left overflow-hidden shadow-xl transform transition-all max-w-lg w-full fade-in border border-[#2A2A2A] relative z-10">
-                
                 <div id="payment-step" class="p-6">
                     <div class="flex items-center justify-between mb-4">
                         <h3 class="font-cinzel text-lg font-bold text-[#F5B731]">Método de Pago</h3>
-                        <button onclick="closeCheckoutModal()" class="text-gray-500 hover:text-white transition-colors">
-                            <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
-                        </button>
+                        <button onclick="closeCheckoutModal()" class="text-gray-500 hover:text-white transition-colors"><svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg></button>
                     </div>
                     <div class="section-divider mb-6"></div>
-                    
                     <p class="text-sm text-gray-500 mb-4">Elegí cómo querés abonar:</p>
-                    
                     <div class="space-y-3">
-                        <div onclick="selectPayment('full')" id="payment-full" class="payment-option selected flex items-center p-4 rounded-xl bg-black/30">
-                            <input type="radio" name="payment-method" value="full" class="h-4 w-4 text-[#F5B731] focus:ring-[#F5B731] border-gray-600 bg-[#1E1E1E]" checked>
-                            <div class="ml-3">                                <span class="block text-sm font-bold text-white">1 Pago</span>
-                                <span class="block text-xs text-gray-500">Pagás el total ahora por transferencia o QR</span>
-                            </div>
-                        </div>
-
-                        <div onclick="selectPayment('installments')" id="payment-installments" class="payment-option flex items-center p-4 rounded-xl bg-black/30">
-                            <input type="radio" name="payment-method" value="installments" class="h-4 w-4 text-[#F5B731] focus:ring-[#F5B731] border-gray-600 bg-[#1E1E1E]">
-                            <div class="ml-3">
-                                <span class="block text-sm font-bold text-white">2 Pagos</span>
-                                <span class="block text-xs text-gray-500">Pagá la mitad ahora y el siguiente mes la otra mitad</span>
-                            </div>
-                        </div>
+                        <div onclick="selectPayment('full')" id="payment-full" class="payment-option selected flex items-center p-4 rounded-xl bg-black/30"><input type="radio" name="payment-method" value="full" class="h-4 w-4 text-[#F5B731] focus:ring-[#F5B731] border-gray-600 bg-[#1E1E1E]" checked><div class="ml-3"><span class="block text-sm font-bold text-white">1 Pago</span><span class="block text-xs text-gray-500">Pagás el total ahora por transferencia o QR</span></div></div>
+                        <div onclick="selectPayment('installments')" id="payment-installments" class="payment-option flex items-center p-4 rounded-xl bg-black/30"><input type="radio" name="payment-method" value="installments" class="h-4 w-4 text-[#F5B731] focus:ring-[#F5B731] border-gray-600 bg-[#1E1E1E]"><div class="ml-3"><span class="block text-sm font-bold text-white">2 Pagos</span><span class="block text-xs text-gray-500">Pagá la mitad ahora y el siguiente mes la otra mitad</span></div></div>
                     </div>
-
                     <div id="bank-details" class="mt-6 bg-black/30 p-5 rounded-xl border border-[#2A2A2A]">
                         <h4 class="font-cinzel font-bold text-[#F5B731] mb-3 text-[10px] uppercase tracking-widest">Datos para Transferir</h4>
                         <p class="text-3xl font-bold text-[#F5B731] mb-4" id="transfer-amount">$0</p>
-                        
-                        <div class="mb-4">
-                            <p class="text-[10px] text-gray-600 uppercase tracking-widest mb-1">Alias / CBU</p>
-                            <div class="flex items-center gap-2">
-                                <code class="bg-black px-3 py-2.5 rounded-lg border border-[#2A2A2A] text-sm flex-1 select-all text-[#F5B731] font-mono">camisetas.rdv</code>
-                                <button onclick="copyAlias()" class="text-xs text-[#F5B731] hover:text-[#FFD54F] font-semibold px-3 py-2.5 border border-[#F5B731]/30 rounded-lg hover:bg-[#F5B731]/10 transition-all">Copiar</button>
-                            </div>
-                        </div>
-
-                        <div class="mb-4 text-center">
-                            <p class="text-[10px] text-gray-600 uppercase tracking-widest mb-2">O escaneá el QR para pagar</p>
-                            <div class="w-36 h-36 bg-black mx-auto flex items-center justify-center rounded-xl border border-[#2A2A2A] overflow-hidden">
-                                <img src="img/qr.png" alt="QR para pagar" class="w-full h-full object-contain">
-                                <span class="text-xs text-gray-600 absolute">Agregá img/qr.png</span>
-                            </div>
-                        </div>
-
-                        <div class="bg-[#F5B731]/10 border-l-4 border-[#F5B731] p-4 mb-4 rounded-r">
-                            <p class="text-sm text-[#F5B731]/80">
-                                ⚠️ Una vez que realizaste el pago, tocá el botón de abajo para enviarnos el comprobante por WhatsApp e indicarnos el <strong>Nombre Personalizado</strong> en tu Camiseta.
-                            </p>
-                        </div>
+                        <div class="mb-4"><p class="text-[10px] text-gray-600 uppercase tracking-widest mb-1">Alias / CBU</p><div class="flex items-center gap-2"><code class="bg-black px-3 py-2.5 rounded-lg border border-[#2A2A2A] text-sm flex-1 select-all text-[#F5B731] font-mono">camisetas.rdv</code><button onclick="copyAlias()" class="text-xs text-[#F5B731] hover:text-[#FFD54F] font-semibold px-3 py-2.5 border border-[#F5B731]/30 rounded-lg hover:bg-[#F5B731]/10 transition-all">Copiar</button></div></div>
+                        <div class="mb-4 text-center"><p class="text-[10px] text-gray-600 uppercase tracking-widest mb-2">O escaneá el QR para pagar</p><div class="w-36 h-36 bg-black mx-auto flex items-center justify-center rounded-xl border border-[#2A2A2A] overflow-hidden"><img src="img/qr.png" alt="QR para pagar" class="w-full h-full object-contain"><span class="text-xs text-gray-600 absolute">Agregá img/qr.png</span></div></div>
+                        <div class="bg-[#F5B731]/10 border-l-4 border-[#F5B731] p-4 mb-4 rounded-r"><p class="text-sm text-[#F5B731]/80">⚠️ Una vez que realizaste el pago, tocá el botón de abajo para enviarnos el comprobante por WhatsApp e indicarnos el <strong>Nombre Personalizado</strong> en tu Camiseta.</p></div>
                     </div>
-
                     <div class="mt-6 flex gap-3">
                         <button onclick="closeCheckoutModal()" class="flex-1 bg-black/50 text-gray-500 py-3 rounded-xl hover:bg-black/70 border border-[#2A2A2A] font-semibold text-sm uppercase tracking-widest transition-all">Volver</button>
-                        <button onclick="sendWhatsAppOrder()" class="flex-1 bg-green-600 text-white py-3 rounded-xl hover:bg-green-700 flex justify-center items-center gap-2 font-bold text-sm uppercase tracking-widest transition-all">
-                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
-                            Ya Pagué
-                        </button>
+                        <button onclick="sendWhatsAppOrder()" class="flex-1 bg-green-600 text-white py-3 rounded-xl hover:bg-green-700 flex justify-center items-center gap-2 font-bold text-sm uppercase tracking-widest transition-all"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>Ya Pagué</button>
                     </div>
                 </div>
-            </div>        </div>
+            </div>
+        </div>
     </div>
 
-    <!-- ==================== JAVASCRIPT ==================== -->
+    <!-- JAVASCRIPT -->
     <script>
-        // ==================== CONFIGURACIÓN ====================
-        // ✅ URL DE GOOGLE APPS SCRIPT YA CONFIGURADA
-        const SHEET_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw2VSVhiWQ7Z-JbZ0nFhyU2hWG5jmnNllOecIZWp9BdqSwiH-EzQiLKPSdUA_RWxZrv3w/exec';
-        
-        // Aquí guardamos los números ocupados que nos devuelve la planilla
-        let occupiedNumbers = {}; 
-
-        // ==================== VALIDACIÓN EN TIEMPO REAL ====================
-        
-        // Se ejecuta cuando el cliente elige una sección
-        async function checkAvailability(section) {
-            if (!section) return;
-
-            const btn = document.getElementById('add-to-cart-btn');
-            const originalText = btn.innerText;
-            
-            // Feedback visual: deshabilitamos el botón mientras consulta
-            btn.disabled = true;
-            btn.innerText = "Verificando...";
-
-            try {
-                // Le preguntamos a Google Script qué números están usados en esta sección
-                const response = await fetch(`${SHEET_SCRIPT_URL}?section=${section}`);
-                const data = await response.json();
-                
-                // Guardamos la respuesta en memoria
-                occupiedNumbers[section] = data;
-                
-                // Si el cliente ya había escrito un número, lo revalidamos
-                validateNumberInput();
-                
-            } catch (error) {
-                console.error("Error consultando la planilla:", error);
-            } finally {
-                // Restauramos el botón
-                btn.disabled = false;
-                btn.innerText = originalText;
-            }
-        }
-
-        // Valida el número escrito por el cliente
-        function validateNumberInput() {
-            const section = document.getElementById('section-select').value;
-            const num = parseInt(document.getElementById('number-input').value);
-            const errorMsg = document.getElementById('number-error');            const btn = document.getElementById('add-to-cart-btn');
-
-            if (!section || !num) {
-                errorMsg.classList.add('hidden');
-                btn.disabled = false;
-                return;
-            }
-
-            // Verificamos si está en la lista de ocupados (de la planilla)
-            // O si ya está en el carrito actual (para evitar repetir mientras comprás)
-            const isOccupied = (occupiedNumbers[section] || []).includes(num);
-            const inCart = cart.some(item => item.section === section && item.number === num);
-
-            if (isOccupied || inCart) {
-                errorMsg.textContent = `⚠️ El número ${num} ya está ocupado en ${section}.`;
-                errorMsg.classList.remove('hidden');
-                btn.disabled = true;
-            } else {
-                errorMsg.classList.add('hidden');
-                btn.disabled = false;
-            }
-        }
-
-        // ==================== LÓGICA DE LA TIENDA ====================
-        let cart = [];
-        let selectedPayment = 'full';
+        // ⚙️ CONFIGURACIÓN
+        const SHEET_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwzWUX9RVNHu5kdeQjLJs0Mk3bVAPCEwq4pEGGOU8D9-DdKWAiom7GyesSvgN2G21oO/exec';
+        let occupiedNumbers = {}, cart = [], selectedPayment = 'full', selectedRating = 0;
         const PRODUCT_PRICE = 35000;
 
-        function openProductModal() {
-            document.getElementById('product-modal').classList.remove('hidden');
-            document.getElementById('cust-name').value = '';
-            document.getElementById('cust-lastname').value = '';
-            document.getElementById('section-select').value = '';
-            document.getElementById('number-input').value = '';
-            document.getElementById('custom-shirt-name').value = '';
-            document.getElementById('number-error').classList.add('hidden');
-            document.getElementById('add-to-cart-btn').disabled = false;
-            occupiedNumbers = {}; // Limpiamos memoria al abrir modal
+        // 🖼️ UI Helpers
+        function openProductModal() { document.getElementById('product-modal').classList.remove('hidden'); occupiedNumbers = {}; }
+        function closeProductModal() { document.getElementById('product-modal').classList.add('hidden'); }
+        function toggleCart() { document.getElementById('cart-sidebar').classList.toggle('translate-x-full'); }
+        function openCheckoutModal() { toggleCart(); document.getElementById('checkout-modal').classList.remove('hidden'); updateTransferAmount(); }
+        function closeCheckoutModal() { document.getElementById('checkout-modal').classList.add('hidden'); }
+        function showToast(msg) { const t = document.getElementById('toast'); document.getElementById('toast-msg').textContent = msg; t.classList.remove('translate-x-full'); setTimeout(() => t.classList.add('translate-x-full'), 3000); }
+        function copyAlias() { navigator.clipboard.writeText("camisetas.rdv"); showToast("Alias copiado"); }
+        function toggleSizeChart() { document.getElementById('size-chart-modal').classList.toggle('hidden'); }
+        function toggleShirtView(v) {
+            const img = document.getElementById('shirt-image'), lbl = document.getElementById('shirt-view-label');
+            if(v==='frontal'){ img.src='img/camiseta-frontal.jpg'; lbl.textContent='VISTA FRONTAL'; }
+            else { img.src='img/camiseta-trasera.jpg'; lbl.textContent='VISTA TRASERA'; }
         }
-
-        function closeProductModal() {
-            document.getElementById('product-modal').classList.add('hidden');
-        }
-
-        function toggleSizeChart() {
-            document.getElementById('size-chart-modal').classList.toggle('hidden');
-        }
-
-        function toggleCart() {
-            const sidebar = document.getElementById('cart-sidebar');            sidebar.classList.toggle('translate-x-full');
-        }
-
-        function openCheckoutModal() {
-            toggleCart();
-            document.getElementById('checkout-modal').classList.remove('hidden');
+        function selectPayment(m) {
+            selectedPayment = m;
+            document.getElementById('payment-full').classList.toggle('selected', m==='full');
+            document.getElementById('payment-installments').classList.toggle('selected', m==='installments');
+            document.querySelector(`input[name="payment-method"][value="${m}"]`).checked = true;
             updateTransferAmount();
         }
-
-        function closeCheckoutModal() {
-            document.getElementById('checkout-modal').classList.add('hidden');
-        }
-
-        function selectPayment(method) {
-            selectedPayment = method;
-            document.getElementById('payment-full').classList.toggle('selected', method === 'full');
-            document.getElementById('payment-installments').classList.toggle('selected', method === 'installments');
-            document.querySelector('input[name="payment-method"][value="' + method + '"]').checked = true;
-            updateTransferAmount();
-        }
-
         function updateTransferAmount() {
-            const total = cart.reduce((sum, item) => sum + item.price, 0);
-            const displayTotal = selectedPayment === 'installments' ? total / 2 : total;
-            const label = selectedPayment === 'installments' ? '1ra Cuota (50%)' : 'Total a Pagar';
-            document.getElementById('transfer-amount').innerHTML = `<span class="text-sm font-normal text-gray-500 block">${label}</span>$${displayTotal.toLocaleString('es-AR')}`;
+            const t = cart.reduce((s,i)=>s+i.price,0);
+            const d = selectedPayment==='installments'?t/2:t;
+            document.getElementById('transfer-amount').textContent = `$${d.toLocaleString('es-AR')}`;
         }
 
-        function copyAlias() {
-            navigator.clipboard.writeText("camisetas.rdv");
-            const btn = event.target;
-            btn.textContent = "✓ Copiado";
-            setTimeout(() => { btn.textContent = "Copiar"; }, 2000);
+        // 🔢 Number Validation & Availability Check
+        async function checkAvailability(section) {
+            if(!section) return;
+            const btn = document.getElementById('add-to-cart-btn');
+            btn.disabled = true; btn.textContent = "Verificando...";
+            try {
+                const res = await fetch(`${SHEET_SCRIPT_URL}?action=availability&section=${section}`);
+                occupiedNumbers[section] = await res.json();
+                validateNumberInput();
+            } catch(e) { console.error(e); }
+            btn.disabled = false; btn.textContent = "Agregar al Carrito";
+        }
+        function validateNumberInput() {
+            const sec = document.getElementById('section-select').value, num = parseInt(document.getElementById('number-input').value);
+            const err = document.getElementById('number-error'), btn = document.getElementById('add-to-cart-btn');
+            if(!sec || !num) { err.classList.add('hidden'); btn.disabled=false; return; }
+            const used = (occupiedNumbers[sec]||[]).includes(num);
+            const inCart = cart.some(i=>i.section===sec && i.number===num);
+            if(used || inCart) { err.textContent=`⚠️ El ${num} ya está ocupado en ${sec}.`; err.classList.remove('hidden'); btn.disabled=true; }
+            else { err.classList.add('hidden'); btn.disabled=false; }
         }
 
-        function toggleShirtView(view) {
-            const imgElement = document.getElementById('shirt-image');
-            const labelElement = document.getElementById('shirt-view-label');
-            const btnFrontal = document.getElementById('btn-frontal');
-            const btnTrasera = document.getElementById('btn-trasera');
-
-            if (view === 'frontal') {
-                imgElement.src = 'img/camiseta-frontal.jpg';
-                labelElement.textContent = 'VISTA FRONTAL';
-                btnFrontal.classList.add('active');
-                btnFrontal.classList.remove('text-gray-500');
-                btnFrontal.classList.add('text-[#F5B731]');
-                btnTrasera.classList.remove('active');
-                btnTrasera.classList.add('text-gray-500');
-            } else {                imgElement.src = 'img/camiseta-trasera.jpg';
-                labelElement.textContent = 'VISTA TRASERA';
-                btnTrasera.classList.add('active');
-                btnTrasera.classList.remove('text-gray-500');
-                btnTrasera.classList.add('text-[#F5B731]');
-                btnFrontal.classList.remove('active');
-                btnFrontal.classList.add('text-gray-500');
-            }
-        }
-
+        // 🛒 Cart Logic
         function addToCart() {
-            const name = document.getElementById('cust-name').value.trim();
-            const lastname = document.getElementById('cust-lastname').value.trim();
-            const size = document.getElementById('size-select').value;
-            const section = document.getElementById('section-select').value;
-            const number = document.getElementById('number-input').value;
-            const customName = document.getElementById('custom-shirt-name').value.trim().toUpperCase();
-
-            if (!name || !lastname) { alert("Por favor ingresá tu nombre y apellido."); return; }
-            if (!section) { alert("Por favor seleccioná una sección."); return; }
-            if (!number) { alert("Por favor ingresá un número del 1 al 99."); return; }
-
-            const num = parseInt(number);
-            if (num < 1 || num > 99) { alert("El número debe ser entre 1 y 99."); return; }
-
-            const item = {
-                id: Date.now(),
-                productName: "Camiseta Oficial Ruca del Valle",
-                price: PRODUCT_PRICE,
-                customer: `${name} ${lastname}`,
-                size, section, number: num,
-                customName: customName || name.toUpperCase()
-            };
-
-            cart.push(item);
-            renderCart();
-            showToast();
-            closeProductModal();
+            const n=document.getElementById('cust-name').value.trim(), l=document.getElementById('cust-lastname').value.trim();
+            const s=document.getElementById('size-select').value, sec=document.getElementById('section-select').value;
+            const num=document.getElementById('number-input').value, cn=document.getElementById('custom-shirt-name').value.trim().toUpperCase();
+            if(!n||!l) return alert("Nombre y apellido obligatorios");
+            if(!sec) return alert("Seleccioná una sección");
+            if(!num) return alert("Ingresá un número");
+            const item = {id:Date.now(), product:"Camiseta Oficial Ruca del Valle", price:PRODUCT_PRICE, customer:`${n} ${l}`, email:document.getElementById('cust-email').value, size:s, section:sec, number:parseInt(num), customName:cn||n.toUpperCase()};
+            cart.push(item); renderCart(); showToast("¡Agregado al carrito!"); closeProductModal();
         }
-
-        function removeFromCart(id) {
-            cart = cart.filter(item => item.id !== id);
-            renderCart();
-        }
-
+        function removeFromCart(id) { cart=cart.filter(i=>i.id!==id); renderCart(); }
         function renderCart() {
-            const container = document.getElementById('cart-items');
-            const countBadge = document.getElementById('cart-count');
-            const totalEl = document.getElementById('cart-total');
-            const checkoutBtn = document.getElementById('checkout-btn');            let total = 0;
+            const c=document.getElementById('cart-items'), badge=document.getElementById('cart-count'), tot=document.getElementById('cart-total'), btn=document.getElementById('checkout-btn');
+            let t=0;
+            if(cart.length===0) { c.innerHTML='<div class="text-center text-gray-600 mt-16"><svg class="w-16 h-16 mx-auto mb-4 text-[#2A2A2A]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" /></svg><p class="text-base font-medium text-gray-500">El carrito está vacío</p><p class="text-xs mt-1 text-gray-600">Agregá tu camiseta para comenzar</p></div>'; badge.classList.add('hidden'); btn.disabled=true; }
+            else {
+                badge.textContent=cart.length; badge.classList.remove('hidden'); btn.disabled=false; c.innerHTML='';
+                cart.forEach(i=>{ t+=i.price; c.innerHTML+=`<div class="bg-black/30 border border-[#2A2A2A] rounded-xl p-4"><div class="flex justify-between items-start"><div class="flex-1 min-w-0"><h4 class="font-cinzel font-bold text-sm text-[#F5B731] truncate">${i.product}</h4><div class="mt-2 space-y-1"><p class="text-xs text-gray-400">👤 ${i.customer}</p><p class="text-xs text-gray-400">📏 Talle: ${i.size} · 🛡️ ${i.section}</p><p class="text-xs text-gray-400">🔢 Nº ${i.number} · ✍️ "${i.customName}"</p></div><p class="text-sm font-bold text-[#F5B731] mt-2">$${i.price.toLocaleString('es-AR')}</p></div><button onclick="removeFromCart(${i.id})" class="text-gray-600 hover:text-red-400 ml-3 p-1">🗑️</button></div></div>`; });
+            }
+            tot.textContent=`$${t.toLocaleString('es-AR')}`;
+        }
 
-            if (cart.length === 0) {
-                container.innerHTML = `
-                    <div class="text-center text-gray-600 mt-16">
-                        <svg class="w-16 h-16 mx-auto mb-4 text-[#2A2A2A]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
-                        </svg>
-                        <p class="text-base font-medium text-gray-500">El carrito está vacío</p>
-                        <p class="text-xs mt-1 text-gray-600">Agregá tu camiseta para comenzar</p>
-                    </div>`;
-                countBadge.classList.add('hidden');
-                checkoutBtn.disabled = true;
-                totalEl.textContent = '$0';
-                return;
+        // 💳 Checkout & WhatsApp
+        async function sendWhatsAppOrder() {
+            if(cart.length===0) return;
+            showToast("Procesando pedido...");
+            
+            // Enviar cada item a Google Sheets
+            for(const item of cart) {
+                await fetch(SHEET_SCRIPT_URL, {
+                    method: 'POST', mode: 'no-cors',
+                    headers: {'Content-Type':'application/json'},
+                    body: JSON.stringify({...item, action:'purchase'})
+                });
             }
 
-            countBadge.textContent = cart.length;
-            countBadge.classList.remove('hidden');
-            checkoutBtn.disabled = false;
-            container.innerHTML = '';
-            
-            cart.forEach(item => {
-                total += item.price;
-                const div = document.createElement('div');
-                div.className = 'bg-black/30 border border-[#2A2A2A] rounded-xl p-4';
-                div.innerHTML = `
-                    <div class="flex justify-between items-start">
-                        <div class="flex-1 min-w-0">
-                            <h4 class="font-cinzel font-bold text-sm text-[#F5B731] truncate">${item.productName}</h4>
-                            <div class="mt-2 space-y-1">
-                                <p class="text-xs text-gray-400">👤 ${item.customer}</p>
-                                <p class="text-xs text-gray-400">📏 Talle: ${item.size} · 🛡️ ${item.section}</p>
-                                <p class="text-xs text-gray-400">🔢 Nº ${item.number} · ✍️ "${item.customName}"</p>
-                            </div>
-                            <p class="text-sm font-bold text-[#F5B731] mt-2">$${item.price.toLocaleString('es-AR')}</p>
-                        </div>
-                        <button onclick="removeFromCart(${item.id})" class="text-gray-600 hover:text-red-400 ml-3 p-1">
-                            🗑️
-                        </button>
-                    </div>`;
-                container.appendChild(div);
+            let msg = "¡Hola Ruca del Valle! Quiero confirmar mi pedido:%0A%0A";
+            cart.forEach((i,idx)=>{
+                msg+=`*${idx+1}. ${i.product}*%0A👤 ${i.customer}%0A📏 ${i.size} | 🛡️ ${i.section}%0A🔢 ${i.number} | ✍️ ${i.customName}%0A💰 $${i.price.toLocaleString('es-AR')}%0A%0A`;
             });
-
-            totalEl.textContent = '$' + total.toLocaleString('es-AR');
+            const total = cart.reduce((s,i)=>s+i.price,0);
+            msg+=`--------------------------%0A💵 *TOTAL: $${total.toLocaleString('es-AR')}*%0A💳 Método: ${selectedPayment==='installments'?'2 Pagos (Mitad ahora)':'Pago Total'}%0A--------------------------%0A%0AAdjunto comprobante.`;
+            window.open(`https://wa.me/3834565209?text=${msg}`, '_blank');
+            cart=[]; renderCart(); closeCheckoutModal();
         }
 
-        function showToast() {
-            const toast = document.getElementById('toast');
-            toast.classList.remove('translate-x-full');            setTimeout(() => { toast.classList.add('translate-x-full'); }, 3000);
-        }
-
-        function sendWhatsAppOrder() {
-            if (cart.length === 0) return;
-
-            // Enviamos cada item a Google Sheets (silenciosamente)
-            cart.forEach(item => {
-                const recordData = {
-                    cliente: item.customer,
-                    producto: item.productName,
-                    talle: item.size,
-                    seccion: item.section,
-                    numero: item.number,
-                    nombreEstampado: item.customName,
-                    total: item.price,
-                    metodo: selectedPayment === 'installments' ? '2 Pagos' : '1 Pago'
-                };
-                
-                fetch(SHEET_SCRIPT_URL, {
-                    method: 'POST',
-                    mode: 'no-cors',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(recordData)
+        // ⭐ Reviews System
+        document.querySelectorAll('#star-selector span').forEach(s => {
+            s.addEventListener('click', function() {
+                selectedRating = parseInt(this.dataset.val);
+                document.querySelectorAll('#star-selector span').forEach((el, i) => {
+                    el.classList.toggle('active', i < selectedRating);
                 });
             });
+        });
 
-            // Preparamos mensaje de WhatsApp
-            let msg = "¡Hola Ruca del Valle! Quiero confirmar mi pedido:%0A%0A";
-            cart.forEach((item, i) => {
-                msg += `*${i + 1}. ${item.productName}*%0A`;
-                msg += `   👤 Cliente: ${item.customer}%0A`;
-                msg += `   📏 Talle: ${item.size}%0A`;
-                msg += `   🛡️ Sección: ${item.section}%0A`;
-                msg += `   🔢 Número: ${item.number}%0A`;
-                msg += `   ✍️ Estampado: "${item.customName}"%0A`;
-                msg += `   💰 Precio: $${item.price.toLocaleString('es-AR')}%0A%0A`;
+        async function loadReviews() {
+            try {
+                const res = await fetch(`${SHEET_SCRIPT_URL}?action=reviews`);
+                const reviews = await res.json();
+                const container = document.getElementById('reviews-container');
+                container.innerHTML = reviews.length ? '' : '<p class="text-gray-500 text-center py-4">Sé el primero en opinar.</p>';
+                reviews.reverse().forEach(r => {
+                    const stars = '★'.repeat(r.rating) + '☆'.repeat(5-r.rating);
+                    const date = new Date(r.date).toLocaleDateString('es-AR');
+                    container.innerHTML += `<div class="bg-[#1A1A1A] p-4 rounded-lg border border-[#2A2A2A]"><div class="flex justify-between items-center mb-2"><span class="font-bold text-white">${r.name}</span><span class="text-[#F5B731] text-sm">${stars}</span></div><p class="text-gray-400 text-sm">${r.comment}</p><p class="text-gray-600 text-xs mt-2">${date}</p></div>`;
+                });
+            } catch(e){}
+        }
+
+        async function submitReview() {
+            const name = document.getElementById('review-name').value.trim();
+            const comment = document.getElementById('review-comment').value.trim();
+            if(!name || !selectedRating || !comment) return alert('Completá nombre, calificación y comentario.');
+            await fetch(SHEET_SCRIPT_URL, {
+                method: 'POST', mode: 'no-cors',
+                headers: {'Content-Type':'application/json'},
+                body: JSON.stringify({action:'review', name, rating:selectedRating, comment})
             });
+            showToast('¡Gracias! Tu opinión se publicará en breve.');
+            document.getElementById('review-name').value=''; document.getElementById('review-comment').value='';
+            selectedRating=0; document.querySelectorAll('#star-selector span').forEach(s=>s.classList.remove('active'));
+            loadReviews();
+        }
 
-            const total = cart.reduce((sum, item) => sum + item.price, 0);
-            const method = selectedPayment === 'installments' ? '2 Pagos (Mitad ahora)' : 'Pago Total';
-            
-            msg += `--------------------------%0A`;
-            msg += `💵 *TOTAL: $${total.toLocaleString('es-AR')}*%0A`;
-            msg += `💳 Método: ${method}%0A`;
-            msg += `--------------------------%0A%0A`;
-            msg += `Adjunto el comprobante de transferencia.`;
-
-            window.open(`https://wa.me/3834565209?text=${msg}`, '_blank');
-        }    </script>
+        // 🚀 Init
+        document.addEventListener('DOMContentLoaded', () => { loadReviews(); });
+    </script>
 </body>
 </html>
