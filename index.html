@@ -321,7 +321,7 @@
         </div>
     </div>
 
-    <!-- JAVASCRIPT -->
+    <!-- JAVASCRIPT CORREGIDO -->
     <script>
         // ⚙️ CONFIGURACIÓN
         const SHEET_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzneOHcisZO5p8ZF584hkI3PWf9nJT44OA8qn1p2p-TQc0rOFngbHw_y5AkA3__u38zBw/exec';
@@ -380,7 +380,7 @@
                 try {
                     const res = await fetch(`${SHEET_SCRIPT_URL}?action=availability&section=${sec}`);
                     const usedNumbers = await res.json();
-                    occupiedNumbers[sec] = usedNumbers;
+                    occupiedNumbers[sec] = usedNumbers.map(n => parseInt(n));
                     
                     let option = select.querySelector(`option[value="${sec}"]`);
                     if (option) {
@@ -391,92 +391,198 @@
             }
         }
 
-        // 🔢 Number Validation
+        // 🔢 Number Validation - CON CONSULTA FRESCA
         async function checkAvailability(section) {
             if(!section) return;
             const btn = document.getElementById('add-to-cart-btn');
-            btn.disabled = true; btn.textContent = "Verificando...";
+            const numInput = document.getElementById('number-input');
+            const originalText = btn.innerText;
+            
+            btn.disabled = true; 
+            btn.innerText = "Verificando stock...";
+            numInput.disabled = true;
+
             try {
                 const res = await fetch(`${SHEET_SCRIPT_URL}?action=availability&section=${section}`);
-                occupiedNumbers[section] = await res.json();
+                if (!res.ok) throw new Error('Error de red');
+                const data = await res.json();
+                
+                occupiedNumbers[section] = data.map(n => parseInt(n));
                 validateNumberInput();
-            } catch(e) { console.error(e); }
-            btn.disabled = false; btn.textContent = "Agregar al Carrito";
-        }
-        function validateNumberInput() {
-            const sec = document.getElementById('section-select').value, num = parseInt(document.getElementById('number-input').value);
-            const err = document.getElementById('number-error'), btn = document.getElementById('add-to-cart-btn');
-            if(!sec || !num) { err.classList.add('hidden'); btn.disabled=false; return; }
-            const used = (occupiedNumbers[sec]||[]).includes(num);
-            const inCart = cart.some(i=>i.section===sec && i.number===num);
-            if(used || inCart) { err.textContent=`⚠️ El ${num} ya está ocupado en ${sec}.`; err.classList.remove('hidden'); btn.disabled=true; }
-            else { err.classList.add('hidden'); btn.disabled=false; }
+            } catch (e) {
+                console.error("Error verificando sección:", e);
+                occupiedNumbers[section] = [];
+                document.getElementById('number-error').textContent = "⚠️ Error de conexión. Reintentá en unos segundos.";
+                document.getElementById('number-error').classList.remove('hidden');
+                btn.disabled = true;
+            } finally {
+                btn.disabled = false;
+                btn.innerText = originalText;
+                numInput.disabled = false;
+                numInput.focus();
+            }
         }
 
-        // 🛒 Cart Logic
-        function addToCart() {
-            const n=document.getElementById('cust-name').value.trim(), l=document.getElementById('cust-lastname').value.trim();
-            const s=document.getElementById('size-select').value, sec=document.getElementById('section-select').value;
-            const num=document.getElementById('number-input').value, cn=document.getElementById('custom-shirt-name').value.trim().toUpperCase();
+        function validateNumberInput() {
+            const sec = document.getElementById('section-select').value;
+            const num = parseInt(document.getElementById('number-input').value);
+            const err = document.getElementById('number-error');
+            const btn = document.getElementById('add-to-cart-btn');
+
+            if (!sec || !num || num < 1 || num > 99) {
+                err.classList.add('hidden');
+                btn.disabled = false;
+                return;
+            }
+
+            const isOccupied = (occupiedNumbers[sec] || []).includes(num);
+            const inCart = cart.some(i => i.section === sec && i.number === num);
+
+            if (isOccupied || inCart) {
+                err.textContent = `⚠️ El ${num} ya está ocupado en ${sec}.`;
+                err.classList.remove('hidden');
+                btn.disabled = true;
+            } else {
+                err.classList.add('hidden');
+                btn.disabled = false;
+            }
+        }
+
+        // 🔒 BARRERA FINAL: Verificación en tiempo real antes de agregar
+        async function finalNumberCheck(section, number) {
+            try {
+                const res = await fetch(`${SHEET_SCRIPT_URL}?action=availability&section=${section}`);
+                const freshData = await res.json();
+                const freshOccupied = freshData.map(n => parseInt(n));
+                
+                if (freshOccupied.includes(number)) {
+                    alert(`⛔ El número ${number} acaba de ser tomado por otro cliente. Elegí otro.`);
+                    return false;
+                }
+                return true;
+            } catch (e) {
+                console.warn("No se pudo verificar disponibilidad final:", e);
+                return true; // Permitir continuar si falla la consulta
+            }
+        }
+
+        // 🛒 Cart Logic - CON BARRERA FINAL
+        async function addToCart() {
+            const n = document.getElementById('cust-name').value.trim();
+            const l = document.getElementById('cust-lastname').value.trim();
+            const s = document.getElementById('size-select').value;
+            const sec = document.getElementById('section-select').value;
+            const num = parseInt(document.getElementById('number-input').value);
+            const cn = document.getElementById('custom-shirt-name').value.trim().toUpperCase();
+
+            if (!n || !l) return alert("Nombre y apellido obligatorios");
+            if (!sec) return alert("Seleccioná una sección");
+            if (!num || num < 1 || num > 99) return alert("Ingresá un número válido (1-99)");
+
+            // 🔒 BARRERA FINAL: Verificación en tiempo real
+            const isValid = await finalNumberCheck(sec, num);
+            if (!isValid) return;
             
-            if(!n||!l) return alert("Nombre y apellido obligatorios");
-            if(!sec) return alert("Seleccioná una sección");
-            if(!num || num < 1 || num > 99) return alert("Ingresá un número válido (1-99)");
+            const item = {
+                id: Date.now(),
+                product: "Camiseta Oficial Ruca del Valle",
+                price: PRODUCT_PRICE,
+                customer: `${n} ${l}`,
+                email: document.getElementById('cust-email').value,
+                size: s,
+                section: sec,
+                number: num,
+                customName: cn || n.toUpperCase()
+            };
             
-            const item = {id:Date.now(), product:"Camiseta Oficial Ruca del Valle", price:PRODUCT_PRICE, customer:`${n} ${l}`, email:document.getElementById('cust-email').value, size:s, section:sec, number:parseInt(num), customName:cn||n.toUpperCase()};
-            cart.push(item); renderCart(); showToast("¡Agregado al carrito!"); closeProductModal();
+            cart.push(item);
+            renderCart();
+            showToast("¡Agregado al carrito!");
+            closeProductModal();
         }
         
-        function removeFromCart(id) { cart=cart.filter(i=>i.id!==id); renderCart(); }
+        function removeFromCart(id) { cart = cart.filter(i => i.id !== id); renderCart(); }
         
         function renderCart() {
-            const c=document.getElementById('cart-items'), badge=document.getElementById('cart-count'), tot=document.getElementById('cart-total'), btn=document.getElementById('checkout-btn');
-            let t=0;
-            if(cart.length===0) { 
-                c.innerHTML='<div class="text-center text-gray-600 mt-16"><svg class="w-16 h-16 mx-auto mb-4 text-[#2A2A2A]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" /></svg><p class="text-base font-medium text-gray-500">El carrito está vacío</p><p class="text-xs mt-1 text-gray-600">Agregá tu camiseta para comenzar</p></div>'; 
-                badge.classList.add('hidden'); btn.disabled=true; 
+            const c = document.getElementById('cart-items'), badge = document.getElementById('cart-count'), tot = document.getElementById('cart-total'), btn = document.getElementById('checkout-btn');
+            let t = 0;
+            if (cart.length === 0) { 
+                c.innerHTML = '<div class="text-center text-gray-600 mt-16"><svg class="w-16 h-16 mx-auto mb-4 text-[#2A2A2A]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" /></svg><p class="text-base font-medium text-gray-500">El carrito está vacío</p><p class="text-xs mt-1 text-gray-600">Agregá tu camiseta para comenzar</p></div>'; 
+                badge.classList.add('hidden'); btn.disabled = true; 
             } else {
-                badge.textContent=cart.length; badge.classList.remove('hidden'); btn.disabled=false; c.innerHTML='';
-                cart.forEach(i=>{ 
-                    t+=i.price; 
-                    c.innerHTML+=`<div class="bg-black/30 border border-[#2A2A2A] rounded-xl p-4"><div class="flex justify-between items-start"><div class="flex-1 min-w-0"><h4 class="font-cinzel font-bold text-sm text-[#F5B731] truncate">${i.product}</h4><div class="mt-2 space-y-1"><p class="text-xs text-gray-400">👤 ${i.customer}</p><p class="text-xs text-gray-400">📏 Talle: ${i.size} · 🛡️ ${i.section}</p><p class="text-xs text-gray-400">🔢 Nº ${i.number} · ✍️ "${i.customName}"</p></div><p class="text-sm font-bold text-[#F5B731] mt-2">$${i.price.toLocaleString('es-AR')}</p></div><button onclick="removeFromCart(${i.id})" class="text-gray-600 hover:text-red-400 ml-3 p-1">🗑️</button></div></div>`; 
+                badge.textContent = cart.length; badge.classList.remove('hidden'); btn.disabled = false; c.innerHTML = '';
+                cart.forEach(i => { 
+                    t += i.price; 
+                    c.innerHTML += `<div class="bg-black/30 border border-[#2A2A2A] rounded-xl p-4"><div class="flex justify-between items-start"><div class="flex-1 min-w-0"><h4 class="font-cinzel font-bold text-sm text-[#F5B731] truncate">${i.product}</h4><div class="mt-2 space-y-1"><p class="text-xs text-gray-400">👤 ${i.customer}</p><p class="text-xs text-gray-400">📏 Talle: ${i.size} · 🛡️ ${i.section}</p><p class="text-xs text-gray-400">🔢 Nº ${i.number} · ✍️ "${i.customName}"</p></div><p class="text-sm font-bold text-[#F5B731] mt-2">$${i.price.toLocaleString('es-AR')}</p></div><button onclick="removeFromCart(${i.id})" class="text-gray-600 hover:text-red-400 ml-3 p-1">🗑️</button></div></div>`; 
                 });
             }
-            tot.textContent=`$${t.toLocaleString('es-AR')}`;
+            tot.textContent = `$${t.toLocaleString('es-AR')}`;
         }
 
-        // 💳 Checkout & WhatsApp
+        // 💳 Checkout & WhatsApp - CON REINTENTOS
         async function sendWhatsAppOrder() {
-            if(cart.length===0) return;
-            showToast("Procesando pedido...");
-            
-            for(const item of cart) {
-                const recordData = {
-                    action: 'purchase',
-                    cliente: item.customer,
-                    email: item.email || '',
-                    producto: item.product,
-                    talle: item.size,
-                    seccion: item.section,
-                    numero: item.number,
-                    nombreEstampado: item.customName,
-                    total: item.price,
-                    metodo: selectedPayment === 'installments' ? '2 Pagos' : '1 Pago'
-                };
+            if (cart.length === 0) return;
+
+            const btn = document.querySelector('#checkout-modal .bg-green-600');
+            const originalText = btn.innerHTML;
+            btn.disabled = true;
+            btn.innerHTML = '⏳ Enviando registro...';
+
+            let success = false;
+            let attempts = 0;
+            const maxAttempts = 3;
+
+            while (attempts < maxAttempts && !success) {
+                attempts++;
                 try {
-                    await fetch(SHEET_SCRIPT_URL, { method: 'POST', mode: 'no-cors', headers: {'Content-Type':'application/json'}, body: JSON.stringify(recordData) });
-                } catch (e) { console.error('Error enviando a Sheets:', e); }
+                    const promises = cart.map(item => 
+                        fetch(SHEET_SCRIPT_URL, {
+                            method: 'POST',
+                            mode: 'no-cors',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({
+                                action: 'purchase',
+                                cliente: item.customer,
+                                email: item.email || '',
+                                producto: item.product,
+                                talle: item.size,
+                                seccion: item.section,
+                                numero: item.number,
+                                nombreEstampado: item.customName,
+                                total: item.price,
+                                metodo: selectedPayment === 'installments' ? '2 Pagos' : '1 Pago'
+                            })
+                        }).then(() => true)
+                    );
+
+                    await Promise.all(promises);
+                    success = true;
+                } catch (e) {
+                    console.warn(`Intento ${attempts} fallido:`, e);
+                    if (attempts < maxAttempts) await new Promise(r => setTimeout(r, 1500 * attempts));
+                }
             }
 
+            if (!success) {
+                alert('⚠️ No pudimos registrar el pedido automáticamente. Por favor, envianos los datos por WhatsApp manualmente.');
+            } else {
+                showToast('✅ Pedido registrado correctamente');
+            }
+
+            // Preparamos mensaje de WhatsApp (siempre se abre, registrado o no)
             let msg = "¡Hola Ruca del Valle! Quiero confirmar mi pedido:%0A%0A";
-            cart.forEach((i,idx)=>{
-                msg+=`*${idx+1}. ${i.product}*%0A👤 ${i.customer}%0A📏 ${i.size} | 🛡️ ${i.section}%0A🔢 ${i.number} | ✍️ ${i.customName}%0A💰 $${i.price.toLocaleString('es-AR')}%0A%0A`;
+            cart.forEach((i, idx) => {
+                msg += `*${idx + 1}. ${i.product}*%0A👤 ${i.customer}%0A📏 ${i.size} | 🛡️ ${i.section}%0A🔢 ${i.number} | ✍️ ${i.customName}%0A💰 $${i.price.toLocaleString('es-AR')}%0A%0A`;
             });
-            const total = cart.reduce((s,i)=>s+i.price,0);
-            msg+=`--------------------------%0A💵 *TOTAL: $${total.toLocaleString('es-AR')}*%0A💳 Método: ${selectedPayment==='installments'?'2 Pagos (Mitad ahora)':'Pago Total'}%0A--------------------------%0A%0AAdjunto comprobante.`;
-            
+            const total = cart.reduce((s, i) => s + i.price, 0);
+            msg += `--------------------------%0A💵 *TOTAL: $${total.toLocaleString('es-AR')}*%0A💳 Método: ${selectedPayment === 'installments' ? '2 Pagos (Mitad ahora)' : 'Pago Total'}%0A--------------------------%0A%0AAdjunto comprobante.`;
+
             window.open(`https://wa.me/3834565209?text=${msg}`, '_blank');
-            cart=[]; renderCart(); closeCheckoutModal();
+            cart = [];
+            renderCart();
+            closeCheckoutModal();
+            btn.disabled = false;
+            btn.innerHTML = originalText;
         }
 
         // ⭐ Reviews
@@ -495,21 +601,21 @@
                 const container = document.getElementById('reviews-container');
                 container.innerHTML = reviews.length ? '' : '<p class="text-gray-500 text-center py-4">Sé el primero en opinar.</p>';
                 reviews.reverse().forEach(r => {
-                    const stars = '★'.repeat(r.rating) + '☆'.repeat(5-r.rating);
+                    const stars = '★'.repeat(r.rating) + '☆'.repeat(5 - r.rating);
                     const date = new Date(r.date).toLocaleDateString('es-AR');
                     container.innerHTML += `<div class="bg-[#1A1A1A] p-4 rounded-lg border border-[#2A2A2A]"><div class="flex justify-between items-center mb-2"><span class="font-bold text-white">${r.name}</span><span class="text-[#F5B731] text-sm">${stars}</span></div><p class="text-gray-400 text-sm">${r.comment}</p><p class="text-gray-600 text-xs mt-2">${date}</p></div>`;
                 });
-            } catch(e){ console.error("Error cargando reseñas", e); }
+            } catch (e) { console.error("Error cargando reseñas", e); }
         }
 
         async function submitReview() {
             const name = document.getElementById('review-name').value.trim();
             const comment = document.getElementById('review-comment').value.trim();
-            if(!name || !selectedRating || !comment) return alert('Completá nombre, calificación y comentario.');
-            await fetch(SHEET_SCRIPT_URL, { method: 'POST', mode: 'no-cors', headers: {'Content-Type':'application/json'}, body: JSON.stringify({action:'review', name, rating:selectedRating, comment}) });
+            if (!name || !selectedRating || !comment) return alert('Completá nombre, calificación y comentario.');
+            await fetch(SHEET_SCRIPT_URL, { method: 'POST', mode: 'no-cors', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({action: 'review', name, rating: selectedRating, comment}) });
             showToast('¡Gracias! Tu opinión se publicará en breve.');
-            document.getElementById('review-name').value=''; document.getElementById('review-comment').value='';
-            selectedRating=0; document.querySelectorAll('#star-selector span').forEach(s=>s.classList.remove('active'));
+            document.getElementById('review-name').value = ''; document.getElementById('review-comment').value = '';
+            selectedRating = 0; document.querySelectorAll('#star-selector span').forEach(s => s.classList.remove('active'));
             loadReviews();
         }
 
