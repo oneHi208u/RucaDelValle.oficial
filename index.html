@@ -384,6 +384,28 @@
             document.getElementById('section-select').value = '';
             document.getElementById('number-error').classList.add('hidden');
         }
+        
+        // 🎯 Maneja el clic del botón principal según la tanda
+function handleMainCTA() {
+    if (currentProduct === '1ra') {
+        // 1ra Tanda: Redirige directo a WhatsApp para pagar 2da cuota
+        const msg = `¡Hola Ruca del Valle! 👋%0A%0A` +
+            `Quiero pagar la *2da Cuota* de mi pedido de la 1ra Tanda.%0A%0A` +
+            `📋 *Datos de mi compra:*%0A` +
+            `• Nombre: %0A` +
+            `• Sección: %0A` +
+            `• Número: %0A` +
+            `• Talle: %0A%0A` +
+            `💰 Monto a pagar: $17.500%0A%0A` +
+            `Adjunto comprobante de transferencia. ¡Gracias!`;
+        
+        window.open(`https://wa.me/3834565209?text=${msg}`, '_blank');
+        showToast('✅ Redirigiendo a WhatsApp...');
+    } else {
+        // 2da Tanda: Abre el formulario normal de compra
+        openProductModal();
+    }
+}
 
         async function openProductModal() { 
             document.getElementById('product-modal').classList.remove('hidden'); 
