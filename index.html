@@ -73,7 +73,7 @@
     <!-- Toast Notification -->
     <div id="toast" class="fixed top-4 right-4 toast-gold px-6 py-3 rounded-lg shadow-2xl transform translate-x-full transition-transform duration-300 z-[100] flex items-center gap-2 font-semibold text-sm">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
-        <span id="toast-msg">¡Producto agregado al carrito!</span>
+        <span id="toast-msg">¡Acción completada!</span>
     </div>
 
     <!-- Header -->
@@ -139,7 +139,6 @@
             <div class="section-divider w-20 mx-auto"></div>
             <p class="text-gray-500 mt-4 text-sm" id="product-desc">Personalizable · Ideal para Actividad Física · Edición limitada</p>
             
-            <!-- Selector de Producto -->
             <div class="product-toggle">
                 <button onclick="selectProduct('1ra')" id="btn-prod-1ra" class="product-btn active">1ra Tanda</button>
                 <button onclick="selectProduct('2da')" id="btn-prod-2da" class="product-btn">2da Tanda</button>
@@ -150,7 +149,6 @@
         <div class="max-w-4xl mx-auto">
             <div class="card-dark rounded-2xl overflow-hidden">
                 <div class="grid md:grid-cols-2">
-                    <!-- Imagen con Toggle -->
                     <div class="relative h-80 sm:h-96 md:h-full min-h-[320px] overflow-hidden flex flex-col">
                         <div class="relative flex-1 overflow-hidden bg-[#1E1E1E]">
                             <img id="shirt-image" src="img/camiseta-frontal.jpg" alt="Camiseta" class="w-full h-full object-cover transition-opacity duration-500">
@@ -165,12 +163,10 @@
                         </div>
                     </div>
                     
-                    <!-- Info del Producto -->
                     <div class="p-6 sm:p-8 flex flex-col justify-center">
                         <h4 class="font-cinzel text-xl sm:text-2xl font-bold text-white mb-2">Camiseta Oficial Ruca del Valle</h4>
                         <p class="text-gray-400 text-sm leading-relaxed mb-6">Camiseta personalizada con estampado de tu sección. Elegí tu número único y el nombre que querás que lleve.</p>
                         
-                        <!-- Toggle de modo de pago (solo para 1ra tanda) -->
                         <div id="payment-mode-container" class="mb-4">
                             <div class="payment-mode-toggle">
                                 <button onclick="selectPaymentMode('new')" id="btn-mode-new" class="payment-mode-btn active">Nueva Compra</button>
@@ -197,10 +193,70 @@
         </div>
     </main>
 
-    <!-- Video, Gallery, Reviews, Footer (igual que antes) -->
-    <!-- ... [mantené estas secciones igual que en tu versión anterior] ... -->
+    <!-- Video -->
+    <section class="bg-[#121212] border-y border-[#2A2A2A]">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+            <div class="text-center mb-12">
+                <h3 class="font-cinzel text-2xl sm:text-3xl font-bold text-white mb-2 tracking-wider">NUESTROS MODELOS EN ACCIÓN</h3>
+                <div class="section-divider w-20 mx-auto"></div>
+            </div>
+            <div class="max-w-3xl mx-auto">
+                <div class="relative w-full aspect-video rounded-2xl overflow-hidden border border-[#2A2A2A] shadow-2xl bg-black">
+                    <iframe class="absolute inset-0 w-full h-full" src="https://www.youtube.com/embed/TU_ID_DE_YOUTUBE?rel=0&modestbranding=1&playsinline=1" title="Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                </div>
+                <p class="text-center text-xs text-gray-600 mt-3">Si no carga, verificá tu conexión o <a href="https://youtu.be/TU_ID_DE_YOUTUBE" target="_blank" class="text-[#F5B731] underline">miralo directo en YouTube</a>.</p>
+            </div>
+        </div>
+    </section>
 
-    <!-- Product Modal (actualizado) -->
+    <!-- Gallery -->
+    <section class="bg-[#0A0A0A]">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+            <div class="text-center mb-12">
+                <h3 class="font-cinzel text-xl sm:text-2xl font-bold text-white mb-2 tracking-wider">GALERÍA DE FOTOS</h3>
+                <div class="section-divider w-20 mx-auto"></div>
+            </div>
+            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+                <div class="model-card rounded-xl overflow-hidden aspect-[3/4] bg-[#1E1E1E] border border-[#2A2A2A]"><img src="img/modelo-1.jpg" alt="1" class="w-full h-full object-cover"><div class="overlay flex items-end p-4"><p class="text-sm font-semibold text-white">Modelo 1</p></div></div>
+                <div class="model-card rounded-xl overflow-hidden aspect-[3/4] bg-[#1E1E1E] border border-[#2A2A2A]"><img src="img/modelo-2.jpg" alt="2" class="w-full h-full object-cover"><div class="overlay flex items-end p-4"><p class="text-sm font-semibold text-white">Modelo 2</p></div></div>
+                <div class="model-card rounded-xl overflow-hidden aspect-[3/4] bg-[#1E1E1E] border border-[#2A2A2A]"><img src="img/modelo-3.jpg" alt="3" class="w-full h-full object-cover"><div class="overlay flex items-end p-4"><p class="text-sm font-semibold text-white">Modelo 3</p></div></div>
+                <div class="model-card rounded-xl overflow-hidden aspect-[3/4] bg-[#1E1E1E] border border-[#2A2A2A]"><img src="img/modelo-4.jpg" alt="4" class="w-full h-full object-cover"><div class="overlay flex items-end p-4"><p class="text-sm font-semibold text-white">Modelo 4</p></div></div>
+                <div class="model-card rounded-xl overflow-hidden aspect-[3/4] bg-[#1E1E1E] border border-[#2A2A2A]"><img src="img/modelo-5.jpg" alt="5" class="w-full h-full object-cover"><div class="overlay flex items-end p-4"><p class="text-sm font-semibold text-white">Modelo 5</p></div></div>
+                <div class="model-card rounded-xl overflow-hidden aspect-[3/4] bg-[#1E1E1E] border border-[#2A2A2A]"><img src="img/modelo-6.jpg" alt="6" class="w-full h-full object-cover"><div class="overlay flex items-end p-4"><p class="text-sm font-semibold text-white">Modelo 6</p></div></div>
+                <div class="model-card rounded-xl overflow-hidden aspect-[3/4] bg-[#1E1E1E] border border-[#2A2A2A]"><img src="img/modelo-7.jpg" alt="7" class="w-full h-full object-cover"><div class="overlay flex items-end p-4"><p class="text-sm font-semibold text-white">Modelo 7</p></div></div>
+                <div class="model-card rounded-xl overflow-hidden aspect-[3/4] bg-[#1E1E1E] border border-[#2A2A2A]"><img src="img/modelo-8.jpg" alt="8" class="w-full h-full object-cover"><div class="overlay flex items-end p-4"><p class="text-sm font-semibold text-white">Modelo 8</p></div></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reviews -->
+    <section class="bg-[#121212] border-y border-[#2A2A2A] py-16">
+        <div class="max-w-4xl mx-auto px-4">
+            <h3 class="font-cinzel text-2xl font-bold text-white text-center mb-8">💬 Opiniones de Clientes</h3>
+            <div id="reviews-container" class="grid gap-4 mb-10 max-h-96 overflow-y-auto pr-2"></div>
+            <div class="bg-[#1A1A1A] p-6 rounded-xl border border-[#2A2A2A]">
+                <h4 class="text-[#F5B731] font-bold mb-4">Dejá tu opinión</h4>
+                <input type="text" id="review-name" placeholder="Tu nombre" class="input-dark w-full mb-3 rounded-lg px-3 py-2 text-sm">
+                <div class="flex gap-2 mb-3" id="star-selector">
+                    <span class="star-btn text-gray-600" data-val="1">★</span><span class="star-btn text-gray-600" data-val="2">★</span><span class="star-btn text-gray-600" data-val="3">★</span><span class="star-btn text-gray-600" data-val="4">★</span><span class="star-btn text-gray-600" data-val="5">★</span>
+                </div>
+                <textarea id="review-comment" placeholder="Contanos tu experiencia..." class="input-dark w-full mb-3 rounded-lg px-3 py-2 text-sm h-20"></textarea>
+                <button onclick="submitReview()" class="btn-gold w-full py-2 rounded-lg text-sm font-bold">Enviar Opinión</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-[#0A0A0A] border-t border-[#2A2A2A] py-12">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <div class="flex justify-center mb-6"><div class="w-14 h-14 drop-shadow-[0_0_8px_rgba(245,183,49,0.5)]"><img src="img/logo.png" alt="Logo" class="w-full h-full object-contain"></div></div>
+            <p class="font-cinzel text-[#F5B731] text-lg font-bold tracking-widest">RUCA DEL VALLE</p>
+            <p class="text-gray-600 mt-2 text-sm">Remeras Ruca del Valle © 2026 | Hecho con ❤️ y sin comisiones.</p>
+            <p class="mt-4"><a href="https://wa.me/3834565209?text=Hola!%20Tengo%20una%20consulta" class="text-[#F5B731] hover:text-[#FFD54F] underline transition-colors text-sm">¿Dudas? Escribinos por WhatsApp</a></p>
+        </div>
+    </footer>
+
+    <!-- Product Modal -->
     <div id="product-modal" class="fixed inset-0 z-50 hidden overflow-y-auto">
         <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-6 text-center sm:block sm:p-0">
             <div class="fixed inset-0 modal-backdrop transition-opacity" onclick="closeProductModal()"></div>
@@ -221,23 +277,85 @@
                         <div><label class="block text-[10px] font-bold text-[#F5B731] uppercase tracking-widest mb-1.5">Nombre *</label><input type="text" id="cust-name" class="input-dark w-full rounded-lg px-3 py-2.5 text-sm" placeholder="Tu nombre"></div>
                         <div><label class="block text-[10px] font-bold text-[#F5B731] uppercase tracking-widest mb-1.5">Apellido *</label><input type="text" id="cust-lastname" class="input-dark w-full rounded-lg px-3 py-2.5 text-sm" placeholder="Tu apellido"></div>
                     </div>
-                    <div><label class="block text-[10px] font-bold text-[#F5B731] uppercase tracking-widest mb-1.5">Email <span class="text-gray-500 normal-case">(Solo para recordatorios)</span></label><input type="email" id="cust-email" class="input-dark w-full rounded-lg px-3 py-2.5 text-sm" placeholder="Opcional"></div>
                     <div><label class="block text-[10px] font-bold text-[#F5B731] uppercase tracking-widest mb-1.5">Talle *</label><select id="size-select" class="input-dark w-full rounded-lg px-3 py-2.5 text-sm"><option value="S">S</option><option value="M">M</option><option value="L">L</option><option value="XL">XL</option><option value="XXL">XXL</option><option value="XXXL">XXXL</option></select></div>
                     <div><label class="block text-[10px] font-bold text-[#F5B731] uppercase tracking-widest mb-1.5">Sección *</label><select id="section-select" onchange="checkAvailability(this.value)" class="input-dark w-full rounded-lg px-3 py-2.5 text-sm"><option value="">Elegí tu sección...</option><option value="Escuderos">🛡️ Escuderos</option><option value="Templarios">⚔️ Templarios</option><option value="Adalides">🏹 Adalides</option><option value="Herederas">👑 Herederas</option><option value="Caperucitas">🎭 Caperucitas</option><option value="Mayor">🏰 Mayor</option><option value="Milicianos">🏛️ Milicianos</option></select></div>
                     <div><label class="block text-[10px] font-bold text-[#F5B731] uppercase tracking-widest mb-1.5">Número (1-99) *</label><input type="number" id="number-input" min="1" max="99" oninput="validateNumberInput()" class="input-dark w-full rounded-lg px-3 py-2.5 text-sm" placeholder="Ej: 10"><p id="number-error" class="text-red-400 text-xs mt-1 hidden">⚠️ Este número ya está ocupado.</p></div>
                     <div><label class="block text-[10px] font-bold text-[#F5B731] uppercase tracking-widest mb-1.5">Nombre para estampar <span class="text-gray-600 normal-case">(Opcional)</span></label><input type="text" id="custom-shirt-name" maxlength="12" class="input-dark w-full rounded-lg px-3 py-2.5 text-sm uppercase" placeholder="Nombre en la remera"></div>
                 </div>
                 <div class="bg-black/40 px-6 py-4 sm:flex sm:flex-row-reverse gap-3">
-                    <button type="button" id="add-to-cart-btn" onclick="addToCart()" class="w-full sm:w-auto btn-gold px-8 py-3 rounded-xl text-sm font-bold disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:transform-none disabled:hover:shadow-none">Agregar al Carrito</button>
+                    <button type="button" id="add-to-cart-btn" onclick="handleFormSubmit()" class="w-full sm:w-auto btn-gold px-8 py-3 rounded-xl text-sm font-bold disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:transform-none disabled:hover:shadow-none">Agregar al Carrito</button>
                     <button type="button" onclick="closeProductModal()" class="mt-3 sm:mt-0 w-full sm:w-auto btn-outline-gold px-8 py-3 rounded-xl text-sm font-bold">Cancelar</button>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- [Mantené el resto de modales: Size Chart, Cart Sidebar, Checkout Modal igual que antes] -->
+    <!-- Size Chart Modal -->
+    <div id="size-chart-modal" class="fixed inset-0 z-50 hidden overflow-y-auto">
+        <div class="flex items-center justify-center min-h-screen px-4 text-center">
+            <div class="fixed inset-0 modal-backdrop transition-opacity" onclick="toggleSizeChart()"></div>
+            <div class="inline-block bg-[#1A1A1A] rounded-2xl text-left overflow-hidden shadow-xl transform transition-all max-w-md w-full fade-in border border-[#2A2A2A] p-6 relative z-10">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="font-cinzel text-lg font-bold text-[#F5B731]">Tabla de Talles</h3>
+                    <button onclick="toggleSizeChart()" class="text-gray-500 hover:text-white transition-colors"><svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg></button>
+                </div>
+                <div class="section-divider mb-4"></div>
+                <table class="min-w-full"><thead><tr class="border-b border-[#2A2A2A]"><th class="px-4 py-3 text-left text-[10px] font-bold text-[#F5B731] uppercase tracking-widest">Talle</th><th class="px-4 py-3 text-left text-[10px] font-bold text-[#F5B731] uppercase tracking-widest">Ancho (cm)</th><th class="px-4 py-3 text-left text-[10px] font-bold text-[#F5B731] uppercase tracking-widest">Largo (cm)</th></tr></thead><tbody class="divide-y divide-[#2A2A2A]"><tr class="hover:bg-black/30"><td class="px-4 py-3 font-semibold text-white text-sm">S</td><td class="px-4 py-3 text-gray-400 text-sm">48</td><td class="px-4 py-3 text-gray-400 text-sm">68</td></tr><tr class="hover:bg-black/30"><td class="px-4 py-3 font-semibold text-white text-sm">M</td><td class="px-4 py-3 text-gray-400 text-sm">51</td><td class="px-4 py-3 text-gray-400 text-sm">70</td></tr><tr class="hover:bg-black/30"><td class="px-4 py-3 font-semibold text-white text-sm">L</td><td class="px-4 py-3 text-gray-400 text-sm">54</td><td class="px-4 py-3 text-gray-400 text-sm">72</td></tr><tr class="hover:bg-black/30"><td class="px-4 py-3 font-semibold text-white text-sm">XL</td><td class="px-4 py-3 text-gray-400 text-sm">57</td><td class="px-4 py-3 text-gray-400 text-sm">74</td></tr><tr class="hover:bg-black/30"><td class="px-4 py-3 font-semibold text-white text-sm">XXL</td><td class="px-4 py-3 text-gray-400 text-sm">60</td><td class="px-4 py-3 text-gray-400 text-sm">76</td></tr><tr class="hover:bg-black/30"><td class="px-4 py-3 font-semibold text-white text-sm">XXXL</td><td class="px-4 py-3 text-gray-400 text-sm">68</td><td class="px-4 py-3 text-gray-400 text-sm">80</td></tr></tbody></table>
+                <p class="text-[10px] text-gray-600 mt-4 text-center">Medidas aproximadas. Puede variar ±2cm.</p>
+            </div>
+        </div>
+    </div>
 
-    <!-- JAVASCRIPT ACTUALIZADO -->
+    <!-- Cart Sidebar -->
+    <div id="cart-sidebar" class="fixed inset-y-0 right-0 z-50 w-full max-w-md cart-sidebar shadow-2xl transform translate-x-full transition-transform duration-300 ease-in-out">
+        <div class="flex flex-col h-full">
+            <div class="px-6 py-5 bg-black/40 border-b border-[#2A2A2A] flex justify-between items-center">
+                <h2 class="font-cinzel text-lg font-bold text-[#F5B731]">Tu Carrito</h2>
+                <button onclick="toggleCart()" class="text-gray-500 hover:text-white transition-colors"><svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg></button>
+            </div>
+            <div id="cart-items" class="flex-1 overflow-y-auto p-6 space-y-4">
+                <div class="text-center text-gray-600 mt-16"><svg class="w-16 h-16 mx-auto mb-4 text-[#2A2A2A]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" /></svg><p class="text-base font-medium text-gray-500">El carrito está vacío</p><p class="text-xs mt-1 text-gray-600">Agregá tu camiseta para comenzar</p></div>
+            </div>
+            <div class="border-t border-[#2A2A2A] p-6 bg-black/40">
+                <div class="flex justify-between text-base font-bold text-[#F5B731] mb-4"><p>Total</p><p id="cart-total">$0</p></div>
+                <button onclick="openCheckoutModal()" id="checkout-btn" disabled class="w-full flex justify-center items-center px-6 py-3 border border-transparent rounded-xl shadow-sm text-sm font-bold text-black bg-[#F5B731] hover:bg-[#FFD54F] disabled:opacity-40 disabled:cursor-not-allowed transition-all uppercase tracking-widest">Continuar al Pago</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Checkout Modal -->
+    <div id="checkout-modal" class="fixed inset-0 z-[60] hidden overflow-y-auto">
+        <div class="flex items-center justify-center min-h-screen px-4 text-center">
+            <div class="fixed inset-0 modal-backdrop transition-opacity" onclick="closeCheckoutModal()"></div>
+            <div class="inline-block bg-[#1A1A1A] rounded-2xl text-left overflow-hidden shadow-xl transform transition-all max-w-lg w-full fade-in border border-[#2A2A2A] relative z-10">
+                <div id="payment-step" class="p-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="font-cinzel text-lg font-bold text-[#F5B731]">Método de Pago</h3>
+                        <button onclick="closeCheckoutModal()" class="text-gray-500 hover:text-white transition-colors"><svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg></button>
+                    </div>
+                    <div class="section-divider mb-6"></div>
+                    <p class="text-sm text-gray-500 mb-4">Elegí cómo querés abonar:</p>
+                    <div class="space-y-3">
+                        <div onclick="selectPayment('full')" id="payment-full" class="payment-option selected flex items-center p-4 rounded-xl bg-black/30"><input type="radio" name="payment-method" value="full" class="h-4 w-4 text-[#F5B731] focus:ring-[#F5B731] border-gray-600 bg-[#1E1E1E]" checked><div class="ml-3"><span class="block text-sm font-bold text-white">1 Pago</span><span class="block text-xs text-gray-500">Pagás el total ahora por transferencia o QR</span></div></div>
+                        <div onclick="selectPayment('installments')" id="payment-installments" class="payment-option flex items-center p-4 rounded-xl bg-black/30"><input type="radio" name="payment-method" value="installments" class="h-4 w-4 text-[#F5B731] focus:ring-[#F5B731] border-gray-600 bg-[#1E1E1E]"><div class="ml-3"><span class="block text-sm font-bold text-white">2 Pagos</span><span class="block text-xs text-gray-500">Pagá la mitad ahora y el siguiente mes la otra mitad</span></div></div>
+                    </div>
+                    <div id="bank-details" class="mt-6 bg-black/30 p-5 rounded-xl border border-[#2A2A2A]">
+                        <h4 class="font-cinzel font-bold text-[#F5B731] mb-3 text-[10px] uppercase tracking-widest">Datos para Transferir</h4>
+                        <p class="text-3xl font-bold text-[#F5B731] mb-4" id="transfer-amount">$0</p>
+                        <div class="mb-4"><p class="text-[10px] text-gray-600 uppercase tracking-widest mb-1">Alias / CBU</p><div class="flex items-center gap-2"><code class="bg-black px-3 py-2.5 rounded-lg border border-[#2A2A2A] text-sm flex-1 select-all text-[#F5B731] font-mono">camisetas.rdv</code><button onclick="copyAlias()" class="text-xs text-[#F5B731] hover:text-[#FFD54F] font-semibold px-3 py-2.5 border border-[#F5B731]/30 rounded-lg hover:bg-[#F5B731]/10 transition-all">Copiar</button></div></div>
+                        <div class="mb-4 text-center"><p class="text-[10px] text-gray-600 uppercase tracking-widest mb-2">O escaneá el QR para pagar</p><div class="w-36 h-36 bg-black mx-auto flex items-center justify-center rounded-xl border border-[#2A2A2A] overflow-hidden"><img src="img/qr.png" alt="QR para pagar" class="w-full h-full object-contain"><span class="text-xs text-gray-600 absolute">Agregá img/qr.png</span></div></div>
+                        <div class="bg-[#F5B731]/10 border-l-4 border-[#F5B731] p-4 mb-4 rounded-r"><p class="text-sm text-[#F5B731]/80">⚠️ Una vez que realizaste el pago, tocá el botón de abajo para enviarnos el comprobante por WhatsApp e indicarnos el <strong>Nombre Personalizado</strong> en tu Camiseta.</p></div>
+                    </div>
+                    <div class="mt-6 flex gap-3">
+                        <button onclick="closeCheckoutModal()" class="flex-1 bg-black/50 text-gray-500 py-3 rounded-xl hover:bg-black/70 border border-[#2A2A2A] font-semibold text-sm uppercase tracking-widest transition-all">Volver</button>
+                        <button onclick="sendWhatsAppOrder()" class="flex-1 bg-green-600 text-white py-3 rounded-xl hover:bg-green-700 flex justify-center items-center gap-2 font-bold text-sm uppercase tracking-widest transition-all"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>Ya Pagué</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT CORREGIDO Y ROBUSTO -->
     <script>
         // ⚙️ CONFIGURACIÓN
         const SHEET_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxxKCjrhAbl9wbjbtyn5-hPyNZfQHksMFawubZWEfJhmyB43SFJ9cqb1CEz6jYBTzzjXw/exec';
@@ -245,48 +363,40 @@
         let cart = [];
         let selectedPayment = 'full';
         let occupiedNumbers = {};
-        let currentProduct = '1ra'; // '1ra' o '2da'
-        let currentPaymentMode = 'new'; // 'new' o 'second' (solo para 1ra tanda)
+        let currentProduct = '1ra';
+        let currentPaymentMode = 'new';
+        let isProcessing = false; // Evita clics múltiples
         
-        // Precios y configuración
         const CONFIG = {
             '1ra': {
-                new: { price: 35000, label: '1ra Tanda - Nueva Compra', cta: 'COMPRAR AHORA' },
-                second: { price: 17500, label: '1ra Tanda - 2da Cuota', cta: 'PAGAR 2DA CUOTA' }
+                new: { price: 35000, label: '1ra Tanda - Nueva Compra', cta: 'Agregar al Carrito' },
+                second: { price: 17500, label: '1ra Tanda - 2da Cuota', cta: 'Enviar por WhatsApp' }
             },
             '2da': {
-                new: { price: 35000, label: '2da Tanda - Nueva Compra', cta: 'COMPRAR AHORA' }
+                new: { price: 35000, label: '2da Tanda - Nueva Compra', cta: 'Agregar al Carrito' }
             }
         };
 
         // 🖼️ UI Helpers
         function selectProduct(product) {
             currentProduct = product;
-            
-            // Actualizar UI del toggle de producto
             document.getElementById('btn-prod-1ra').classList.toggle('active', product === '1ra');
             document.getElementById('btn-prod-2da').classList.toggle('active', product === '2da');
-            
-            // Actualizar badges y textos
             document.getElementById('product-badge').textContent = product === '1ra' ? '1ra Tanda' : '2da Tanda';
             document.getElementById('modal-product').textContent = product === '1ra' ? '1ra Tanda' : '2da Tanda';
             document.getElementById('product-desc').textContent = product === '1ra' 
                 ? 'Personalizable · Ideal para Actividad Física · Edición limitada'
                 : 'Segunda tanda · Números independientes pero bloqueados por 1ra tanda';
-            document.getElementById('product-note').textContent = 'Los números elegidos en la 1ra tanda quedan bloqueados para la 2da tanda';
             
-            // Mostrar/ocultar toggle de modo de pago (solo para 1ra tanda)
             const paymentContainer = document.getElementById('payment-mode-container');
             if (product === '1ra') {
                 paymentContainer.style.display = 'block';
-                selectPaymentMode('new'); // Reset a nueva compra
+                selectPaymentMode('new');
             } else {
                 paymentContainer.style.display = 'none';
                 currentPaymentMode = 'new';
                 updateProductUI();
             }
-            
-            // Resetear validación de números
             occupiedNumbers = {};
             document.getElementById('section-select').value = '';
             document.getElementById('number-error').classList.add('hidden');
@@ -294,26 +404,20 @@
 
         function selectPaymentMode(mode) {
             currentPaymentMode = mode;
-            
-            // Actualizar UI del toggle de modo
             document.getElementById('btn-mode-new').classList.toggle('active', mode === 'new');
             document.getElementById('btn-mode-second').classList.toggle('active', mode === 'second');
             document.getElementById('modal-mode').textContent = mode === 'new' ? 'Nueva Compra' : 'Pagar 2da Cuota';
-            
             updateProductUI();
         }
 
         function updateProductUI() {
             const config = CONFIG[currentProduct][currentPaymentMode];
+            document.getElementById('price-display').textContent = `$${config.price.toLocaleString('es-AR')}`;
+            document.getElementById('price-note').classList.toggle('hidden', currentPaymentMode !== 'second');
             
-            // Actualizar precio y botón
-            const priceDisplay = document.getElementById('price-display');
-            const priceNote = document.getElementById('price-note');
-            const mainCta = document.getElementById('main-cta');
-            
-            priceDisplay.textContent = `$${config.price.toLocaleString('es-AR')}`;
-            priceNote.classList.toggle('hidden', currentPaymentMode !== 'second');
-            mainCta.textContent = config.cta;
+            const ctaBtn = document.getElementById('add-to-cart-btn');
+            ctaBtn.textContent = config.cta;
+            ctaBtn.onclick = handleFormSubmit; // Actualiza el evento
         }
 
         async function openProductModal() { 
@@ -322,7 +426,10 @@
             await loadSectionSalesCount(); 
         }
         function closeProductModal() { document.getElementById('product-modal').classList.add('hidden'); }
-        function toggleCart() { document.getElementById('cart-sidebar').classList.toggle('translate-x-full'); }
+        function toggleCart() { 
+            const sidebar = document.getElementById('cart-sidebar');
+            if(sidebar) sidebar.classList.toggle('translate-x-full'); 
+        }
         function openCheckoutModal() { toggleCart(); document.getElementById('checkout-modal').classList.remove('hidden'); updateTransferAmount(); }
         function closeCheckoutModal() { document.getElementById('checkout-modal').classList.add('hidden'); }
         function toggleSizeChart() { document.getElementById('size-chart-modal').classList.toggle('hidden'); }
@@ -343,9 +450,7 @@
         }
 
         function selectPayment(m) {
-            // Para modo "2da cuota", forzar 1 pago
             if (currentPaymentMode === 'second') m = 'full';
-            
             selectedPayment = m;
             document.getElementById('payment-full').classList.toggle('selected', m==='full');
             document.getElementById('payment-installments').classList.toggle('selected', m==='installments');
@@ -361,54 +466,40 @@
             document.getElementById('transfer-amount').innerHTML = `<span class="text-sm font-normal text-gray-500 block">${label}</span>$${d.toLocaleString('es-AR')}`;
         }
 
-        // 📊 Contador de ventas por sección (COMPARTIDO ENTRE PRODUCTOS)
+        // 📊 Contador de ventas
         async function loadSectionSalesCount() {
             const sections = ["Escuderos", "Templarios", "Adalides", "Herederas", "Caperucitas", "Mayor", "Milicianos"];
             const select = document.getElementById('section-select');
             
             for (const sec of sections) {
                 try {
-                    // Consultar disponibilidad SIN filtro de producto (números compartidos)
                     const res = await fetch(`${SHEET_SCRIPT_URL}?action=availability&section=${sec}`);
                     const usedNumbers = await res.json();
                     occupiedNumbers[sec] = usedNumbers.map(n => parseInt(n));
-                    
                     let option = select.querySelector(`option[value="${sec}"]`);
-                    if (option) {
-                        let baseName = option.text.split('(')[0].trim();
-                        option.text = `${baseName} (Vendidas: ${usedNumbers.length})`;
-                    }
-                } catch (e) { console.error(`Error cargando ventas de ${sec}`, e); }
+                    if (option) option.text = `${option.text.split('(')[0].trim()} (Vendidas: ${usedNumbers.length})`;
+                } catch (e) { console.error(`Error cargando ${sec}:`, e); }
             }
         }
 
-        // 🔢 Number Validation - COMPARTIDO ENTRE PRODUCTOS
         async function checkAvailability(section) {
             if(!section) return;
             const btn = document.getElementById('add-to-cart-btn');
             const numInput = document.getElementById('number-input');
-            const originalText = btn.innerText;
-            
-            btn.disabled = true; 
-            btn.innerText = "Verificando stock...";
-            numInput.disabled = true;
-
+            btn.disabled = true; btn.textContent = "Verificando..."; numInput.disabled = true;
             try {
                 const res = await fetch(`${SHEET_SCRIPT_URL}?action=availability&section=${section}`);
                 if (!res.ok) throw new Error('Error de red');
-                const data = await res.json();
-                
-                occupiedNumbers[section] = data.map(n => parseInt(n));
+                occupiedNumbers[section] = (await res.json()).map(n => parseInt(n));
                 validateNumberInput();
             } catch (e) {
                 console.error("Error verificando sección:", e);
                 occupiedNumbers[section] = [];
-                document.getElementById('number-error').textContent = "⚠️ Error de conexión. Reintentá.";
+                document.getElementById('number-error').textContent = "⚠️ Error de conexión.";
                 document.getElementById('number-error').classList.remove('hidden');
-                btn.disabled = true;
             } finally {
                 btn.disabled = false;
-                btn.innerText = originalText;
+                btn.textContent = CONFIG[currentProduct][currentPaymentMode].cta;
                 numInput.disabled = false;
                 numInput.focus();
             }
@@ -420,213 +511,133 @@
             const err = document.getElementById('number-error');
             const btn = document.getElementById('add-to-cart-btn');
 
-            if (!sec || !num || num < 1 || num > 99) {
-                err.classList.add('hidden');
-                btn.disabled = false;
-                return;
-            }
-
-            // Validación global: Planilla + Carrito (sin importar producto)
+            if (!sec || !num || num < 1 || num > 99) { err.classList.add('hidden'); btn.disabled = false; return; }
             const isOccupied = (occupiedNumbers[sec] || []).includes(num);
             const inCart = cart.some(i => i.section === sec && i.number === num);
-
             if (isOccupied || inCart) {
                 err.textContent = `⚠️ El ${num} ya está ocupado en ${sec}.`;
-                err.classList.remove('hidden');
-                btn.disabled = true;
-            } else {
-                err.classList.add('hidden');
-                btn.disabled = false;
-            }
+                err.classList.remove('hidden'); btn.disabled = true;
+            } else { err.classList.add('hidden'); btn.disabled = false; }
         }
 
-        // 🔒 BARRERA FINAL: Verificación en tiempo real (compartida)
         async function finalNumberCheck(section, number) {
             try {
                 const res = await fetch(`${SHEET_SCRIPT_URL}?action=availability&section=${section}`);
-                const freshData = await res.json();
-                const freshOccupied = freshData.map(n => parseInt(n));
-                
-                if (freshOccupied.includes(number)) {
-                    alert(`⛔ El número ${number} en ${section} ya está tomado. Elegí otro.`);
-                    return false;
+                const fresh = (await res.json()).map(n => parseInt(n));
+                if (fresh.includes(number)) { alert(`⛔ El número ${number} ya está tomado.`); return false; }
+                return true;
+            } catch (e) { console.warn("Verificación final falló:", e); return true; }
+        }
+
+        // 🔀 CONTROLADOR PRINCIPAL DEL FORMULARIO
+        async function handleFormSubmit() {
+            if (isProcessing) return;
+            isProcessing = true;
+            const btn = document.getElementById('add-to-cart-btn');
+            const originalText = btn.textContent;
+            btn.disabled = true; btn.textContent = "Procesando...";
+
+            try {
+                const n = document.getElementById('cust-name').value.trim();
+                const l = document.getElementById('cust-lastname').value.trim();
+                const s = document.getElementById('size-select').value;
+                const sec = document.getElementById('section-select').value;
+                const num = parseInt(document.getElementById('number-input').value);
+                const cn = document.getElementById('custom-shirt-name').value.trim().toUpperCase();
+
+                if (!n || !l) throw new Error("Nombre y apellido obligatorios");
+                if (!sec) throw new Error("Seleccioná una sección");
+                if (!num || num < 1 || num > 99) throw new Error("Ingresá un número válido (1-99)");
+
+                const isValid = await finalNumberCheck(sec, num);
+                if (!isValid) return;
+
+                const config = CONFIG[currentProduct][currentPaymentMode];
+                const item = { id: Date.now(), product: "Camiseta Oficial Ruca del Valle", productType: currentProduct, paymentMode: currentPaymentMode, price: config.price, customer: `${n} ${l}`, size: s, section: sec, number: num, customName: cn || n.toUpperCase() };
+
+                if (currentPaymentMode === 'second') {
+                    // 📲 REDIRECT DIRECTO A WHATSAPP PARA 2DA CUOTA
+                    await sendToWhatsAppDirectly(item);
+                } else {
+                    cart.push(item);
+                    renderCart();
+                    showToast("¡Agregado al carrito!");
+                    closeProductModal();
                 }
-                return true;
-            } catch (e) {
-                console.warn("No se pudo verificar disponibilidad final:", e);
-                return true;
+            } catch (err) {
+                alert(err.message);
+                console.error(err);
+            } finally {
+                btn.disabled = false;
+                btn.textContent = originalText;
+                isProcessing = false;
             }
         }
 
-        // 🛒 Cart Logic - CON PRODUCTO Y MODO
-        async function addToCart() {
-            const n = document.getElementById('cust-name').value.trim();
-            const l = document.getElementById('cust-lastname').value.trim();
-            const s = document.getElementById('size-select').value;
-            const sec = document.getElementById('section-select').value;
-            const num = parseInt(document.getElementById('number-input').value);
-            const cn = document.getElementById('custom-shirt-name').value.trim().toUpperCase();
-
-            if (!n || !l) return alert("Nombre y apellido obligatorios");
-            if (!sec) return alert("Seleccioná una sección");
-            if (!num || num < 1 || num > 99) return alert("Ingresá un número válido (1-99)");
-
-            // 🔒 BARRERA FINAL: Verificación en tiempo real (compartida)
-            const isValid = await finalNumberCheck(sec, num);
-            if (!isValid) return;
+        async function sendToWhatsAppDirectly(item) {
+            const msg = `¡Hola Ruca del Valle! Quiero pagar la *2da Cuota* de mi pedido:%0A%0A` +
+                `👤 Cliente: ${item.customer}%0A` +
+                `📏 Talle: ${item.size}%0A` +
+                `🛡️ Sección: ${item.section}%0A` +
+                `🔢 Número: ${item.number}%0A` +
+                `✍️ Estampado: "${item.customName}"%0A` +
+                `💰 Monto 2da Cuota: $${item.price.toLocaleString('es-AR')}%0A%0A` +
+                `Adjunto comprobante de transferencia. ¡Gracias!`;
             
-            const config = CONFIG[currentProduct][currentPaymentMode];
-            
-            const item = {
-                id: Date.now(),
-                product: "Camiseta Oficial Ruca del Valle",
-                productType: currentProduct, // '1ra' o '2da'
-                paymentMode: currentPaymentMode, // 'new' o 'second'
-                price: config.price,
-                customer: `${n} ${l}`,
-                email: document.getElementById('cust-email').value,
-                size: s,
-                section: sec,
-                number: num,
-                customName: cn || n.toUpperCase()
-            };
-            
-            cart.push(item);
-            renderCart();
-            showToast("¡Agregado al carrito!");
+            window.open(`https://wa.me/3834565209?text=${msg}`, '_blank');
+            showToast("✅ Redirigiendo a WhatsApp...");
             closeProductModal();
         }
-        
+
         function removeFromCart(id) { cart = cart.filter(i => i.id !== id); renderCart(); }
         
         function renderCart() {
             const c = document.getElementById('cart-items'), badge = document.getElementById('cart-count'), tot = document.getElementById('cart-total'), btn = document.getElementById('checkout-btn');
             let t = 0;
             if (cart.length === 0) { 
-                c.innerHTML = '<div class="text-center text-gray-600 mt-16"><svg class="w-16 h-16 mx-auto mb-4 text-[#2A2A2A]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" /></svg><p class="text-base font-medium text-gray-500">El carrito está vacío</p><p class="text-xs mt-1 text-gray-600">Agregá tu camiseta para comenzar</p></div>'; 
+                c.innerHTML = '<div class="text-center text-gray-600 mt-16"><p class="text-base font-medium text-gray-500">El carrito está vacío</p></div>'; 
                 badge.classList.add('hidden'); btn.disabled = true; 
             } else {
                 badge.textContent = cart.length; badge.classList.remove('hidden'); btn.disabled = false; c.innerHTML = '';
                 cart.forEach(i => { 
                     t += i.price; 
-                    const modeText = i.paymentMode === 'second' ? ' (2da Cuota)' : '';
-                    c.innerHTML += `<div class="bg-black/30 border border-[#2A2A2A] rounded-xl p-4"><div class="flex justify-between items-start"><div class="flex-1 min-w-0"><h4 class="font-cinzel font-bold text-sm text-[#F5B731] truncate">${i.product} ${i.productType}${modeText}</h4><div class="mt-2 space-y-1"><p class="text-xs text-gray-400">👤 ${i.customer}</p><p class="text-xs text-gray-400">📏 Talle: ${i.size} · 🛡️ ${i.section}</p><p class="text-xs text-gray-400">🔢 Nº ${i.number} · ✍️ "${i.customName}"</p></div><p class="text-sm font-bold text-[#F5B731] mt-2">$${i.price.toLocaleString('es-AR')}</p></div><button onclick="removeFromCart(${i.id})" class="text-gray-600 hover:text-red-400 ml-3 p-1">🗑️</button></div></div>`; 
+                    c.innerHTML += `<div class="bg-black/30 border border-[#2A2A2A] rounded-xl p-4 mb-3"><div class="flex justify-between items-start"><div class="flex-1 min-w-0"><h4 class="font-cinzel font-bold text-sm text-[#F5B731] truncate">${i.product} ${i.productType}</h4><div class="mt-2 space-y-1"><p class="text-xs text-gray-400">👤 ${i.customer}</p><p class="text-xs text-gray-400">📏 Talle: ${i.size} · 🛡️ ${i.section}</p><p class="text-xs text-gray-400">🔢 Nº ${i.number} · ✍️ "${i.customName}"</p></div><p class="text-sm font-bold text-[#F5B731] mt-2">$${i.price.toLocaleString('es-AR')}</p></div><button onclick="removeFromCart(${i.id})" class="text-gray-600 hover:text-red-400 ml-3 p-1">✕</button></div></div>`; 
                 });
             }
             tot.textContent = `$${t.toLocaleString('es-AR')}`;
         }
 
-        // 💳 Checkout & WhatsApp - CON PRODUCTO Y MODO
         async function sendWhatsAppOrder() {
             if (cart.length === 0) return;
-
             const btn = document.querySelector('#checkout-modal .bg-green-600');
-            const originalText = btn.innerHTML;
-            btn.disabled = true;
-            btn.innerHTML = '⏳ Enviando registro...';
-
-            let success = false;
-            let attempts = 0;
-            const maxAttempts = 3;
-
-            while (attempts < maxAttempts && !success) {
+            btn.disabled = true; btn.innerHTML = '⏳ Enviando...';
+            let success = false, attempts = 0;
+            while (attempts < 3 && !success) {
                 attempts++;
                 try {
-                    const promises = cart.map(item => 
-                        fetch(SHEET_SCRIPT_URL, {
-                            method: 'POST',
-                            mode: 'no-cors',
-                            headers: { 'Content-Type': 'application/json' },
-                            body: JSON.stringify({
-                                action: 'purchase',
-                                cliente: item.customer,
-                                email: item.email || '',
-                                producto: item.product,
-                                productoTipo: item.productType, // '1ra' o '2da'
-                                modoPago: item.paymentMode, // 'new' o 'second'
-                                talle: item.size,
-                                seccion: item.section,
-                                numero: item.number,
-                                nombreEstampado: item.customName,
-                                total: item.price,
-                                metodo: selectedPayment === 'installments' ? '2 Pagos' : '1 Pago'
-                            })
-                        }).then(() => true)
-                    );
-
-                    await Promise.all(promises);
+                    await Promise.all(cart.map(item => fetch(SHEET_SCRIPT_URL, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ action: 'purchase', cliente: item.customer, producto: item.product, productoTipo: item.productType, modoPago: item.paymentMode, talle: item.size, seccion: item.section, numero: item.number, nombreEstampado: item.customName, total: item.price, metodo: selectedPayment === 'installments' ? '2 Pagos' : '1 Pago' }) }).then(() => true)));
                     success = true;
-                } catch (e) {
-                    console.warn(`Intento ${attempts} fallido:`, e);
-                    if (attempts < maxAttempts) await new Promise(r => setTimeout(r, 1500 * attempts));
-                }
+                } catch (e) { await new Promise(r => setTimeout(r, 1000 * attempts)); }
             }
+            if (!success) alert('⚠️ Error al registrar. Envianos los datos manualmente por WhatsApp.');
+            else showToast('✅ Pedido registrado');
 
-            if (!success) {
-                alert('⚠️ No pudimos registrar el pedido automáticamente. Por favor, envianos los datos por WhatsApp manualmente.');
-            } else {
-                showToast('✅ Pedido registrado correctamente');
-            }
-
-            // Mensaje de WhatsApp CON PRODUCTO Y MODO
             let msg = "¡Hola Ruca del Valle! Quiero confirmar mi pedido:%0A%0A";
-            cart.forEach((i, idx) => {
-                const modeText = i.paymentMode === 'second' ? ' (2da Cuota)' : '';
-                msg += `*${idx + 1}. ${i.product} (${i.productType} Tanda${modeText})*%0A👤 ${i.customer}%0A📏 ${i.size} | 🛡️ ${i.section}%0A🔢 ${i.number} | ✍️ ${i.customName}%0A💰 $${i.price.toLocaleString('es-AR')}%0A%0A`;
-            });
+            cart.forEach((i, idx) => msg += `*${idx + 1}. ${i.product} (${i.productType})*%0A👤 ${i.customer}%0A📏 ${i.size} | 🛡️ ${i.section}%0A🔢 ${i.number} | ✍️ ${i.customName}%0A💰 $${i.price.toLocaleString('es-AR')}%0A%0A`);
             const total = cart.reduce((s, i) => s + i.price, 0);
-            const paymentText = currentPaymentMode === 'second' ? '2da Cuota' : (selectedPayment === 'installments' ? '2 Pagos (Mitad ahora)' : 'Pago Total');
-            msg += `--------------------------%0A💵 *TOTAL: $${total.toLocaleString('es-AR')}*%0A💳 Método: ${paymentText}%0A--------------------------%0A%0AAdjunto comprobante.`;
-
+            msg += `--------------------------%0A💵 *TOTAL: $${total.toLocaleString('es-AR')}*%0A💳 Método: ${selectedPayment === 'installments' ? '2 Pagos' : '1 Pago'}%0A--------------------------%0A%0AAdjunto comprobante.`;
             window.open(`https://wa.me/3834565209?text=${msg}`, '_blank');
-            cart = [];
-            renderCart();
-            closeCheckoutModal();
-            btn.disabled = false;
-            btn.innerHTML = originalText;
+            cart = []; renderCart(); closeCheckoutModal();
+            btn.disabled = false; btn.innerHTML = `<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>Ya Pagué`;
         }
 
-        // ⭐ Reviews (igual que antes)
-        document.querySelectorAll('#star-selector span').forEach(s => {
-            s.addEventListener('click', function() {
-                selectedRating = parseInt(this.dataset.val);
-                document.querySelectorAll('#star-selector span').forEach((el, i) => el.classList.toggle('active', i < selectedRating));
-            });
-        });
+        // ⭐ Reviews
+        document.querySelectorAll('#star-selector span').forEach(s => s.addEventListener('click', function() { selectedRating = parseInt(this.dataset.val); document.querySelectorAll('#star-selector span').forEach((el, i) => el.classList.toggle('active', i < selectedRating)); }));
         let selectedRating = 0;
+        async function loadReviews() { try { const res = await fetch(`${SHEET_SCRIPT_URL}?action=reviews`); const reviews = await res.json(); const container = document.getElementById('reviews-container'); container.innerHTML = reviews.length ? '' : '<p class="text-gray-500 text-center py-4">Sé el primero en opinar.</p>'; reviews.reverse().forEach(r => container.innerHTML += `<div class="bg-[#1A1A1A] p-4 rounded-lg border border-[#2A2A2A]"><div class="flex justify-between items-center mb-2"><span class="font-bold text-white">${r.name}</span><span class="text-[#F5B731] text-sm">${'★'.repeat(r.rating) + '☆'.repeat(5 - r.rating)}</span></div><p class="text-gray-400 text-sm">${r.comment}</p><p class="text-gray-600 text-xs mt-2">${new Date(r.date).toLocaleDateString('es-AR')}</p></div>`); } catch (e) { console.error("Error reseñas:", e); } }
+        async function submitReview() { const name = document.getElementById('review-name').value.trim(); const comment = document.getElementById('review-comment').value.trim(); if (!name || !selectedRating || !comment) return alert('Completá todos los campos.'); await fetch(SHEET_SCRIPT_URL, { method: 'POST', mode: 'no-cors', headers: {'Content-Type':'application/json'}, body: JSON.stringify({action: 'review', name, rating: selectedRating, comment}) }); showToast('¡Gracias!'); document.getElementById('review-name').value = ''; document.getElementById('review-comment').value = ''; selectedRating = 0; document.querySelectorAll('#star-selector span').forEach(s=>s.classList.remove('active')); loadReviews(); }
 
-        async function loadReviews() {
-            try {
-                const res = await fetch(`${SHEET_SCRIPT_URL}?action=reviews`);
-                const reviews = await res.json();
-                const container = document.getElementById('reviews-container');
-                container.innerHTML = reviews.length ? '' : '<p class="text-gray-500 text-center py-4">Sé el primero en opinar.</p>';
-                reviews.reverse().forEach(r => {
-                    const stars = '★'.repeat(r.rating) + '☆'.repeat(5 - r.rating);
-                    const date = new Date(r.date).toLocaleDateString('es-AR');
-                    container.innerHTML += `<div class="bg-[#1A1A1A] p-4 rounded-lg border border-[#2A2A2A]"><div class="flex justify-between items-center mb-2"><span class="font-bold text-white">${r.name}</span><span class="text-[#F5B731] text-sm">${stars}</span></div><p class="text-gray-400 text-sm">${r.comment}</p><p class="text-gray-600 text-xs mt-2">${date}</p></div>`;
-                });
-            } catch (e) { console.error("Error cargando reseñas", e); }
-        }
-
-        async function submitReview() {
-            const name = document.getElementById('review-name').value.trim();
-            const comment = document.getElementById('review-comment').value.trim();
-            if (!name || !selectedRating || !comment) return alert('Completá nombre, calificación y comentario.');
-            await fetch(SHEET_SCRIPT_URL, { method: 'POST', mode: 'no-cors', headers: {'Content-Type':'application/json'}, body: JSON.stringify({action: 'review', name, rating: selectedRating, comment}) });
-            showToast('¡Gracias! Tu opinión se publicará en breve.');
-            document.getElementById('review-name').value = ''; document.getElementById('review-comment').value = '';
-            selectedRating = 0; document.querySelectorAll('#star-selector span').forEach(s => s.classList.remove('active'));
-            loadReviews();
-        }
-
-        // 🚀 Init
-        document.addEventListener('DOMContentLoaded', () => { 
-            loadReviews(); 
-            renderCart(); 
-            selectProduct('1ra'); // Iniciar con 1ra tanda por defecto
-            updateProductUI();
-        });
+        document.addEventListener('DOMContentLoaded', () => { loadReviews(); renderCart(); selectProduct('1ra'); updateProductUI(); });
     </script>
 </body>
 </html>
