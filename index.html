@@ -43,6 +43,7 @@
         .hero-bg { background: radial-gradient(ellipse at 50% 0%, rgba(245, 183, 49, 0.08) 0%, transparent 60%), radial-gradient(ellipse at 80% 80%, rgba(245, 183, 49, 0.04) 0%, transparent 50%), var(--black); }
         .hero-grid-pattern { background-image: linear-gradient(rgba(245,183,49,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(245,183,49,0.03) 1px, transparent 1px); background-size: 40px 40px; }
         .badge-stock { background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%); color: var(--black); }
+        .badge-edition { background: rgba(245, 183, 49, 0.15); border: 1px solid var(--gold); color: var(--gold); }
         .section-tag { background: rgba(245, 183, 49, 0.08); border: 1px solid rgba(245, 183, 49, 0.2); color: var(--gold); transition: all 0.3s ease; }
         .section-tag:hover { background: rgba(245, 183, 49, 0.15); border-color: var(--gold); }
         .payment-option { border: 2px solid #2A2A2A; transition: all 0.3s ease; cursor: pointer; }
@@ -57,6 +58,14 @@
         .view-btn.active { background: var(--gold); color: var(--black); border-color: var(--gold); }
         .star-btn { cursor: pointer; transition: color 0.2s; font-size: 1.5rem; }
         .star-btn.active { color: var(--gold); }
+        .product-toggle { display: flex; gap: 4px; background: var(--dark-gray); padding: 6px; border-radius: 10px; margin: 0 auto 16px; max-width: 320px; }
+        .product-btn { flex: 1; padding: 10px 12px; border-radius: 8px; font-size: 0.9rem; font-weight: 600; transition: all 0.2s; background: transparent; color: var(--cream); border: none; cursor: pointer; }
+        .product-btn.active { background: var(--gold); color: var(--black); }
+        .product-btn:hover:not(.active) { background: #2A2A2A; }
+        .payment-mode-toggle { display: flex; gap: 2px; background: var(--dark-gray); padding: 4px; border-radius: 8px; margin-bottom: 16px; }
+        .payment-mode-btn { flex: 1; padding: 6px 10px; border-radius: 6px; font-size: 0.8rem; font-weight: 600; transition: all 0.2s; background: transparent; color: var(--cream); border: none; cursor: pointer; }
+        .payment-mode-btn.active { background: var(--gold); color: var(--black); }
+        .payment-mode-btn:hover:not(.active) { background: #2A2A2A; }
     </style>
 </head>
 <body>
@@ -128,103 +137,70 @@
         <div class="text-center mb-12">
             <h3 class="font-cinzel text-2xl sm:text-3xl font-bold text-white mb-2 tracking-wider">NUESTRA CAMISETA</h3>
             <div class="section-divider w-20 mx-auto"></div>
-            <p class="text-gray-500 mt-4 text-sm">Personalizable · Algodón premium · Edición limitada</p>
+            <p class="text-gray-500 mt-4 text-sm" id="product-desc">Personalizable · Ideal para Actividad Física · Edición limitada</p>
+            
+            <!-- Selector de Producto -->
+            <div class="product-toggle">
+                <button onclick="selectProduct('1ra')" id="btn-prod-1ra" class="product-btn active">1ra Tanda</button>
+                <button onclick="selectProduct('2da')" id="btn-prod-2da" class="product-btn">2da Tanda</button>
+            </div>
+            <p id="product-note" class="text-sm text-gray-500">Los números elegidos en la 1ra tanda quedan bloqueados para la 2da tanda</p>
         </div>
+        
         <div class="max-w-4xl mx-auto">
             <div class="card-dark rounded-2xl overflow-hidden">
                 <div class="grid md:grid-cols-2">
+                    <!-- Imagen con Toggle -->
                     <div class="relative h-80 sm:h-96 md:h-full min-h-[320px] overflow-hidden flex flex-col">
                         <div class="relative flex-1 overflow-hidden bg-[#1E1E1E]">
                             <img id="shirt-image" src="img/camiseta-frontal.jpg" alt="Camiseta" class="w-full h-full object-cover transition-opacity duration-500">
-                            <div class="absolute top-4 left-4 badge-stock text-[10px] font-bold px-3 py-1 rounded-full" id="shirt-view-label">VISTA FRONTAL</div>
+                            <div class="absolute top-4 left-4 flex gap-2">
+                                <span class="badge-stock text-[10px] font-bold px-3 py-1 rounded-full" id="shirt-view-label">VISTA FRONTAL</span>
+                                <span class="badge-edition text-[10px] font-bold px-3 py-1 rounded-full" id="product-badge">1ra Tanda</span>
+                            </div>
                         </div>
                         <div class="flex border-t border-[#2A2A2A]">
                             <button onclick="toggleShirtView('frontal')" id="btn-frontal" class="view-btn active flex-1 py-3 text-xs font-bold uppercase tracking-widest border-r border-[#2A2A2A] text-[#F5B731]">📸 Vista Frontal</button>
                             <button onclick="toggleShirtView('trasera')" id="btn-trasera" class="view-btn flex-1 py-3 text-xs font-bold uppercase tracking-widest text-gray-500 hover:text-[#F5B731]">Vista Trasera</button>
                         </div>
                     </div>
+                    
+                    <!-- Info del Producto -->
                     <div class="p-6 sm:p-8 flex flex-col justify-center">
                         <h4 class="font-cinzel text-xl sm:text-2xl font-bold text-white mb-2">Camiseta Oficial Ruca del Valle</h4>
                         <p class="text-gray-400 text-sm leading-relaxed mb-6">Camiseta personalizada con estampado de tu sección. Elegí tu número único y el nombre que querás que lleve.</p>
-                        <div class="mb-6"><span class="text-3xl font-bold text-[#F5B731]">$35.000</span></div>
+                        
+                        <!-- Toggle de modo de pago (solo para 1ra tanda) -->
+                        <div id="payment-mode-container" class="mb-4">
+                            <div class="payment-mode-toggle">
+                                <button onclick="selectPaymentMode('new')" id="btn-mode-new" class="payment-mode-btn active">Nueva Compra</button>
+                                <button onclick="selectPaymentMode('second')" id="btn-mode-second" class="payment-mode-btn">Pagar 2da Cuota</button>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-6">
+                            <span id="price-display" class="text-3xl font-bold text-[#F5B731]">$35.000</span>
+                            <span id="price-note" class="text-xs text-gray-500 ml-2 hidden">(2da Cuota)</span>
+                        </div>
+                        
                         <div class="space-y-3 mb-6">
                             <div class="flex items-center gap-2 text-sm text-gray-400"><svg class="w-4 h-4 text-[#F5B731]" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg><span>Personalización de nombre incluida</span></div>
                             <div class="flex items-center gap-2 text-sm text-gray-400"><svg class="w-4 h-4 text-[#F5B731]" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg><span>Número único por sección (1-99)</span></div>
                             <div class="flex items-center gap-2 text-sm text-gray-400"><svg class="w-4 h-4 text-[#F5B731]" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg><span>7 secciones disponibles</span></div>
                             <div class="flex items-center gap-2 text-sm text-gray-400"><svg class="w-4 h-4 text-[#F5B731]" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg><span>Pago en 1 o 2 cuotas</span></div>
                         </div>
-                        <button onclick="openProductModal()" class="btn-gold w-full py-4 rounded-xl text-sm font-bold">COMPRAR AHORA</button>
+                        
+                        <button id="main-cta" onclick="openProductModal()" class="btn-gold w-full py-4 rounded-xl text-sm font-bold">COMPRAR AHORA</button>
                     </div>
                 </div>
             </div>
         </div>
     </main>
 
-    <!-- Video -->
-    <section class="bg-[#121212] border-y border-[#2A2A2A]">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-            <div class="text-center mb-12">
-                <h3 class="font-cinzel text-2xl sm:text-3xl font-bold text-white mb-2 tracking-wider">NUESTROS MODELOS EN ACCIÓN</h3>
-                <div class="section-divider w-20 mx-auto"></div>
-            </div>
-            <div class="max-w-3xl mx-auto">
-                <div class="relative w-full aspect-video rounded-2xl overflow-hidden border border-[#2A2A2A] shadow-2xl bg-black">
-                    <!-- REEMPLAZÁ TU_ID_DE_YOUTUBE POR TU ID REAL -->
-                    <iframe class="absolute inset-0 w-full h-full" src="https://www.youtube.com/embed/TU_ID_DE_YOUTUBE?rel=0&modestbranding=1&playsinline=1" title="Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-                </div>
-                <p class="text-center text-xs text-gray-600 mt-3">Si no carga, verificá tu conexión o <a href="https://youtu.be/TU_ID_DE_YOUTUBE" target="_blank" class="text-[#F5B731] underline">miralo directo en YouTube</a>.</p>
-            </div>
-        </div>
-    </section>
+    <!-- Video, Gallery, Reviews, Footer (igual que antes) -->
+    <!-- ... [mantené estas secciones igual que en tu versión anterior] ... -->
 
-    <!-- Gallery -->
-    <section class="bg-[#0A0A0A]">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-            <div class="text-center mb-12">
-                <h3 class="font-cinzel text-xl sm:text-2xl font-bold text-white mb-2 tracking-wider">GALERÍA DE FOTOS</h3>
-                <div class="section-divider w-20 mx-auto"></div>
-            </div>
-            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
-                <div class="model-card rounded-xl overflow-hidden aspect-[3/4] bg-[#1E1E1E] border border-[#2A2A2A]"><img src="img/modelo-1.jpg" alt="1" class="w-full h-full object-cover"><div class="overlay flex items-end p-4"><p class="text-sm font-semibold text-white">Modelo 1</p></div></div>
-                <div class="model-card rounded-xl overflow-hidden aspect-[3/4] bg-[#1E1E1E] border border-[#2A2A2A]"><img src="img/modelo-2.jpg" alt="2" class="w-full h-full object-cover"><div class="overlay flex items-end p-4"><p class="text-sm font-semibold text-white">Modelo 2</p></div></div>
-                <div class="model-card rounded-xl overflow-hidden aspect-[3/4] bg-[#1E1E1E] border border-[#2A2A2A]"><img src="img/modelo-3.jpg" alt="3" class="w-full h-full object-cover"><div class="overlay flex items-end p-4"><p class="text-sm font-semibold text-white">Modelo 3</p></div></div>
-                <div class="model-card rounded-xl overflow-hidden aspect-[3/4] bg-[#1E1E1E] border border-[#2A2A2A]"><img src="img/modelo-4.jpg" alt="4" class="w-full h-full object-cover"><div class="overlay flex items-end p-4"><p class="text-sm font-semibold text-white">Modelo 4</p></div></div>
-                <div class="model-card rounded-xl overflow-hidden aspect-[3/4] bg-[#1E1E1E] border border-[#2A2A2A]"><img src="img/modelo-5.jpg" alt="5" class="w-full h-full object-cover"><div class="overlay flex items-end p-4"><p class="text-sm font-semibold text-white">Modelo 5</p></div></div>
-                <div class="model-card rounded-xl overflow-hidden aspect-[3/4] bg-[#1E1E1E] border border-[#2A2A2A]"><img src="img/modelo-6.jpg" alt="6" class="w-full h-full object-cover"><div class="overlay flex items-end p-4"><p class="text-sm font-semibold text-white">Modelo 6</p></div></div>
-                <div class="model-card rounded-xl overflow-hidden aspect-[3/4] bg-[#1E1E1E] border border-[#2A2A2A]"><img src="img/modelo-7.jpg" alt="7" class="w-full h-full object-cover"><div class="overlay flex items-end p-4"><p class="text-sm font-semibold text-white">Modelo 7</p></div></div>
-                <div class="model-card rounded-xl overflow-hidden aspect-[3/4] bg-[#1E1E1E] border border-[#2A2A2A]"><img src="img/modelo-8.jpg" alt="8" class="w-full h-full object-cover"><div class="overlay flex items-end p-4"><p class="text-sm font-semibold text-white">Modelo 8</p></div></div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Reviews -->
-    <section class="bg-[#121212] border-y border-[#2A2A2A] py-16">
-        <div class="max-w-4xl mx-auto px-4">
-            <h3 class="font-cinzel text-2xl font-bold text-white text-center mb-8">💬 Opiniones de Clientes</h3>
-            <div id="reviews-container" class="grid gap-4 mb-10 max-h-96 overflow-y-auto pr-2"></div>
-            <div class="bg-[#1A1A1A] p-6 rounded-xl border border-[#2A2A2A]">
-                <h4 class="text-[#F5B731] font-bold mb-4">Dejá tu opinión</h4>
-                <input type="text" id="review-name" placeholder="Tu nombre" class="input-dark w-full mb-3 rounded-lg px-3 py-2 text-sm">
-                <div class="flex gap-2 mb-3" id="star-selector">
-                    <span class="star-btn text-gray-600" data-val="1">★</span><span class="star-btn text-gray-600" data-val="2">★</span><span class="star-btn text-gray-600" data-val="3">★</span><span class="star-btn text-gray-600" data-val="4">★</span><span class="star-btn text-gray-600" data-val="5">★</span>
-                </div>
-                <textarea id="review-comment" placeholder="Contanos tu experiencia..." class="input-dark w-full mb-3 rounded-lg px-3 py-2 text-sm h-20"></textarea>
-                <button onclick="submitReview()" class="btn-gold w-full py-2 rounded-lg text-sm font-bold">Enviar Opinión</button>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="bg-[#0A0A0A] border-t border-[#2A2A2A] py-12">
-        <div class="max-w-7xl mx-auto px-4 text-center">
-            <div class="flex justify-center mb-6"><div class="w-14 h-14 drop-shadow-[0_0_8px_rgba(245,183,49,0.5)]"><img src="img/logo.png" alt="Logo" class="w-full h-full object-contain"></div></div>
-            <p class="font-cinzel text-[#F5B731] text-lg font-bold tracking-widest">RUCA DEL VALLE</p>
-            <p class="text-gray-600 mt-2 text-sm">Remeras Ruca del Valle © 2026 | Hecho con ❤️ y sin comisiones.</p>
-            <p class="mt-4"><a href="https://wa.me/3834565209?text=Hola!%20Tengo%20una%20consulta" class="text-[#F5B731] hover:text-[#FFD54F] underline transition-colors text-sm">¿Dudas? Escribinos por WhatsApp</a></p>
-        </div>
-    </footer>
-
-    <!-- Product Modal -->
+    <!-- Product Modal (actualizado) -->
     <div id="product-modal" class="fixed inset-0 z-50 hidden overflow-y-auto">
         <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-6 text-center sm:block sm:p-0">
             <div class="fixed inset-0 modal-backdrop transition-opacity" onclick="closeProductModal()"></div>
@@ -232,7 +208,10 @@
             <div class="inline-block align-bottom bg-[#1A1A1A] rounded-2xl text-left overflow-hidden shadow-2xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg w-full fade-in border border-[#2A2A2A]">
                 <div class="px-6 pt-6 pb-4">
                     <div class="flex items-center justify-between">
-                        <div><h3 class="font-cinzel text-lg font-bold text-[#F5B731]">Personalizar Camiseta</h3><p class="text-xs text-gray-500 mt-0.5">Completá los datos para tu remera</p></div>
+                        <div>
+                            <h3 class="font-cinzel text-lg font-bold text-[#F5B731]">Personalizar Camiseta</h3>
+                            <p class="text-xs text-gray-500 mt-0.5"><span id="modal-product">1ra Tanda</span> · <span id="modal-mode">Nueva Compra</span></p>
+                        </div>
                         <button onclick="closeProductModal()" class="text-gray-500 hover:text-white transition-colors p-1"><svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg></button>
                     </div>
                     <div class="section-divider mt-4"></div>
@@ -256,72 +235,9 @@
         </div>
     </div>
 
-    <!-- Size Chart Modal -->
-    <div id="size-chart-modal" class="fixed inset-0 z-50 hidden overflow-y-auto">
-        <div class="flex items-center justify-center min-h-screen px-4 text-center">
-            <div class="fixed inset-0 modal-backdrop transition-opacity" onclick="toggleSizeChart()"></div>
-            <div class="inline-block bg-[#1A1A1A] rounded-2xl text-left overflow-hidden shadow-xl transform transition-all max-w-md w-full fade-in border border-[#2A2A2A] p-6 relative z-10">
-                <div class="flex items-center justify-between mb-4">
-                    <h3 class="font-cinzel text-lg font-bold text-[#F5B731]">Tabla de Talles</h3>
-                    <button onclick="toggleSizeChart()" class="text-gray-500 hover:text-white transition-colors"><svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg></button>
-                </div>
-                <div class="section-divider mb-4"></div>
-                <table class="min-w-full"><thead><tr class="border-b border-[#2A2A2A]"><th class="px-4 py-3 text-left text-[10px] font-bold text-[#F5B731] uppercase tracking-widest">Talle</th><th class="px-4 py-3 text-left text-[10px] font-bold text-[#F5B731] uppercase tracking-widest">Ancho (cm)</th><th class="px-4 py-3 text-left text-[10px] font-bold text-[#F5B731] uppercase tracking-widest">Largo (cm)</th></tr></thead><tbody class="divide-y divide-[#2A2A2A]"><tr class="hover:bg-black/30"><td class="px-4 py-3 font-semibold text-white text-sm">S</td><td class="px-4 py-3 text-gray-400 text-sm">48</td><td class="px-4 py-3 text-gray-400 text-sm">68</td></tr><tr class="hover:bg-black/30"><td class="px-4 py-3 font-semibold text-white text-sm">M</td><td class="px-4 py-3 text-gray-400 text-sm">51</td><td class="px-4 py-3 text-gray-400 text-sm">70</td></tr><tr class="hover:bg-black/30"><td class="px-4 py-3 font-semibold text-white text-sm">L</td><td class="px-4 py-3 text-gray-400 text-sm">54</td><td class="px-4 py-3 text-gray-400 text-sm">72</td></tr><tr class="hover:bg-black/30"><td class="px-4 py-3 font-semibold text-white text-sm">XL</td><td class="px-4 py-3 text-gray-400 text-sm">57</td><td class="px-4 py-3 text-gray-400 text-sm">74</td></tr><tr class="hover:bg-black/30"><td class="px-4 py-3 font-semibold text-white text-sm">XXL</td><td class="px-4 py-3 text-gray-400 text-sm">60</td><td class="px-4 py-3 text-gray-400 text-sm">76</td></tr><tr class="hover:bg-black/30"><td class="px-4 py-3 font-semibold text-white text-sm">XXXL</td><td class="px-4 py-3 text-gray-400 text-sm">68</td><td class="px-4 py-3 text-gray-400 text-sm">80</td></tr></tbody></table>
-                <p class="text-[10px] text-gray-600 mt-4 text-center">Medidas aproximadas. Puede variar ±2cm.</p>
-            </div>
-        </div>
-    </div>
+    <!-- [Mantené el resto de modales: Size Chart, Cart Sidebar, Checkout Modal igual que antes] -->
 
-    <!-- Cart Sidebar -->
-    <div id="cart-sidebar" class="fixed inset-y-0 right-0 z-50 w-full max-w-md cart-sidebar shadow-2xl transform translate-x-full transition-transform duration-300 ease-in-out">
-        <div class="flex flex-col h-full">
-            <div class="px-6 py-5 bg-black/40 border-b border-[#2A2A2A] flex justify-between items-center">
-                <h2 class="font-cinzel text-lg font-bold text-[#F5B731]">Tu Carrito</h2>
-                <button onclick="toggleCart()" class="text-gray-500 hover:text-white transition-colors"><svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg></button>
-            </div>
-            <div id="cart-items" class="flex-1 overflow-y-auto p-6 space-y-4">
-                <div class="text-center text-gray-600 mt-16"><svg class="w-16 h-16 mx-auto mb-4 text-[#2A2A2A]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" /></svg><p class="text-base font-medium text-gray-500">El carrito está vacío</p><p class="text-xs mt-1 text-gray-600">Agregá tu camiseta para comenzar</p></div>
-            </div>
-            <div class="border-t border-[#2A2A2A] p-6 bg-black/40">
-                <div class="flex justify-between text-base font-bold text-[#F5B731] mb-4"><p>Total</p><p id="cart-total">$0</p></div>
-                <button onclick="openCheckoutModal()" id="checkout-btn" disabled class="w-full flex justify-center items-center px-6 py-3 border border-transparent rounded-xl shadow-sm text-sm font-bold text-black bg-[#F5B731] hover:bg-[#FFD54F] disabled:opacity-40 disabled:cursor-not-allowed transition-all uppercase tracking-widest">Continuar al Pago</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Checkout Modal -->
-    <div id="checkout-modal" class="fixed inset-0 z-[60] hidden overflow-y-auto">
-        <div class="flex items-center justify-center min-h-screen px-4 text-center">
-            <div class="fixed inset-0 modal-backdrop transition-opacity" onclick="closeCheckoutModal()"></div>
-            <div class="inline-block bg-[#1A1A1A] rounded-2xl text-left overflow-hidden shadow-xl transform transition-all max-w-lg w-full fade-in border border-[#2A2A2A] relative z-10">
-                <div id="payment-step" class="p-6">
-                    <div class="flex items-center justify-between mb-4">
-                        <h3 class="font-cinzel text-lg font-bold text-[#F5B731]">Método de Pago</h3>
-                        <button onclick="closeCheckoutModal()" class="text-gray-500 hover:text-white transition-colors"><svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg></button>
-                    </div>
-                    <div class="section-divider mb-6"></div>
-                    <p class="text-sm text-gray-500 mb-4">Elegí cómo querés abonar:</p>
-                    <div class="space-y-3">
-                        <div onclick="selectPayment('full')" id="payment-full" class="payment-option selected flex items-center p-4 rounded-xl bg-black/30"><input type="radio" name="payment-method" value="full" class="h-4 w-4 text-[#F5B731] focus:ring-[#F5B731] border-gray-600 bg-[#1E1E1E]" checked><div class="ml-3"><span class="block text-sm font-bold text-white">1 Pago</span><span class="block text-xs text-gray-500">Pagás el total ahora por transferencia o QR</span></div></div>
-                        <div onclick="selectPayment('installments')" id="payment-installments" class="payment-option flex items-center p-4 rounded-xl bg-black/30"><input type="radio" name="payment-method" value="installments" class="h-4 w-4 text-[#F5B731] focus:ring-[#F5B731] border-gray-600 bg-[#1E1E1E]"><div class="ml-3"><span class="block text-sm font-bold text-white">2 Pagos</span><span class="block text-xs text-gray-500">Pagá la mitad ahora y el siguiente mes la otra mitad</span></div></div>
-                    </div>
-                    <div id="bank-details" class="mt-6 bg-black/30 p-5 rounded-xl border border-[#2A2A2A]">
-                        <h4 class="font-cinzel font-bold text-[#F5B731] mb-3 text-[10px] uppercase tracking-widest">Datos para Transferir</h4>
-                        <p class="text-3xl font-bold text-[#F5B731] mb-4" id="transfer-amount">$0</p>
-                        <div class="mb-4"><p class="text-[10px] text-gray-600 uppercase tracking-widest mb-1">Alias / CBU</p><div class="flex items-center gap-2"><code class="bg-black px-3 py-2.5 rounded-lg border border-[#2A2A2A] text-sm flex-1 select-all text-[#F5B731] font-mono">camisetas.rdv</code><button onclick="copyAlias()" class="text-xs text-[#F5B731] hover:text-[#FFD54F] font-semibold px-3 py-2.5 border border-[#F5B731]/30 rounded-lg hover:bg-[#F5B731]/10 transition-all">Copiar</button></div></div>
-                        <div class="mb-4 text-center"><p class="text-[10px] text-gray-600 uppercase tracking-widest mb-2">O escaneá el QR para pagar</p><div class="w-36 h-36 bg-black mx-auto flex items-center justify-center rounded-xl border border-[#2A2A2A] overflow-hidden"><img src="img/qr.png" alt="QR para pagar" class="w-full h-full object-contain"><span class="text-xs text-gray-600 absolute">Agregá img/qr.png</span></div></div>
-                        <div class="bg-[#F5B731]/10 border-l-4 border-[#F5B731] p-4 mb-4 rounded-r"><p class="text-sm text-[#F5B731]/80">⚠️ Una vez que realizaste el pago, tocá el botón de abajo para enviarnos el comprobante por WhatsApp e indicarnos el <strong>Nombre Personalizado</strong> en tu Camiseta.</p></div>
-                    </div>
-                    <div class="mt-6 flex gap-3">
-                        <button onclick="closeCheckoutModal()" class="flex-1 bg-black/50 text-gray-500 py-3 rounded-xl hover:bg-black/70 border border-[#2A2A2A] font-semibold text-sm uppercase tracking-widest transition-all">Volver</button>
-                        <button onclick="sendWhatsAppOrder()" class="flex-1 bg-green-600 text-white py-3 rounded-xl hover:bg-green-700 flex justify-center items-center gap-2 font-bold text-sm uppercase tracking-widest transition-all"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>Ya Pagué</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- JAVASCRIPT CORREGIDO -->
+    <!-- JAVASCRIPT ACTUALIZADO -->
     <script>
         // ⚙️ CONFIGURACIÓN
         const SHEET_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby7pF2Ysw-48c_QsR67pqgjxED9FX-8Oy_VmW2rfWxXWf8Q7IkaIHE7S2XfVhSrlA3rKQ/exec';
@@ -329,9 +245,77 @@
         let cart = [];
         let selectedPayment = 'full';
         let occupiedNumbers = {};
-        const PRODUCT_PRICE = 35000;
+        let currentProduct = '1ra'; // '1ra' o '2da'
+        let currentPaymentMode = 'new'; // 'new' o 'second' (solo para 1ra tanda)
+        
+        // Precios y configuración
+        const CONFIG = {
+            '1ra': {
+                new: { price: 35000, label: '1ra Tanda - Nueva Compra', cta: 'COMPRAR AHORA' },
+                second: { price: 17500, label: '1ra Tanda - 2da Cuota', cta: 'PAGAR 2DA CUOTA' }
+            },
+            '2da': {
+                new: { price: 35000, label: '2da Tanda - Nueva Compra', cta: 'COMPRAR AHORA' }
+            }
+        };
 
         // 🖼️ UI Helpers
+        function selectProduct(product) {
+            currentProduct = product;
+            
+            // Actualizar UI del toggle de producto
+            document.getElementById('btn-prod-1ra').classList.toggle('active', product === '1ra');
+            document.getElementById('btn-prod-2da').classList.toggle('active', product === '2da');
+            
+            // Actualizar badges y textos
+            document.getElementById('product-badge').textContent = product === '1ra' ? '1ra Tanda' : '2da Tanda';
+            document.getElementById('modal-product').textContent = product === '1ra' ? '1ra Tanda' : '2da Tanda';
+            document.getElementById('product-desc').textContent = product === '1ra' 
+                ? 'Personalizable · Ideal para Actividad Física · Edición limitada'
+                : 'Segunda tanda · Números independientes pero bloqueados por 1ra tanda';
+            document.getElementById('product-note').textContent = 'Los números elegidos en la 1ra tanda quedan bloqueados para la 2da tanda';
+            
+            // Mostrar/ocultar toggle de modo de pago (solo para 1ra tanda)
+            const paymentContainer = document.getElementById('payment-mode-container');
+            if (product === '1ra') {
+                paymentContainer.style.display = 'block';
+                selectPaymentMode('new'); // Reset a nueva compra
+            } else {
+                paymentContainer.style.display = 'none';
+                currentPaymentMode = 'new';
+                updateProductUI();
+            }
+            
+            // Resetear validación de números
+            occupiedNumbers = {};
+            document.getElementById('section-select').value = '';
+            document.getElementById('number-error').classList.add('hidden');
+        }
+
+        function selectPaymentMode(mode) {
+            currentPaymentMode = mode;
+            
+            // Actualizar UI del toggle de modo
+            document.getElementById('btn-mode-new').classList.toggle('active', mode === 'new');
+            document.getElementById('btn-mode-second').classList.toggle('active', mode === 'second');
+            document.getElementById('modal-mode').textContent = mode === 'new' ? 'Nueva Compra' : 'Pagar 2da Cuota';
+            
+            updateProductUI();
+        }
+
+        function updateProductUI() {
+            const config = CONFIG[currentProduct][currentPaymentMode];
+            
+            // Actualizar precio y botón
+            const priceDisplay = document.getElementById('price-display');
+            const priceNote = document.getElementById('price-note');
+            const mainCta = document.getElementById('main-cta');
+            
+            priceDisplay.textContent = `$${config.price.toLocaleString('es-AR')}`;
+            priceNote.classList.toggle('hidden', currentPaymentMode !== 'second');
+            mainCta.textContent = config.cta;
+        }
+
         async function openProductModal() { 
             document.getElementById('product-modal').classList.remove('hidden'); 
             occupiedNumbers = {}; 
@@ -359,25 +343,32 @@
         }
 
         function selectPayment(m) {
+            // Para modo "2da cuota", forzar 1 pago
+            if (currentPaymentMode === 'second') m = 'full';
+            
             selectedPayment = m;
             document.getElementById('payment-full').classList.toggle('selected', m==='full');
             document.getElementById('payment-installments').classList.toggle('selected', m==='installments');
             document.querySelector(`input[name="payment-method"][value="${m}"]`).checked = true;
             updateTransferAmount();
         }
+        
         function updateTransferAmount() {
-            const t = cart.reduce((s,i)=>s+i.price,0);
-            const d = selectedPayment==='installments'?t/2:t;
-            document.getElementById('transfer-amount').textContent = `$${d.toLocaleString('es-AR')}`;
+            const config = CONFIG[currentProduct][currentPaymentMode];
+            const t = cart.reduce((s,i)=>s+i.price,0) || config.price;
+            const d = (selectedPayment==='installments' && currentPaymentMode!=='second') ? t/2 : t;
+            const label = (selectedPayment==='installments' && currentPaymentMode!=='second') ? '1ra Cuota (50%)' : 'Total a Pagar';
+            document.getElementById('transfer-amount').innerHTML = `<span class="text-sm font-normal text-gray-500 block">${label}</span>$${d.toLocaleString('es-AR')}`;
         }
 
-        // 📊 Contador de ventas por sección
+        // 📊 Contador de ventas por sección (COMPARTIDO ENTRE PRODUCTOS)
         async function loadSectionSalesCount() {
             const sections = ["Escuderos", "Templarios", "Adalides", "Herederas", "Caperucitas", "Mayor", "Milicianos"];
             const select = document.getElementById('section-select');
             
             for (const sec of sections) {
                 try {
+                    // Consultar disponibilidad SIN filtro de producto (números compartidos)
                     const res = await fetch(`${SHEET_SCRIPT_URL}?action=availability&section=${sec}`);
                     const usedNumbers = await res.json();
                     occupiedNumbers[sec] = usedNumbers.map(n => parseInt(n));
@@ -391,7 +382,7 @@
             }
         }
 
-        // 🔢 Number Validation - CON CONSULTA FRESCA
+        // 🔢 Number Validation - COMPARTIDO ENTRE PRODUCTOS
         async function checkAvailability(section) {
             if(!section) return;
             const btn = document.getElementById('add-to-cart-btn');
@@ -412,7 +403,7 @@
             } catch (e) {
                 console.error("Error verificando sección:", e);
                 occupiedNumbers[section] = [];
-                document.getElementById('number-error').textContent = "⚠️ Error de conexión. Reintentá en unos segundos.";
+                document.getElementById('number-error').textContent = "⚠️ Error de conexión. Reintentá.";
                 document.getElementById('number-error').classList.remove('hidden');
                 btn.disabled = true;
             } finally {
@@ -435,6 +426,7 @@
                 return;
             }
 
+            // Validación global: Planilla + Carrito (sin importar producto)
             const isOccupied = (occupiedNumbers[sec] || []).includes(num);
             const inCart = cart.some(i => i.section === sec && i.number === num);
 
@@ -448,7 +440,7 @@
             }
         }
 
-        // 🔒 BARRERA FINAL: Verificación en tiempo real antes de agregar
+        // 🔒 BARRERA FINAL: Verificación en tiempo real (compartida)
         async function finalNumberCheck(section, number) {
             try {
                 const res = await fetch(`${SHEET_SCRIPT_URL}?action=availability&section=${section}`);
@@ -456,17 +448,17 @@
                 const freshOccupied = freshData.map(n => parseInt(n));
                 
                 if (freshOccupied.includes(number)) {
-                    alert(`⛔ El número ${number} acaba de ser tomado por otro cliente. Elegí otro.`);
+                    alert(`⛔ El número ${number} en ${section} ya está tomado. Elegí otro.`);
                     return false;
                 }
                 return true;
             } catch (e) {
                 console.warn("No se pudo verificar disponibilidad final:", e);
-                return true; // Permitir continuar si falla la consulta
+                return true;
             }
         }
 
-        // 🛒 Cart Logic - CON BARRERA FINAL
+        // 🛒 Cart Logic - CON PRODUCTO Y MODO
         async function addToCart() {
             const n = document.getElementById('cust-name').value.trim();
             const l = document.getElementById('cust-lastname').value.trim();
@@ -479,14 +471,18 @@
             if (!sec) return alert("Seleccioná una sección");
             if (!num || num < 1 || num > 99) return alert("Ingresá un número válido (1-99)");
 
-            // 🔒 BARRERA FINAL: Verificación en tiempo real
+            // 🔒 BARRERA FINAL: Verificación en tiempo real (compartida)
             const isValid = await finalNumberCheck(sec, num);
             if (!isValid) return;
+            
+            const config = CONFIG[currentProduct][currentPaymentMode];
             
             const item = {
                 id: Date.now(),
                 product: "Camiseta Oficial Ruca del Valle",
-                price: PRODUCT_PRICE,
+                productType: currentProduct, // '1ra' o '2da'
+                paymentMode: currentPaymentMode, // 'new' o 'second'
+                price: config.price,
                 customer: `${n} ${l}`,
                 email: document.getElementById('cust-email').value,
                 size: s,
@@ -513,13 +509,14 @@
                 badge.textContent = cart.length; badge.classList.remove('hidden'); btn.disabled = false; c.innerHTML = '';
                 cart.forEach(i => { 
                     t += i.price; 
-                    c.innerHTML += `<div class="bg-black/30 border border-[#2A2A2A] rounded-xl p-4"><div class="flex justify-between items-start"><div class="flex-1 min-w-0"><h4 class="font-cinzel font-bold text-sm text-[#F5B731] truncate">${i.product}</h4><div class="mt-2 space-y-1"><p class="text-xs text-gray-400">👤 ${i.customer}</p><p class="text-xs text-gray-400">📏 Talle: ${i.size} · 🛡️ ${i.section}</p><p class="text-xs text-gray-400">🔢 Nº ${i.number} · ✍️ "${i.customName}"</p></div><p class="text-sm font-bold text-[#F5B731] mt-2">$${i.price.toLocaleString('es-AR')}</p></div><button onclick="removeFromCart(${i.id})" class="text-gray-600 hover:text-red-400 ml-3 p-1">🗑️</button></div></div>`; 
+                    const modeText = i.paymentMode === 'second' ? ' (2da Cuota)' : '';
+                    c.innerHTML += `<div class="bg-black/30 border border-[#2A2A2A] rounded-xl p-4"><div class="flex justify-between items-start"><div class="flex-1 min-w-0"><h4 class="font-cinzel font-bold text-sm text-[#F5B731] truncate">${i.product} ${i.productType}${modeText}</h4><div class="mt-2 space-y-1"><p class="text-xs text-gray-400">👤 ${i.customer}</p><p class="text-xs text-gray-400">📏 Talle: ${i.size} · 🛡️ ${i.section}</p><p class="text-xs text-gray-400">🔢 Nº ${i.number} · ✍️ "${i.customName}"</p></div><p class="text-sm font-bold text-[#F5B731] mt-2">$${i.price.toLocaleString('es-AR')}</p></div><button onclick="removeFromCart(${i.id})" class="text-gray-600 hover:text-red-400 ml-3 p-1">🗑️</button></div></div>`; 
                 });
             }
             tot.textContent = `$${t.toLocaleString('es-AR')}`;
         }
 
-        // 💳 Checkout & WhatsApp - CON REINTENTOS
+        // 💳 Checkout & WhatsApp - CON PRODUCTO Y MODO
         async function sendWhatsAppOrder() {
             if (cart.length === 0) return;
 
@@ -545,6 +542,8 @@
                                 cliente: item.customer,
                                 email: item.email || '',
                                 producto: item.product,
+                                productoTipo: item.productType, // '1ra' o '2da'
+                                modoPago: item.paymentMode, // 'new' o 'second'
                                 talle: item.size,
                                 seccion: item.section,
                                 numero: item.number,
@@ -569,13 +568,15 @@
                 showToast('✅ Pedido registrado correctamente');
             }
 
-            // Preparamos mensaje de WhatsApp (siempre se abre, registrado o no)
+            // Mensaje de WhatsApp CON PRODUCTO Y MODO
             let msg = "¡Hola Ruca del Valle! Quiero confirmar mi pedido:%0A%0A";
             cart.forEach((i, idx) => {
-                msg += `*${idx + 1}. ${i.product}*%0A👤 ${i.customer}%0A📏 ${i.size} | 🛡️ ${i.section}%0A🔢 ${i.number} | ✍️ ${i.customName}%0A💰 $${i.price.toLocaleString('es-AR')}%0A%0A`;
+                const modeText = i.paymentMode === 'second' ? ' (2da Cuota)' : '';
+                msg += `*${idx + 1}. ${i.product} (${i.productType} Tanda${modeText})*%0A👤 ${i.customer}%0A📏 ${i.size} | 🛡️ ${i.section}%0A🔢 ${i.number} | ✍️ ${i.customName}%0A💰 $${i.price.toLocaleString('es-AR')}%0A%0A`;
             });
             const total = cart.reduce((s, i) => s + i.price, 0);
-            msg += `--------------------------%0A💵 *TOTAL: $${total.toLocaleString('es-AR')}*%0A💳 Método: ${selectedPayment === 'installments' ? '2 Pagos (Mitad ahora)' : 'Pago Total'}%0A--------------------------%0A%0AAdjunto comprobante.`;
+            const paymentText = currentPaymentMode === 'second' ? '2da Cuota' : (selectedPayment === 'installments' ? '2 Pagos (Mitad ahora)' : 'Pago Total');
+            msg += `--------------------------%0A💵 *TOTAL: $${total.toLocaleString('es-AR')}*%0A💳 Método: ${paymentText}%0A--------------------------%0A%0AAdjunto comprobante.`;
 
             window.open(`https://wa.me/3834565209?text=${msg}`, '_blank');
             cart = [];
@@ -585,7 +586,7 @@
             btn.innerHTML = originalText;
         }
 
-        // ⭐ Reviews
+        // ⭐ Reviews (igual que antes)
         document.querySelectorAll('#star-selector span').forEach(s => {
             s.addEventListener('click', function() {
                 selectedRating = parseInt(this.dataset.val);
@@ -612,14 +613,20 @@
             const name = document.getElementById('review-name').value.trim();
             const comment = document.getElementById('review-comment').value.trim();
             if (!name || !selectedRating || !comment) return alert('Completá nombre, calificación y comentario.');
-            await fetch(SHEET_SCRIPT_URL, { method: 'POST', mode: 'no-cors', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({action: 'review', name, rating: selectedRating, comment}) });
+            await fetch(SHEET_SCRIPT_URL, { method: 'POST', mode: 'no-cors', headers: {'Content-Type':'application/json'}, body: JSON.stringify({action: 'review', name, rating: selectedRating, comment}) });
             showToast('¡Gracias! Tu opinión se publicará en breve.');
             document.getElementById('review-name').value = ''; document.getElementById('review-comment').value = '';
             selectedRating = 0; document.querySelectorAll('#star-selector span').forEach(s => s.classList.remove('active'));
             loadReviews();
         }
 
-        document.addEventListener('DOMContentLoaded', () => { loadReviews(); renderCart(); });
+        // 🚀 Init
+        document.addEventListener('DOMContentLoaded', () => { 
+            loadReviews(); 
+            renderCart(); 
+            selectProduct('1ra'); // Iniciar con 1ra tanda por defecto
+            updateProductUI();
+        });
     </script>
 </body>
 </html>
