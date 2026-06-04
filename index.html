@@ -544,21 +544,66 @@
             }
         }
 
-        async function sendToWhatsAppDirectly(item) {
-            const modeText = item.productType === '1ra' ? '2da Cuota' : 'Nueva Compra';
-            const msg = `¡Hola Ruca del Valle! Quiero ${item.productType === '1ra' ? 'pagar la *2da Cuota*' : 'confirmar mi pedido de la *2da Tanda*'}:%0A%0A` +
-                `👤 Cliente: ${item.customer}%0A` +
-                `📏 Talle: ${item.size}%0A` +
-                `🛡️ Sección: ${item.section}%0A` +
-                `🔢 Número: ${item.number}%0A` +
-                `✍️ Estampado: "${item.customName}"%0A` +
-                `💰 Monto: $${item.price.toLocaleString('es-AR')}%0A%0A` +
-                `Adjunto comprobante de transferencia. ¡Gracias!`;
-            
-            window.open(`https://wa.me/3834565209?text=${msg}`, '_blank');
-            showToast("✅ Redirigiendo a WhatsApp...");
-            closeProductModal();
+async function sendToWhatsAppDirectly(item) {
+    const btn = document.getElementById('add-to-cart-btn');
+    btn.disabled = true;
+    btn.textContent = "⏳ Registrando...";
+    
+    // 🔴 REGISTRAR EN GOOGLE SHEETS PRIMERO
+    let success = false;
+    let attempts = 0;
+    
+    while (attempts < 3 && !success) {
+        attempts++;
+        try {
+            await fetch(SHEET_SCRIPT_URL, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    action: 'purchase',
+                    cliente: item.customer,
+                    email: document.getElementById('cust-email').value || '',
+                    producto: item.product,
+                    productoTipo: item.productType, // '1ra' o '2da'
+                    modoPago: item.productType === '1ra' ? 'second' : 'new', // 1ra=2da cuota, 2da=nueva
+                    talle: item.size,
+                    seccion: item.section,
+                    numero: item.number,
+                    nombreEstampado: item.customName,
+                    total: item.price,
+                    metodo: '1 Pago' // Siempre 1 pago para ambas
+                })
+            });
+            success = true;
+        } catch (e) {
+            console.warn(`Intento ${attempts} fallido:`, e);
+            if (attempts < 3) await new Promise(r => setTimeout(r, 1000 * attempts));
         }
+    }
+    
+    if (!success) {
+        alert('⚠️ No pudimos registrar el pedido. Envianos los datos manualmente por WhatsApp.');
+    } else {
+        showToast('✅ Pedido registrado');
+    }
+    
+    // 🟢 ABRIR WHATSAPP
+    const msg = `¡Hola Ruca del Valle! Quiero ${item.productType === '1ra' ? 'pagar la *2da Cuota*' : 'confirmar mi pedido de la *2da Tanda*'}:%0A%0A` +
+        `👤 Cliente: ${item.customer}%0A` +
+        `📏 Talle: ${item.size}%0A` +
+        `🛡️ Sección: ${item.section}%0A` +
+        `🔢 Número: ${item.number}%0A` +
+        `✍️ Estampado: "${item.customName}"%0A` +
+        `💰 Monto: $${item.price.toLocaleString('es-AR')}%0A%0A` +
+        `Adjunto comprobante de transferencia. ¡Gracias!`;
+    
+    window.open(`https://wa.me/3834565209?text=${msg}`, '_blank');
+    closeProductModal();
+    
+    btn.disabled = false;
+    btn.textContent = CONFIG[currentProduct].cta;
+}
 
         function removeFromCart(id) { cart = cart.filter(i => i.id !== id); renderCart(); }
         
