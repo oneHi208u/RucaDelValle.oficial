@@ -325,7 +325,6 @@
                     </div>
                     <div class="section-divider mb-6"></div>
                     
-                    <!-- Toggle de método de pago (solo visible para 2da Tanda) -->
                     <div id="payment-method-container">
                         <p class="text-sm text-gray-500 mb-4">Elegí cómo querés abonar:</p>
                         <div class="space-y-3">
@@ -400,7 +399,6 @@
             toggleCart(); 
             document.getElementById('checkout-modal').classList.remove('hidden'); 
             
-            // Mostrar/ocultar toggle de método de pago según producto
             const paymentContainer = document.getElementById('payment-method-container');
             if (currentProduct === '1ra') {
                 paymentContainer.style.display = 'none';
@@ -532,7 +530,6 @@
                 const config = CONFIG[currentProduct];
                 const item = { id: Date.now(), product: "Camiseta Oficial Ruca del Valle", productType: currentProduct, price: config.price, customer: `${n} ${l}`, size: s, section: sec, number: num, customName: cn || n.toUpperCase() };
 
-                // Ambas tandas van directo a WhatsApp
                 await sendToWhatsAppDirectly(item);
             } catch (err) {
                 alert(err.message);
@@ -544,66 +541,56 @@
             }
         }
 
-async function sendToWhatsAppDirectly(item) {
-    const btn = document.getElementById('add-to-cart-btn');
-    btn.disabled = true;
-    btn.textContent = "⏳ Registrando...";
-    
-    // 🔴 REGISTRAR EN GOOGLE SHEETS PRIMERO
-    let success = false;
-    let attempts = 0;
-    
-    while (attempts < 3 && !success) {
-        attempts++;
-        try {
-            await fetch(SHEET_SCRIPT_URL, {
-                method: 'POST',
-                mode: 'no-cors',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    action: 'purchase',
-                    cliente: item.customer,
-                    email: document.getElementById('cust-email').value || '',
-                    producto: item.product,
-                    productoTipo: item.productType, // '1ra' o '2da'
-                    modoPago: item.productType === '1ra' ? 'second' : 'new', // 1ra=2da cuota, 2da=nueva
-                    talle: item.size,
-                    seccion: item.section,
-                    numero: item.number,
-                    nombreEstampado: item.customName,
-                    total: item.price,
-                    metodo: '1 Pago' // Siempre 1 pago para ambas
-                })
-            });
-            success = true;
-        } catch (e) {
-            console.warn(`Intento ${attempts} fallido:`, e);
-            if (attempts < 3) await new Promise(r => setTimeout(r, 1000 * attempts));
+        async function sendToWhatsAppDirectly(item) {
+            const btn = document.getElementById('add-to-cart-btn');
+            btn.disabled = true;
+            btn.textContent = "⏳ Registrando...";
+            
+            // 1. Intentar registrar en Google Sheets
+            try {
+                await fetch(SHEET_SCRIPT_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        action: 'purchase',
+                        cliente: item.customer,
+                        email: document.getElementById('cust-email')?.value || '',
+                        producto: item.product,
+                        productoTipo: item.productType,
+                        modoPago: item.productType === '1ra' ? 'second' : 'new',
+                        talle: item.size,
+                        seccion: item.section,
+                        numero: item.number,
+                        nombreEstampado: item.customName,
+                        total: item.price,
+                        metodo: '1 Pago'
+                    })
+                });
+                showToast('✅ Pedido registrado en el sistema');
+            } catch (e) {
+                console.error("Error registrando:", e);
+                showToast('⚠️ Registrando manualmente...');
+            }
+
+            // 2. Redirigir a WhatsApp SIEMPRE (con o sin éxito en el registro)
+            const msg = `¡Hola Ruca del Valle! Quiero ${item.productType === '1ra' ? 'pagar la *2da Cuota*' : 'confirmar mi pedido de la *2da Tanda*'}:%0A%0A` +
+                `👤 Cliente: ${item.customer}%0A` +
+                `📏 Talle: ${item.size}%0A` +
+                `🛡️ Sección: ${item.section}%0A` +
+                `🔢 Número: ${item.number}%0A` +
+                `✍️ Estampado: "${item.customName}"%0A` +
+                `💰 Monto: $${item.price.toLocaleString('es-AR')}%0A%0A` +
+                `Adjunto comprobante de transferencia. ¡Gracias!`;
+            
+            // Delay de 800ms para asegurar que el fetch se envíe antes de cambiar de pestaña
+            setTimeout(() => {
+                window.open(`https://wa.me/3834565209?text=${msg}`, '_blank');
+                closeProductModal();
+                btn.disabled = false;
+                btn.textContent = CONFIG[currentProduct].cta;
+            }, 800);
         }
-    }
-    
-    if (!success) {
-        alert('⚠️ No pudimos registrar el pedido. Envianos los datos manualmente por WhatsApp.');
-    } else {
-        showToast('✅ Pedido registrado');
-    }
-    
-    // 🟢 ABRIR WHATSAPP
-    const msg = `¡Hola Ruca del Valle! Quiero ${item.productType === '1ra' ? 'pagar la *2da Cuota*' : 'confirmar mi pedido de la *2da Tanda*'}:%0A%0A` +
-        `👤 Cliente: ${item.customer}%0A` +
-        `📏 Talle: ${item.size}%0A` +
-        `🛡️ Sección: ${item.section}%0A` +
-        `🔢 Número: ${item.number}%0A` +
-        `✍️ Estampado: "${item.customName}"%0A` +
-        `💰 Monto: $${item.price.toLocaleString('es-AR')}%0A%0A` +
-        `Adjunto comprobante de transferencia. ¡Gracias!`;
-    
-    window.open(`https://wa.me/3834565209?text=${msg}`, '_blank');
-    closeProductModal();
-    
-    btn.disabled = false;
-    btn.textContent = CONFIG[currentProduct].cta;
-}
 
         function removeFromCart(id) { cart = cart.filter(i => i.id !== id); renderCart(); }
         
