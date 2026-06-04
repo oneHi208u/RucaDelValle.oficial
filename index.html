@@ -62,10 +62,6 @@
         .product-btn { flex: 1; padding: 10px 12px; border-radius: 8px; font-size: 0.9rem; font-weight: 600; transition: all 0.2s; background: transparent; color: var(--cream); border: none; cursor: pointer; }
         .product-btn.active { background: var(--gold); color: var(--black); }
         .product-btn:hover:not(.active) { background: #2A2A2A; }
-        .payment-mode-toggle { display: flex; gap: 2px; background: var(--dark-gray); padding: 4px; border-radius: 8px; margin-bottom: 16px; }
-        .payment-mode-btn { flex: 1; padding: 6px 10px; border-radius: 6px; font-size: 0.8rem; font-weight: 600; transition: all 0.2s; background: transparent; color: var(--cream); border: none; cursor: pointer; }
-        .payment-mode-btn.active { background: var(--gold); color: var(--black); }
-        .payment-mode-btn:hover:not(.active) { background: #2A2A2A; }
     </style>
 </head>
 <body>
@@ -167,26 +163,19 @@
                         <h4 class="font-cinzel text-xl sm:text-2xl font-bold text-white mb-2">Camiseta Oficial Ruca del Valle</h4>
                         <p class="text-gray-400 text-sm leading-relaxed mb-6">Camiseta personalizada con estampado de tu sección. Elegí tu número único y el nombre que querás que lleve.</p>
                         
-                        <div id="payment-mode-container" class="mb-4">
-                            <div class="payment-mode-toggle">
-                                <button onclick="selectPaymentMode('new')" id="btn-mode-new" class="payment-mode-btn active">Nueva Compra</button>
-                                <button onclick="selectPaymentMode('second')" id="btn-mode-second" class="payment-mode-btn">Pagar 2da Cuota</button>
-                            </div>
-                        </div>
-                        
                         <div class="mb-6">
-                            <span id="price-display" class="text-3xl font-bold text-[#F5B731]">$35.000</span>
-                            <span id="price-note" class="text-xs text-gray-500 ml-2 hidden">(2da Cuota)</span>
+                            <span id="price-display" class="text-3xl font-bold text-[#F5B731]">$17.500</span>
+                            <span id="price-note" class="text-xs text-gray-500 ml-2">(2da Cuota)</span>
                         </div>
                         
                         <div class="space-y-3 mb-6">
                             <div class="flex items-center gap-2 text-sm text-gray-400"><svg class="w-4 h-4 text-[#F5B731]" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg><span>Personalización de nombre incluida</span></div>
                             <div class="flex items-center gap-2 text-sm text-gray-400"><svg class="w-4 h-4 text-[#F5B731]" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg><span>Número único por sección (1-99)</span></div>
                             <div class="flex items-center gap-2 text-sm text-gray-400"><svg class="w-4 h-4 text-[#F5B731]" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg><span>7 secciones disponibles</span></div>
-                            <div class="flex items-center gap-2 text-sm text-gray-400"><svg class="w-4 h-4 text-[#F5B731]" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg><span>Pago en 1 o 2 cuotas</span></div>
+                            <div id="payment-info" class="flex items-center gap-2 text-sm text-gray-400"><svg class="w-4 h-4 text-[#F5B731]" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg><span id="payment-info-text">Pago único de 2da cuota</span></div>
                         </div>
                         
-                        <button id="main-cta" onclick="openProductModal()" class="btn-gold w-full py-4 rounded-xl text-sm font-bold">COMPRAR AHORA</button>
+                        <button id="main-cta" onclick="openProductModal()" class="btn-gold w-full py-4 rounded-xl text-sm font-bold">PAGAR 2DA CUOTA</button>
                     </div>
                 </div>
             </div>
@@ -266,7 +255,7 @@
                     <div class="flex items-center justify-between">
                         <div>
                             <h3 class="font-cinzel text-lg font-bold text-[#F5B731]">Personalizar Camiseta</h3>
-                            <p class="text-xs text-gray-500 mt-0.5"><span id="modal-product">1ra Tanda</span> · <span id="modal-mode">Nueva Compra</span></p>
+                            <p class="text-xs text-gray-500 mt-0.5"><span id="modal-product">1ra Tanda</span></p>
                         </div>
                         <button onclick="closeProductModal()" class="text-gray-500 hover:text-white transition-colors p-1"><svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg></button>
                     </div>
@@ -277,13 +266,14 @@
                         <div><label class="block text-[10px] font-bold text-[#F5B731] uppercase tracking-widest mb-1.5">Nombre *</label><input type="text" id="cust-name" class="input-dark w-full rounded-lg px-3 py-2.5 text-sm" placeholder="Tu nombre"></div>
                         <div><label class="block text-[10px] font-bold text-[#F5B731] uppercase tracking-widest mb-1.5">Apellido *</label><input type="text" id="cust-lastname" class="input-dark w-full rounded-lg px-3 py-2.5 text-sm" placeholder="Tu apellido"></div>
                     </div>
+                    <div><label class="block text-[10px] font-bold text-[#F5B731] uppercase tracking-widest mb-1.5">Email <span class="text-gray-500 normal-case">(Solo para recordatorios)</span></label><input type="email" id="cust-email" class="input-dark w-full rounded-lg px-3 py-2.5 text-sm" placeholder="Opcional"></div>
                     <div><label class="block text-[10px] font-bold text-[#F5B731] uppercase tracking-widest mb-1.5">Talle *</label><select id="size-select" class="input-dark w-full rounded-lg px-3 py-2.5 text-sm"><option value="S">S</option><option value="M">M</option><option value="L">L</option><option value="XL">XL</option><option value="XXL">XXL</option><option value="XXXL">XXXL</option></select></div>
                     <div><label class="block text-[10px] font-bold text-[#F5B731] uppercase tracking-widest mb-1.5">Sección *</label><select id="section-select" onchange="checkAvailability(this.value)" class="input-dark w-full rounded-lg px-3 py-2.5 text-sm"><option value="">Elegí tu sección...</option><option value="Escuderos">🛡️ Escuderos</option><option value="Templarios">⚔️ Templarios</option><option value="Adalides">🏹 Adalides</option><option value="Herederas">👑 Herederas</option><option value="Caperucitas">🎭 Caperucitas</option><option value="Mayor">🏰 Mayor</option><option value="Milicianos">🏛️ Milicianos</option></select></div>
                     <div><label class="block text-[10px] font-bold text-[#F5B731] uppercase tracking-widest mb-1.5">Número (1-99) *</label><input type="number" id="number-input" min="1" max="99" oninput="validateNumberInput()" class="input-dark w-full rounded-lg px-3 py-2.5 text-sm" placeholder="Ej: 10"><p id="number-error" class="text-red-400 text-xs mt-1 hidden">⚠️ Este número ya está ocupado.</p></div>
                     <div><label class="block text-[10px] font-bold text-[#F5B731] uppercase tracking-widest mb-1.5">Nombre para estampar <span class="text-gray-600 normal-case">(Opcional)</span></label><input type="text" id="custom-shirt-name" maxlength="12" class="input-dark w-full rounded-lg px-3 py-2.5 text-sm uppercase" placeholder="Nombre en la remera"></div>
                 </div>
                 <div class="bg-black/40 px-6 py-4 sm:flex sm:flex-row-reverse gap-3">
-                    <button type="button" id="add-to-cart-btn" onclick="handleFormSubmit()" class="w-full sm:w-auto btn-gold px-8 py-3 rounded-xl text-sm font-bold disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:transform-none disabled:hover:shadow-none">Agregar al Carrito</button>
+                    <button type="button" id="add-to-cart-btn" onclick="handleFormSubmit()" class="w-full sm:w-auto btn-gold px-8 py-3 rounded-xl text-sm font-bold disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:transform-none disabled:hover:shadow-none">Enviar por WhatsApp</button>
                     <button type="button" onclick="closeProductModal()" class="mt-3 sm:mt-0 w-full sm:w-auto btn-outline-gold px-8 py-3 rounded-xl text-sm font-bold">Cancelar</button>
                 </div>
             </div>
@@ -334,11 +324,16 @@
                         <button onclick="closeCheckoutModal()" class="text-gray-500 hover:text-white transition-colors"><svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg></button>
                     </div>
                     <div class="section-divider mb-6"></div>
-                    <p class="text-sm text-gray-500 mb-4">Elegí cómo querés abonar:</p>
-                    <div class="space-y-3">
-                        <div onclick="selectPayment('full')" id="payment-full" class="payment-option selected flex items-center p-4 rounded-xl bg-black/30"><input type="radio" name="payment-method" value="full" class="h-4 w-4 text-[#F5B731] focus:ring-[#F5B731] border-gray-600 bg-[#1E1E1E]" checked><div class="ml-3"><span class="block text-sm font-bold text-white">1 Pago</span><span class="block text-xs text-gray-500">Pagás el total ahora por transferencia o QR</span></div></div>
-                        <div onclick="selectPayment('installments')" id="payment-installments" class="payment-option flex items-center p-4 rounded-xl bg-black/30"><input type="radio" name="payment-method" value="installments" class="h-4 w-4 text-[#F5B731] focus:ring-[#F5B731] border-gray-600 bg-[#1E1E1E]"><div class="ml-3"><span class="block text-sm font-bold text-white">2 Pagos</span><span class="block text-xs text-gray-500">Pagá la mitad ahora y el siguiente mes la otra mitad</span></div></div>
+                    
+                    <!-- Toggle de método de pago (solo visible para 2da Tanda) -->
+                    <div id="payment-method-container">
+                        <p class="text-sm text-gray-500 mb-4">Elegí cómo querés abonar:</p>
+                        <div class="space-y-3">
+                            <div onclick="selectPayment('full')" id="payment-full" class="payment-option selected flex items-center p-4 rounded-xl bg-black/30"><input type="radio" name="payment-method" value="full" class="h-4 w-4 text-[#F5B731] focus:ring-[#F5B731] border-gray-600 bg-[#1E1E1E]" checked><div class="ml-3"><span class="block text-sm font-bold text-white">1 Pago</span><span class="block text-xs text-gray-500">Pagás el total ahora por transferencia o QR</span></div></div>
+                            <div onclick="selectPayment('installments')" id="payment-installments" class="payment-option flex items-center p-4 rounded-xl bg-black/30"><input type="radio" name="payment-method" value="installments" class="h-4 w-4 text-[#F5B731] focus:ring-[#F5B731] border-gray-600 bg-[#1E1E1E]"><div class="ml-3"><span class="block text-sm font-bold text-white">2 Pagos</span><span class="block text-xs text-gray-500">Pagá la mitad ahora y el siguiente mes la otra mitad</span></div></div>
+                        </div>
                     </div>
+                    
                     <div id="bank-details" class="mt-6 bg-black/30 p-5 rounded-xl border border-[#2A2A2A]">
                         <h4 class="font-cinzel font-bold text-[#F5B731] mb-3 text-[10px] uppercase tracking-widest">Datos para Transferir</h4>
                         <p class="text-3xl font-bold text-[#F5B731] mb-4" id="transfer-amount">$0</p>
@@ -355,69 +350,40 @@
         </div>
     </div>
 
-    <!-- JAVASCRIPT CORREGIDO Y ROBUSTO -->
+    <!-- JAVASCRIPT ACTUALIZADO -->
     <script>
-        // ⚙️ CONFIGURACIÓN
-        const SHEET_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxxKCjrhAbl9wbjbtyn5-hPyNZfQHksMFawubZWEfJhmyB43SFJ9cqb1CEz6jYBTzzjXw/exec';
+        const SHEET_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby7pF2Ysw-48c_QsR67pqgjxED9FX-8Oy_VmW2rfWxXWf8Q7IkaIHE7S2XfVhSrlA3rKQ/exec';
         
         let cart = [];
         let selectedPayment = 'full';
         let occupiedNumbers = {};
         let currentProduct = '1ra';
-        let currentPaymentMode = 'new';
-        let isProcessing = false; // Evita clics múltiples
+        let isProcessing = false;
         
         const CONFIG = {
-            '1ra': {
-                new: { price: 35000, label: '1ra Tanda - Nueva Compra', cta: 'Agregar al Carrito' },
-                second: { price: 17500, label: '1ra Tanda - 2da Cuota', cta: 'Enviar por WhatsApp' }
-            },
-            '2da': {
-                new: { price: 35000, label: '2da Tanda - Nueva Compra', cta: 'Agregar al Carrito' }
-            }
+            '1ra': { price: 17500, label: '1ra Tanda - 2da Cuota', cta: 'PAGAR 2DA CUOTA' },
+            '2da': { price: 35000, label: '2da Tanda', cta: 'COMPRAR AHORA' }
         };
 
-        // 🖼️ UI Helpers
         function selectProduct(product) {
             currentProduct = product;
             document.getElementById('btn-prod-1ra').classList.toggle('active', product === '1ra');
             document.getElementById('btn-prod-2da').classList.toggle('active', product === '2da');
             document.getElementById('product-badge').textContent = product === '1ra' ? '1ra Tanda' : '2da Tanda';
-            document.getElementById('modal-product').textContent = product === '1ra' ? '1ra Tanda' : '2da Tanda';
+            document.getElementById('modal-product').textContent = product === '1ra' ? '1ra Tanda - 2da Cuota' : '2da Tanda';
             document.getElementById('product-desc').textContent = product === '1ra' 
                 ? 'Personalizable · Ideal para Actividad Física · Edición limitada'
                 : 'Segunda tanda · Números independientes pero bloqueados por 1ra tanda';
             
-            const paymentContainer = document.getElementById('payment-mode-container');
-            if (product === '1ra') {
-                paymentContainer.style.display = 'block';
-                selectPaymentMode('new');
-            } else {
-                paymentContainer.style.display = 'none';
-                currentPaymentMode = 'new';
-                updateProductUI();
-            }
+            const config = CONFIG[product];
+            document.getElementById('price-display').textContent = `$${config.price.toLocaleString('es-AR')}`;
+            document.getElementById('price-note').textContent = product === '1ra' ? '(2da Cuota)' : '';
+            document.getElementById('main-cta').textContent = config.cta;
+            document.getElementById('payment-info-text').textContent = product === '1ra' ? 'Pago único de 2da cuota' : 'Pago en 1 o 2 cuotas';
+            
             occupiedNumbers = {};
             document.getElementById('section-select').value = '';
             document.getElementById('number-error').classList.add('hidden');
-        }
-
-        function selectPaymentMode(mode) {
-            currentPaymentMode = mode;
-            document.getElementById('btn-mode-new').classList.toggle('active', mode === 'new');
-            document.getElementById('btn-mode-second').classList.toggle('active', mode === 'second');
-            document.getElementById('modal-mode').textContent = mode === 'new' ? 'Nueva Compra' : 'Pagar 2da Cuota';
-            updateProductUI();
-        }
-
-        function updateProductUI() {
-            const config = CONFIG[currentProduct][currentPaymentMode];
-            document.getElementById('price-display').textContent = `$${config.price.toLocaleString('es-AR')}`;
-            document.getElementById('price-note').classList.toggle('hidden', currentPaymentMode !== 'second');
-            
-            const ctaBtn = document.getElementById('add-to-cart-btn');
-            ctaBtn.textContent = config.cta;
-            ctaBtn.onclick = handleFormSubmit; // Actualiza el evento
         }
 
         async function openProductModal() { 
@@ -430,7 +396,21 @@
             const sidebar = document.getElementById('cart-sidebar');
             if(sidebar) sidebar.classList.toggle('translate-x-full'); 
         }
-        function openCheckoutModal() { toggleCart(); document.getElementById('checkout-modal').classList.remove('hidden'); updateTransferAmount(); }
+        function openCheckoutModal() { 
+            toggleCart(); 
+            document.getElementById('checkout-modal').classList.remove('hidden'); 
+            
+            // Mostrar/ocultar toggle de método de pago según producto
+            const paymentContainer = document.getElementById('payment-method-container');
+            if (currentProduct === '1ra') {
+                paymentContainer.style.display = 'none';
+                selectedPayment = 'full';
+            } else {
+                paymentContainer.style.display = 'block';
+            }
+            
+            updateTransferAmount(); 
+        }
         function closeCheckoutModal() { document.getElementById('checkout-modal').classList.add('hidden'); }
         function toggleSizeChart() { document.getElementById('size-chart-modal').classList.toggle('hidden'); }
         
@@ -450,7 +430,6 @@
         }
 
         function selectPayment(m) {
-            if (currentPaymentMode === 'second') m = 'full';
             selectedPayment = m;
             document.getElementById('payment-full').classList.toggle('selected', m==='full');
             document.getElementById('payment-installments').classList.toggle('selected', m==='installments');
@@ -459,14 +438,13 @@
         }
         
         function updateTransferAmount() {
-            const config = CONFIG[currentProduct][currentPaymentMode];
+            const config = CONFIG[currentProduct];
             const t = cart.reduce((s,i)=>s+i.price,0) || config.price;
-            const d = (selectedPayment==='installments' && currentPaymentMode!=='second') ? t/2 : t;
-            const label = (selectedPayment==='installments' && currentPaymentMode!=='second') ? '1ra Cuota (50%)' : 'Total a Pagar';
+            const d = (selectedPayment==='installments' && currentProduct==='2da') ? t/2 : t;
+            const label = (selectedPayment==='installments' && currentProduct==='2da') ? '1ra Cuota (50%)' : 'Total a Pagar';
             document.getElementById('transfer-amount').innerHTML = `<span class="text-sm font-normal text-gray-500 block">${label}</span>$${d.toLocaleString('es-AR')}`;
         }
 
-        // 📊 Contador de ventas
         async function loadSectionSalesCount() {
             const sections = ["Escuderos", "Templarios", "Adalides", "Herederas", "Caperucitas", "Mayor", "Milicianos"];
             const select = document.getElementById('section-select');
@@ -499,7 +477,7 @@
                 document.getElementById('number-error').classList.remove('hidden');
             } finally {
                 btn.disabled = false;
-                btn.textContent = CONFIG[currentProduct][currentPaymentMode].cta;
+                btn.textContent = CONFIG[currentProduct].cta;
                 numInput.disabled = false;
                 numInput.focus();
             }
@@ -529,7 +507,6 @@
             } catch (e) { console.warn("Verificación final falló:", e); return true; }
         }
 
-        // 🔀 CONTROLADOR PRINCIPAL DEL FORMULARIO
         async function handleFormSubmit() {
             if (isProcessing) return;
             isProcessing = true;
@@ -552,18 +529,11 @@
                 const isValid = await finalNumberCheck(sec, num);
                 if (!isValid) return;
 
-                const config = CONFIG[currentProduct][currentPaymentMode];
-                const item = { id: Date.now(), product: "Camiseta Oficial Ruca del Valle", productType: currentProduct, paymentMode: currentPaymentMode, price: config.price, customer: `${n} ${l}`, size: s, section: sec, number: num, customName: cn || n.toUpperCase() };
+                const config = CONFIG[currentProduct];
+                const item = { id: Date.now(), product: "Camiseta Oficial Ruca del Valle", productType: currentProduct, price: config.price, customer: `${n} ${l}`, size: s, section: sec, number: num, customName: cn || n.toUpperCase() };
 
-                if (currentPaymentMode === 'second') {
-                    // 📲 REDIRECT DIRECTO A WHATSAPP PARA 2DA CUOTA
-                    await sendToWhatsAppDirectly(item);
-                } else {
-                    cart.push(item);
-                    renderCart();
-                    showToast("¡Agregado al carrito!");
-                    closeProductModal();
-                }
+                // Ambas tandas van directo a WhatsApp
+                await sendToWhatsAppDirectly(item);
             } catch (err) {
                 alert(err.message);
                 console.error(err);
@@ -575,13 +545,14 @@
         }
 
         async function sendToWhatsAppDirectly(item) {
-            const msg = `¡Hola Ruca del Valle! Quiero pagar la *2da Cuota* de mi pedido:%0A%0A` +
+            const modeText = item.productType === '1ra' ? '2da Cuota' : 'Nueva Compra';
+            const msg = `¡Hola Ruca del Valle! Quiero ${item.productType === '1ra' ? 'pagar la *2da Cuota*' : 'confirmar mi pedido de la *2da Tanda*'}:%0A%0A` +
                 `👤 Cliente: ${item.customer}%0A` +
                 `📏 Talle: ${item.size}%0A` +
                 `🛡️ Sección: ${item.section}%0A` +
                 `🔢 Número: ${item.number}%0A` +
                 `✍️ Estampado: "${item.customName}"%0A` +
-                `💰 Monto 2da Cuota: $${item.price.toLocaleString('es-AR')}%0A%0A` +
+                `💰 Monto: $${item.price.toLocaleString('es-AR')}%0A%0A` +
                 `Adjunto comprobante de transferencia. ¡Gracias!`;
             
             window.open(`https://wa.me/3834565209?text=${msg}`, '_blank');
@@ -615,7 +586,7 @@
             while (attempts < 3 && !success) {
                 attempts++;
                 try {
-                    await Promise.all(cart.map(item => fetch(SHEET_SCRIPT_URL, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ action: 'purchase', cliente: item.customer, producto: item.product, productoTipo: item.productType, modoPago: item.paymentMode, talle: item.size, seccion: item.section, numero: item.number, nombreEstampado: item.customName, total: item.price, metodo: selectedPayment === 'installments' ? '2 Pagos' : '1 Pago' }) }).then(() => true)));
+                    await Promise.all(cart.map(item => fetch(SHEET_SCRIPT_URL, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ action: 'purchase', cliente: item.customer, producto: item.product, productoTipo: item.productType, modoPago: 'new', talle: item.size, seccion: item.section, numero: item.number, nombreEstampado: item.customName, total: item.price, metodo: selectedPayment === 'installments' ? '2 Pagos' : '1 Pago' }) }).then(() => true)));
                     success = true;
                 } catch (e) { await new Promise(r => setTimeout(r, 1000 * attempts)); }
             }
@@ -631,13 +602,12 @@
             btn.disabled = false; btn.innerHTML = `<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>Ya Pagué`;
         }
 
-        // ⭐ Reviews
         document.querySelectorAll('#star-selector span').forEach(s => s.addEventListener('click', function() { selectedRating = parseInt(this.dataset.val); document.querySelectorAll('#star-selector span').forEach((el, i) => el.classList.toggle('active', i < selectedRating)); }));
         let selectedRating = 0;
         async function loadReviews() { try { const res = await fetch(`${SHEET_SCRIPT_URL}?action=reviews`); const reviews = await res.json(); const container = document.getElementById('reviews-container'); container.innerHTML = reviews.length ? '' : '<p class="text-gray-500 text-center py-4">Sé el primero en opinar.</p>'; reviews.reverse().forEach(r => container.innerHTML += `<div class="bg-[#1A1A1A] p-4 rounded-lg border border-[#2A2A2A]"><div class="flex justify-between items-center mb-2"><span class="font-bold text-white">${r.name}</span><span class="text-[#F5B731] text-sm">${'★'.repeat(r.rating) + '☆'.repeat(5 - r.rating)}</span></div><p class="text-gray-400 text-sm">${r.comment}</p><p class="text-gray-600 text-xs mt-2">${new Date(r.date).toLocaleDateString('es-AR')}</p></div>`); } catch (e) { console.error("Error reseñas:", e); } }
         async function submitReview() { const name = document.getElementById('review-name').value.trim(); const comment = document.getElementById('review-comment').value.trim(); if (!name || !selectedRating || !comment) return alert('Completá todos los campos.'); await fetch(SHEET_SCRIPT_URL, { method: 'POST', mode: 'no-cors', headers: {'Content-Type':'application/json'}, body: JSON.stringify({action: 'review', name, rating: selectedRating, comment}) }); showToast('¡Gracias!'); document.getElementById('review-name').value = ''; document.getElementById('review-comment').value = ''; selectedRating = 0; document.querySelectorAll('#star-selector span').forEach(s=>s.classList.remove('active')); loadReviews(); }
 
-        document.addEventListener('DOMContentLoaded', () => { loadReviews(); renderCart(); selectProduct('1ra'); updateProductUI(); });
+        document.addEventListener('DOMContentLoaded', () => { loadReviews(); renderCart(); selectProduct('1ra'); });
     </script>
 </body>
 </html>
