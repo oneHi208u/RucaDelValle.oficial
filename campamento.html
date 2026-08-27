@@ -554,7 +554,7 @@
             document.getElementById('compra-modal').classList.add('hidden');
         }
 
-        // ✅ Confirmar reserva → registra y abre WhatsApp
+        // ✅ Confirmar reserva → registra y abre WhatsApp (compatible con iPhone)
         async function confirmarReserva() {
             if (isProcessing) return;
             
@@ -573,7 +573,6 @@
             
             isProcessing = true;
             const btn = document.getElementById('btn-confirmar');
-            const originalText = btn.textContent;
             btn.disabled = true;
             btn.textContent = '⏳ Registrando...';
             
@@ -581,11 +580,13 @@
             const email = document.getElementById('camp-email').value;
             const observaciones = document.getElementById('camp-observaciones').value.trim();
             
-            // 1. Registrar en Google Sheets
+            // 1. Registrar en Google Sheets (fire and forget con keepalive)
+            // keepalive: true hace que el envío sobreviva aunque cambiemos de página
             try {
-                await fetch(SHEET_SCRIPT_URL, {
+                fetch(SHEET_SCRIPT_URL, {
                     method: 'POST',
                     mode: 'no-cors',
+                    keepalive: true,
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
                         action: 'campamento',
@@ -601,8 +602,7 @@
                         observaciones: observaciones,
                         total: plan.total
                     })
-                });
-                showToast('✅ Reserva registrada');
+                }).catch(e => console.error('Error registrando:', e));
             } catch (e) {
                 console.error('Error registrando:', e);
             }
@@ -622,14 +622,10 @@
                 `💰 *Total: $${plan.total.toLocaleString('es-AR')}*%0A%0A` +
                 `Adjunto comprobante de transferencia. ¡Gracias!`;
             
-            // 3. Abrir WhatsApp
-            setTimeout(() => {
-                window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${msg}`, '_blank');
-                closeCompraModal();
-                btn.disabled = false;
-                btn.textContent = originalText;
-                isProcessing = false;
-            }, 800);
+            // 3. Redirigir a WhatsApp
+            // window.location.href funciona en iPhone (no lo bloquea como popup)
+            showToast('✅ Reserva registrada');
+            window.location.href = `https://wa.me/${WHATSAPP_NUMBER}?text=${msg}`;
         }
 
         function showToast(msg) {
