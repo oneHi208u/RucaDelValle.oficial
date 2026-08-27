@@ -23,72 +23,147 @@
         body { font-family: 'Inter', sans-serif; background-color: var(--black); color: var(--cream); overflow-x: hidden; }
         .font-cinzel { font-family: 'Cinzel', serif; }
 
-        /* 🔥 FONDO DE LLAMAS DE FUEGO */
+        /* 🔥 FONDO DE LLAMAS DE FUEGO INTENSO */
         .fire-bg {
             position: fixed;
             inset: 0;
             z-index: 0;
             pointer-events: none;
             background: 
-                radial-gradient(ellipse at 20% 110%, rgba(212, 58, 15, 0.28) 0%, transparent 45%),
-                radial-gradient(ellipse at 50% 115%, rgba(255, 107, 26, 0.30) 0%, transparent 50%),
-                radial-gradient(ellipse at 80% 110%, rgba(212, 58, 15, 0.25) 0%, transparent 45%),
-                radial-gradient(ellipse at 50% 0%, rgba(245, 183, 49, 0.06) 0%, transparent 55%),
+                radial-gradient(ellipse at 15% 115%, rgba(212, 58, 15, 0.50) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 120%, rgba(255, 107, 26, 0.55) 0%, transparent 55%),
+                radial-gradient(ellipse at 85% 115%, rgba(212, 58, 15, 0.48) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 0%, rgba(245, 183, 49, 0.08) 0%, transparent 55%),
                 var(--black);
         }
         .fire-bg::before {
+            content: '';
+            position: absolute;
+            bottom: -20%;
+            left: -10%;
+            width: 120%;
+            height: 70%;
+            background: radial-gradient(ellipse at 30% 100%, rgba(255, 107, 26, 0.40) 0%, transparent 55%),
+                        radial-gradient(ellipse at 70% 100%, rgba(245, 183, 49, 0.30) 0%, transparent 50%);
+            animation: fireFlicker 4s ease-in-out infinite alternate;
+            filter: blur(20px);
+        }
+        .fire-bg::after {
             content: '';
             position: absolute;
             bottom: -30%;
             left: -10%;
             width: 120%;
             height: 80%;
-            background: radial-gradient(ellipse at 30% 100%, rgba(255, 107, 26, 0.20) 0%, transparent 55%),
-                        radial-gradient(ellipse at 70% 100%, rgba(245, 183, 49, 0.14) 0%, transparent 50%);
-            animation: fireFlicker 5s ease-in-out infinite alternate;
-        }
-        .fire-bg::after {
-            content: '';
-            position: absolute;
-            bottom: -40%;
-            left: -10%;
-            width: 120%;
-            height: 90%;
-            background: radial-gradient(ellipse at 50% 100%, rgba(212, 58, 15, 0.18) 0%, transparent 60%),
-                        radial-gradient(ellipse at 85% 100%, rgba(255, 107, 26, 0.12) 0%, transparent 45%);
-            animation: fireFlicker 7s ease-in-out infinite alternate-reverse;
+            background: radial-gradient(ellipse at 50% 100%, rgba(212, 58, 15, 0.35) 0%, transparent 60%),
+                        radial-gradient(ellipse at 85% 100%, rgba(255, 140, 26, 0.25) 0%, transparent 45%);
+            animation: fireFlicker 6s ease-in-out infinite alternate-reverse;
+            filter: blur(25px);
         }
         @keyframes fireFlicker {
-            0%   { opacity: 0.6; transform: scaleY(1) translateY(0); }
-            40%  { opacity: 0.9; transform: scaleY(1.08) translateY(-1.5%); }
-            70%  { opacity: 0.75; transform: scaleY(1.03) translateY(-0.5%); }
-            100% { opacity: 1; transform: scaleY(1.1) translateY(-2%); }
+            0%   { opacity: 0.7; transform: scaleY(1) translateY(0); }
+            30%  { opacity: 1; transform: scaleY(1.12) translateY(-2%); }
+            60%  { opacity: 0.85; transform: scaleY(1.05) translateY(-1%); }
+            100% { opacity: 1; transform: scaleY(1.15) translateY(-3%); }
         }
-        /* Chispas de fuego */
+
+        /* 🔥 Llamas flameando individuales */
+        .flames-container {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 40vh;
+            overflow: visible;
+        }
+        .flame {
+            position: absolute;
+            bottom: -30px;
+            border-radius: 50% 50% 50% 50% / 65% 65% 35% 35%;
+            background: radial-gradient(ellipse at 50% 85%, 
+                rgba(255, 213, 79, 0.95) 0%, 
+                rgba(255, 140, 26, 0.85) 30%, 
+                rgba(212, 58, 15, 0.75) 60%, 
+                rgba(150, 30, 10, 0.4) 80%,
+                transparent 100%);
+            filter: blur(6px);
+            transform-origin: bottom center;
+            animation: flameDance ease-in-out infinite;
+            mix-blend-mode: screen;
+        }
+        /* Distribución y tamaños de cada llama */
+        .flame:nth-child(1)  { left: -2%;  width: 90px;  height: 160px; animation-duration: 2.1s; animation-delay: 0s; }
+        .flame:nth-child(2)  { left: 6%;   width: 70px;  height: 220px; animation-duration: 1.8s; animation-delay: 0.4s; }
+        .flame:nth-child(3)  { left: 14%;  width: 100px; height: 180px; animation-duration: 2.4s; animation-delay: 0.2s; }
+        .flame:nth-child(4)  { left: 23%;  width: 65px;  height: 250px; animation-duration: 1.9s; animation-delay: 0.7s; }
+        .flame:nth-child(5)  { left: 31%;  width: 95px;  height: 190px; animation-duration: 2.3s; animation-delay: 0.1s; }
+        .flame:nth-child(6)  { left: 40%;  width: 75px;  height: 270px; animation-duration: 2.0s; animation-delay: 0.5s; }
+        .flame:nth-child(7)  { left: 48%;  width: 105px; height: 210px; animation-duration: 1.7s; animation-delay: 0.3s; }
+        .flame:nth-child(8)  { left: 57%;  width: 70px;  height: 260px; animation-duration: 2.2s; animation-delay: 0.8s; }
+        .flame:nth-child(9)  { left: 65%;  width: 95px;  height: 185px; animation-duration: 1.9s; animation-delay: 0.15s; }
+        .flame:nth-child(10) { left: 74%;  width: 80px;  height: 240px; animation-duration: 2.3s; animation-delay: 0.6s; }
+        .flame:nth-child(11) { left: 82%;  width: 100px; height: 195px; animation-duration: 2.0s; animation-delay: 0.35s; }
+        .flame:nth-child(12) { left: 91%;  width: 85px;  height: 230px; animation-duration: 1.8s; animation-delay: 0.55s; }
+        .flame:nth-child(13) { left: 97%;  width: 90px;  height: 170px; animation-duration: 2.2s; animation-delay: 0.25s; }
+
+        @keyframes flameDance {
+            0%   { transform: scaleY(1) skewX(0deg) translateY(0); opacity: 0.75; }
+            20%  { transform: scaleY(1.15) skewX(5deg) translateY(-10px); opacity: 0.95; }
+            40%  { transform: scaleY(0.92) skewX(-4deg) translateY(-3px); opacity: 0.8; }
+            60%  { transform: scaleY(1.22) skewX(3deg) translateY(-14px); opacity: 1; }
+            80%  { transform: scaleY(1.05) skewX(-5deg) translateY(-6px); opacity: 0.85; }
+            100% { transform: scaleY(1.12) skewX(2deg) translateY(-8px); opacity: 0.9; }
+        }
+
+        /* Resplandor base del fuego */
+        .fire-glow {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 25vh;
+            background: linear-gradient(to top, 
+                rgba(255, 107, 26, 0.35) 0%, 
+                rgba(212, 58, 15, 0.20) 50%, 
+                transparent 100%);
+            filter: blur(15px);
+            animation: glowPulse 3s ease-in-out infinite alternate;
+        }
+        @keyframes glowPulse {
+            0%   { opacity: 0.6; }
+            50%  { opacity: 1; }
+            100% { opacity: 0.75; }
+        }
+
+        /* Chispas de fuego (más y más rápidas) */
         .ember {
             position: absolute;
             bottom: -10px;
             width: 4px;
             height: 4px;
             border-radius: 50%;
-            background: var(--gold);
-            box-shadow: 0 0 8px 2px rgba(255, 107, 26, 0.6);
+            background: var(--gold-light);
+            box-shadow: 0 0 10px 3px rgba(255, 107, 26, 0.8);
             animation: emberRise linear infinite;
             opacity: 0;
         }
-        .ember:nth-child(1) { left: 10%; animation-duration: 9s; animation-delay: 0s; }
-        .ember:nth-child(2) { left: 25%; animation-duration: 12s; animation-delay: 2s; width: 3px; height: 3px; }
-        .ember:nth-child(3) { left: 40%; animation-duration: 10s; animation-delay: 4s; }
-        .ember:nth-child(4) { left: 55%; animation-duration: 14s; animation-delay: 1s; width: 5px; height: 5px; }
-        .ember:nth-child(5) { left: 70%; animation-duration: 11s; animation-delay: 3s; }
-        .ember:nth-child(6) { left: 85%; animation-duration: 13s; animation-delay: 5s; width: 3px; height: 3px; }
-        .ember:nth-child(7) { left: 95%; animation-duration: 10s; animation-delay: 6s; }
-        .ember:nth-child(8) { left: 5%; animation-duration: 15s; animation-delay: 7s; width: 2px; height: 2px; }
+        .ember:nth-child(1)  { left: 8%;  animation-duration: 7s;  animation-delay: 0s; }
+        .ember:nth-child(2)  { left: 18%; animation-duration: 9s;  animation-delay: 1.5s; width: 3px; height: 3px; }
+        .ember:nth-child(3)  { left: 28%; animation-duration: 8s;  animation-delay: 3s; width: 5px; height: 5px; }
+        .ember:nth-child(4)  { left: 38%; animation-duration: 11s; animation-delay: 0.8s; }
+        .ember:nth-child(5)  { left: 48%; animation-duration: 7.5s; animation-delay: 2.2s; width: 3px; height: 3px; }
+        .ember:nth-child(6)  { left: 58%; animation-duration: 9.5s; animation-delay: 4s; }
+        .ember:nth-child(7)  { left: 68%; animation-duration: 8.5s; animation-delay: 1s; width: 5px; height: 5px; }
+        .ember:nth-child(8)  { left: 78%; animation-duration: 10s; animation-delay: 3.5s; }
+        .ember:nth-child(9)  { left: 88%; animation-duration: 7s;  animation-delay: 5s; width: 3px; height: 3px; }
+        .ember:nth-child(10) { left: 95%; animation-duration: 9s;  animation-delay: 2.8s; }
+        .ember:nth-child(11) { left: 3%;  animation-duration: 12s; animation-delay: 6s; width: 2px; height: 2px; }
+        .ember:nth-child(12) { left: 50%; animation-duration: 6.5s; animation-delay: 4.5s; }
         @keyframes emberRise {
             0%   { transform: translateY(0) translateX(0); opacity: 0; }
-            10%  { opacity: 0.9; }
-            50%  { transform: translateY(-50vh) translateX(20px); opacity: 0.6; }
-            100% { transform: translateY(-105vh) translateX(-15px); opacity: 0; }
+            10%  { opacity: 1; }
+            50%  { transform: translateY(-50vh) translateX(25px); opacity: 0.7; }
+            100% { transform: translateY(-105vh) translateX(-20px); opacity: 0; }
         }
         /* Contenido por encima del fondo */
         .content-layer { position: relative; z-index: 1; }
@@ -126,8 +201,28 @@
 </head>
 <body>
 
-    <!-- 🔥 Fondo de fuego -->
+       <!-- 🔥 Fondo de fuego intenso -->
     <div class="fire-bg">
+        <div class="flames-container">
+            <div class="flame"></div>
+            <div class="flame"></div>
+            <div class="flame"></div>
+            <div class="flame"></div>
+            <div class="flame"></div>
+            <div class="flame"></div>
+            <div class="flame"></div>
+            <div class="flame"></div>
+            <div class="flame"></div>
+            <div class="flame"></div>
+            <div class="flame"></div>
+            <div class="flame"></div>
+            <div class="flame"></div>
+        </div>
+        <div class="fire-glow"></div>
+        <div class="ember"></div>
+        <div class="ember"></div>
+        <div class="ember"></div>
+        <div class="ember"></div>
         <div class="ember"></div>
         <div class="ember"></div>
         <div class="ember"></div>
