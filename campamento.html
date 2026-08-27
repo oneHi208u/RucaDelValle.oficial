@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campamento Ruca del Valle | Entradas</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --gold: #F5B731;
+            --gold-dark: #C49000;
+            --gold-light: #FFD54F;
+            --black: #0A0A0A;
+            --dark: #121212;
+            --dark-gray: #1E1E1E;
+            --card-bg: #1A1A1A;
+            --cream: #FFF8E1;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background-color: var(--black); color: var(--cream); overflow-x: hidden; }
+        .font-cinzel { font-family: 'Cinzel', serif; }
+        .btn-gold { background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%); color: var(--black); font-weight: 700; transition: all 0.3s ease; text-transform: uppercase; letter-spacing: 1.5px; }
+        .btn-gold:hover { background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold) 100%); transform: translateY(-2px); box-shadow: 0 6px 25px rgba(245, 183, 49, 0.35); }
+        .btn-gold:disabled { opacity: 0.4; cursor: not-allowed; transform: none !important; box-shadow: none !important; }
+        .btn-outline-gold { border: 2px solid var(--gold); color: var(--gold); background: transparent; font-weight: 600; transition: all 0.3s ease; text-transform: uppercase; letter-spacing: 1.5px; }
+        .btn-outline-gold:hover { background: var(--gold); color: var(--black); }
+        .card-dark { background: var(--card-bg); border: 1px solid #2A2A2A; transition: all 0.4s ease; }
+        .card-dark:hover { border-color: var(--gold); transform: translateY(-4px); box-shadow: 0 10px 40px rgba(245, 183, 49, 0.12); }
+        .modal-backdrop { background-color: rgba(0, 0, 0, 0.9); backdrop-filter: blur(10px); }
+        .fade-in { animation: fadeIn 0.35s ease-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: scale(0.96) translateY(10px); } to { opacity: 1; transform: scale(1) translateY(0); } }
+        .section-divider { height: 2px; background: linear-gradient(90deg, transparent, var(--gold), transparent); }
+        .input-dark { background: var(--dark-gray); border: 1px solid #3A3A3A; color: var(--cream); transition: border-color 0.3s ease, box-shadow 0.3s ease; }
+        .input-dark:focus { border-color: var(--gold); outline: none; box-shadow: 0 0 0 3px rgba(245, 183, 49, 0.15); }
+        .input-dark::placeholder { color: #666; }
+        select.input-dark option { background: var(--dark); color: var(--cream); }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: var(--dark); }
+        ::-webkit-scrollbar-thumb { background: #333; border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--gold-dark); }
+        .toast-gold { background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%); color: var(--black); }
+        .hero-bg { background: radial-gradient(ellipse at 50% 0%, rgba(245, 183, 49, 0.08) 0%, transparent 60%), radial-gradient(ellipse at 80% 80%, rgba(245, 183, 49, 0.04) 0%, transparent 50%), var(--black); }
+        .hero-grid-pattern { background-image: linear-gradient(rgba(245,183,49,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(245,183,49,0.03) 1px, transparent 1px); background-size: 40px 40px; }
+        .glow-line { height: 1px; background: linear-gradient(90deg, transparent, var(--gold), transparent); opacity: 0.3; }
+        .turno-card { border: 2px solid #2A2A2A; transition: all 0.3s ease; cursor: pointer; }
+        .turno-card:hover { border-color: var(--gold); }
+        .turno-card.selected { border-color: var(--gold); background: rgba(245, 183, 49, 0.06); }
+        .turno-card.agotado { opacity: 0.4; cursor: not-allowed; }
+        .info-chip { background: rgba(245, 183, 49, 0.08); border: 1px solid rgba(245, 183, 49, 0.2); color: var(--gold); }
+        .cupos-bar { height: 6px; background: #2A2A2A; border-radius: 3px; overflow: hidden; }
+        .cupos-fill { height: 100%; background: linear-gradient(90deg, var(--gold) 0%, var(--gold-dark) 100%); transition: width 0.5s ease; }
+    </style>
+</head>
+<body>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="fixed top-4 right-4 toast-gold px-6 py-3 rounded-lg shadow-2xl transform translate-x-full transition-transform duration-300 z-[100] flex items-center gap-2 font-semibold text-sm">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+        <span id="toast-msg">¡Acción completada!</span>
+    </div>
+
+    <!-- Header -->
+    <header class="sticky top-0 z-40 bg-black/90 backdrop-blur-xl border-b border-[#2A2A2A]">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between">
+            <a href="index.html" class="flex items-center gap-3">
+                <div class="w-9 h-9 sm:w-11 sm:h-11 flex-shrink-0 drop-shadow-[0_0_8px_rgba(245,183,49,0.5)]">
+                    <img src="img/logo.png" alt="Logo" class="w-full h-full object-contain" onerror="this.parentElement.innerHTML='<span class=\'text-[#F5B731] font-cinzel font-bold text-sm\'>RUCA</span>'">
+                </div>
+                <div>
+                    <h1 class="text-sm sm:text-base font-cinzel font-bold text-[#F5B731] tracking-[0.2em] leading-tight">RUCA DEL VALLE</h1>
+                    <p class="text-[10px] text-gray-500 tracking-[0.3em] uppercase hidden sm:block">Campamento Oficial</p>
+                </div>
+            </a>
+            <a href="index.html" class="text-xs text-gray-400 hover:text-[#F5B731] transition-colors uppercase tracking-widest">← Volver a la Tienda</a>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="relative hero-bg overflow-hidden">
+        <div class="absolute inset-0 hero-grid-pattern"></div>
+        <div class="relative max-w-7xl mx-auto py-16 sm:py-24 px-4 sm:px-6 lg:px-8 text-center">
+            <div class="flex justify-center mb-8">
+                <div class="w-28 h-28 sm:w-36 sm:h-36 lg:w-44 lg:h-44 drop-shadow-[0_0_15px_rgba(245,183,49,0.6)]">
+                    <img src="img/logo.png" alt="Logo" class="w-full h-full object-contain">
+                </div>
+            </div>
+            <h2 class="font-cinzel text-3xl sm:text-5xl lg:text-6xl font-black text-white tracking-wider mb-1">CAMPAMENTO 2026</h2>
+            <div class="glow-line w-40 mx-auto my-6"></div>
+            <p class="text-base sm:text-lg text-gray-400 max-w-xl mx-auto font-light leading-relaxed">
+                Una experiencia única en la naturaleza.<br>
+                <span class="text-[#F5B731] font-semibold">Cupos limitados · Reservá tu lugar.</span>
+            </p>
+            
+            <!-- Info chips -->
+            <div class="flex flex-wrap justify-center gap-3 mt-8 text-xs">
+                <span class="info-chip px-4 py-2 rounded-full font-medium">📅 15 al 17 de Marzo</span>
+                <span class="info-chip px-4 py-2 rounded-full font-medium">📍 Valle de Ruca</span>
+                <span class="info-chip px-4 py-2 rounded-full font-medium">🔥 Fogón + Actividades</span>
+                <span class="info-chip px-4 py-2 rounded-full font-medium">🍽️ Comidas incluidas</span>
+            </div>
+            
+            <div class="mt-10">
+                <button onclick="document.getElementById('entradas').scrollIntoView({behavior:'smooth'})" class="btn-gold px-10 py-4 rounded-lg text-sm sm:text-base font-bold">
+                    Reservar mi Lugar
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Qué incluye -->
+    <section class="bg-[#121212] border-y border-[#2A2A2A]">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+            <div class="text-center mb-12">
+                <h3 class="font-cinzel text-2xl sm:text-3xl font-bold text-white mb-2 tracking-wider">¿QUÉ INCLUYE?</h3>
+                <div class="section-divider w-20 mx-auto"></div>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="card-dark rounded-xl p-6 text-center">
+                    <div class="text-4xl mb-3">🏕️</div>
+                    <h4 class="font-cinzel font-bold text-white mb-2">Alojamiento</h4>
+                    <p class="text-gray-400 text-sm">Carpas o cabañas según el tipo de entrada elegida.</p>
+                </div>
+                <div class="card-dark rounded-xl p-6 text-center">
+                    <div class="text-4xl mb-3">🍖</div>
+                    <h4 class="font-cinzel font-bold text-white mb-2">Comidas</h4>
+                    <p class="text-gray-400 text-sm">Desayuno, almuerzo, merienda y cena durante todo el campamento.</p>
+                </div>
+                <div class="card-dark rounded-xl p-6 text-center">
+                    <div class="text-4xl mb-3">🎯</div>
+                    <h4 class="font-cinzel font-bold text-white mb-2">Actividades</h4>
+                    <p class="text-gray-400 text-sm">Senderismo, juegos, deportes y fogón nocturno.</p>
+                </div>
+                <div class="card-dark rounded-xl p-6 text-center">
+                    <div class="text-4xl mb-3">🛡️</div>
+                    <h4 class="font-cinzel font-bold text-white mb-2">Seguridad</h4>
+                    <p class="text-gray-400 text-sm">Equipo de coordinación y primeros auxilios 24/7.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Entradas / Turnos -->
+    <main id="entradas" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
+        <div class="text-center mb-12">
+            <h3 class="font-cinzel text-2xl sm:text-3xl font-bold text-white mb-2 tracking-wider">ELEGÍ TU TURNO</h3>
+            <div class="section-divider w-20 mx-auto"></div>
+            <p class="text-gray-500 mt-4 text-sm">Seleccioná el turno al que querés asistir</p>
+        </div>
+
+        <!-- Selector de Turnos -->
+        <div id="turnos-container" class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto mb-10">
+            <!-- Los turnos se cargan dinámicamente con JavaScript -->
+        </div>
+
+        <!-- Botón comprar -->
+        <div class="text-center">
+            <button id="main-cta" onclick="openCompraModal()" class="btn-gold px-12 py-4 rounded-xl text-sm font-bold" disabled>
+                SELECCIONÁ UN TURNO
+            </button>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-[#0A0A0A] border-t border-[#2A2A2A] py-12">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <div class="flex justify-center mb-6">
+                <div class="w-14 h-14 drop-shadow-[0_0_8px_rgba(245,183,49,0.5)]">
+                    <img src="img/logo.png" alt="Logo" class="w-full h-full object-contain">
+                </div>
+            </div>
+            <p class="font-cinzel text-[#F5B731] text-lg font-bold tracking-widest">RUCA DEL VALLE</p>
+            <p class="text-gray-600 mt-2 text-sm">Campamento Ruca del Valle © 2026 | Hecho con ❤️ y sin comisiones.</p>
+            <p class="mt-4"><a href="https://wa.me/3834565209?text=Hola!%20Tengo%20una%20consulta%20sobre%20el%20campamento" class="text-[#F5B731] hover:text-[#FFD54F] underline transition-colors text-sm">¿Dudas? Escribinos por WhatsApp</a></p>
+        </div>
+    </footer>
+
+    <!-- Modal de Compra -->
+    <div id="compra-modal" class="fixed inset-0 z-50 hidden overflow-y-auto">
+        <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-6 text-center sm:block sm:p-0">
+            <div class="fixed inset-0 modal-backdrop transition-opacity" onclick="closeCompraModal()"></div>
+            <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+            <div class="inline-block align-bottom bg-[#1A1A1A] rounded-2xl text-left overflow-hidden shadow-2xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg w-full fade-in border border-[#2A2A2A]">
+                <div class="px-6 pt-6 pb-4">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <h3 class="font-cinzel text-lg font-bold text-[#F5B731]">Reservar Entrada</h3>
+                            <p class="text-xs text-gray-500 mt-0.5">Turno: <span id="modal-turno">-</span></p>
+                        </div>
+                        <button onclick="closeCompraModal()" class="text-gray-500 hover:text-white transition-colors p-1">
+                            <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+                        </button>
+                    </div>
+                    <div class="section-divider mt-4"></div>
+                </div>
+                <div class="px-6 pb-6 space-y-4">
+                    <div class="grid grid-cols-2 gap-3">
+                        <div>
+                            <label class="block text-[10px] font-bold text-[#F5B731] uppercase tracking-widest mb-1.5">Nombre *</label>
+                            <input type="text" id="camp-name" class="input-dark w-full rounded-lg px-3 py-2.5 text-sm" placeholder="Tu nombre">
+                        </div>
+                        <div>
+                            <label class="block text-[10px] font-bold text-[#F5B731] uppercase tracking-widest mb-1.5">Apellido *</label>
+                            <input type="text" id="camp-lastname" class="input-dark w-full rounded-lg px-3 py-2.5 text-sm" placeholder="Tu apellido">
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-2 gap-3">
+                        <div>
+                            <label class="block text-[10px] font-bold text-[#F5B731] uppercase tracking-widest mb-1.5">Edad *</label>
+                            <input type="number" id="camp-edad" min="4" max="99" class="input-dark w-full rounded-lg px-3 py-2.5 text-sm" placeholder="Edad del participante">
+                        </div>
+                        <div>
+                            <label class="block text-[10px] font-bold text-[#F5B731] uppercase tracking-widest mb-1.5">Cantidad *</label>
+                            <select id="camp-cantidad" class="input-dark w-full rounded-lg px-3 py-2.5 text-sm">
+                                <option value="1">1 entrada</option>
+                                <option value="2">2 entradas</option>
+                                <option value="3">3 entradas</option>
+                                <option value="4">4 entradas</option>
+                                <option value="5">5 entradas</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-bold text-[#F5B731] uppercase tracking-widest mb-1.5">Email <span class="text-gray-500 normal-case">(Solo para recordatorios)</span></label>
+                        <input type="email" id="camp-email" class="input-dark w-full rounded-lg px-3 py-2.5 text-sm" placeholder="Opcional">
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-bold text-[#F5B731] uppercase tracking-widest mb-1.5">Teléfono de contacto *</label>
+                        <input type="tel" id="camp-telefono" class="input-dark w-full rounded-lg px-3 py-2.5 text-sm" placeholder="Ej: 3834565209">
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-bold text-[#F5B731] uppercase tracking-widest mb-1.5">Observaciones médicas <span class="text-gray-600 normal-case">(Opcional)</span></label>
+                        <textarea id="camp-observaciones" class="input-dark w-full rounded-lg px-3 py-2.5 text-sm h-16" placeholder="Alergias, medicación, etc."></textarea>
+                    </div>
+                    
+                    <!-- Resumen del precio -->
+                    <div class="bg-black/40 rounded-lg p-4 border border-[#2A2A2A]">
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm text-gray-400">Total a pagar:</span>
+                            <span id="precio-total" class="text-xl font-bold text-[#F5B731]">$0</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-black/40 px-6 py-4 sm:flex sm:flex-row-reverse gap-3">
+                    <button type="button" id="btn-confirmar" onclick="confirmarReserva()" class="w-full sm:w-auto btn-gold px-8 py-3 rounded-xl text-sm font-bold">
+                        Reservar y Pagar
+                    </button>
+                    <button type="button" onclick="closeCompraModal()" class="mt-3 sm:mt-0 w-full sm:w-auto btn-outline-gold px-8 py-3 rounded-xl text-sm font-bold">
+                        Cancelar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT -->
+    <script>
+        // ⚙️ CONFIGURACIÓN (EDITÁ ACÁ)
+        const SHEET_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbx3UbnSDDyWARjxwzZha0sD9rXcImlHNnvnnRkWvdDkgbEuCzU6v7Ui7BkxBEK_E1Bg/exec';
+        const WHATSAPP_NUMBER = '3834565209';
+        const PRECIO_ENTRADA = 45000; // ← Cambiá el precio de la entrada acá
+        
+        // Definición de turnos (editá fechas y cupos)
+        const TURNOS = [
+            { id: 'turno1', nombre: 'Turno 1', fecha: '15 al 17 de Marzo', cupoMaximo: 50 },
+            { id: 'turno2', nombre: 'Turno 2', fecha: '22 al 24 de Marzo', cupoMaximo: 50 },
+            { id: 'turno3', nombre: 'Turno 3', fecha: '29 al 31 de Marzo', cupoMaximo: 50 }
+        ];
+
+        let turnoSeleccionado = null;
+        let cuposPorTurno = {};
+        let isProcessing = false;
+
+        // 🎨 Renderizar turnos
+        function renderTurnos() {
+            const container = document.getElementById('turnos-container');
+            container.innerHTML = '';
+            
+            TURNOS.forEach(turno => {
+                const vendidos = cuposPorTurno[turno.id] || 0;
+                const disponibles = turno.cupoMaximo - vendidos;
+                const agotado = disponibles <= 0;
+                const porcentaje = Math.min((vendidos / turno.cupoMaximo) * 100, 100);
+                
+                const card = document.createElement('div');
+                card.className = `turno-card rounded-xl p-6 ${agotado ? 'agotado' : ''} ${turnoSeleccionado === turno.id ? 'selected' : ''}`;
+                card.onclick = () => !agotado && seleccionarTurno(turno.id);
+                
+                card.innerHTML = `
+                    <div class="flex justify-between items-start mb-4">
+                        <div>
+                            <h4 class="font-cinzel text-lg font-bold text-white">${turno.nombre}</h4>
+                            <p class="text-sm text-gray-400">${turno.fecha}</p>
+                        </div>
+                        <span class="text-xs font-bold px-3 py-1 rounded-full ${agotado ? 'bg-red-900/50 text-red-400' : 'info-chip'}">
+                            ${agotado ? 'AGOTADO' : `${disponibles} disponibles`}
+                        </span>
+                    </div>
+                    <div class="mb-4">
+                        <div class="cupos-bar">
+                            <div class="cupos-fill" style="width: ${porcentaje}%"></div>
+                        </div>
+                        <p class="text-xs text-gray-500 mt-2">${vendidos}/${turno.cupoMaximo} lugares ocupados</p>
+                    </div>
+                    <p class="text-2xl font-bold text-[#F5B731]">$${PRECIO_ENTRADA.toLocaleString('es-AR')}</p>
+                    <p class="text-xs text-gray-500">por persona</p>
+                `;
+                
+                container.appendChild(card);
+            });
+        }
+
+        // 📊 Cargar cupos vendidos desde Google Sheets
+        async function cargarCupos() {
+            try {
+                for (const turno of TURNOS) {
+                    const res = await fetch(`${SHEET_SCRIPT_URL}?action=campamentoCupos&turno=${turno.id}`);
+                    const data = await res.json();
+                    cuposPorTurno[turno.id] = data.vendidos || 0;
+                }
+            } catch (e) {
+                console.error('Error cargando cupos:', e);
+            }
+            renderTurnos();
+        }
+
+        // 🎯 Seleccionar turno
+        function seleccionarTurno(turnoId) {
+            turnoSeleccionado = turnoId;
+            renderTurnos();
+            
+            const turno = TURNOS.find(t => t.id === turnoId);
+            const cta = document.getElementById('main-cta');
+            cta.disabled = false;
+            cta.textContent = `RESERVAR ${turno.nombre.toUpperCase()} · $${PRECIO_ENTRADA.toLocaleString('es-AR')}`;
+        }
+
+        // 🛒 Modal de compra
+        function openCompraModal() {
+            if (!turnoSeleccionado) return;
+            const turno = TURNOS.find(t => t.id === turnoSeleccionado);
+            document.getElementById('modal-turno').textContent = `${turno.nombre} · ${turno.fecha}`;
+            document.getElementById('compra-modal').classList.remove('hidden');
+            actualizarPrecioTotal();
+        }
+        
+        function closeCompraModal() {
+            document.getElementById('compra-modal').classList.add('hidden');
+        }
+
+        function actualizarPrecioTotal() {
+            const cantidad = parseInt(document.getElementById('camp-cantidad').value) || 1;
+            document.getElementById('precio-total').textContent = `$${(cantidad * PRECIO_ENTRADA).toLocaleString('es-AR')}`;
+        }
+        
+        document.addEventListener('change', (e) => {
+            if (e.target.id === 'camp-cantidad') actualizarPrecioTotal();
+        });
+
+        // ✅ Confirmar reserva → registra y abre WhatsApp
+        async function confirmarReserva() {
+            if (isProcessing) return;
+            
+            const name = document.getElementById('camp-name').value.trim();
+            const lastname = document.getElementById('camp-lastname').value.trim();
+            const edad = document.getElementById('camp-edad').value;
+            const telefono = document.getElementById('camp-telefono').value.trim();
+            
+            if (!name || !lastname) return alert('Nombre y apellido obligatorios');
+            if (!edad || edad < 4) return alert('Ingresá una edad válida');
+            if (!telefono) return alert('Ingresá un teléfono de contacto');
+            
+            isProcessing = true;
+            const btn = document.getElementById('btn-confirmar');
+            const originalText = btn.textContent;
+            btn.disabled = true;
+            btn.textContent = '⏳ Registrando...';
+            
+            const turno = TURNOS.find(t => t.id === turnoSeleccionado);
+            const cantidad = parseInt(document.getElementById('camp-cantidad').value);
+            const total = cantidad * PRECIO_ENTRADA;
+            const email = document.getElementById('camp-email').value;
+            const observaciones = document.getElementById('camp-observaciones').value.trim();
+            
+            // 1. Registrar en Google Sheets
+            try {
+                await fetch(SHEET_SCRIPT_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        action: 'campamento',
+                        cliente: `${name} ${lastname}`,
+                        email: email || '',
+                        turno: turno.id,
+                        turnoNombre: turno.nombre,
+                        fecha: turno.fecha,
+                        edad: edad,
+                        cantidad: cantidad,
+                        telefono: telefono,
+                        observaciones: observaciones,
+                        total: total
+                    })
+                });
+                showToast('✅ Reserva registrada');
+            } catch (e) {
+                console.error('Error registrando:', e);
+            }
+            
+            // 2. Armar mensaje de WhatsApp
+            const msg = `¡Hola Ruca del Valle! 🏕️%0A%0A` +
+                `Quiero reservar mi lugar en el *Campamento 2026*:%0A%0A` +
+                `📋 *Datos de la reserva:*%0A` +
+                `👤 Nombre: ${name} ${lastname}%0A` +
+                `🎂 Edad: ${edad} años%0A` +
+                `📅 Turno: ${turno.nombre} (${turno.fecha})%0A` +
+                `🎟️ Cantidad: ${cantidad} entrada${cantidad > 1 ? 's' : ''}%0A` +
+                `📞 Teléfono: ${telefono}%0A` +
+                (observaciones ? `⚕️ Observaciones: ${observaciones}%0A` : '') +
+                `%0A💰 *Total: $${total.toLocaleString('es-AR')}*%0A%0A` +
+                `Adjunto comprobante de transferencia. ¡Gracias!`;
+            
+            // 3. Abrir WhatsApp
+            setTimeout(() => {
+                window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${msg}`, '_blank');
+                closeCompraModal();
+                btn.disabled = false;
+                btn.textContent = originalText;
+                isProcessing = false;
+                cargarCupos(); // Recargar cupos
+            }, 800);
+        }
+
+        function showToast(msg) {
+            const t = document.getElementById('toast');
+            document.getElementById('toast-msg').textContent = msg;
+            t.classList.remove('translate-x-full');
+            setTimeout(() => t.classList.add('translate-x-full'), 3000);
+        }
+
+        // 🚀 Init
+        document.addEventListener('DOMContentLoaded', () => { cargarCupos(); });
+    </script>
+</body>
+</html>
