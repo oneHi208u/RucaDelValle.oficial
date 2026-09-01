@@ -635,11 +635,11 @@
         }
 
                 function copyAlias() { 
-            navigator.clipboard.writeText("camisetas.rdv").then(() => {
+            navigator.clipboard.writeText("CAMPAMENTO.RDV").then(() => {
                 showToast('✅ Alias copiado');
             }).catch(() => {
                 // Fallback para iPhone si falla
-                const text = "camisetas.rdv";
+                const text = "CAMPAMENTO.RDV";
                 const textarea = document.createElement('textarea');
                 textarea.value = text;
                 document.body.appendChild(textarea);
