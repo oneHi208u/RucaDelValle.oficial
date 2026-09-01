@@ -236,10 +236,12 @@
     <div class="content-layer">
 
         <!-- Toast Notification -->
+        
         <div id="toast" class="fixed top-4 right-4 toast-gold px-6 py-3 rounded-lg shadow-2xl transform translate-x-full transition-transform duration-300 z-[100] flex items-center gap-2 font-semibold text-sm">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
             <span id="toast-msg">¡Acción completada!</span>
         </div>
+        
 
         <!-- Header -->
         <header class="sticky top-0 z-40 bg-black/90 backdrop-blur-xl border-b border-[#2A2A2A]">
@@ -426,7 +428,21 @@
                             <label class="block text-[10px] font-bold text-[#F5B731] uppercase tracking-widest mb-1.5">Observaciones médicas <span class="text-gray-600 normal-case">(Opcional)</span></label>
                             <textarea id="camp-observaciones" class="input-dark w-full rounded-lg px-3 py-2.5 text-sm h-16" placeholder="Alergias, medicación, etc."></textarea>
                         </div>
-                        
+
+                        <!-- 💳 Datos para Transferir -->
+                        <div class="bg-black/40 rounded-lg p-4 border border-[#2A2A2A]">
+                            <h4 class="font-cinzel font-bold text-[#F5B731] mb-3 text-[10px] uppercase tracking-widest">Datos para Transferir</h4>
+                            <div class="mb-3">
+                                <p class="text-[10px] text-gray-500 uppercase tracking-widest mb-1">Alias / CBU</p>
+                                <div class="flex items-center gap-2">
+                                    <code class="bg-black px-3 py-2.5 rounded-lg border border-[#2A2A2A] text-sm flex-1 select-all text-[#F5B731] font-mono">camisetas.rdv</code>
+                                    <button onclick="copyAlias()" class="text-xs text-[#F5B731] hover:text-[#FFD54F] font-semibold px-3 py-2.5 border border-[#F5B731]/30 rounded-lg hover:bg-[#F5B731]/10 transition-all whitespace-nowrap">Copiar</button>
+                                </div>
+                            </div>
+                            <div class="bg-[#F5B731]/10 border-l-4 border-[#F5B731] p-3 rounded-r">
+                                <p class="text-xs text-[#F5B731]/80">⚠️ Después de transferir, adjuntá el comprobante en el WhatsApp que se va a abrir.</p>
+                            </div>
+                        </div>
                         <!-- Resumen del precio -->
                         <div class="bg-black/40 rounded-lg p-4 border border-[#2A2A2A]">
                             <div class="flex justify-between items-center mb-1">
@@ -618,6 +634,21 @@
             window.location.href = `https://wa.me/${WHATSAPP_NUMBER}?text=${msg}`;
         }
 
+                function copyAlias() { 
+            navigator.clipboard.writeText("camisetas.rdv").then(() => {
+                showToast('✅ Alias copiado');
+            }).catch(() => {
+                // Fallback para iPhone si falla
+                const text = "camisetas.rdv";
+                const textarea = document.createElement('textarea');
+                textarea.value = text;
+                document.body.appendChild(textarea);
+                textarea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textarea);
+                showToast('✅ Alias copiado');
+            });
+        }
         function showToast(msg) {
             const t = document.getElementById('toast');
             document.getElementById('toast-msg').textContent = msg;
