@@ -91,7 +91,6 @@
             animation: flameDance ease-in-out infinite;
             mix-blend-mode: screen;
         }
-        /* Distribución y tamaños de cada llama */
         .flame:nth-child(1)  { left: -2%;  width: 90px;  height: 160px; animation-duration: 2.1s; animation-delay: 0s; }
         .flame:nth-child(2)  { left: 6%;   width: 70px;  height: 220px; animation-duration: 1.8s; animation-delay: 0.4s; }
         .flame:nth-child(3)  { left: 14%;  width: 100px; height: 180px; animation-duration: 2.4s; animation-delay: 0.2s; }
@@ -135,7 +134,7 @@
             100% { opacity: 0.75; }
         }
 
-        /* Chispas de fuego (más y más rápidas) */
+        /* Chispas de fuego */
         .ember {
             position: absolute;
             bottom: -10px;
@@ -165,7 +164,6 @@
             50%  { transform: translateY(-50vh) translateX(25px); opacity: 0.7; }
             100% { transform: translateY(-105vh) translateX(-20px); opacity: 0; }
         }
-        /* Contenido por encima del fondo */
         .content-layer { position: relative; z-index: 1; }
 
         .btn-gold { background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%); color: var(--black); font-weight: 700; transition: all 0.3s ease; text-transform: uppercase; letter-spacing: 1.5px; }
@@ -197,11 +195,17 @@
         .plan-card.selected { border-color: var(--gold); background: rgba(245, 183, 49, 0.06); box-shadow: 0 0 30px rgba(245, 183, 49, 0.15); }
         .plan-badge { background: linear-gradient(135deg, var(--fire-orange) 0%, var(--fire-red) 100%); color: white; }
         .plan-badge-gold { background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%); color: var(--black); }
+
+        /* 👥 Checkbox de hermanos */
+        #camp-hermano:checked {
+            background-color: var(--gold);
+            border-color: var(--gold);
+        }
     </style>
 </head>
 <body>
 
-       <!-- 🔥 Fondo de fuego intenso -->
+    <!-- 🔥 Fondo de fuego intenso -->
     <div class="fire-bg">
         <div class="flames-container">
             <div class="flame"></div>
@@ -236,12 +240,10 @@
     <div class="content-layer">
 
         <!-- Toast Notification -->
-        
         <div id="toast" class="fixed top-4 right-4 toast-gold px-6 py-3 rounded-lg shadow-2xl transform translate-x-full transition-transform duration-300 z-[100] flex items-center gap-2 font-semibold text-sm">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
             <span id="toast-msg">¡Acción completada!</span>
         </div>
-        
 
         <!-- Header -->
         <header class="sticky top-0 z-40 bg-black/90 backdrop-blur-xl border-b border-[#2A2A2A]">
@@ -279,7 +281,8 @@
                     <span class="info-chip px-4 py-2 rounded-full font-medium">🔥 Fogón nocturno</span>
                     <span class="info-chip px-4 py-2 rounded-full font-medium">🏕️ Actividades al aire libre</span>
                     <span class="info-chip px-4 py-2 rounded-full font-medium">🍽️ Comidas incluidas</span>
-                    <span class="info-chip px-4 py-2 rounded-full font-medium">💳 Hasta 3 pagos</span>
+                    <span class="info-chip px-4 py-2 rounded-full font-medium">💳 Hasta 2 pagos</span>
+                    <span class="info-chip px-4 py-2 rounded-full font-medium">👥 20% dto. hermanos</span>
                 </div>
                 
                 <div class="mt-10">
@@ -331,7 +334,7 @@
             </div>
 
             <!-- Selector de Planes -->
-            <div id="planes-container" class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto mb-10">
+            <div id="planes-container" class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto mb-10">
                 <!-- Se cargan con JavaScript -->
             </div>
 
@@ -429,6 +432,20 @@
                             <textarea id="camp-observaciones" class="input-dark w-full rounded-lg px-3 py-2.5 text-sm h-16" placeholder="Alergias, medicación, etc."></textarea>
                         </div>
 
+                        <!-- 👥 Descuento para hermanos -->
+                        <div class="bg-[#F5B731]/5 border border-[#F5B731]/30 rounded-lg p-4">
+                            <label class="flex items-center gap-3 cursor-pointer">
+                                <input type="checkbox" id="camp-hermano" class="w-5 h-5 text-[#F5B731] focus:ring-[#F5B731] border-gray-600 bg-[#1E1E1E]" onchange="actualizarPrecioTotal()">
+                                <div>
+                                    <p class="text-sm font-bold text-[#F5B731]">👥 Soy hermano/a de otro inscripto</p>
+                                    <p class="text-xs text-gray-400">Obtené 20% de descuento en tu entrada</p>
+                                </div>
+                            </label>
+                            <div id="hermano-info" class="mt-3 hidden">
+                                <input type="text" id="camp-hermano-nombre" class="input-dark w-full rounded-lg px-3 py-2.5 text-sm" placeholder="Nombre del hermano/a ya inscripto/a">
+                            </div>
+                        </div>
+
                         <!-- 💳 Datos para Transferir -->
                         <div class="bg-black/40 rounded-lg p-4 border border-[#2A2A2A]">
                             <h4 class="font-cinzel font-bold text-[#F5B731] mb-3 text-[10px] uppercase tracking-widest">Datos para Transferir</h4>
@@ -443,6 +460,7 @@
                                 <p class="text-xs text-[#F5B731]/80">⚠️ Verifica que la cuenta este a nombre de Mariano Ismael Alvarez Peñas. Después de transferir, adjuntá el comprobante en el WhatsApp que se va a abrir.</p>
                             </div>
                         </div>
+
                         <!-- Resumen del precio -->
                         <div class="bg-black/40 rounded-lg p-4 border border-[#2A2A2A]">
                             <div class="flex justify-between items-center mb-1">
@@ -478,6 +496,7 @@
         // ⚙️ CONFIGURACIÓN (EDITÁ ACÁ)
         const SHEET_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby7hqHwlwwMYdT7BsPPG0rvoYhDvpALkVMKCIyma-wKNata0Xqwk9A0DL2E6iCuoEvKEg/exec';
         const WHATSAPP_NUMBER = '3834565209';
+        const DESCUENTO_HERMANO = 0.20; // 20% de descuento
         
         // 💳 Planes de pago (editá montos y cuotas acá)
         const PLANES = [
@@ -549,15 +568,49 @@
             const plan = PLANES.find(p => p.id === planSeleccionado);
             document.getElementById('modal-plan').textContent = `${plan.nombre} · Total $${plan.total.toLocaleString('es-AR')}`;
             document.getElementById('resumen-plan').textContent = plan.nombre;
-            document.getElementById('resumen-cuotas').textContent = plan.cuotas > 1 
-                ? `${plan.cuotas} x $${plan.montoCuota.toLocaleString('es-AR')}` 
-                : `$${plan.total.toLocaleString('es-AR')}`;
-            document.getElementById('precio-total').textContent = `$${plan.total.toLocaleString('es-AR')}`;
+            actualizarPrecioTotal();
             document.getElementById('compra-modal').classList.remove('hidden');
         }
         
         function closeCompraModal() {
             document.getElementById('compra-modal').classList.add('hidden');
+        }
+
+        // 💰 Calcular precio con descuento si es hermano
+        function actualizarPrecioTotal() {
+            if (!planSeleccionado) return;
+            const plan = PLANES.find(p => p.id === planSeleccionado);
+            const esHermano = document.getElementById('camp-hermano').checked;
+            
+            // Mostrar/ocultar campo de nombre del hermano
+            document.getElementById('hermano-info').classList.toggle('hidden', !esHermano);
+            
+            let totalFinal = plan.total;
+            let cuotas = plan.cuotas;
+            let montoCuota = plan.montoCuota;
+            
+            if (esHermano) {
+                totalFinal = Math.round(plan.total * (1 - DESCUENTO_HERMANO));
+                montoCuota = Math.round(plan.montoCuota * (1 - DESCUENTO_HERMANO));
+            }
+            
+            // Actualizar resumen
+            const cuotasText = cuotas > 1 
+                ? `${cuotas} x $${montoCuota.toLocaleString('es-AR')}` 
+                : `$${totalFinal.toLocaleString('es-AR')}`;
+            
+            document.getElementById('resumen-cuotas').textContent = cuotasText;
+            
+            // Mostrar precio con descuento
+            if (esHermano) {
+                document.getElementById('precio-total').innerHTML = `
+                    <span class="line-through text-gray-500 text-sm mr-2">$${plan.total.toLocaleString('es-AR')}</span>
+                    <span>$${totalFinal.toLocaleString('es-AR')}</span>
+                    <span class="text-xs text-green-400 ml-2">(-20%)</span>
+                `;
+            } else {
+                document.getElementById('precio-total').textContent = `$${totalFinal.toLocaleString('es-AR')}`;
+            }
         }
 
         // ✅ Confirmar reserva → registra y abre WhatsApp (compatible con iPhone)
@@ -570,12 +623,18 @@
             const seccion = document.getElementById('camp-seccion').value;
             const edad = document.getElementById('camp-edad').value;
             const telefono = document.getElementById('camp-telefono').value.trim();
+            const esHermano = document.getElementById('camp-hermano').checked;
+            const hermanoNombre = document.getElementById('camp-hermano-nombre').value.trim();
             
             if (!name || !lastname) return alert('Nombre y apellido obligatorios');
             if (!colegio) return alert('Ingresá el colegio del inscripto');
             if (!seccion) return alert('Seleccioná la sección a la que pertenece');
             if (!edad || edad < 4) return alert('Ingresá una edad válida');
             if (!telefono) return alert('Ingresá un teléfono de contacto');
+            
+            if (esHermano && !hermanoNombre) {
+                return alert('Ingresá el nombre del hermano/a ya inscripto/a para aplicar el descuento');
+            }
             
             isProcessing = true;
             const btn = document.getElementById('btn-confirmar');
@@ -586,8 +645,18 @@
             const email = document.getElementById('camp-email').value;
             const observaciones = document.getElementById('camp-observaciones').value.trim();
             
-            // 1. Registrar en Google Sheets (fire and forget con keepalive)
-            // keepalive: true hace que el envío sobreviva aunque cambiemos de página
+            // Calcular totales con descuento si aplica
+            let totalFinal = plan.total;
+            let montoCuota = plan.montoCuota;
+            let planNombre = plan.nombre;
+            
+            if (esHermano) {
+                totalFinal = Math.round(plan.total * (1 - DESCUENTO_HERMANO));
+                montoCuota = Math.round(plan.montoCuota * (1 - DESCUENTO_HERMANO));
+                planNombre = `${plan.nombre} (20% dto. hermano)`;
+            }
+            
+            // 1. Registrar en Google Sheets
             try {
                 fetch(SHEET_SCRIPT_URL, {
                     method: 'POST',
@@ -600,13 +669,16 @@
                         email: email || '',
                         colegio: colegio,
                         seccion: seccion,
-                        planPago: plan.nombre,
+                        planPago: planNombre,
                         cuotas: plan.cuotas,
-                        montoCuota: plan.montoCuota,
+                        montoCuota: montoCuota,
                         edad: edad,
                         telefono: telefono,
-                        observaciones: observaciones,
-                        total: plan.total
+                        observaciones: observaciones + (esHermano ? ` | HERMANO DE: ${hermanoNombre}` : ''),
+                        total: totalFinal,
+                        esHermano: esHermano,
+                        hermanoNombre: hermanoNombre || '',
+                        descuento: esHermano ? '20%' : '0%'
                     })
                 }).catch(e => console.error('Error registrando:', e));
             } catch (e) {
@@ -623,22 +695,22 @@
                 `🎂 Edad: ${edad} años%0A` +
                 `📞 Teléfono: ${telefono}%0A` +
                 (observaciones ? `⚕️ Observaciones: ${observaciones}%0A` : '') +
-                `%0A💳 *Plan de pago: ${plan.nombre}*%0A` +
-                (plan.cuotas > 1 ? `📅 ${plan.cuotas} cuotas de $${plan.montoCuota.toLocaleString('es-AR')}%0A` : '') +
-                `💰 *Total: $${plan.total.toLocaleString('es-AR')}*%0A%0A` +
+                (esHermano ? `👥 *HERMANO DE: ${hermanoNombre}* (20% dto.)%0A` : '') +
+                `%0A💳 *Plan de pago: ${planNombre}*%0A` +
+                (plan.cuotas > 1 ? `📅 ${plan.cuotas} cuotas de $${montoCuota.toLocaleString('es-AR')}%0A` : '') +
+                (esHermano ? `~~Total sin dto.: $${plan.total.toLocaleString('es-AR')}~~%0A` : '') +
+                `💰 *Total: $${totalFinal.toLocaleString('es-AR')}*%0A%0A` +
                 `Adjunto comprobante de transferencia. ¡Gracias!`;
             
             // 3. Redirigir a WhatsApp
-            // window.location.href funciona en iPhone (no lo bloquea como popup)
             showToast('✅ Reserva registrada');
             window.location.href = `https://wa.me/${WHATSAPP_NUMBER}?text=${msg}`;
         }
 
-                function copyAlias() { 
+        function copyAlias() { 
             navigator.clipboard.writeText("CAMPAMENTO.RDV").then(() => {
                 showToast('✅ Alias copiado');
             }).catch(() => {
-                // Fallback para iPhone si falla
                 const text = "CAMPAMENTO.RDV";
                 const textarea = document.createElement('textarea');
                 textarea.value = text;
@@ -649,6 +721,7 @@
                 showToast('✅ Alias copiado');
             });
         }
+        
         function showToast(msg) {
             const t = document.getElementById('toast');
             document.getElementById('toast-msg').textContent = msg;
