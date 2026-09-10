@@ -114,7 +114,6 @@
             100% { transform: scaleY(1.12) skewX(2deg) translateY(-8px); opacity: 0.9; }
         }
 
-        /* Resplandor base del fuego */
         .fire-glow {
             position: absolute;
             bottom: 0;
@@ -134,7 +133,6 @@
             100% { opacity: 0.75; }
         }
 
-        /* Chispas de fuego */
         .ember {
             position: absolute;
             bottom: -10px;
@@ -189,63 +187,46 @@
         .glow-line { height: 1px; background: linear-gradient(90deg, transparent, var(--gold), transparent); opacity: 0.3; }
         .info-chip { background: rgba(245, 183, 49, 0.08); border: 1px solid rgba(245, 183, 49, 0.2); color: var(--gold); }
 
-        /* 💳 Cards de planes de pago */
         .plan-card { border: 2px solid #2A2A2A; background: var(--card-bg); transition: all 0.3s ease; cursor: pointer; }
         .plan-card:hover { border-color: var(--fire-orange); transform: translateY(-3px); }
         .plan-card.selected { border-color: var(--gold); background: rgba(245, 183, 49, 0.06); box-shadow: 0 0 30px rgba(245, 183, 49, 0.15); }
         .plan-badge { background: linear-gradient(135deg, var(--fire-orange) 0%, var(--fire-red) 100%); color: white; }
         .plan-badge-gold { background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%); color: var(--black); }
+        .plan-badge-combo { background: linear-gradient(135deg, #E91E63 0%, #9C27B0 100%); color: white; }
 
-        /* 👥 Checkbox de hermanos */
-        #camp-hermano:checked {
-            background-color: var(--gold);
-            border-color: var(--gold);
-        }
+        /* Selector de cuotas para combo */
+        .cuotas-selector { display: flex; gap: 8px; margin-top: 8px; }
+        .cuota-option { flex: 1; padding: 8px; border: 2px solid #3A3A3A; border-radius: 8px; text-align: center; cursor: pointer; transition: all 0.2s; font-size: 0.85rem; }
+        .cuota-option:hover { border-color: var(--gold); }
+        .cuota-option.selected { border-color: var(--gold); background: rgba(245, 183, 49, 0.1); color: var(--gold); }
+
+        /* Sección de hermanos */
+        .hermano-card { background: var(--dark-gray); border: 1px solid #3A3A3A; border-radius: 12px; padding: 16px; margin-top: 12px; }
+        .hermano-title { color: var(--gold); font-weight: 700; font-size: 0.9rem; margin-bottom: 12px; display: flex; align-items: center; gap: 6px; }
     </style>
 </head>
 <body>
 
-    <!-- 🔥 Fondo de fuego intenso -->
     <div class="fire-bg">
         <div class="flames-container">
-            <div class="flame"></div>
-            <div class="flame"></div>
-            <div class="flame"></div>
-            <div class="flame"></div>
-            <div class="flame"></div>
-            <div class="flame"></div>
-            <div class="flame"></div>
-            <div class="flame"></div>
-            <div class="flame"></div>
-            <div class="flame"></div>
-            <div class="flame"></div>
-            <div class="flame"></div>
+            <div class="flame"></div><div class="flame"></div><div class="flame"></div><div class="flame"></div>
+            <div class="flame"></div><div class="flame"></div><div class="flame"></div><div class="flame"></div>
+            <div class="flame"></div><div class="flame"></div><div class="flame"></div><div class="flame"></div>
             <div class="flame"></div>
         </div>
         <div class="fire-glow"></div>
-        <div class="ember"></div>
-        <div class="ember"></div>
-        <div class="ember"></div>
-        <div class="ember"></div>
-        <div class="ember"></div>
-        <div class="ember"></div>
-        <div class="ember"></div>
-        <div class="ember"></div>
-        <div class="ember"></div>
-        <div class="ember"></div>
-        <div class="ember"></div>
-        <div class="ember"></div>
+        <div class="ember"></div><div class="ember"></div><div class="ember"></div><div class="ember"></div>
+        <div class="ember"></div><div class="ember"></div><div class="ember"></div><div class="ember"></div>
+        <div class="ember"></div><div class="ember"></div><div class="ember"></div><div class="ember"></div>
     </div>
 
     <div class="content-layer">
 
-        <!-- Toast Notification -->
         <div id="toast" class="fixed top-4 right-4 toast-gold px-6 py-3 rounded-lg shadow-2xl transform translate-x-full transition-transform duration-300 z-[100] flex items-center gap-2 font-semibold text-sm">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
             <span id="toast-msg">¡Acción completada!</span>
         </div>
 
-        <!-- Header -->
         <header class="sticky top-0 z-40 bg-black/90 backdrop-blur-xl border-b border-[#2A2A2A]">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between">
                 <a href="index.html" class="flex items-center gap-3">
@@ -261,7 +242,6 @@
             </div>
         </header>
 
-        <!-- Hero -->
         <section class="relative overflow-hidden">
             <div class="relative max-w-7xl mx-auto py-16 sm:py-24 px-4 sm:px-6 lg:px-8 text-center">
                 <div class="flex justify-center mb-8">
@@ -276,13 +256,11 @@
                     <span class="text-[#F5B731] font-semibold">Reservá tu lugar ahora.</span>
                 </p>
                 
-                <!-- Info chips -->
                 <div class="flex flex-wrap justify-center gap-3 mt-8 text-xs">
                     <span class="info-chip px-4 py-2 rounded-full font-medium">🔥 Fogón nocturno</span>
                     <span class="info-chip px-4 py-2 rounded-full font-medium">🏕️ Actividades al aire libre</span>
                     <span class="info-chip px-4 py-2 rounded-full font-medium">🍽️ Comidas incluidas</span>
-                    <span class="info-chip px-4 py-2 rounded-full font-medium">💳 Hasta 2 pagos</span>
-                    <span class="info-chip px-4 py-2 rounded-full font-medium">👥 20% dto. hermanos</span>
+                    <span class="info-chip px-4 py-2 rounded-full font-medium">💳 Hasta 3 pagos</span>
                 </div>
                 
                 <div class="mt-10">
@@ -293,7 +271,6 @@
             </div>
         </section>
 
-        <!-- Qué incluye -->
         <section class="border-y border-[#2A2A2A] bg-black/40 backdrop-blur-sm">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
                 <div class="text-center mb-12">
@@ -325,7 +302,6 @@
             </div>
         </section>
 
-        <!-- Planes de Pago -->
         <main id="entradas" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
             <div class="text-center mb-12">
                 <h3 class="font-cinzel text-2xl sm:text-3xl font-bold text-white mb-2 tracking-wider">ELEGÍ TU PLAN DE PAGO</h3>
@@ -333,12 +309,9 @@
                 <p class="text-gray-500 mt-4 text-sm">Seleccioná cómo querés pagar tu entrada</p>
             </div>
 
-            <!-- Selector de Planes -->
-            <div id="planes-container" class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto mb-10">
-                <!-- Se cargan con JavaScript -->
+            <div id="planes-container" class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto mb-10">
             </div>
 
-            <!-- Botón reservar -->
             <div class="text-center">
                 <button id="main-cta" onclick="openCompraModal()" class="btn-gold px-12 py-4 rounded-xl text-sm font-bold" disabled>
                     SELECCIONÁ UN PLAN DE PAGO
@@ -346,7 +319,6 @@
             </div>
         </main>
 
-        <!-- Footer -->
         <footer class="bg-black/60 backdrop-blur-sm border-t border-[#2A2A2A] py-12">
             <div class="max-w-7xl mx-auto px-4 text-center">
                 <div class="flex justify-center mb-6">
@@ -360,12 +332,11 @@
             </div>
         </footer>
 
-        <!-- Modal de Reserva -->
         <div id="compra-modal" class="fixed inset-0 z-50 hidden overflow-y-auto">
             <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-6 text-center sm:block sm:p-0">
                 <div class="fixed inset-0 modal-backdrop transition-opacity" onclick="closeCompraModal()"></div>
                 <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
-                <div class="inline-block align-bottom bg-[#1A1A1A] rounded-2xl text-left overflow-hidden shadow-2xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg w-full fade-in border border-[#2A2A2A]">
+                <div class="inline-block align-bottom bg-[#1A1A1A] rounded-2xl text-left overflow-hidden shadow-2xl transform transition-all sm:my-8 sm:align-middle sm:max-w-2xl w-full fade-in border border-[#2A2A2A]">
                     <div class="px-6 pt-6 pb-4">
                         <div class="flex items-center justify-between">
                             <div>
@@ -378,25 +349,27 @@
                         </div>
                         <div class="section-divider mt-4"></div>
                     </div>
-                    <div class="px-6 pb-6 space-y-4">
+                    <div class="px-6 pb-6 space-y-4 max-h-[70vh] overflow-y-auto">
+                        <!-- Datos del hermano principal -->
+                        <div>
+                            <h4 class="text-[#F5B731] font-bold text-sm mb-2 flex items-center gap-2">👤 Hermano 1 (Principal)</h4>
+                        </div>
                         <div class="grid grid-cols-2 gap-3">
                             <div>
                                 <label class="block text-[10px] font-bold text-[#F5B731] uppercase tracking-widest mb-1.5">Nombre *</label>
-                                <input type="text" id="camp-name" class="input-dark w-full rounded-lg px-3 py-2.5 text-sm" placeholder="Tu nombre">
+                                <input type="text" id="camp-name" class="input-dark w-full rounded-lg px-3 py-2.5 text-sm" placeholder="Nombre">
                             </div>
                             <div>
                                 <label class="block text-[10px] font-bold text-[#F5B731] uppercase tracking-widest mb-1.5">Apellido *</label>
-                                <input type="text" id="camp-lastname" class="input-dark w-full rounded-lg px-3 py-2.5 text-sm" placeholder="Tu apellido">
+                                <input type="text" id="camp-lastname" class="input-dark w-full rounded-lg px-3 py-2.5 text-sm" placeholder="Apellido">
                             </div>
                         </div>
 
-                        <!-- 🏫 Colegio -->
                         <div>
                             <label class="block text-[10px] font-bold text-[#F5B731] uppercase tracking-widest mb-1.5">Colegio *</label>
                             <input type="text" id="camp-colegio" class="input-dark w-full rounded-lg px-3 py-2.5 text-sm" placeholder="Nombre del colegio">
                         </div>
 
-                        <!-- 🛡️ Sección -->
                         <div>
                             <label class="block text-[10px] font-bold text-[#F5B731] uppercase tracking-widest mb-1.5">Sección a la que pertenece *</label>
                             <select id="camp-seccion" class="input-dark w-full rounded-lg px-3 py-2.5 text-sm">
@@ -432,21 +405,98 @@
                             <textarea id="camp-observaciones" class="input-dark w-full rounded-lg px-3 py-2.5 text-sm h-16" placeholder="Alergias, medicación, etc."></textarea>
                         </div>
 
-                        <!-- 👥 Descuento para hermanos -->
-                        <div class="bg-[#F5B731]/5 border border-[#F5B731]/30 rounded-lg p-4">
-                            <label class="flex items-center gap-3 cursor-pointer">
-                                <input type="checkbox" id="camp-hermano" class="w-5 h-5 text-[#F5B731] focus:ring-[#F5B731] border-gray-600 bg-[#1E1E1E]" onchange="actualizarPrecioTotal()">
-                                <div>
-                                    <p class="text-sm font-bold text-[#F5B731]">👥 Soy hermano/a de otro inscripto</p>
-                                    <p class="text-xs text-gray-400">Obtené 20% de descuento en tu entrada</p>
+                        <!-- 🆕 Sección exclusiva para COMBO HERMANOS -->
+                        <div id="hermanos-extra-container" class="hidden">
+                            <div class="section-divider my-4"></div>
+                            <h4 class="text-[#F5B731] font-bold text-sm mb-2 flex items-center gap-2">👥 Datos de los Hermanos Adicionales</h4>
+                            <p class="text-xs text-gray-500 mb-3">Completá los datos de los otros 2 hermanos que participan del combo.</p>
+                            
+                            <!-- Hermano 2 -->
+                            <div class="hermano-card">
+                                <div class="hermano-title">👤 Hermano 2</div>
+                                <div class="grid grid-cols-2 gap-3 mb-3">
+                                    <div>
+                                        <label class="block text-[10px] font-bold text-[#F5B731] uppercase tracking-widest mb-1.5">Nombre *</label>
+                                        <input type="text" id="hermano2-name" class="input-dark w-full rounded-lg px-3 py-2.5 text-sm" placeholder="Nombre">
+                                    </div>
+                                    <div>
+                                        <label class="block text-[10px] font-bold text-[#F5B731] uppercase tracking-widest mb-1.5">Apellido *</label>
+                                        <input type="text" id="hermano2-lastname" class="input-dark w-full rounded-lg px-3 py-2.5 text-sm" placeholder="Apellido">
+                                    </div>
                                 </div>
-                            </label>
-                            <div id="hermano-info" class="mt-3 hidden">
-                                <input type="text" id="camp-hermano-nombre" class="input-dark w-full rounded-lg px-3 py-2.5 text-sm" placeholder="Nombre del hermano/a ya inscripto/a">
+                                <div class="grid grid-cols-2 gap-3">
+                                    <div>
+                                        <label class="block text-[10px] font-bold text-[#F5B731] uppercase tracking-widest mb-1.5">Edad *</label>
+                                        <input type="number" id="hermano2-edad" min="4" max="99" class="input-dark w-full rounded-lg px-3 py-2.5 text-sm" placeholder="Edad">
+                                    </div>
+                                    <div>
+                                        <label class="block text-[10px] font-bold text-[#F5B731] uppercase tracking-widest mb-1.5">Sección *</label>
+                                        <select id="hermano2-seccion" class="input-dark w-full rounded-lg px-3 py-2.5 text-sm">
+                                            <option value="">Elegí...</option>
+                                            <option value="Escuderos">🛡️ Escuderos</option>
+                                            <option value="Templarios">⚔️ Templarios</option>
+                                            <option value="Adalides">🏹 Adalides</option>
+                                            <option value="Herederas">👑 Herederas</option>
+                                            <option value="Caperucitas">🎭 Caperucitas</option>
+                                            <option value="Mayor">🏰 Mayor</option>
+                                            <option value="Milicianos">🏛️ Milicianos</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Hermano 3 -->
+                            <div class="hermano-card">
+                                <div class="hermano-title">👤 Hermano 3</div>
+                                <div class="grid grid-cols-2 gap-3 mb-3">
+                                    <div>
+                                        <label class="block text-[10px] font-bold text-[#F5B731] uppercase tracking-widest mb-1.5">Nombre *</label>
+                                        <input type="text" id="hermano3-name" class="input-dark w-full rounded-lg px-3 py-2.5 text-sm" placeholder="Nombre">
+                                    </div>
+                                    <div>
+                                        <label class="block text-[10px] font-bold text-[#F5B731] uppercase tracking-widest mb-1.5">Apellido *</label>
+                                        <input type="text" id="hermano3-lastname" class="input-dark w-full rounded-lg px-3 py-2.5 text-sm" placeholder="Apellido">
+                                    </div>
+                                </div>
+                                <div class="grid grid-cols-2 gap-3">
+                                    <div>
+                                        <label class="block text-[10px] font-bold text-[#F5B731] uppercase tracking-widest mb-1.5">Edad *</label>
+                                        <input type="number" id="hermano3-edad" min="4" max="99" class="input-dark w-full rounded-lg px-3 py-2.5 text-sm" placeholder="Edad">
+                                    </div>
+                                    <div>
+                                        <label class="block text-[10px] font-bold text-[#F5B731] uppercase tracking-widest mb-1.5">Sección *</label>
+                                        <select id="hermano3-seccion" class="input-dark w-full rounded-lg px-3 py-2.5 text-sm">
+                                            <option value="">Elegí...</option>
+                                            <option value="Escuderos">🛡️ Escuderos</option>
+                                            <option value="Templarios">⚔️ Templarios</option>
+                                            <option value="Adalides">🏹 Adalides</option>
+                                            <option value="Herederas">👑 Herederas</option>
+                                            <option value="Caperucitas">🎭 Caperucitas</option>
+                                            <option value="Mayor">🏰 Mayor</option>
+                                            <option value="Milicianos">🏛️ Milicianos</option>
+                                        </select>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
-                        <!-- 💳 Datos para Transferir -->
+                        <!-- Selector de cuotas para COMBO -->
+                        <div id="cuotas-selector-container" class="hidden">
+                            <div class="bg-black/40 rounded-lg p-4 border border-[#2A2A2A]">
+                                <label class="block text-[10px] font-bold text-[#F5B731] uppercase tracking-widest mb-2">Elegí cómo pagar el combo *</label>
+                                <div class="cuotas-selector">
+                                    <div class="cuota-option selected" data-cuotas="1" onclick="seleccionarCuotasCombo(1)">
+                                        <strong>1 Pago</strong><br>
+                                        <span class="text-xs">$180.000</span>
+                                    </div>
+                                    <div class="cuota-option" data-cuotas="2" onclick="seleccionarCuotasCombo(2)">
+                                        <strong>2 Cuotas</strong><br>
+                                        <span class="text-xs">2 x $90.000</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="bg-black/40 rounded-lg p-4 border border-[#2A2A2A]">
                             <h4 class="font-cinzel font-bold text-[#F5B731] mb-3 text-[10px] uppercase tracking-widest">Datos para Transferir</h4>
                             <div class="mb-3">
@@ -461,15 +511,22 @@
                             </div>
                         </div>
 
-                        <!-- Resumen del precio -->
                         <div class="bg-black/40 rounded-lg p-4 border border-[#2A2A2A]">
                             <div class="flex justify-between items-center mb-1">
                                 <span class="text-sm text-gray-400">Plan elegido:</span>
                                 <span id="resumen-plan" class="text-sm font-bold text-white">-</span>
                             </div>
+                            <div id="resumen-cantidad-container" class="flex justify-between items-center mb-1 hidden">
+                                <span class="text-sm text-gray-400">Cantidad de participantes:</span>
+                                <span id="resumen-cantidad" class="text-sm font-bold text-white">3</span>
+                            </div>
                             <div class="flex justify-between items-center mb-1">
                                 <span class="text-sm text-gray-400">Cuotas:</span>
                                 <span id="resumen-cuotas" class="text-sm font-bold text-white">-</span>
+                            </div>
+                            <div id="resumen-precio-unitario-container" class="flex justify-between items-center mb-1 hidden">
+                                <span class="text-sm text-gray-400">Precio por hermano:</span>
+                                <span id="resumen-precio-unitario" class="text-sm font-bold text-white">-</span>
                             </div>
                             <div class="flex justify-between items-center pt-2 border-t border-[#2A2A2A] mt-2">
                                 <span class="text-sm text-gray-400">Total a pagar:</span>
@@ -489,16 +546,14 @@
             </div>
         </div>
 
-    </div> <!-- fin content-layer -->
+    </div>
 
-    <!-- JAVASCRIPT -->
     <script>
-        // ⚙️ CONFIGURACIÓN (EDITÁ ACÁ)
         const SHEET_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby7hqHwlwwMYdT7BsPPG0rvoYhDvpALkVMKCIyma-wKNata0Xqwk9A0DL2E6iCuoEvKEg/exec';
         const WHATSAPP_NUMBER = '3834565209';
-        const DESCUENTO_HERMANO = 0.20; // 20% de descuento
+        const PRECIO_BASE = 75000;
+        const PRECIO_HERMANO_COMBO = 60000; // 20% descuento
         
-        // 💳 Planes de pago (editá montos y cuotas acá)
         const PLANES = [
             { 
                 id: 'plan1', 
@@ -508,7 +563,8 @@
                 descripcion: 'Pagás todo junto y listo',
                 cuotas: 1, 
                 montoCuota: 75000, 
-                total: 75000 
+                total: 75000,
+                esCombo: false
             },
             { 
                 id: 'plan2', 
@@ -518,14 +574,27 @@
                 descripcion: '2 cuotas de $37.500',
                 cuotas: 2, 
                 montoCuota: 37500, 
-                total: 75000 
+                total: 75000,
+                esCombo: false
+            },
+            { 
+                id: 'plan3', 
+                nombre: 'Combo Hermanos', 
+                badge: '🔥 20% DESCUENTO · Mín. 3 hermanos',
+                badgeClass: 'plan-badge-combo',
+                descripcion: 'Precio especial por hermano · 1 o 2 cuotas',
+                cuotas: 1, // por defecto, se puede cambiar
+                montoCuota: 180000, 
+                total: 180000,
+                esCombo: true,
+                precioUnitario: 60000
             }
         ];
 
         let planSeleccionado = null;
+        let cuotasCombo = 1;
         let isProcessing = false;
 
-        // 🎨 Renderizar planes de pago
         function renderPlanes() {
             const container = document.getElementById('planes-container');
             container.innerHTML = '';
@@ -535,25 +604,40 @@
                 card.className = `plan-card rounded-xl p-6 text-center ${planSeleccionado === plan.id ? 'selected' : ''}`;
                 card.onclick = () => seleccionarPlan(plan.id);
                 
-                card.innerHTML = `
-                    <span class="${plan.badgeClass} text-[10px] font-bold px-3 py-1 rounded-full inline-block mb-4">${plan.badge}</span>
-                    <h4 class="font-cinzel text-2xl font-bold text-white mb-2">${plan.nombre}</h4>
-                    <p class="text-sm text-gray-400 mb-4">${plan.descripcion}</p>
-                    <p class="text-4xl font-bold text-[#F5B731] mb-1">$${plan.montoCuota.toLocaleString('es-AR')}</p>
-                    <p class="text-xs text-gray-500 mb-4">${plan.cuotas > 1 ? `por cuota · ${plan.cuotas} pagos` : 'pago único'}</p>
-                    <div class="pt-4 border-t border-[#2A2A2A]">
-                        <p class="text-xs text-gray-500">Total final:</p>
-                        <p class="text-lg font-bold text-white">$${plan.total.toLocaleString('es-AR')}</p>
-                    </div>
-                `;
+                if (plan.esCombo) {
+                    card.innerHTML = `
+                        <span class="${plan.badgeClass} text-[10px] font-bold px-3 py-1 rounded-full inline-block mb-4">${plan.badge}</span>
+                        <h4 class="font-cinzel text-2xl font-bold text-white mb-2">${plan.nombre}</h4>
+                        <p class="text-sm text-gray-400 mb-4">${plan.descripcion}</p>
+                        <p class="text-4xl font-bold text-[#F5B731] mb-1">$${plan.precioUnitario.toLocaleString('es-AR')}</p>
+                        <p class="text-xs text-gray-500 mb-2">por hermano</p>
+                        <p class="text-sm text-gray-300 mb-4">Total: <strong class="text-white">$${plan.total.toLocaleString('es-AR')}</strong></p>
+                        <div class="pt-4 border-t border-[#2A2A2A]">
+                            <p class="text-xs text-gray-500">3 hermanos incluidos</p>
+                            <p class="text-xs text-[#F5B731] mt-1">1 o 2 cuotas a elección</p>
+                        </div>
+                    `;
+                } else {
+                    card.innerHTML = `
+                        <span class="${plan.badgeClass} text-[10px] font-bold px-3 py-1 rounded-full inline-block mb-4">${plan.badge}</span>
+                        <h4 class="font-cinzel text-2xl font-bold text-white mb-2">${plan.nombre}</h4>
+                        <p class="text-sm text-gray-400 mb-4">${plan.descripcion}</p>
+                        <p class="text-4xl font-bold text-[#F5B731] mb-1">$${plan.montoCuota.toLocaleString('es-AR')}</p>
+                        <p class="text-xs text-gray-500 mb-4">${plan.cuotas > 1 ? `por cuota · ${plan.cuotas} pagos` : 'pago único'}</p>
+                        <div class="pt-4 border-t border-[#2A2A2A]">
+                            <p class="text-xs text-gray-500">Total final:</p>
+                            <p class="text-lg font-bold text-white">$${plan.total.toLocaleString('es-AR')}</p>
+                        </div>
+                    `;
+                }
                 
                 container.appendChild(card);
             });
         }
 
-        // 🎯 Seleccionar plan
         function seleccionarPlan(planId) {
             planSeleccionado = planId;
+            cuotasCombo = 1; // Resetear cuotas al cambiar de plan
             renderPlanes();
             
             const plan = PLANES.find(p => p.id === planId);
@@ -562,13 +646,69 @@
             cta.textContent = `RESERVAR CON ${plan.nombre.toUpperCase()}`;
         }
 
-        // 🛒 Modal de reserva
+        function seleccionarCuotasCombo(cantidad) {
+            cuotasCombo = cantidad;
+            document.querySelectorAll('.cuota-option').forEach(opt => {
+                opt.classList.toggle('selected', parseInt(opt.dataset.cuotas) === cantidad);
+            });
+            actualizarResumenPrecio();
+        }
+
+        function actualizarResumenPrecio() {
+            const plan = PLANES.find(p => p.id === planSeleccionado);
+            if (!plan) return;
+
+            if (plan.esCombo) {
+                const total = PRECIO_HERMANO_COMBO * 3;
+                const montoCuota = cuotasCombo === 1 ? total : total / cuotasCombo;
+                
+                document.getElementById('resumen-cuotas').textContent = 
+                    cuotasCombo === 1 ? `$${total.toLocaleString('es-AR')}` : `${cuotasCombo} x $${montoCuota.toLocaleString('es-AR')}`;
+                document.getElementById('precio-total').textContent = `$${total.toLocaleString('es-AR')}`;
+            }
+        }
+
         function openCompraModal() {
             if (!planSeleccionado) return;
             const plan = PLANES.find(p => p.id === planSeleccionado);
-            document.getElementById('modal-plan').textContent = `${plan.nombre} · Total $${plan.total.toLocaleString('es-AR')}`;
+            
+            document.getElementById('modal-plan').textContent = `${plan.nombre}${plan.esCombo ? ` · 3 hermanos` : ` · Total $${plan.total.toLocaleString('es-AR')}`}`;
             document.getElementById('resumen-plan').textContent = plan.nombre;
-            actualizarPrecioTotal();
+            
+            // Mostrar/ocultar secciones según el plan
+            const hermanosContainer = document.getElementById('hermanos-extra-container');
+            const cuotasContainer = document.getElementById('cuotas-selector-container');
+            const cantidadContainer = document.getElementById('resumen-cantidad-container');
+            const precioUnitarioContainer = document.getElementById('resumen-precio-unitario-container');
+
+            if (plan.esCombo) {
+                hermanosContainer.classList.remove('hidden');
+                cuotasContainer.classList.remove('hidden');
+                cantidadContainer.classList.remove('hidden');
+                precioUnitarioContainer.classList.remove('hidden');
+                
+                document.getElementById('resumen-cantidad').textContent = '3 hermanos';
+                document.getElementById('resumen-precio-unitario').textContent = `$${PRECIO_HERMANO_COMBO.toLocaleString('es-AR')} c/u`;
+                
+                // Resetear cuotas
+                cuotasCombo = 1;
+                document.querySelectorAll('.cuota-option').forEach(opt => {
+                    opt.classList.toggle('selected', parseInt(opt.dataset.cuotas) === 1);
+                });
+                
+                actualizarResumenPrecio();
+            } else {
+                hermanosContainer.classList.add('hidden');
+                cuotasContainer.classList.add('hidden');
+                cantidadContainer.classList.add('hidden');
+                precioUnitarioContainer.classList.add('hidden');
+                
+                document.getElementById('resumen-cuotas').textContent = plan.cuotas > 1 
+                    ? `${plan.cuotas} x $${plan.montoCuota.toLocaleString('es-AR')}` 
+                    : `$${plan.total.toLocaleString('es-AR')}`;
+                document.getElementById('precio-total').textContent = `$${plan.total.toLocaleString('es-AR')}`;
+            }
+            
             document.getElementById('compra-modal').classList.remove('hidden');
         }
         
@@ -576,44 +716,6 @@
             document.getElementById('compra-modal').classList.add('hidden');
         }
 
-        // 💰 Calcular precio con descuento si es hermano
-        function actualizarPrecioTotal() {
-            if (!planSeleccionado) return;
-            const plan = PLANES.find(p => p.id === planSeleccionado);
-            const esHermano = document.getElementById('camp-hermano').checked;
-            
-            // Mostrar/ocultar campo de nombre del hermano
-            document.getElementById('hermano-info').classList.toggle('hidden', !esHermano);
-            
-            let totalFinal = plan.total;
-            let cuotas = plan.cuotas;
-            let montoCuota = plan.montoCuota;
-            
-            if (esHermano) {
-                totalFinal = Math.round(plan.total * (1 - DESCUENTO_HERMANO));
-                montoCuota = Math.round(plan.montoCuota * (1 - DESCUENTO_HERMANO));
-            }
-            
-            // Actualizar resumen
-            const cuotasText = cuotas > 1 
-                ? `${cuotas} x $${montoCuota.toLocaleString('es-AR')}` 
-                : `$${totalFinal.toLocaleString('es-AR')}`;
-            
-            document.getElementById('resumen-cuotas').textContent = cuotasText;
-            
-            // Mostrar precio con descuento
-            if (esHermano) {
-                document.getElementById('precio-total').innerHTML = `
-                    <span class="line-through text-gray-500 text-sm mr-2">$${plan.total.toLocaleString('es-AR')}</span>
-                    <span>$${totalFinal.toLocaleString('es-AR')}</span>
-                    <span class="text-xs text-green-400 ml-2">(-20%)</span>
-                `;
-            } else {
-                document.getElementById('precio-total').textContent = `$${totalFinal.toLocaleString('es-AR')}`;
-            }
-        }
-
-        // ✅ Confirmar reserva → registra y abre WhatsApp (compatible con iPhone)
         async function confirmarReserva() {
             if (isProcessing) return;
             
@@ -623,17 +725,39 @@
             const seccion = document.getElementById('camp-seccion').value;
             const edad = document.getElementById('camp-edad').value;
             const telefono = document.getElementById('camp-telefono').value.trim();
-            const esHermano = document.getElementById('camp-hermano').checked;
-            const hermanoNombre = document.getElementById('camp-hermano-nombre').value.trim();
             
-            if (!name || !lastname) return alert('Nombre y apellido obligatorios');
+            // Validaciones básicas
+            if (!name || !lastname) return alert('Nombre y apellido del hermano 1 son obligatorios');
             if (!colegio) return alert('Ingresá el colegio del inscripto');
-            if (!seccion) return alert('Seleccioná la sección a la que pertenece');
-            if (!edad || edad < 4) return alert('Ingresá una edad válida');
+            if (!seccion) return alert('Seleccioná la sección del hermano 1');
+            if (!edad || edad < 4) return alert('Ingresá una edad válida para el hermano 1');
             if (!telefono) return alert('Ingresá un teléfono de contacto');
             
-            if (esHermano && !hermanoNombre) {
-                return alert('Ingresá el nombre del hermano/a ya inscripto/a para aplicar el descuento');
+            const plan = PLANES.find(p => p.id === planSeleccionado);
+            
+            // Validaciones específicas para COMBO
+            let hermanos = [{name, lastname, edad, seccion}];
+            if (plan.esCombo) {
+                const h2name = document.getElementById('hermano2-name').value.trim();
+                const h2lastname = document.getElementById('hermano2-lastname').value.trim();
+                const h2edad = document.getElementById('hermano2-edad').value;
+                const h2seccion = document.getElementById('hermano2-seccion').value;
+                
+                const h3name = document.getElementById('hermano3-name').value.trim();
+                const h3lastname = document.getElementById('hermano3-lastname').value.trim();
+                const h3edad = document.getElementById('hermano3-edad').value;
+                const h3seccion = document.getElementById('hermano3-seccion').value;
+                
+                if (!h2name || !h2lastname) return alert('Completá nombre y apellido del hermano 2');
+                if (!h2edad || h2edad < 4) return alert('Ingresá una edad válida para el hermano 2');
+                if (!h2seccion) return alert('Seleccioná la sección del hermano 2');
+                
+                if (!h3name || !h3lastname) return alert('Completá nombre y apellido del hermano 3');
+                if (!h3edad || h3edad < 4) return alert('Ingresá una edad válida para el hermano 3');
+                if (!h3seccion) return alert('Seleccioná la sección del hermano 3');
+                
+                hermanos.push({name: h2name, lastname: h2lastname, edad: h2edad, seccion: h2seccion});
+                hermanos.push({name: h3name, lastname: h3lastname, edad: h3edad, seccion: h3seccion});
             }
             
             isProcessing = true;
@@ -641,68 +765,82 @@
             btn.disabled = true;
             btn.textContent = '⏳ Registrando...';
             
-            const plan = PLANES.find(p => p.id === planSeleccionado);
             const email = document.getElementById('camp-email').value;
             const observaciones = document.getElementById('camp-observaciones').value.trim();
             
-            // Calcular totales con descuento si aplica
-            let totalFinal = plan.total;
-            let montoCuota = plan.montoCuota;
-            let planNombre = plan.nombre;
+            // Calcular totales según el plan
+            let totalFinal, cuotasFinal, montoCuotaFinal, nombrePlanFinal;
             
-            if (esHermano) {
-                totalFinal = Math.round(plan.total * (1 - DESCUENTO_HERMANO));
-                montoCuota = Math.round(plan.montoCuota * (1 - DESCUENTO_HERMANO));
-                planNombre = `${plan.nombre} (20% dto. hermano)`;
+            if (plan.esCombo) {
+                totalFinal = PRECIO_HERMANO_COMBO * 3; // $180.000
+                cuotasFinal = cuotasCombo;
+                montoCuotaFinal = cuotasCombo === 1 ? totalFinal : totalFinal / cuotasCombo;
+                nombrePlanFinal = `Combo Hermanos (${cuotasCombo === 1 ? '1 Pago' : `${cuotasCombo} Cuotas`})`;
+            } else {
+                totalFinal = plan.total;
+                cuotasFinal = plan.cuotas;
+                montoCuotaFinal = plan.montoCuota;
+                nombrePlanFinal = plan.nombre;
             }
             
             // 1. Registrar en Google Sheets
             try {
-                fetch(SHEET_SCRIPT_URL, {
-                    method: 'POST',
-                    mode: 'no-cors',
-                    keepalive: true,
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        action: 'campamento',
-                        cliente: `${name} ${lastname}`,
-                        email: email || '',
-                        colegio: colegio,
-                        seccion: seccion,
-                        planPago: planNombre,
-                        cuotas: plan.cuotas,
-                        montoCuota: montoCuota,
-                        edad: edad,
-                        telefono: telefono,
-                        observaciones: observaciones + (esHermano ? ` | HERMANO DE: ${hermanoNombre}` : ''),
-                        total: totalFinal,
-                        esHermano: esHermano,
-                        hermanoNombre: hermanoNombre || '',
-                        descuento: esHermano ? '20%' : '0%'
-                    })
-                }).catch(e => console.error('Error registrando:', e));
+                // Para combo, registramos una fila por cada hermano
+                const promesas = hermanos.map((hermano, idx) => {
+                    return fetch(SHEET_SCRIPT_URL, {
+                        method: 'POST',
+                        mode: 'no-cors',
+                        keepalive: true,
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            action: 'campamento',
+                            cliente: `${hermano.name} ${hermano.lastname}`,
+                            email: email || '',
+                            colegio: colegio,
+                            seccion: hermano.seccion,
+                            planPago: nombrePlanFinal,
+                            cuotas: cuotasFinal,
+                            montoCuota: montoCuotaFinal,
+                            edad: hermano.edad,
+                            telefono: telefono,
+                            observaciones: plan.esCombo ? `${observaciones ? observaciones + ' | ' : ''}Grupo Combo #${Date.now()} (Hno ${idx+1}/3)` : observaciones,
+                            total: plan.esCombo ? PRECIO_HERMANO_COMBO : totalFinal
+                        })
+                    }).catch(e => console.error('Error registrando:', e));
+                });
+                
+                await Promise.all(promesas);
             } catch (e) {
                 console.error('Error registrando:', e);
             }
             
             // 2. Armar mensaje de WhatsApp
-            const msg = `¡Hola Ruca del Valle! 🔥%0A%0A` +
-                `Quiero reservar mi lugar en el *Campamento 2026*:%0A%0A` +
-                `📋 *Datos de la reserva:*%0A` +
-                `👤 Nombre: ${name} ${lastname}%0A` +
-                `🏫 Colegio: ${colegio}%0A` +
-                `🛡️ Sección: ${seccion}%0A` +
-                `🎂 Edad: ${edad} años%0A` +
-                `📞 Teléfono: ${telefono}%0A` +
-                (observaciones ? `⚕️ Observaciones: ${observaciones}%0A` : '') +
-                (esHermano ? `👥 *HERMANO DE: ${hermanoNombre}* (20% dto.)%0A` : '') +
-                `%0A💳 *Plan de pago: ${planNombre}*%0A` +
-                (plan.cuotas > 1 ? `📅 ${plan.cuotas} cuotas de $${montoCuota.toLocaleString('es-AR')}%0A` : '') +
-                (esHermano ? `~~Total sin dto.: $${plan.total.toLocaleString('es-AR')}~~%0A` : '') +
+            let msg = `¡Hola Ruca del Valle! 🔥%0A%0A` +
+                `Quiero reservar mi lugar en el *Campamento 2026*:%0A%0A`;
+            
+            if (plan.esCombo) {
+                msg += `👥 *COMBO HERMANOS (3 participantes)*%0A%0A`;
+                hermanos.forEach((h, idx) => {
+                    msg += `👤 *Hermano ${idx+1}:*%0A` +
+                        `   • Nombre: ${h.name} ${h.lastname}%0A` +
+                        `   • Edad: ${h.edad} años%0A` +
+                        `   • Sección: ${h.seccion}%0A%0A`;
+                });
+            } else {
+                msg += `📋 *Datos de la reserva:*%0A` +
+                    `👤 Nombre: ${name} ${lastname}%0A` +
+                    `🎂 Edad: ${edad} años%0A` +
+                    `🛡️ Sección: ${seccion}%0A%0A`;
+            }
+            
+            msg += `🏫 *Colegio:* ${colegio}%0A` +
+                `📞 *Teléfono:* ${telefono}%0A` +
+                (observaciones ? `⚕️ *Observaciones:* ${observaciones}%0A` : '') +
+                `%0A💳 *Plan de pago:* ${nombrePlanFinal}%0A` +
+                (cuotasFinal > 1 ? `📅 ${cuotasFinal} cuotas de $${montoCuotaFinal.toLocaleString('es-AR')}%0A` : '') +
                 `💰 *Total: $${totalFinal.toLocaleString('es-AR')}*%0A%0A` +
                 `Adjunto comprobante de transferencia. ¡Gracias!`;
             
-            // 3. Redirigir a WhatsApp
             showToast('✅ Reserva registrada');
             window.location.href = `https://wa.me/${WHATSAPP_NUMBER}?text=${msg}`;
         }
@@ -729,7 +867,6 @@
             setTimeout(() => t.classList.add('translate-x-full'), 3000);
         }
 
-        // 🚀 Init
         document.addEventListener('DOMContentLoaded', () => { renderPlanes(); });
     </script>
 </body>
