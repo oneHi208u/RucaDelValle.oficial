@@ -23,7 +23,6 @@
         body { font-family: 'Inter', sans-serif; background-color: var(--black); color: var(--cream); overflow-x: hidden; }
         .font-cinzel { font-family: 'Cinzel', serif; }
 
-        /* 🔥 FONDO DE LLAMAS DE FUEGO INTENSO */
         .fire-bg {
             position: fixed;
             inset: 0;
@@ -67,7 +66,6 @@
             100% { opacity: 1; transform: scaleY(1.15) translateY(-3%); }
         }
 
-        /* 🔥 Llamas flameando individuales */
         .flames-container {
             position: absolute;
             bottom: 0;
@@ -194,13 +192,6 @@
         .plan-badge-gold { background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%); color: var(--black); }
         .plan-badge-combo { background: linear-gradient(135deg, #E91E63 0%, #9C27B0 100%); color: white; }
 
-        /* Selector de cuotas para combo */
-        .cuotas-selector { display: flex; gap: 8px; margin-top: 8px; }
-        .cuota-option { flex: 1; padding: 8px; border: 2px solid #3A3A3A; border-radius: 8px; text-align: center; cursor: pointer; transition: all 0.2s; font-size: 0.85rem; }
-        .cuota-option:hover { border-color: var(--gold); }
-        .cuota-option.selected { border-color: var(--gold); background: rgba(245, 183, 49, 0.1); color: var(--gold); }
-
-        /* Sección de hermanos */
         .hermano-card { background: var(--dark-gray); border: 1px solid #3A3A3A; border-radius: 12px; padding: 16px; margin-top: 12px; }
         .hermano-title { color: var(--gold); font-weight: 700; font-size: 0.9rem; margin-bottom: 12px; display: flex; align-items: center; gap: 6px; }
     </style>
@@ -260,7 +251,7 @@
                     <span class="info-chip px-4 py-2 rounded-full font-medium">🔥 Fogón nocturno</span>
                     <span class="info-chip px-4 py-2 rounded-full font-medium">🏕️ Actividades al aire libre</span>
                     <span class="info-chip px-4 py-2 rounded-full font-medium">🍽️ Comidas incluidas</span>
-                    <span class="info-chip px-4 py-2 rounded-full font-medium">💳 Hasta 1 pago</span>
+                    <span class="info-chip px-4 py-2 rounded-full font-medium">💳 Pago único</span>
                 </div>
                 
                 <div class="mt-10">
@@ -306,10 +297,10 @@
             <div class="text-center mb-12">
                 <h3 class="font-cinzel text-2xl sm:text-3xl font-bold text-white mb-2 tracking-wider">ELEGÍ TU PLAN DE PAGO</h3>
                 <div class="section-divider w-20 mx-auto"></div>
-                <p class="text-gray-500 mt-4 text-sm">Seleccioná cómo querés pagar tu entrada</p>
+                <p class="text-gray-500 mt-4 text-sm">Seleccioná el plan que mejor se adapte a vos</p>
             </div>
 
-            <div id="planes-container" class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto mb-10">
+            <div id="planes-container" class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto mb-10">
             </div>
 
             <div class="text-center">
@@ -350,7 +341,6 @@
                         <div class="section-divider mt-4"></div>
                     </div>
                     <div class="px-6 pb-6 space-y-4 max-h-[70vh] overflow-y-auto">
-                        <!-- Datos del hermano principal -->
                         <div>
                             <h4 class="text-[#F5B731] font-bold text-sm mb-2 flex items-center gap-2">👤 Hermano 1 (Principal)</h4>
                         </div>
@@ -405,13 +395,12 @@
                             <textarea id="camp-observaciones" class="input-dark w-full rounded-lg px-3 py-2.5 text-sm h-16" placeholder="Alergias, medicación, etc."></textarea>
                         </div>
 
-                        <!-- 🆕 Sección exclusiva para COMBO HERMANOS -->
+                        <!-- Sección exclusiva para COMBO HERMANOS -->
                         <div id="hermanos-extra-container" class="hidden">
                             <div class="section-divider my-4"></div>
                             <h4 class="text-[#F5B731] font-bold text-sm mb-2 flex items-center gap-2">👥 Datos de los Hermanos Adicionales</h4>
                             <p class="text-xs text-gray-500 mb-3">Completá los datos de los otros 2 hermanos que participan del combo.</p>
                             
-                            <!-- Hermano 2 -->
                             <div class="hermano-card">
                                 <div class="hermano-title">👤 Hermano 2</div>
                                 <div class="grid grid-cols-2 gap-3 mb-3">
@@ -445,7 +434,6 @@
                                 </div>
                             </div>
 
-                            <!-- Hermano 3 -->
                             <div class="hermano-card">
                                 <div class="hermano-title">👤 Hermano 3</div>
                                 <div class="grid grid-cols-2 gap-3 mb-3">
@@ -480,25 +468,6 @@
                             </div>
                         </div>
 
-                        <!-- Selector de cuotas para COMBO -->
-                        <div id="cuotas-selector-container" class="hidden">
-                            <div class="bg-black/40 rounded-lg p-4 border border-[#2A2A2A]">
-                                <label class="block text-[10px] font-bold text-[#F5B731] uppercase tracking-widest mb-2">Elegí cómo pagar el combo *</label>
-                                <div class="cuotas-selector">
-                                    <div class="cuota-option selected" data-cuotas="1" onclick="seleccionarCuotasCombo(1)">
-                                        <strong>1 Pago</strong><br>
-                                        <span class="text-xs">$180.000</span>
-                                    </div>
-                                     <div class="cuota-option selected" data-cuotas="1" onclick="seleccionarCuotasCombo(1)">
-                                        <strong>1 Pagos</strong><br>
-                                        <span class="text-xs">$180.000</span>
-                                    </div>
-                                    
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
                         <div class="bg-black/40 rounded-lg p-4 border border-[#2A2A2A]">
                             <h4 class="font-cinzel font-bold text-[#F5B731] mb-3 text-[10px] uppercase tracking-widest">Datos para Transferir</h4>
                             <div class="mb-3">
@@ -521,10 +490,6 @@
                             <div id="resumen-cantidad-container" class="flex justify-between items-center mb-1 hidden">
                                 <span class="text-sm text-gray-400">Cantidad de participantes:</span>
                                 <span id="resumen-cantidad" class="text-sm font-bold text-white">3</span>
-                            </div>
-                            <div class="flex justify-between items-center mb-1">
-                                <span class="text-sm text-gray-400">Cuotas:</span>
-                                <span id="resumen-cuotas" class="text-sm font-bold text-white">-</span>
                             </div>
                             <div id="resumen-precio-unitario-container" class="flex justify-between items-center mb-1 hidden">
                                 <span class="text-sm text-gray-400">Precio por hermano:</span>
@@ -554,7 +519,7 @@
         const SHEET_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby7hqHwlwwMYdT7BsPPG0rvoYhDvpALkVMKCIyma-wKNata0Xqwk9A0DL2E6iCuoEvKEg/exec';
         const WHATSAPP_NUMBER = '3834565209';
         const PRECIO_BASE = 75000;
-        const PRECIO_HERMANO_COMBO = 60000; // 20% descuento
+        const PRECIO_HERMANO_COMBO = 60000;
         
         const PLANES = [
             { 
@@ -573,8 +538,8 @@
                 nombre: 'Combo Hermanos', 
                 badge: '🔥 20% DESCUENTO · Mín. 3 hermanos',
                 badgeClass: 'plan-badge-combo',
-                descripcion: 'Precio especial por hermano · 1 solo pago',
-                cuotas: 1, // por defecto, se puede cambiar
+                descripcion: 'Precio especial por hermano · Pago único',
+                cuotas: 1,
                 montoCuota: 180000, 
                 total: 180000,
                 esCombo: true,
@@ -583,7 +548,6 @@
         ];
 
         let planSeleccionado = null;
-        let cuotasCombo = 1;
         let isProcessing = false;
 
         function renderPlanes() {
@@ -605,7 +569,7 @@
                         <p class="text-sm text-gray-300 mb-4">Total: <strong class="text-white">$${plan.total.toLocaleString('es-AR')}</strong></p>
                         <div class="pt-4 border-t border-[#2A2A2A]">
                             <p class="text-xs text-gray-500">3 hermanos incluidos</p>
-                            <p class="text-xs text-[#F5B731] mt-1">1 </p>
+                            <p class="text-xs text-[#F5B731] mt-1">Pago único</p>
                         </div>
                     `;
                 } else {
@@ -614,7 +578,7 @@
                         <h4 class="font-cinzel text-2xl font-bold text-white mb-2">${plan.nombre}</h4>
                         <p class="text-sm text-gray-400 mb-4">${plan.descripcion}</p>
                         <p class="text-4xl font-bold text-[#F5B731] mb-1">$${plan.montoCuota.toLocaleString('es-AR')}</p>
-                        <p class="text-xs text-gray-500 mb-4">${plan.cuotas > 1 ? `por cuota · ${plan.cuotas} pagos` : 'pago único'}</p>
+                        <p class="text-xs text-gray-500 mb-4">pago único</p>
                         <div class="pt-4 border-t border-[#2A2A2A]">
                             <p class="text-xs text-gray-500">Total final:</p>
                             <p class="text-lg font-bold text-white">$${plan.total.toLocaleString('es-AR')}</p>
@@ -628,35 +592,12 @@
 
         function seleccionarPlan(planId) {
             planSeleccionado = planId;
-            cuotasCombo = 1; // Resetear cuotas al cambiar de plan
             renderPlanes();
             
             const plan = PLANES.find(p => p.id === planId);
             const cta = document.getElementById('main-cta');
             cta.disabled = false;
             cta.textContent = `RESERVAR CON ${plan.nombre.toUpperCase()}`;
-        }
-
-        function seleccionarCuotasCombo(cantidad) {
-            cuotasCombo = cantidad;
-            document.querySelectorAll('.cuota-option').forEach(opt => {
-                opt.classList.toggle('selected', parseInt(opt.dataset.cuotas) === cantidad);
-            });
-            actualizarResumenPrecio();
-        }
-
-        function actualizarResumenPrecio() {
-            const plan = PLANES.find(p => p.id === planSeleccionado);
-            if (!plan) return;
-
-            if (plan.esCombo) {
-                const total = PRECIO_HERMANO_COMBO * 3;
-                const montoCuota = cuotasCombo === 1 ? total : total / cuotasCombo;
-                
-                document.getElementById('resumen-cuotas').textContent = 
-                    cuotasCombo === 1 ? `$${total.toLocaleString('es-AR')}` : `${cuotasCombo} x $${montoCuota.toLocaleString('es-AR')}`;
-                document.getElementById('precio-total').textContent = `$${total.toLocaleString('es-AR')}`;
-            }
         }
 
         function openCompraModal() {
@@ -666,37 +607,22 @@
             document.getElementById('modal-plan').textContent = `${plan.nombre}${plan.esCombo ? ` · 3 hermanos` : ` · Total $${plan.total.toLocaleString('es-AR')}`}`;
             document.getElementById('resumen-plan').textContent = plan.nombre;
             
-            // Mostrar/ocultar secciones según el plan
             const hermanosContainer = document.getElementById('hermanos-extra-container');
-            const cuotasContainer = document.getElementById('cuotas-selector-container');
             const cantidadContainer = document.getElementById('resumen-cantidad-container');
             const precioUnitarioContainer = document.getElementById('resumen-precio-unitario-container');
 
             if (plan.esCombo) {
                 hermanosContainer.classList.remove('hidden');
-                cuotasContainer.classList.remove('hidden');
                 cantidadContainer.classList.remove('hidden');
                 precioUnitarioContainer.classList.remove('hidden');
                 
                 document.getElementById('resumen-cantidad').textContent = '3 hermanos';
                 document.getElementById('resumen-precio-unitario').textContent = `$${PRECIO_HERMANO_COMBO.toLocaleString('es-AR')} c/u`;
-                
-                // Resetear cuotas
-                cuotasCombo = 1;
-                document.querySelectorAll('.cuota-option').forEach(opt => {
-                    opt.classList.toggle('selected', parseInt(opt.dataset.cuotas) === 1);
-                });
-                
-                actualizarResumenPrecio();
+                document.getElementById('precio-total').textContent = `$${plan.total.toLocaleString('es-AR')}`;
             } else {
                 hermanosContainer.classList.add('hidden');
-                cuotasContainer.classList.add('hidden');
                 cantidadContainer.classList.add('hidden');
                 precioUnitarioContainer.classList.add('hidden');
-                
-                document.getElementById('resumen-cuotas').textContent = plan.cuotas > 1 
-                    ? `${plan.cuotas} x $${plan.montoCuota.toLocaleString('es-AR')}` 
-                    : `$${plan.total.toLocaleString('es-AR')}`;
                 document.getElementById('precio-total').textContent = `$${plan.total.toLocaleString('es-AR')}`;
             }
             
@@ -717,7 +643,6 @@
             const edad = document.getElementById('camp-edad').value;
             const telefono = document.getElementById('camp-telefono').value.trim();
             
-            // Validaciones básicas
             if (!name || !lastname) return alert('Nombre y apellido del hermano 1 son obligatorios');
             if (!colegio) return alert('Ingresá el colegio del inscripto');
             if (!seccion) return alert('Seleccioná la sección del hermano 1');
@@ -726,7 +651,6 @@
             
             const plan = PLANES.find(p => p.id === planSeleccionado);
             
-            // Validaciones específicas para COMBO
             let hermanos = [{name, lastname, edad, seccion}];
             if (plan.esCombo) {
                 const h2name = document.getElementById('hermano2-name').value.trim();
@@ -759,24 +683,10 @@
             const email = document.getElementById('camp-email').value;
             const observaciones = document.getElementById('camp-observaciones').value.trim();
             
-            // Calcular totales según el plan
-            let totalFinal, cuotasFinal, montoCuotaFinal, nombrePlanFinal;
+            const totalFinal = plan.total;
+            const nombrePlanFinal = plan.nombre;
             
-            if (plan.esCombo) {
-                totalFinal = PRECIO_HERMANO_COMBO * 3; // $180.000
-                cuotasFinal = cuotasCombo;
-                montoCuotaFinal = cuotasCombo === 1 ? totalFinal : totalFinal / cuotasCombo;
-                nombrePlanFinal = `Combo Hermanos (${cuotasCombo === 1 ? '1 Pago' : `${cuotasCombo} Cuotas`})`;
-            } else {
-                totalFinal = plan.total;
-                cuotasFinal = plan.cuotas;
-                montoCuotaFinal = plan.montoCuota;
-                nombrePlanFinal = plan.nombre;
-            }
-            
-            // 1. Registrar en Google Sheets
             try {
-                // Para combo, registramos una fila por cada hermano
                 const promesas = hermanos.map((hermano, idx) => {
                     return fetch(SHEET_SCRIPT_URL, {
                         method: 'POST',
@@ -790,8 +700,8 @@
                             colegio: colegio,
                             seccion: hermano.seccion,
                             planPago: nombrePlanFinal,
-                            cuotas: cuotasFinal,
-                            montoCuota: montoCuotaFinal,
+                            cuotas: 1,
+                            montoCuota: plan.esCombo ? PRECIO_HERMANO_COMBO : totalFinal,
                             edad: hermano.edad,
                             telefono: telefono,
                             observaciones: plan.esCombo ? `${observaciones ? observaciones + ' | ' : ''}Grupo Combo #${Date.now()} (Hno ${idx+1}/3)` : observaciones,
@@ -805,7 +715,6 @@
                 console.error('Error registrando:', e);
             }
             
-            // 2. Armar mensaje de WhatsApp
             let msg = `¡Hola Ruca del Valle! 🔥%0A%0A` +
                 `Quiero reservar mi lugar en el *Campamento 2026*:%0A%0A`;
             
@@ -828,7 +737,6 @@
                 `📞 *Teléfono:* ${telefono}%0A` +
                 (observaciones ? `⚕️ *Observaciones:* ${observaciones}%0A` : '') +
                 `%0A💳 *Plan de pago:* ${nombrePlanFinal}%0A` +
-                (cuotasFinal > 1 ? `📅 ${cuotasFinal} cuotas de $${montoCuotaFinal.toLocaleString('es-AR')}%0A` : '') +
                 `💰 *Total: $${totalFinal.toLocaleString('es-AR')}*%0A%0A` +
                 `Adjunto comprobante de transferencia. ¡Gracias!`;
             
